@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="55dp">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd ="25dp">
+        <!-- everything you already have -->
+
+
+
+        <ImageView
+            android:id="@+id/balance_profile"
+            android:layout_width="145dp"
+            android:layout_height="114dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="85dp"
+
+
+            android:src="@drawable/profile_user"
+            />
+        <TextView
+            android:id="@+id/balance_name_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+
+            android:layout_below="@+id/balance_profile"
+            android:text="Lautaro Osinaga" />
+
+        <TextView
+            android:id="@+id/balance_myBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:layout_below="@+id/balance_name_profile"
+            android:text="$407.8" />
+
+        <TextView
+            android:id="@+id/balance_load_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+
+            android:textSize="25dp"
+            android:layout_below="@+id/balance_myBalance"
+            android:text="Cargar Saldo"
+            android:textStyle="bold"
+            android:textColor="#000"
+            />
+
+        <TextView
+            android:id="@+id/balance_importe1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+
+
+            android:layout_below="@+id/balance_load_money"
+            android:text="Importe" />
+
+        <EditText
+            android:id="@+id/balance_importe1_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+
+
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:layout_below="@+id/balance_importe1"
+            android:text="$" />
+
+        <Button
+            android:id="@+id/balance_button_load_money"
+            android:layout_width="327dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/balance_importe1_input"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:backgroundTint="#105661"
+            android:text="Cargar Saldo"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/balance_button_load_money"
+            android:textSize="25dp"
+            android:text="Transferir Saldo"
+            android:textStyle="bold"
+            android:textColor="#000"/>
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView12"
+
+            android:text="Destinatario" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName3"
+            android:layout_width="373dp"
+            android:layout_height="51dp"
+            android:layout_below="@+id/textView13"
+
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="DNI" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextTextPersonName3"
+            android:text="Importe" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName4"
+            android:layout_width="338dp"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@+id/textView14"
+            android:layout_alignParentStart="true"
+            android:inputType="textPersonName"
+            android:text="$" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextTextPersonName4"
+            android:layout_centerHorizontal="true"
+            android:backgroundTint="#105661"
+            android:text="Transferir Saldo"
+            android:textColor="#fff"
+            android:textColorHint="#E41A1A"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            />
+    </TableLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
