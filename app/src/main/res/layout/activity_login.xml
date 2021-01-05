@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#105661"
-    tools:context="com.example.navigationdrawerpractica.Interfaces.MainActivity"
+    tools:context="com.example.view.Interfaces.MainActivity"
     >
 
 
