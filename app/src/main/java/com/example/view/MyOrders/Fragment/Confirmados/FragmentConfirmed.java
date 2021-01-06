@@ -2,6 +2,7 @@ package com.example.view.MyOrders.Fragment.Confirmados;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.view.Interfaces.MainActivity;
 import com.example.view.Interfaces.iComunicaFragments;
 
+import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.R;
 
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ public class FragmentConfirmed  extends Fragment {
 
     AdapterConfirmed adapterPend;
     RecyclerView recyclerViewPersonas;
-    ArrayList<Order2> listaFoods;
+    ArrayList<Order> listaFoods;
 
 
 
@@ -44,20 +47,26 @@ public class FragmentConfirmed  extends Fragment {
         return view;
     }
     public void cargarLista(){
-        listaFoods.add(new Order2("a","$50",R.drawable.food_alfajor_pepitos));
-        listaFoods.add(new Order2("pedido 8","$50",R.drawable.food_botella_coca));
-        listaFoods.add(new Order2("pedido 9","$50",R.drawable.food_empanada));
-        listaFoods.add(new Order2("pedido 10","$50",R.drawable.food_milanesas_con_fritas));
-        listaFoods.add(new Order2("pedido","$50",R.drawable.food_pepas_trio));
-        listaFoods.add(new Order2("pedido","$50",R.drawable.food_vaso_coca));
-        listaFoods.add(new Order2("pedido","$50",R.drawable.food_turron_arcor));
+        ArrayList<Order> ar = MainActivity.repo.getConfirmedOrders();
+        for(Order o : ar){
+            listaFoods.add(o);
+        }
     }
     private void mostrarData(){
         recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterPend = new AdapterConfirmed(getContext(), listaFoods);
         recyclerViewPersonas.setAdapter(adapterPend);
 
-
+        adapterPend.setOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("Ola");
+                Intent intent = new Intent(getActivity(), ActivityPdf.class);
+                startActivity(intent);
+                //interfaceComunicaFragments.abrirPDF(listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
+                //luego en el mainactivity se hace la implementacion de la interface para implementar el metodo enviarpersona
+            }
+        });
     }
 
     @Override

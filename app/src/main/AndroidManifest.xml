@@ -9,15 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.view.Interfaces.Login" android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".MyOrders.Fragment.Confirmados.ActivityPdf"
+            android:label="@string/title_activity_pdf"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Food.FoodDetail"
+            android:label="@string/title_activity_pdf"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Interfaces.Login"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.view.Interfaces.MainActivity" android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+        <activity
+            android:name=".Interfaces.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ package com.example.view.MyOrders.Fragment.Confirmados;
         import androidx.recyclerview.widget.RecyclerView;
 
 
+        import com.example.view.MyOrders.Fragment.Pendientes.Order;
         import com.example.view.R;
 
         import java.util.ArrayList;
@@ -20,11 +21,11 @@ package com.example.view.MyOrders.Fragment.Confirmados;
 public class AdapterConfirmed extends RecyclerView.Adapter<com.example.view.MyOrders.Fragment.Confirmados.AdapterConfirmed.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
-    ArrayList<Order2> model;
+    ArrayList<Order> model;
 
     private View.OnClickListener listener;
 
-    public AdapterConfirmed(Context context, ArrayList<Order2> model) {
+    public AdapterConfirmed(Context context, ArrayList<Order> model) {
         this.inflater = LayoutInflater.from(context);
         this.model = model;
     }
@@ -56,6 +57,7 @@ public class AdapterConfirmed extends RecyclerView.Adapter<com.example.view.MyOr
     public int getItemCount() {
         return model.size();
     }
+
 
     @Override
     public void onClick(View view) {

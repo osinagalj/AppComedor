@@ -12,25 +12,28 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
+
         <ImageView
             android:id="@+id/pendiente_img"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
 
-            android:layout_marginStart="250dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="27dp"
+            android:layout_toEndOf="@+id/pendiente_nombre"
             android:src="@drawable/food_milanesas_con_fritas"></ImageView>
-
 
         <TextView
             android:id="@+id/pendiente_nombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="50dp"
+            android:layout_alignParentStart="true"
 
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="28dp"
             android:text="Nombre de la Persona"
             android:textSize="18sp"
             android:textStyle="bold"></TextView>
@@ -40,29 +43,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/pendiente_nombre"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="23dp"
+            android:layout_toEndOf="@+id/textView8"
             android:text="2020-01-20"></TextView>
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="54dp"
-            android:layout_height="35dp"
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pendiente_nombre"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="273dp"
-            android:layout_marginTop="121dp"
-            app:srcCompat="@drawable/cross_image" />
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="24dp"
+            android:text="Total"
+            android:textStyle="bold" />
 
-        <Button
+        <TextView
+            android:id="@+id/txt_unidades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pendiente_img"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="17dp"
+            android:layout_toEndOf="@+id/pendiente_nombre"
+            android:text="2 Unidades" />
+
+        <ImageButton
             android:id="@+id/button_remove_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_marginEnd="138dp"
-
-            android:layout_marginBottom="191dp"
-            android:text="Eliminar" />
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="58dp"
+            android:layout_toEndOf="@+id/pendiente_img"
+            app:srcCompat="@drawable/cross_image" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

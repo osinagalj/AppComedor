@@ -9,16 +9,17 @@ public class Repositorio {
 
     private int id;
     ArrayList<Order> ordenes = new ArrayList<Order>();
-
+    ArrayList<Order> confirmedOrders = new ArrayList<Order>();
 
     public Repositorio(){
-        Order o1 = new Order("prueba77","$50", R.drawable.food_alfajor_pepitos);
-        Order o3 = new Order("prueba79","$60",R.drawable.food_empanada);
-        Order o4 = new Order("prueba80","$80",R.drawable.food_empanada);
+        Order o1 = new Order("Pedido 1","2$",R.drawable.food_vaso_coca);
+        Order o2 = new Order("Pedido 2","6$",R.drawable.food_milanesas_con_fritas);
+        Order o3 = new Order("Pedido 3","20$",R.drawable.food_turron_arcor);
 
-        ordenes.add(o1);
-        ordenes.add(o3);
-        ordenes.add(o4);
+        confirmedOrders.add(o1);
+        confirmedOrders.add(o2);
+        confirmedOrders.add(o3);
+
     }
 
     public void putOrder(Order o){
@@ -27,6 +28,18 @@ public class Repositorio {
     public  ArrayList<Order> getOrders(){
         return ordenes;
     }
+
+    public void addConfirmedOrder(Order o){
+        confirmedOrders.add(o);
+    }
+    public  ArrayList<Order> getConfirmedOrders(){
+        return confirmedOrders;
+    }
+
+    public  ArrayList<Order> getOrder(int id){
+        return confirmedOrders;
+    } // implementar desp
+
     public void setId(int id){
         this.id=id;
     }

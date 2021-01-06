@@ -9,8 +9,8 @@ public interface iComunicaFragments {
     public void enviarPersona(Food food); //se transportara un objeto de tipo persona
 
     void enviarOrdenPendiente(Order order);
-    void enviarPersona(Order2 order);
-
+   // void enviarPersona(Order2 order);
+    void abrirPDF(Order order);
 
     //(En la clase Persona se implementa Serializable para poder transportar un objeteo a otro)
 }

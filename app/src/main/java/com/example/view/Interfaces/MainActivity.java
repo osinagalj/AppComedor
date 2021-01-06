@@ -17,6 +17,7 @@ import com.example.view.Food.Food;
 import com.example.view.Food.DetallePersonaFragment;
 import com.example.view.Food.Fragment_food;
 import com.example.view.MyOrders.Fragment.Confirmados.Order2;
+import com.example.view.MyOrders.Fragment.Confirmados.OrderDetail;
 import com.example.view.MyOrders.Fragment.Pendientes.FragmentPendientes;
 import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.MyOrders.HomeFragment;
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentPendientes fragmentPendientes = new FragmentPendientes();
     HomeFragment homeFragment = new HomeFragment();
 
+    OrderDetail orderDetail;
+
     public static Repositorio repo = new Repositorio();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //cargar fragment principal en la actividad
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container_fragment,new Fragment_food());
+        fragmentTransaction.add(R.id.container_fragment,new HomeFragment());
         fragmentTransaction.commit();
 
     }
@@ -166,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
+/*
     @Override
     public void enviarPersona(Order2 food) {
         //gracias a hbaer implementado de la interface "iComunicaFragments" se tiene la implementacion del metodo enviarPersona
@@ -190,8 +193,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
          getSupportFragmentManager().beginTransaction()
                  .replace(R.id.container_fragment, detallePersonaFragment)
                  .addToBackStack(null).commit();
-        */
+
         //***Luego pasar a programar al fragmentdetalle
+    }
+*/
+    @Override
+    public void abrirPDF(Order food) {
+        //gracias a hbaer implementado de la interface "iComunicaFragments" se tiene la implementacion del metodo enviarPersona
+        //o mejor dicho este metodo.
+        //Aqui se realiza toda la logica necesaria para poder realizar el envio
+        orderDetail = new OrderDetail();
+        //objeto bundle para transportar la informacion
+        Bundle bundleEnvio = new Bundle();
+        //se manda el objeto que le esta llegando:
+        bundleEnvio.putSerializable("PDF", food);
+        orderDetail.setArguments(bundleEnvio);
+
+        //CArgar fragment en el activity
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_fragment, orderDetail);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
     }
 
 

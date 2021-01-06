@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
         View view = inflater.inflate(R.layout.row_order_pendiente, parent, false);
         view.setOnClickListener(this);
 
-        Button button = (Button) view.findViewById(R.id.button_remove_order);
+        ImageButton button = (ImageButton) view.findViewById(R.id.button_remove_order);
 
         button.setOnClickListener(new View.OnClickListener()
         {
