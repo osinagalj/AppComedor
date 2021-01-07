@@ -12,11 +12,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.view.Fila.Fragment_fila;
 import com.example.view.MiCuenta.fragmen_myAccount;
 import com.example.view.Food.Food;
-import com.example.view.Food.DetallePersonaFragment;
+import com.example.view.otross.DetallePersonaFragment;
 import com.example.view.Food.Fragment_food;
-import com.example.view.MyOrders.Fragment.Confirmados.Order2;
 import com.example.view.MyOrders.Fragment.Confirmados.OrderDetail;
 import com.example.view.MyOrders.Fragment.Pendientes.FragmentPendientes;
 import com.example.view.MyOrders.Fragment.Pendientes.Order;
@@ -90,6 +90,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.container_fragment,new fragmen_myAccount());
+            fragmentTransaction.commit();
+        }
+
+        if(menuItem.getItemId() == R.id.Fila){
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_fragment,new Fragment_fila());
             fragmentTransaction.commit();
         }
         if(menuItem.getItemId() == R.id.balance){
