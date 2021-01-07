@@ -7,31 +7,32 @@
         <menu>
             <item
                 android:id="@+id/myOrders"
-                android:icon="@drawable/ic_home_black_24dp"
+                android:icon="@drawable/ic_orders"
                 android:title="Mis Pedidos"/>
 
             <item
                 android:id="@+id/food"
-                android:icon="@drawable/ic_group_black_24dp"
+                android:icon="@drawable/ic_food"
                 android:title="Comidas"/>
+
+            <item
+                android:id="@+id/Fila"
+                android:icon="@drawable/ic_queue"
+                android:title="Fila"/>
+
             <item
                 android:id="@+id/balance"
-                android:icon="@drawable/ic_home_black_24dp"
+                android:icon="@drawable/icon_balance"
                 android:title="Saldo"/>
 
             <item
                 android:id="@+id/myAccount"
-                android:icon="@android:drawable/sym_action_chat"
+                android:icon="@drawable/ic_myaccount"
                 android:title="Mi Cuenta"/>
 
             <item
-                android:id="@+id/Fila"
-                android:icon="@android:drawable/sym_action_email"
-                android:title="Fila"/>
-
-            <item
                 android:id="@+id/logout"
-                android:icon="@drawable/ic_group_black_24dp"
+                android:icon="@drawable/ic_exit"
                 android:title="Salir"/>
         </menu>
     </item>

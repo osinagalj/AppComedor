@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class Food {
+public class Food implements Serializable {
     private int barcode;
     private String name;
     private int stock;

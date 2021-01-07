@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Restaurant {
 
-    static Restaurant restaurant = new Restaurant(1,"Comedor Unicen","Paraje Arroyo Seco",900,2000);
+    public static Restaurant restaurant = new Restaurant(1,"Comedor Unicen","Paraje Arroyo Seco",900,2000);
 
     private static final int MAX_SPECIAL_ORDERS = 2;
     private int id;
@@ -18,7 +18,7 @@ public class Restaurant {
     private HashMap<Integer, Condition> usersConditions;
 
 
-   private Restaurant(int id, String name ,String address, int openTime, int closeTime){
+   public Restaurant(int id, String name, String address, int openTime, int closeTime){
        this.id = id;
        this.name = name;
        this.address = address;

@@ -2,6 +2,7 @@ package com.example.view.MyOrders.Fragment.Pendientes;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.view.Interfaces.MainActivity;
 import com.example.view.Interfaces.iComunicaFragments;
+import com.example.view.MyOrders.Fragment.Confirmados.ActivityPdf;
 import com.example.view.R;
 
 import java.util.ArrayList;
@@ -59,6 +61,18 @@ public class FragmentPendientes extends Fragment {
         adapterPend = new AdapterPendientes(getContext(), listaFoods);
         recyclerViewPersonas.setAdapter(adapterPend);
 
+        adapterPend.setOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), ActivityPdf.class);
+                startActivity(intent);
+                //voy a tener que pasarle la orden para el pedido
+
+                //interfaceComunicaFragments.abrirPDF(listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
+                //luego en el mainactivity se hace la implementacion de la interface para implementar el metodo enviarpersona
+            }
+        });
     }
 
     public void onAttach(Context context) {

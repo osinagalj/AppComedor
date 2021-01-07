@@ -25,6 +25,9 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+
+import model.Restaurant;
 
 public class Fragment_food extends Fragment {
 
@@ -73,6 +76,13 @@ public class Fragment_food extends Fragment {
         return view;
     }
     public void cargarLista(){
+
+        Restaurant restaurant = new Restaurant(1,"Comedor Unicen","Paraje Arroyo Seco",900,2000);
+        //listaFoods = Restaurant.restaurant.getProducts();
+        //Vector<String> ingredients = new Vector<String>();
+       // model.Food food1 = new model.Food(0001,"Alfajor Pepitos",6, 20.2f, ingredients);
+       // listaFoods.add(food1);
+
         listaFoods.add(new Food("food_alfajor_pepitos","$50",R.drawable.food_alfajor_pepitos));
         listaFoods.add(new Food("food_botella_coca","$50",R.drawable.food_botella_coca));
         listaFoods.add(new Food("food_empanada","$50",R.drawable.food_empanada));
