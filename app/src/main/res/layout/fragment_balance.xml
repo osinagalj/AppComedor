@@ -81,7 +81,7 @@
 
 
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="numberDecimal"
             android:layout_below="@+id/balance_importe1"
             android:hint="$" />
 
@@ -102,6 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/balance_button_load_money"
             android:textSize="25dp"
+            android:layout_marginTop="50dp"
             android:text="Transferir Saldo"
             android:textStyle="bold"
             android:textColor="#000"/>
@@ -141,8 +142,8 @@
 
             android:layout_below="@+id/textView14"
             android:layout_alignParentStart="true"
-            android:inputType="textPersonName"
-            android:text="$" />
+            android:inputType="numberDecimal"
+            android:hint="$" />
 
         <Button
             android:id="@+id/button2"
@@ -159,4 +160,6 @@
             />
     </TableLayout>
     </androidx.core.widget.NestedScrollView>
+
+
 </LinearLayout>
