@@ -1,5 +1,7 @@
 package model;
 
+import com.example.view.R;
+
 import java.util.*;
 
 public class Restaurant {
@@ -26,8 +28,26 @@ public class Restaurant {
        this.closeTime = closeTime;
        this.usersConditions = new HashMap<Integer, Condition>();
 
+       loadProducts();
    }
 
+   private void loadProducts(){
+       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+       products.add(new Food(0002,"Name 1",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
+       products.add(new Food(0003,"Name 2",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
+       products.add(new Food(0004,"Name 3",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
+       products.add(new Food(0005,"Name 4",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
+       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+       products.add(new Food(0002,"Name 1",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
+       products.add(new Food(0003,"Name 2",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
+       products.add(new Food(0004,"Name 3",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
+       products.add(new Food(0005,"Name 4",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
+       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+       products.add(new Food(0002,"Name 1",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
+       products.add(new Food(0003,"Name 2",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
+       products.add(new Food(0004,"Name 3",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
+       products.add(new Food(0005,"Name 4",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
+   }
    //los listar irian en la interfaz usando el getProducts o getOrders
 
     public int getPendingOrders(){

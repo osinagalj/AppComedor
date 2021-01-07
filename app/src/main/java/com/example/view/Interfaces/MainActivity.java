@@ -1,5 +1,8 @@
 package com.example.view.Interfaces;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,20 +12,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.example.view.Fila.Fragment_fila;
-import com.example.view.MiCuenta.fragmen_myAccount;
 import com.example.view.Food.Food;
-import com.example.view.otross.DetallePersonaFragment;
-import com.example.view.Food.Fragment_food;
+import com.example.view.Food.Nested2.Nested2Main;
+import com.example.view.MiCuenta.fragmen_myAccount;
 import com.example.view.MyOrders.Fragment.Confirmados.OrderDetail;
 import com.example.view.MyOrders.Fragment.Pendientes.FragmentPendientes;
 import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.MyOrders.HomeFragment;
 import com.example.view.R;
 import com.example.view.Saldo.fragment_balance;
+import com.example.view.otross.DetallePersonaFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import DataBase.Repositorio;
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(menuItem.getItemId() == R.id.food){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment,new Fragment_food());
+            fragmentTransaction.replace(R.id.container_fragment,new Nested2Main());
             fragmentTransaction.commit();
         }
 
