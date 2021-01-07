@@ -11,12 +11,19 @@ public class Food implements Serializable {
     private float price;
     private Vector<String> ingredients;
 
-    public Food(int barcode, String name, int stock, float price, Vector<String> ingredients){
+    private int imagenId;
+
+    public Food(int barcode, String name, int stock, float price, Vector<String> ingredients,int imagenId){
         this.barcode = barcode;
         this.name = name;
         this.stock = stock;
         this.price = price;
         this.ingredients = ingredients;
+        this.imagenId = imagenId;
+    }
+
+    public int getImagenId() {
+        return imagenId;
     }
 
     public int getBarcode() {

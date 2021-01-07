@@ -19,12 +19,16 @@ public class Login extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Hay que hacer un if, si el usuario es valido, que buscamos en el archivo de users, y
+                // la contraseña tmb, entonces hacemos el openActivity2, sino tiramos un Toast para avisar
                 openActivity2();
             }
         });
     }
+
     public void openActivity2() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
 }

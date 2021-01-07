@@ -17,11 +17,11 @@ import java.util.ArrayList;
 public class AdapterPersonas extends RecyclerView.Adapter<AdapterPersonas.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
-    ArrayList<Food> model;
+    ArrayList<model.Food> model;
 
     private View.OnClickListener listener;
 
-    public AdapterPersonas(Context context, ArrayList<Food> model){
+    public AdapterPersonas(Context context, ArrayList<model.Food> model){
         this.inflater = LayoutInflater.from(context);
         this.model = model;
     }
@@ -40,9 +40,10 @@ public class AdapterPersonas extends RecyclerView.Adapter<AdapterPersonas.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String nombres = model.get(position).getNombre();
-        String fechanacimiento = model.get(position).getFechanacimiento();
-        int imageid = model.get(position).getImagenid();
+        String nombres = model.get(position).getName();
+        String fechanacimiento = String.valueOf((model.get(position).getPrice()));
+        int imageid = model.get(position).getImagenId();
+
         holder.nombres.setText(nombres);
         holder.fechancimiento.setText(fechanacimiento);
         holder.imagen.setImageResource(imageid);

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,16 +15,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.Food.Nested.Item;
-import com.example.view.Food.Nested.SubItem;
+import com.example.view.Food.Nested2.Nested2Main;
 import com.example.view.Interfaces.iComunicaFragments;
-import com.example.view.MyOrders.Fragment.Confirmados.ActivityPdf;
 import com.example.view.R;
 
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 import model.Restaurant;
 
@@ -34,7 +28,7 @@ public class Fragment_food extends Fragment {
 
     AdapterPersonas adapterPersonas;
     RecyclerView recyclerViewPersonas;
-    ArrayList<Food> listaFoods;
+    ArrayList<model.Food> listaFoods;
     //Crear referencias para poder realizar la comunicacion entre el fragment detalle
     Activity actividad;
     iComunicaFragments interfaceComunicaFragments;
@@ -77,12 +71,15 @@ public class Fragment_food extends Fragment {
     }
     public void cargarLista(){
 
-        Restaurant restaurant = new Restaurant(1,"Comedor Unicen","Paraje Arroyo Seco",900,2000);
-        //listaFoods = Restaurant.restaurant.getProducts();
-        //Vector<String> ingredients = new Vector<String>();
-       // model.Food food1 = new model.Food(0001,"Alfajor Pepitos",6, 20.2f, ingredients);
-       // listaFoods.add(food1);
+        //Restaurant restaurant = new Restaurant(1,"Comedor Unicen","Paraje Arroyo Seco",900,2000);
+        listaFoods = Restaurant.restaurant.getProducts();
+        /*
+        Vector<String> ingredients = new Vector<String>();
+        model.Food food1 = new model.Food(0001,"Alfajor Pepitos",6, 20.2f, ingredients,R.drawable.food_alfajor_pepitos);
+        listaFoods.add(food1);
+        */
 
+/*
         listaFoods.add(new Food("food_alfajor_pepitos","$50",R.drawable.food_alfajor_pepitos));
         listaFoods.add(new Food("food_botella_coca","$50",R.drawable.food_botella_coca));
         listaFoods.add(new Food("food_empanada","$50",R.drawable.food_empanada));
@@ -90,6 +87,7 @@ public class Fragment_food extends Fragment {
         listaFoods.add(new Food("food_pepas_trio","$50",R.drawable.food_pepas_trio));
         listaFoods.add(new Food("food_vaso_coca","$50",R.drawable.food_vaso_coca));
         listaFoods.add(new Food("food_turron_arcor","$50",R.drawable.food_turron_arcor));
+   */
     }
     private void mostrarData(){
         recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -99,7 +97,7 @@ public class Fragment_food extends Fragment {
         adapterPersonas.setOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               String nombre = listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)).getNombre();
+               String nombre = listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)).getName();
 
                 //Toast.makeText(getContext(), "Seleccionó: "+ listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)).getNombre(), Toast.LENGTH_SHORT).show();
                 //enviar mediante la interface el objeto seleccionado al detalle
@@ -107,8 +105,8 @@ public class Fragment_food extends Fragment {
                 //se utiliza la interface como puente para enviar el objeto seleccionado
 
                 System.out.println("Ola");
-                Intent intent = new Intent(getActivity(), FoodDetail.class);
-                intent.putExtra("food_picked", listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
+                Intent intent = new Intent(getActivity(), Nested2Main.class);
+                //intent.putExtra("food_picked", listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
                 startActivity(intent);
 
                 //interfaceComunicaFragments.enviarPersona(listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
@@ -160,24 +158,7 @@ public class Fragment_food extends Fragment {
     }
 */
 
-    //Nuevoooooooooooooooooo nesteddddddddddddddd
-    private List<Item> buildItemList() {
-        List<Item> itemList = new ArrayList<>();
-        for (int i=0; i<10; i++) {
-            Item item = new Item("Item "+i, buildSubItemList());
-            itemList.add(item);
-        }
-        return itemList;
-    }
 
-    private List<SubItem> buildSubItemList() {
-        List<SubItem> subItemList = new ArrayList<>();
-        for (int i=0; i<3; i++) {
-            SubItem subItem = new SubItem("Sub Item "+i, "Description "+i);
-            subItemList.add(subItem);
-        }
-        return subItemList;
-    }
 
 
 }
