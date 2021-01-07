@@ -11,8 +11,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.view.Interfaces.MainActivity;
-import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.R;
 
 public class FoodDetail extends AppCompatActivity {
@@ -26,13 +24,13 @@ public class FoodDetail extends AppCompatActivity {
 
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
-        final model.Food j =(model.Food) b.get("food_picked");
+        //final model.Food j =(model.Food) b.get("food_picked");
         ImageView img = findViewById(R.id.imagen_detalleid);
         if(b!=null)
         {
             System.out.println("Se llego al fodd del j");
 
-            img.setImageResource(j.getImagenId());
+           // img.setImageResource(j.getImagenId());
         }
 
         Button fab = findViewById(R.id.button_add_order);
@@ -40,8 +38,8 @@ public class FoodDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Order o1 = new Order(j.getName(),String.valueOf(j.getPrice()),j.getImagenId());
-                MainActivity.repo.putOrder(o1);
+                //Order o1 = new Order(j.getName(),String.valueOf(j.getPrice()),j.getImagenId());
+                //MainActivity.repo.putOrder(o1);
                 Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
 
                 openFinishOrder();
