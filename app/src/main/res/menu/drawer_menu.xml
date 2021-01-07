@@ -21,8 +21,13 @@
 
             <item
                 android:id="@+id/myAccount"
-                android:icon="@drawable/ic_group_black_24dp"
+                android:icon="@android:drawable/sym_action_chat"
                 android:title="Mi Cuenta"/>
+
+            <item
+                android:id="@+id/Fila"
+                android:icon="@android:drawable/sym_action_email"
+                android:title="Fila"/>
 
             <item
                 android:id="@+id/logout"

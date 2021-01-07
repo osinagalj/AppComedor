@@ -53,13 +53,11 @@ public class fragmen_myAccount extends Fragment {
         listaData.add(new User_data("Condicion","Vegetariano"));
         listaData.add(new User_data("Contraseña","*********"));
 
-
     }
     private void mostrarData(){
         recyclerViewData.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter_data = new Adapter_user(getContext(), listaData);
         recyclerViewData.setAdapter(adapter_data);
-
     }
 
     @Override

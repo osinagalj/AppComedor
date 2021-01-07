@@ -10,6 +10,7 @@ public class Repositorio {
     private int id;
     ArrayList<Order> ordenes = new ArrayList<Order>();
     ArrayList<Order> confirmedOrders = new ArrayList<Order>();
+    ArrayList<Integer> filaPendientes = new ArrayList<Integer>();
 
     public Repositorio(){
         Order o1 = new Order("Pedido 1","2$",R.drawable.food_vaso_coca);
@@ -20,6 +21,16 @@ public class Repositorio {
         confirmedOrders.add(o2);
         confirmedOrders.add(o3);
 
+        filaPendientes.add(20001);
+        filaPendientes.add(20002);
+        filaPendientes.add(20003);
+
+        ordenes.add(o2);
+
+    }
+
+    public  ArrayList<Integer> getFilaPendientes(){
+        return filaPendientes;
     }
 
     public void putOrder(Order o){

@@ -1,4 +1,4 @@
-package com.example.view.Food;
+package com.example.view.otross;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,12 +16,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.view.Food.Food;
 import com.example.view.Interfaces.MainActivity;
 import com.example.view.Interfaces.iComunicaFragments;
 import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.R;
 
-public class DetallePersonaFragment extends Fragment {
+public class DetallePersonaFragment extends Fragment { // Este ya no se usa, despues lo elimino
     TextView nombre;
     //ImageView imagen;
     Button button_add_order2;

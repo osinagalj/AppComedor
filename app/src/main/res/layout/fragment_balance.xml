@@ -9,16 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:stretchColumns="1"
         android:layout_marginStart="25dp"
         android:layout_marginEnd ="25dp">
-        <!-- everything you already have -->
-
-
 
         <ImageView
             android:id="@+id/balance_profile"
@@ -87,7 +83,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:layout_below="@+id/balance_importe1"
-            android:text="$" />
+            android:hint="$" />
 
         <Button
             android:id="@+id/balance_button_load_money"
@@ -129,14 +125,14 @@
 
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="DNI" />
+            android:hint="DNI" />
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/editTextTextPersonName3"
-            android:text="Importe" />
+            android:hint="Importe" />
 
         <EditText
             android:id="@+id/editTextTextPersonName4"
