@@ -1,16 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login.Sign_up_student"
     android:background="#105661"
+    android:orientation="vertical"
     >
+
     <ImageButton
         android:id="@+id/sign_up_student_close"
-        android:layout_width="wrap_content"
+        android:layout_width="61dp"
+        android:layout_height="60dp"
+        android:background="@drawable/ic_arrow_back"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="5dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ic_close"
-        tools:ignore="MissingConstraints" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Crear Cuenta"
+                android:textColor="#fff"
+                android:textColorHighlight="#fff"
+                android:textColorHint="#fff"
+                android:textSize="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                android:layout_marginStart="50dp"
+                tools:layout_editor_absoluteY="65dp" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="75dp"
+                android:layout_marginBottom="25dp"
+                android:text="Alumno"
+                android:textColor="#fff"
+                android:textColorHighlight="#fff"
+                android:textColorHint="#fff"
+                android:textSize="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.449"
+                app:layout_constraintStart_toStartOf="parent"
+
+                tools:ignore="MissingConstraints" />
+
+
+            <EditText
+                android:id="@+id/editTextTextDNI"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/ic_custom_input"
+                android:drawableStart="@drawable/custom_lock_icon"
+                android:hint="DNI"
+                android:inputType="number"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="#fff" />
+
+            <EditText
+                android:id="@+id/editTextTextName"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="#fff"
+                android:hint="Nombre"
+                android:drawableStart="@drawable/custom_lock_icon"
+                android:background="@drawable/ic_custom_input"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="15dp"
+                />
+
+            <EditText
+                android:id="@+id/editTextTextLastName"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="#fff"
+                android:hint="Apellido"
+                android:drawableStart="@drawable/custom_lock_icon"
+                android:background="@drawable/ic_custom_input"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="15dp"
+            />
+
+
+
+            <EditText
+                android:id="@+id/editTextTextPassword2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="#fff"
+                android:hint="Contraseña"
+                android:layout_marginBottom="15dp"
+                android:drawableStart="@drawable/custom_lock_icon"
+                android:background="@drawable/ic_custom_input"
+                android:inputType="textPassword"
+ />
+
+            <EditText
+                android:id="@+id/editTextTextPassword3"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="#fff"
+                android:hint="Repetir Contraseña"
+                android:layout_marginBottom="15dp"
+                android:drawableStart="@drawable/custom_lock_icon"
+                android:background="@drawable/ic_custom_input"
+                android:inputType="textPassword"
+                />
+
+
+
+
+            <EditText
+                android:id="@+id/sign_up_label_variable"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="#fff"
+                android:visibility="gone"
+                android:hint="Antiguedad"
+                android:layout_marginBottom="15dp"
+                android:drawableStart="@drawable/custom_lock_icon"
+                android:background="@drawable/ic_custom_input"
+                android:inputType="number"
+                />
+
+
+
+            <TextView
+                android:id="@+id/textView29"
+                android:textColor="#fff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Condicion Alimenticia"
+                tools:layout_editor_absoluteX="66dp"
+                tools:layout_editor_absoluteY="570dp" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                >
+
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ninguna"
+                    android:theme="@style/RadioButtonStyle"
+                    android:textColor="#fff"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vegano"
+                    android:theme="@style/RadioButtonStyle"
+                    android:textColor="#fff"
+                    />
+
+                <RadioButton
+                    android:id="@+id/radioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Celiaco"
+                    android:textColorHighlight="#fff"
+                    android:textColorLink="#fff"
+                    android:shadowColor="#fff"
+                    android:theme="@style/RadioButtonStyle"
+                    android:textColor="#fff"
+                    />
+            </RadioGroup>
+
+
+            <Button
+                android:id="@+id/sign_up_student_next"
+                android:layout_width="190dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="100dp"
+                tools:ignore="MissingConstraints"
+                android:text="Crear Cuenta"
+                tools:layout_editor_absoluteX="3dp"
+                tools:layout_editor_absoluteY="5dp" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

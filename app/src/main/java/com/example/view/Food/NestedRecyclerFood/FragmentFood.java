@@ -28,14 +28,14 @@ public class FragmentFood extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        View view = inflater.inflate(R.layout.activity_main67,container,false);
+        View view = inflater.inflate(R.layout.fragment_food,container,false);
         view2 = view;
         //setContentView(R.layout.);
 
         // here we will add some dummy data to our model class
         // here we will add data to category item model class
         // added in first category
-        ((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Tus comidas pa");
+        ((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Comidas");
         loadData();
         return view;
     }

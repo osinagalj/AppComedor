@@ -15,7 +15,7 @@ public class Sign_up_1 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_1);
+        setContentView(R.layout.activity_sign_up);
 
         Button sign_up_button_4 = findViewById(R.id.sign_up_button_1);
 
@@ -40,6 +40,7 @@ public class Sign_up_1 extends AppCompatActivity {
 
     public void sign_up_student() {
         Intent intent = new Intent(this, Sign_up_student.class);
+        intent.putExtra("USER_CATEGORY","STUDENT");
         startActivity(intent);
     }
 

@@ -105,9 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } //logout
 
         if(menuItem.getItemId() == R.id.logout){
-            System.out.println("Salio de la app");
             finish();
-            System.exit(0);
 
         } //logout
         return false;
