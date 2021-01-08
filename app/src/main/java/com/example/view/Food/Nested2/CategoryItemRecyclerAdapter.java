@@ -1,6 +1,7 @@
 package com.example.view.Food.Nested2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +10,19 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
+import com.example.view.Food.FoodDetail;
 import com.example.view.R;
 
 import java.util.List;
 
+import model.Food;
+
 public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryItemRecyclerAdapter.CategoryItemViewHolder> {
 
     private Context context;
-    private List<CategoryItem> categoryItemList;
+    private List<Food> categoryItemList;
 
-    public CategoryItemRecyclerAdapter(Context context, List<CategoryItem> categoryItemList) {
+    public CategoryItemRecyclerAdapter(Context context, List<Food> categoryItemList) {
         this.context = context;
         this.categoryItemList = categoryItemList;
     }
@@ -31,9 +34,20 @@ public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryIt
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryItemViewHolder holder, final int position) {
 
-            holder.itemImage.setImageResource(categoryItemList.get(position).getImageUrl());
+        holder.itemImage.setImageResource(categoryItemList.get(position).getImagenId());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, FoodDetail.class);
+
+                i.putExtra("food_picked", categoryItemList.get(position)); //put the Movie object inside Intent which was clicked
+                System.out.println("Seleccione una pelcula de mierda papa");
+                context.startActivity(i); //start a
+            }
+        });
+
     }
 
     @Override

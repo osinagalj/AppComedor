@@ -2,7 +2,6 @@ package com.example.view.Fila;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.Food.AdapterPersonas;
-import com.example.view.Food.Food;
-import com.example.view.Food.FoodDetail;
 import com.example.view.Interfaces.iComunicaFragments;
 import com.example.view.R;
 
