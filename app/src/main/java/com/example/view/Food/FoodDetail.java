@@ -30,7 +30,7 @@ public class FoodDetail extends AppCompatActivity {
         ImageView img = findViewById(R.id.imagen_detalleid);
         if(b!=null)
         {
-
+            img.setImageResource(food.getImagenId());
             Button fab = findViewById(R.id.button_add_order);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
