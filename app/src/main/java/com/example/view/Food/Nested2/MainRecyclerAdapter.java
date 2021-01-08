@@ -15,6 +15,8 @@ import com.example.view.R;
 
 import java.util.List;
 
+import model.Food;
+
 public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.MainViewHolder> {
 
     private Context context;
@@ -58,7 +60,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
         }
     }
 
-    private void setCatItemRecycler(RecyclerView recyclerView, List<CategoryItem> categoryItemList){
+    private void setCatItemRecycler(RecyclerView recyclerView, List<Food> categoryItemList){
 
         CategoryItemRecyclerAdapter itemRecyclerAdapter = new CategoryItemRecyclerAdapter(context, categoryItemList);
         recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));

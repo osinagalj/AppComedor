@@ -1,6 +1,5 @@
 package com.example.view.Food.Nested2;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.Food.FoodDetail;
 import com.example.view.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+
+import model.Food;
 
 public class Nested2Main extends Fragment {
 
@@ -42,26 +43,22 @@ public class Nested2Main extends Fragment {
 
     public void loadData(){
 
-        List<CategoryItem> categoryItemList = new ArrayList<>();
-        categoryItemList.add(new CategoryItem(1, R.drawable.food_milanesas_con_fritas));
+        List<Food> categoryItemList = new ArrayList<>();
+        categoryItemList.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
 
         // added in second category
-        List<CategoryItem> categoryItemList2 = new ArrayList<>();
-        categoryItemList2.add(new CategoryItem(1, R.drawable.food_botella_coca));
-        categoryItemList2.add(new CategoryItem(1, R.drawable.food_botella_coca));
-        categoryItemList2.add(new CategoryItem(1, R.drawable.food_botella_coca));
-        categoryItemList2.add(new CategoryItem(1, R.drawable.food_botella_coca));
-        categoryItemList2.add(new CategoryItem(1, R.drawable.food_botella_coca));
-        categoryItemList2.add(new CategoryItem(1, R.drawable.food_botella_coca));
+        List<Food> categoryItemList2 = new ArrayList<>();
+        categoryItemList2.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+        categoryItemList2.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+        categoryItemList2.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+        categoryItemList2.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+        categoryItemList2.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+
 
         // added in 3rd category
-        List<CategoryItem> categoryItemList3 = new ArrayList<>();
-        categoryItemList3.add(new CategoryItem(1, R.drawable.food_alfajor_pepitos));
-        categoryItemList3.add(new CategoryItem(1, R.drawable.food_alfajor_pepitos));
-        categoryItemList3.add(new CategoryItem(1, R.drawable.food_alfajor_pepitos));
-        categoryItemList3.add(new CategoryItem(1, R.drawable.food_alfajor_pepitos));
-        categoryItemList3.add(new CategoryItem(1, R.drawable.food_alfajor_pepitos));
-        categoryItemList3.add(new CategoryItem(1, R.drawable.food_alfajor_pepitos));
+        List<Food> categoryItemList3 = new ArrayList<>();
+        categoryItemList3.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+
 
         List<AllCategory> allCategoryList = new ArrayList<>();
         allCategoryList.add(new AllCategory("Menu del Dia", categoryItemList));
@@ -80,26 +77,6 @@ public class Nested2Main extends Fragment {
         mainCategoryRecycler.setLayoutManager(layoutManager);
         mainRecyclerAdapter = new MainRecyclerAdapter(getContext(), allCategoryList);
         mainCategoryRecycler.setAdapter(mainRecyclerAdapter);
-
-        mainCategoryRecycler.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String nombre = a.get(mainCategoryRecycler.getChildAdapterPosition(view)).categoryTitle;
-                System.out.println("TITULO DE CATEOGIRAAAAAA = " + nombre);
-                //Toast.makeText(getContext(), "Seleccionó: "+ listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)).getNombre(), Toast.LENGTH_SHORT).show();
-                //enviar mediante la interface el objeto seleccionado al detalle
-                //se envia el objeto completo
-                //se utiliza la interface como puente para enviar el objeto seleccionado
-
-                System.out.println("Ola");
-                Intent intent = new Intent(getActivity(), FoodDetail.class);
-                //intent.putExtra("food_picked", listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
-                startActivity(intent);
-
-                //interfaceComunicaFragments.enviarPersona(listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
-                //luego en el mainactivity se hace la implementacion de la interface para implementar el metodo enviarpersona
-            }
-        });
 
     }
 

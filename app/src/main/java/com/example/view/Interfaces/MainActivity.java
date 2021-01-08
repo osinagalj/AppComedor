@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.view.Fila.Fragment_fila;
-import com.example.view.Food.Food;
+import com.example.view.Food.FoodAux;
 import com.example.view.Food.Nested2.Nested2Main;
 import com.example.view.MiCuenta.fragmen_myAccount;
 import com.example.view.MyOrders.Fragment.Confirmados.OrderDetail;
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     @Override
-    public void enviarPersona(Food food) {
+    public void enviarPersona(FoodAux food) {
         //gracias a hbaer implementado de la interface "iComunicaFragments" se tiene la implementacion del metodo enviarPersona
         //o mejor dicho este metodo.
         //Aqui se realiza toda la logica necesaria para poder realizar el envio

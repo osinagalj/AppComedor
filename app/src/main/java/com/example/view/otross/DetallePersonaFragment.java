@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.view.Food.Food;
+import com.example.view.Food.FoodAux;
 import com.example.view.Interfaces.MainActivity;
 import com.example.view.Interfaces.iComunicaFragments;
 import com.example.view.MyOrders.Fragment.Pendientes.Order;
@@ -38,11 +38,11 @@ public class DetallePersonaFragment extends Fragment { // Este ya no se usa, des
         final ImageView imagen = view.findViewById(R.id.imagen_detalleid);
         //Crear bundle para recibir el objeto enviado por parametro.
         Bundle objetoPersona = getArguments();
-        Food food = null;
+        FoodAux food = null;
         //validacion para verificar si existen argumentos para mostrar
 
         if(objetoPersona !=null){
-            food = (Food) objetoPersona.getSerializable("objeto");
+            food = (FoodAux) objetoPersona.getSerializable("objeto");
             imagen.setImageResource(food.getImagenid());
             nombre.setText(food.getNombre());
             final String name = food.getNombre();

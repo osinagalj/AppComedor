@@ -11,7 +11,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.view.Interfaces.MainActivity;
+import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.R;
+
+import model.Food;
 
 public class FoodDetail extends AppCompatActivity {
 
@@ -24,27 +28,28 @@ public class FoodDetail extends AppCompatActivity {
 
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
-        //final model.Food j =(model.Food) b.get("food_picked");
+        final Food food =(Food) b.get("food_picked");
         ImageView img = findViewById(R.id.imagen_detalleid);
         if(b!=null)
         {
             System.out.println("Se llego al fodd del j");
 
            // img.setImageResource(j.getImagenId());
+            Button fab = findViewById(R.id.button_add_order);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Order o1 = new Order(food.getName(),String.valueOf(food.getPrice()),food.getImagenId());
+                    MainActivity.repo.putOrder(o1);
+                    Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
+
+                    openFinishOrder();
+                }
+            });
         }
 
-        Button fab = findViewById(R.id.button_add_order);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                //Order o1 = new Order(j.getName(),String.valueOf(j.getPrice()),j.getImagenId());
-                //MainActivity.repo.putOrder(o1);
-                Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
-
-                openFinishOrder();
-            }
-        });
         ImageButton fab2 = findViewById(R.id.imageButton_close);
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override

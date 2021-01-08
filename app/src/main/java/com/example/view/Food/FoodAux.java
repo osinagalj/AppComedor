@@ -1,16 +1,15 @@
 package com.example.view.Food;
 
 import java.io.Serializable;
-import java.util.Vector;
 
-public class Food implements Serializable {
+public class FoodAux implements Serializable {
     private String nombre;
     private String fechanacimiento;
     private int imagenid;
 
-    public Food(){}
+    public FoodAux(){}
 
-    public Food(String nombre, String fechanacimiento, int imagenid) {
+    public FoodAux(String nombre, String fechanacimiento, int imagenid) {
         this.nombre = nombre;
         this.fechanacimiento = fechanacimiento;
         this.imagenid = imagenid;
