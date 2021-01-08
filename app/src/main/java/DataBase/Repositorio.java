@@ -25,8 +25,13 @@ public class Repositorio {
         filaPendientes.add(20002);
         filaPendientes.add(20003);
 
+        ordenes.add(o1);
         ordenes.add(o2);
+        ordenes.add(o3);
 
+    }
+    public void eliminarPrimeraOrdenPendiente(){
+        ordenes.remove(0);
     }
 
     public  ArrayList<Integer> getFilaPendientes(){

@@ -1,15 +1,10 @@
 package com.example.view.MyOrders.Fragment.Confirmados;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
-import android.widget.Button;
 
 import com.example.view.R;
 
@@ -20,7 +15,7 @@ public class ActivityPdf extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_order_details);
 
-        Button fab = findViewById(R.id.button3);
+        ImageButton fab = findViewById(R.id.button_order_details_close);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
