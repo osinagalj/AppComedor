@@ -1,26 +1,21 @@
-package com.example.view.Food;
+package com.example.view.Login;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.view.R;
 
-public class FinishOrder extends AppCompatActivity {
-
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
+public class Sign_up_student extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.correct_order);
+        setContentView(R.layout.activity_sign_up_student);
 
-        ImageButton btn_close = findViewById(R.id.correct_order_close);
+        ImageButton btn_close = findViewById(R.id.sign_up_student_close);
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

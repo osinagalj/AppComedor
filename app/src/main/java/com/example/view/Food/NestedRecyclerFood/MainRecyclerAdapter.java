@@ -1,4 +1,4 @@
-package com.example.view.Food.Nested2;
+package com.example.view.Food.NestedRecyclerFood;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.example.view.Food;
+package com.example.view.otross;
 
 import java.io.Serializable;
 

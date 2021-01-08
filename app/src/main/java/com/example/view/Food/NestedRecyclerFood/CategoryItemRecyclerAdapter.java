@@ -1,4 +1,4 @@
-package com.example.view.Food.Nested2;
+package com.example.view.Food.NestedRecyclerFood;
 
 import android.content.Context;
 import android.content.Intent;
@@ -37,13 +37,12 @@ public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryIt
     public void onBindViewHolder(@NonNull CategoryItemViewHolder holder, final int position) {
 
         holder.itemImage.setImageResource(categoryItemList.get(position).getImagenId());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() { //cuando se hace un click en algun item(Food)
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, FoodDetail.class);
 
                 i.putExtra("food_picked", categoryItemList.get(position)); //put the Movie object inside Intent which was clicked
-                System.out.println("Seleccione una pelcula de mierda papa");
                 context.startActivity(i); //start a
             }
         });
