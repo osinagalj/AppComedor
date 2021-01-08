@@ -1,30 +1,17 @@
-package model;
+package com.company.model;
 
-import java.util.Calendar;
-import java.util.Vector;
+import java.time.Instant;
+import java.util.List;
 
-public abstract class Order {
+public class Order {
+
     private int id;
-    private CommonUser user;
-    private OrderState state;
-    private Calendar time;
+    private Instant placed;
+    private CommonUser placedBy;
 
-    public Order(int id,CommonUser user,  Calendar time){
+    private List<Product> items;
+    private List<Product> toHome;
 
-        this.user = user;
-        this.time = time;
-        state = OrderState.pendiente;
-    }
-    public abstract int size();
-    public abstract float getPrice();
-    public abstract Vector<OrderSimple> getOrderProducts();
-    public abstract int getSpecialOrders();
-
-
-
-    //agregar los metodos para modificar el estado del pedido
-
-    //Getters && Setters
     public int getId() {
         return id;
     }
@@ -33,27 +20,35 @@ public abstract class Order {
         this.id = id;
     }
 
-    public CommonUser getUser() {
-        return user;
+    public Instant getPlaced() {
+        return placed;
     }
 
-    public void setUser(CommonUser user) {
-        this.user = user;
+    public void setPlaced(Instant placed) {
+        this.placed = placed;
     }
 
-    public OrderState getState() {
-        return state;
+    public CommonUser getPlacedBy() {
+        return placedBy;
     }
 
-    public void setState(OrderState state) {
-        this.state = state;
+    public void setPlacedBy(CommonUser placedBy) {
+        this.placedBy = placedBy;
     }
 
-    public Calendar getTime() {
-        return time;
+    public List<Product> getItems() {
+        return items;
     }
 
-    public void setTime(Calendar time) {
-        this.time = time;
+    public void setItems(List<Product> items) {
+        this.items = items;
+    }
+
+    public List<Product> getToHome() {
+        return toHome;
+    }
+
+    public void setToHome(List<Product> toHome) {
+        this.toHome = toHome;
     }
 }

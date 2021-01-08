@@ -1,59 +1,77 @@
-package model;
+package com.company.model;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Objects;
 
-
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Vector;
-
-public class CommonUser extends model.User {
-
-    private double balance;
+public class CommonUser {
+    private String username;
+    private String password;
+    private String names;
+    private String lastname;
+    private LocalDate birthdate;
+    private int identityCardNumber;
+    private float balance;
     private Condition condition;
-    private Vector<Order> myOrders;
-    private UserType userType;
+    private PriceCalculator priceCalculator;
+    private List<Order> completedOrders;
+    private int dailySpecialRemaining;
 
-    public CommonUser(Condition condition, UserType userType, String password, String name, String lastname, int DNI){
-        super(password, name, lastname, DNI);
-        this.condition = condition;
-        this.userType = userType;
-        this.balance = 0;
-        myOrders = new Vector<Order>();
+    public CommonUser(){}
+
+    public String getUsername() {
+        return username;
     }
 
-    public CommonUser(Condition condition, UserType userType, String password, String name, String lastname, int DNI, double balance, Vector<Order> orders){
-        super(password, name, lastname, DNI);
-        this.condition = condition;
-        this.userType = userType;
-        this.balance = balance;
-        this.myOrders = orders;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void loadBalance(double amount){
-        this.setBalance(this.balance + amount);
-    }
-    public void addOrder(Order o){
-        myOrders.add(o);
-    }
-    public int getSpecialOrdersOfToday(){
-       Calendar today = Calendar.getInstance();
-        int SpecialOrdersOfToday = 0;
-        for(Order o: myOrders){
-            if((o.getTime().get(Calendar.DATE) == today.get(Calendar.DATE)) && (o.getTime().get(Calendar.MONTH) == today.get(Calendar.MONTH)) && (o.getTime().get(Calendar.YEAR) == today.get(Calendar.YEAR)) ){
-                SpecialOrdersOfToday += o.getSpecialOrders();
-            }
-        }
-        return SpecialOrdersOfToday;
+    public String getPassword() {
+        return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
+    public String getNames() {
+        return names;
+    }
 
-    //Getters && Setters
-    public double getBalance() {
+    public void setNames(String names) {
+        this.names = names;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public LocalDate getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(LocalDate birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public int getIdentityCardNumber() {
+        return identityCardNumber;
+    }
+
+    public void setIdentityCardNumber(int identityCardNumber) {
+        this.identityCardNumber = identityCardNumber;
+    }
+
+    public float getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(float balance) {
         this.balance = balance;
     }
 
@@ -65,19 +83,44 @@ public class CommonUser extends model.User {
         this.condition = condition;
     }
 
-    public UserType getUserType() {
-        return userType;
+    public PriceCalculator getPriceCalculator() {
+        return priceCalculator;
     }
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+    public void setPriceCalculator(PriceCalculator priceCalculator) {
+        this.priceCalculator = priceCalculator;
     }
 
-    public ArrayList<Order> getMyOrders() {
-        ArrayList<Order> r_myOrders = new ArrayList<Order>();
-        for(int i = 0; i < this.myOrders.size(); i++){
-            r_myOrders.add(this.myOrders.elementAt(i));
-        }
-        return r_myOrders;
+    public List<Order> getCompletedOrders() {
+        return completedOrders;
+    }
+
+    public void setCompletedOrders(List<Order> completedOrders) {
+        this.completedOrders = completedOrders;
+    }
+
+    public int getDailySpecialRemaining() {
+        return dailySpecialRemaining;
+    }
+
+    public void setDailySpecialRemaining(int dailySpecialRemaining) {
+        this.dailySpecialRemaining = dailySpecialRemaining;
+    }
+
+    public boolean canConsume(Product product){
+        return condition.canConsume(product);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CommonUser)) return false;
+        CommonUser that = (CommonUser) o;
+        return Objects.equals(username, that.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
     }
 }
