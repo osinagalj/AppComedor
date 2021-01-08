@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.view.Interfaces.MainActivity;
-import com.example.view.Interfaces.iComunicaFragments;
 
 import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.R;
@@ -34,7 +33,7 @@ public class FragmentConfirmed  extends Fragment {
 
     //Crear referencias para poder realizar la comunicacion entre el fragment detalle
     Activity actividad;
-    iComunicaFragments interfaceComunicaFragments;
+
 
     @Nullable
     @Override
@@ -79,7 +78,7 @@ public class FragmentConfirmed  extends Fragment {
             //voy a decirle a mi actividad que sea igual a dicho contesto. castin correspondiente:
             this.actividad= (Activity) context;
             ////que la interface icomunicafragments sea igual ese contexto de la actividad:
-            interfaceComunicaFragments= (iComunicaFragments) this.actividad;
+
             //esto es necesario para establecer la comunicacion entre la lista y el detalle
         }
 

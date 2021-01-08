@@ -24,22 +24,18 @@ public class FoodDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalle_persona_fragment);
 
-
-
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
         final Food food =(Food) b.get("food_picked");
         ImageView img = findViewById(R.id.imagen_detalleid);
         if(b!=null)
         {
-            System.out.println("Se llego al fodd del j");
 
-           // img.setImageResource(j.getImagenId());
             Button fab = findViewById(R.id.button_add_order);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    //TODO revisar que la cantidad sea mayor a 0 y que el usuario tenga plata enla cuena para pedir, y si tiene hay que descontarsela
                     Order o1 = new Order(food.getName(),String.valueOf(food.getPrice()),food.getImagenId());
                     MainActivity.repo.putOrder(o1);
                     Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
@@ -48,6 +44,7 @@ public class FoodDetail extends AppCompatActivity {
                 }
             });
         }
+
 
 
         ImageButton fab2 = findViewById(R.id.imageButton_close);
@@ -65,9 +62,10 @@ public class FoodDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EditText amount = findViewById(R.id.editTextNumber);
-                String name = amount.getText().toString();
-                Integer cant = Integer.parseInt(name) - 1;
-                amount.setText(cant.toString());
+                Integer number = Integer.parseInt(amount.getText().toString());
+                if(number > 0)
+                    number--;
+                amount.setText(number.toString());
             }
         });
 

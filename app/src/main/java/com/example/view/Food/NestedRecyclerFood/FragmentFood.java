@@ -1,4 +1,4 @@
-package com.example.view.Food.Nested2;
+package com.example.view.Food.NestedRecyclerFood;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,11 +16,10 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
-import model.Food;
+import model.Restaurant;
 
-public class Nested2Main extends Fragment {
+public class FragmentFood extends Fragment {
 
     RecyclerView mainCategoryRecycler;
     MainRecyclerAdapter mainRecyclerAdapter;
@@ -43,28 +42,10 @@ public class Nested2Main extends Fragment {
 
     public void loadData(){
 
-        List<Food> categoryItemList = new ArrayList<>();
-        categoryItemList.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
-
-        // added in second category
-        List<Food> categoryItemList2 = new ArrayList<>();
-        categoryItemList2.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
-        categoryItemList2.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
-        categoryItemList2.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
-        categoryItemList2.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
-        categoryItemList2.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
-
-
-        // added in 3rd category
-        List<Food> categoryItemList3 = new ArrayList<>();
-        categoryItemList3.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
-
-
         List<AllCategory> allCategoryList = new ArrayList<>();
-        allCategoryList.add(new AllCategory("Menu del Dia", categoryItemList));
-        allCategoryList.add(new AllCategory("Buffet", categoryItemList2));
-        allCategoryList.add(new AllCategory("Kiosko", categoryItemList3));
-
+        allCategoryList.add(new AllCategory("Menu del Dia", Restaurant.restaurant.getDailyMenu()));
+        allCategoryList.add(new AllCategory("Buffet", Restaurant.restaurant.getProducts()));
+        allCategoryList.add(new AllCategory("Kiosko", Restaurant.restaurant.getProductsKiosko()));
 
         setMainCategoryRecycler(allCategoryList);
     }

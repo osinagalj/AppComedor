@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.view.Interfaces.iComunicaFragments;
 import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.R;
 
@@ -26,7 +25,7 @@ public class OrderDetail extends Fragment {
 
 
     Activity actividad;
-    iComunicaFragments interfaceComunicaFragments;
+
 
     @Nullable
     @Override
@@ -57,7 +56,6 @@ public class OrderDetail extends Fragment {
             //voy a decirle a mi actividad que sea igual a dicho contesto. castin correspondiente:
             this.actividad= (Activity) context;
             ////que la interface icomunicafragments sea igual ese contexto de la actividad:
-            interfaceComunicaFragments= (iComunicaFragments) this.actividad;
             //esto es necesario para establecer la comunicacion entre la lista y el detalle
         }
 

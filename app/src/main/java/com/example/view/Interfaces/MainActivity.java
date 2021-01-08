@@ -13,12 +13,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.view.Fila.Fragment_fila;
-import com.example.view.Food.FoodAux;
-import com.example.view.Food.Nested2.Nested2Main;
+import com.example.view.Food.NestedRecyclerFood.FragmentFood;
 import com.example.view.MiCuenta.fragmen_myAccount;
 import com.example.view.MyOrders.Fragment.Confirmados.OrderDetail;
 import com.example.view.MyOrders.Fragment.Pendientes.FragmentPendientes;
-import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.MyOrders.HomeFragment;
 import com.example.view.R;
 import com.example.view.Saldo.fragment_balance;
@@ -27,7 +25,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import DataBase.Repositorio;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, iComunicaFragments {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -82,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(menuItem.getItemId() == R.id.food){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment,new Nested2Main());
+            fragmentTransaction.replace(R.id.container_fragment,new FragmentFood());
             fragmentTransaction.commit();
         }
 
@@ -116,114 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    @Override
-    public void enviarPersona(FoodAux food) {
-        //gracias a hbaer implementado de la interface "iComunicaFragments" se tiene la implementacion del metodo enviarPersona
-        //o mejor dicho este metodo.
-        //Aqui se realiza toda la logica necesaria para poder realizar el envio
-        detallePersonaFragment = new DetallePersonaFragment();
-        //objeto bundle para transportar la informacion
-        Bundle bundleEnvio = new Bundle();
-        //se manda el objeto que le esta llegando:
-        bundleEnvio.putSerializable("objeto", food);
-        detallePersonaFragment.setArguments(bundleEnvio);
 
-
-        //CArgar fragment en el activity
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container_fragment, detallePersonaFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-
-        /*
-         getSupportFragmentManager().beginTransaction()
-                 .replace(R.id.container_fragment, detallePersonaFragment)
-                 .addToBackStack(null).commit();
-        */
-        //***Luego pasar a programar al fragmentdetalle
-    }
-    @Override
-    public void enviarOrdenPendiente(Order food) {
-        //gracias a hbaer implementado de la interface "iComunicaFragments" se tiene la implementacion del metodo enviarPersona
-        //o mejor dicho este metodo.
-        //Aqui se realiza toda la logica necesaria para poder realizar el envio
-
-        //objeto bundle para transportar la informacion
-        Bundle bundleEnvio = new Bundle();
-        //se manda el objeto que le esta llegando:
-        bundleEnvio.putSerializable("orderP", food);
-        fragmentPendientes.setArguments(bundleEnvio);
-
-        Order o1 = new Order("prueba79","$60",R.drawable.food_empanada);
-        Order o2 = new Order("prueba80","$80",R.drawable.food_empanada);
-//        r.putOrder(o1);
-       // r.putOrder(o2);
-/*
-        //CArgar fragment en el activity
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container_fragment, fragmentPendientes);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-*/
-        /*
-         getSupportFragmentManager().beginTransaction()
-                 .replace(R.id.container_fragment, detallePersonaFragment)
-                 .addToBackStack(null).commit();
-        */
-        //***Luego pasar a programar al fragmentdetalle
-    }
-
-
-/*
-    @Override
-    public void enviarPersona(Order2 food) {
-        //gracias a hbaer implementado de la interface "iComunicaFragments" se tiene la implementacion del metodo enviarPersona
-        //o mejor dicho este metodo.
-        //Aqui se realiza toda la logica necesaria para poder realizar el envio
-        detallePersonaFragment = new DetallePersonaFragment();
-        //objeto bundle para transportar la informacion
-        Bundle bundleEnvio = new Bundle();
-        //se manda el objeto que le esta llegando:
-        bundleEnvio.putSerializable("objeto", food);
-        detallePersonaFragment.setArguments(bundleEnvio);
-
-        //CArgar fragment en el activity
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container_fragment, detallePersonaFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-
-        /*
-         getSupportFragmentManager().beginTransaction()
-                 .replace(R.id.container_fragment, detallePersonaFragment)
-                 .addToBackStack(null).commit();
-
-        //***Luego pasar a programar al fragmentdetalle
-    }
-*/
-    @Override
-    public void abrirPDF(Order food) {
-        //gracias a hbaer implementado de la interface "iComunicaFragments" se tiene la implementacion del metodo enviarPersona
-        //o mejor dicho este metodo.
-        //Aqui se realiza toda la logica necesaria para poder realizar el envio
-        orderDetail = new OrderDetail();
-        //objeto bundle para transportar la informacion
-        Bundle bundleEnvio = new Bundle();
-        //se manda el objeto que le esta llegando:
-        bundleEnvio.putSerializable("PDF", food);
-        orderDetail.setArguments(bundleEnvio);
-
-        //CArgar fragment en el activity
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container_fragment, orderDetail);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-
-    }
 
 
 

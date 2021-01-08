@@ -19,6 +19,7 @@ public class Restaurant {
     private Vector<Order> orders = new Vector<Order>();;
     private HashMap<Integer, Condition> usersConditions;
 
+    private Vector<Food> productsKiosko = new Vector<Food>();;
 
    public Restaurant(int id, String name, String address, int openTime, int closeTime){
        this.id = id;
@@ -32,23 +33,41 @@ public class Restaurant {
    }
 
    private void loadProducts(){
-       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
-       products.add(new Food(0002,"Name 1",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
-       products.add(new Food(0003,"Name 2",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
-       products.add(new Food(0004,"Name 3",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
-       products.add(new Food(0005,"Name 4",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
-       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
-       products.add(new Food(0002,"Name 1",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
-       products.add(new Food(0003,"Name 2",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
-       products.add(new Food(0004,"Name 3",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
-       products.add(new Food(0005,"Name 4",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
-       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
-       products.add(new Food(0002,"Name 1",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
-       products.add(new Food(0003,"Name 2",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
-       products.add(new Food(0004,"Name 3",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
-       products.add(new Food(0005,"Name 4",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
+       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
+       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
+       products.add(new Food(0003,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
+       products.add(new Food(0004,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
+       products.add(new Food(0005,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
+       products.add(new Food(0001,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
+       products.add(new Food(0002,"Name 1",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
+
+       //Producots del kiosko
+       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
+       productsKiosko.add(new Food(0004,"Vaso de Coca-Cola",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
+       productsKiosko.add(new Food(0005,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
+       productsKiosko.add(new Food(0001,"Vaso de Coca-Cola",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
+       productsKiosko.add(new Food(0002,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
+       productsKiosko.add(new Food(0003,"Vaso de Coca-Cola",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
+       productsKiosko.add(new Food(0004,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
+       productsKiosko.add(new Food(0005,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
+
+
    }
    //los listar irian en la interfaz usando el getProducts o getOrders
+
+    public Vector<Food> getDailyMenu(){
+       Vector<Food> aux = new Vector<Food>();
+       aux.add( new Food(0001,"Milanesa con PapaFritas",6, 90.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+    return aux;
+    }
+
+    public ArrayList<Food> getProductsKiosko() {
+        ArrayList<Food> r_products = new ArrayList<Food>();
+        for(int i = 0; i < this.productsKiosko.size(); i++){
+            r_products.add(this.productsKiosko.elementAt(i));
+        }
+        return r_products;
+    }
 
     public int getPendingOrders(){
        return orders.size();

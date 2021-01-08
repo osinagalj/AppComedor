@@ -9,21 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".Login.Sign_up_student"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Login.Sign_up_1"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity
             android:name=".MyOrders.Fragment.Confirmados.ActivityPdf"
             android:label="@string/title_activity_pdf"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Food.FinishOrder"
             android:label="@string/title_activity_pdf"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Food.FoodDetail"
             android:label="@string/title_activity_pdf"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Interfaces.Login"
+            android:name=".Login.Login"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +37,7 @@
         </activity>
         <activity
             android:name=".Interfaces.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
