@@ -22,5 +22,11 @@ public class Sign_up_student extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        View sign_up_label_dni = findViewById(R.id.sign_up_label_variable);
+        sign_up_label_dni.setVisibility(View.VISIBLE);
+
+
     }
 }
