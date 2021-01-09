@@ -74,7 +74,7 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
                 model.remove(position);
                 //notifyItemRemoved(0);
                 notifyDataSetChanged();
-                //Repositorio.repo.removeFirstPendOrder(0);
+                //Repositorio.repo.removeFirstPendOrder(model.get(position).getId()); //TODO ACA HAY QUE PASARLE EL NRO DE ORDEN PARA ELIMINAR, NO LA POS
 
             }
         });
