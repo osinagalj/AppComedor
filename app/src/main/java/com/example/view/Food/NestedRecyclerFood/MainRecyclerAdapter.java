@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.example.view.R;
 
 import java.util.List;
@@ -63,8 +62,16 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     private void setCatItemRecycler(RecyclerView recyclerView, List<Food> categoryItemList){
 
         CategoryItemRecyclerAdapter itemRecyclerAdapter = new CategoryItemRecyclerAdapter(context, categoryItemList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        //To make it Horizontal like Google Play Store and Netflix
+        // recyclerView.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(itemRecyclerAdapter);
+
+
+
+
+
 
     }
 }

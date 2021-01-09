@@ -85,6 +85,8 @@
                 android:layout_width="190dp"
                 android:layout_height="60dp"
                 android:text="Ingresar"
+                android:theme="@style/button"
+                android:background="@drawable/button"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="3dp"
                 tools:layout_editor_absoluteY="5dp" />
@@ -95,6 +97,8 @@
                 android:layout_height="60dp"
                 android:layout_marginBottom="100dp"
                 android:text="Registrarme"
+                android:theme="@style/button"
+                android:background="@drawable/button"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="3dp"
                 tools:layout_editor_absoluteY="5dp" />
