@@ -7,12 +7,19 @@ public class Order implements Serializable {
     private String price;
     private int imagenid;
 
+    private int id;
+
     public Order(){}
 
-    public Order(String nombre, String price, int imagenid) {
+    public Order(int id, String nombre, String price, int imagenid) {
+        this.id = id;
         this.nombre = nombre;
         this.price = price;
         this.imagenid = imagenid;
+    }
+
+    public int getId(){
+        return this.id;
     }
 
     public String getNombre() {

@@ -23,8 +23,6 @@ import com.example.view.Saldo.fragment_balance;
 import com.example.view.otross.DetallePersonaFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import DataBase.Repositorio;
-
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
@@ -41,7 +39,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     OrderDetail orderDetail;
 
-    public static Repositorio repo = new Repositorio();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +110,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
+    public void a(){
+
+        fragmentManager = getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container_fragment,new HomeFragment());
+
+        /*
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container_fragment, new HomeFragment())
+                .addToBackStack(null).commit();*/
+    }
 
 
 

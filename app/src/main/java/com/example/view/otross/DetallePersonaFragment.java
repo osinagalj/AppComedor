@@ -16,8 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.view.Interfaces.MainActivity;
-import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.R;
 
 public class DetallePersonaFragment extends Fragment { // Este ya no se usa, despues lo elimino
@@ -51,8 +49,8 @@ public class DetallePersonaFragment extends Fragment { // Este ya no se usa, des
                 @Override
                 public void onClick(View view) {
 
-                    Order o1 = new Order(name,price,idImg);
-                    MainActivity.repo.putOrder(o1);
+                    //Order o1 = new Order(name,price,idImg);
+                    //Repositorio.repo.putOrder(o1);
                     Toast.makeText(getContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
                 }
             });

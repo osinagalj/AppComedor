@@ -70,7 +70,7 @@
             android:text="2 Unidades" />
 
         <ImageButton
-            android:id="@+id/button_remove_order"
+            android:id="@+id/pendientes_button_remove_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"

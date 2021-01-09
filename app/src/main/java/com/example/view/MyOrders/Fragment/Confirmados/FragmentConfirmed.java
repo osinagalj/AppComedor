@@ -15,12 +15,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.Interfaces.MainActivity;
-
 import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.R;
 
 import java.util.ArrayList;
+
+import DataBase.Repositorio;
 
 public class FragmentConfirmed  extends Fragment {
 
@@ -46,7 +46,7 @@ public class FragmentConfirmed  extends Fragment {
         return view;
     }
     public void cargarLista(){
-        ArrayList<Order> ar = MainActivity.repo.getConfirmedOrders();
+        ArrayList<Order> ar = Repositorio.repo.getConfirmedOrders();
         for(Order o : ar){
             listaFoods.add(o);
         }

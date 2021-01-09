@@ -12,10 +12,19 @@ public class Repositorio {
     ArrayList<Order> confirmedOrders = new ArrayList<Order>();
     ArrayList<Integer> filaPendientes = new ArrayList<Integer>();
 
+    public static Repositorio repo = new Repositorio();
+    private int numero_order = 3;
+
+    public int getNroOrden(){
+        int result = numero_order;
+        numero_order++;
+        return result;
+    }
+
     public Repositorio(){
-        Order o1 = new Order("Pedido 1","2$",R.drawable.food_vaso_coca);
-        Order o2 = new Order("Pedido 2","6$",R.drawable.food_milanesas_con_fritas);
-        Order o3 = new Order("Pedido 3","20$",R.drawable.food_turron_arcor);
+        Order o1 = new Order(0,"Pedido 1","2$",R.drawable.food_vaso_coca);
+        Order o2 = new Order(1,"Pedido 2","6$",R.drawable.food_milanesas_con_fritas);
+        Order o3 = new Order(2,"Pedido 3","20$",R.drawable.food_turron_arcor);
 
         confirmedOrders.add(o1);
         confirmedOrders.add(o2);
@@ -30,6 +39,15 @@ public class Repositorio {
         ordenes.add(o3);
 
     }
+
+    public void removeFirstPendOrder(int nro_orden){
+
+
+        ordenes.remove(0);
+
+        System.out.println("repositorio size = " + ordenes.size());
+    }
+
     public void eliminarPrimeraOrdenPendiente(){
         ordenes.remove(0);
     }

@@ -55,6 +55,8 @@ public class Restaurant {
    }
    //los listar irian en la interfaz usando el getProducts o getOrders
 
+
+
     public Vector<Food> getDailyMenu(){
        Vector<Food> aux = new Vector<Food>();
        aux.add( new Food(0001,"Milanesa con PapaFritas",6, 90.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
