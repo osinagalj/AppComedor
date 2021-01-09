@@ -15,8 +15,6 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DataBase.Repositorio;
-
 public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
@@ -73,9 +71,10 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
                 //  EL ELEMENTO 2 NO PASA A SER EL 1, SINO SIGUE SIENDO EL 2
                 System.out.println("positionn de mierda = " + (position));
                 System.out.println("Size del model  de mierda = " + (model.size()));
-                model.remove(0);
-                notifyItemRemoved(0);
-                Repositorio.repo.removeFirstPendOrder(0);
+                model.remove(position);
+                //notifyItemRemoved(0);
+                notifyDataSetChanged();
+                //Repositorio.repo.removeFirstPendOrder(0);
 
             }
         });
