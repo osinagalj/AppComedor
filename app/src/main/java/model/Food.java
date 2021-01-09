@@ -1,52 +1,71 @@
-package com.company.model;
+package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Vector;
 
-public class Food extends Product {
+public class Food implements Serializable {
+    private int barcode;
+    private String name;
     private int stock;
     private float price;
-    private List<String> ingredients;
+    private Vector<String> ingredients;
 
-    protected Food(){}
+    private int imagenId;
 
-    @Override
-    public List<String> getIngredients() {
-        return Collections.unmodifiableList(ingredients);
-    }
-
-    public Food(int id, String name, String description, int stock, float price) {
-        super(id, name, description);
-        this.stock = stock;
-        this.price = price;
-        this.ingredients = new ArrayList<>();
-    }
-
-    public Food(int id,String name, String description, int stock, float price, List<String> ingredients) {
-        super(id,name, description);
+    public Food(int barcode, String name, int stock, float price, Vector<String> ingredients,int imagenId){
+        this.barcode = barcode;
+        this.name = name;
         this.stock = stock;
         this.price = price;
         this.ingredients = ingredients;
+        this.imagenId = imagenId;
     }
 
-    @Override
-    public List<Product> getProducts() {
-        return null;
+    public int getImagenId() {
+        return imagenId;
     }
 
-    @Override
-    public float getPrice() {
-        return 0;
+    public int getBarcode() {
+        return barcode;
     }
 
-    @Override
+    public void setBarcode(int barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getStock() {
-        return 0;
+        return stock;
     }
 
-    @Override
-    public int getDailyLimit() {
-        return 0;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public Vector<String> getIngredients() {
+
+        Vector<String> r_ingredients = new Vector<String>();
+        for(int i = 0; i < this.ingredients.size(); i++){
+            r_ingredients.add(this.ingredients.elementAt(i));
+        }
+        return r_ingredients;
+    }
+
+
 }

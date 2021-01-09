@@ -1,17 +1,30 @@
-package com.company.model;
+package model;
 
-import java.time.Instant;
-import java.util.List;
+import java.util.Calendar;
+import java.util.Vector;
 
-public class Order {
-
+public abstract class Order {
     private int id;
-    private Instant placed;
-    private CommonUser placedBy;
+    private CommonUser user;
+    private OrderState state;
+    private Calendar time;
 
-    private List<Product> items;
-    private List<Product> toHome;
+    public Order(int id,CommonUser user,  Calendar time){
 
+        this.user = user;
+        this.time = time;
+        state = OrderState.pendiente;
+    }
+    public abstract int size();
+    public abstract float getPrice();
+    public abstract Vector<OrderSimple> getOrderProducts();
+    public abstract int getSpecialOrders();
+
+
+
+    //agregar los metodos para modificar el estado del pedido
+
+    //Getters && Setters
     public int getId() {
         return id;
     }
@@ -20,35 +33,27 @@ public class Order {
         this.id = id;
     }
 
-    public Instant getPlaced() {
-        return placed;
+    public CommonUser getUser() {
+        return user;
     }
 
-    public void setPlaced(Instant placed) {
-        this.placed = placed;
+    public void setUser(CommonUser user) {
+        this.user = user;
     }
 
-    public CommonUser getPlacedBy() {
-        return placedBy;
+    public OrderState getState() {
+        return state;
     }
 
-    public void setPlacedBy(CommonUser placedBy) {
-        this.placedBy = placedBy;
+    public void setState(OrderState state) {
+        this.state = state;
     }
 
-    public List<Product> getItems() {
-        return items;
+    public Calendar getTime() {
+        return time;
     }
 
-    public void setItems(List<Product> items) {
-        this.items = items;
-    }
-
-    public List<Product> getToHome() {
-        return toHome;
-    }
-
-    public void setToHome(List<Product> toHome) {
-        this.toHome = toHome;
+    public void setTime(Calendar time) {
+        this.time = time;
     }
 }
