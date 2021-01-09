@@ -15,6 +15,8 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
+import DataBase.Repositorio;
+
 public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
@@ -65,16 +67,14 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
             @Override
             public void onClick(View v)
             {
-                //TODO CORREGIR LOS INDICES, POR AHORA SOLO SE PUEDE ELIMINAR EL PRIMER ELEMENTO DE LOS PEDIDOS PENDIENTES
-                // NO LO PUDE ARREGLAR F
-                // TODO AL PARECE EL POSITION SIEMPRE MANTIENE LAS POISICONES INICIALES, OSEA SI ELIMINAS EL ELEMENTO 0,
-                //  EL ELEMENTO 2 NO PASA A SER EL 1, SINO SIGUE SIENDO EL 2
+
                 System.out.println("positionn de mierda = " + (position));
                 System.out.println("Size del model  de mierda = " + (model.size()));
+
+                Repositorio.repo.removePendOrder(model.get(position).getId()); //TODO ACA HAY QUE PASARLE EL NRO DE ORDEN PARA ELIMINAR, NO LA POS
                 model.remove(position);
-                //notifyItemRemoved(0);
+                //notifyItemRemoved(0); // esto hace andar mal a la posicion
                 notifyDataSetChanged();
-                //Repositorio.repo.removeFirstPendOrder(model.get(position).getId()); //TODO ACA HAY QUE PASARLE EL NRO DE ORDEN PARA ELIMINAR, NO LA POS
 
             }
         });
