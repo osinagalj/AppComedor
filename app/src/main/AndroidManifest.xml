@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Login.Sign_up_student"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Login.Sign_up_1"
+        <activity android:name=".Login.Sign_up"
             android:theme="@style/AppTheme.NoActionBar"
             />
         <activity
