@@ -11,10 +11,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.view.Interfaces.MainActivity;
 import com.example.view.MyOrders.Fragment.Pendientes.Order;
 import com.example.view.R;
 
+import DataBase.Repositorio;
 import model.Food;
 
 public class FoodDetail extends AppCompatActivity {
@@ -36,8 +36,8 @@ public class FoodDetail extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     //TODO revisar que la cantidad sea mayor a 0 y que el usuario tenga plata enla cuena para pedir, y si tiene hay que descontarsela
-                    Order o1 = new Order(food.getName(),String.valueOf(food.getPrice()),food.getImagenId());
-                    MainActivity.repo.putOrder(o1);
+                    Order o1 = new Order(Repositorio.repo.getNroOrden(),food.getName(),String.valueOf(food.getPrice()),food.getImagenId());
+                    Repositorio.repo.putOrder(o1);
                     Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
 
                     openFinishOrder();
