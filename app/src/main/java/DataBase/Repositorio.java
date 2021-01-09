@@ -24,7 +24,10 @@ public class Repositorio {
     public Repositorio(){
         Order o1 = new Order(0,"Pedido 1","2$",R.drawable.food_vaso_coca);
         Order o2 = new Order(1,"Pedido 2","6$",R.drawable.food_milanesas_con_fritas);
-        Order o3 = new Order(2,"Pedido 3","20$",R.drawable.food_turron_arcor);
+        Order o3 = new Order(2,"Pedido 3","20$",R.drawable.food_pepas_trio);
+        Order o4 = new Order(3,"Pedido 1","2$",R.drawable.food_turron_arcor);
+        Order o5 = new Order(4,"Pedido 2","6$",R.drawable.food_botella_coca);
+        Order o6 = new Order(5,"Pedido 3","20$",R.drawable.food_empanada);
 
         confirmedOrders.add(o1);
         confirmedOrders.add(o2);
@@ -37,6 +40,9 @@ public class Repositorio {
         ordenes.add(o1);
         ordenes.add(o2);
         ordenes.add(o3);
+        ordenes.add(o4);
+        ordenes.add(o5);
+        ordenes.add(o6);
 
     }
 
