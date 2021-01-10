@@ -6,6 +6,7 @@ public abstract class Product {
     private int id;
     private String name;
     private String description;
+    private int imgId; //TODO la imagen de cada producto/combo
 
     protected Product(){}
 

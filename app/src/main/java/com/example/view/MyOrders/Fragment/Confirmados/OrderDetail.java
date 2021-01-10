@@ -31,7 +31,7 @@ public class OrderDetail extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_order_details,container,false);
-        nro_orden = view.findViewById(R.id.txt_nro_orden);
+        //nro_orden = view.findViewById(R.id.txt_nro_orden);
 
         Bundle objetoPersona = getArguments();
         Order food = null;
@@ -39,7 +39,7 @@ public class OrderDetail extends Fragment {
 
         if(objetoPersona !=null){
             //food = (Order) objetoPersona.getSerializable("PDF");
-            nro_orden.setText("2001010");
+            //nro_orden.setText("2001010");
 
         }
 

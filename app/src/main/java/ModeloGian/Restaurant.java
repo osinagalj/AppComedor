@@ -15,6 +15,30 @@ public class Restaurant {
     private final ArrayList<Order> pendingOrders = new ArrayList<>();
     public static final Restaurant INSTANCE = new Restaurant();
 
+    //private Vector<model.Food> productsKiosko = new Vector<Food>(); TODO FALTA ESTO
+
+    //TODO estos metodos tmb faltarian
+    /*
+    public Vector<model.Food> getDailyMenu(){
+        Vector<model.Food> aux = new Vector<model.Food>();
+        aux.add( new model.Food(0001,"Milanesa con PapaFritas",6, 90.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+        return aux;
+    }
+
+    public ArrayList<model.Food> getProductsKiosko() {
+        ArrayList<model.Food> r_products = new ArrayList<Food>();
+        for(int i = 0; i < this.productsKiosko.size(); i++){
+            r_products.add(this.productsKiosko.elementAt(i));
+        }
+        return r_products;
+    }
+    */
+
+
+
+
+
+
     private Restaurant(){}
 
     public static Restaurant getInstance() { return INSTANCE; }
