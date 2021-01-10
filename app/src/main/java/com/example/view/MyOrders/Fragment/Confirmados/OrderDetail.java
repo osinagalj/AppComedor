@@ -30,7 +30,7 @@ public class OrderDetail extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_order_details,container,false);
+        View view = inflater.inflate(R.layout.activity_order_details,container,false);
         nro_orden = view.findViewById(R.id.txt_nro_orden);
 
         Bundle objetoPersona = getArguments();

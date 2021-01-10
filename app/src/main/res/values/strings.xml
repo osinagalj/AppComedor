@@ -11,4 +11,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="su_pedido_se_ha_realizado_exitosamente">Su pedido se ha realizado exitosamente</string>
+    <string name="button_close">Button close</string>
 </resources>

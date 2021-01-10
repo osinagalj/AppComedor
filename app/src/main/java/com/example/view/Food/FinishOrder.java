@@ -18,7 +18,7 @@ public class FinishOrder extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.correct_order);
+        setContentView(R.layout.activity_finish_order);
 
         ImageButton btn_close = findViewById(R.id.correct_order_close);
         btn_close.setOnClickListener(new View.OnClickListener() {

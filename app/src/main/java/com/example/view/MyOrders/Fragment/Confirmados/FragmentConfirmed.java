@@ -38,7 +38,7 @@ public class FragmentConfirmed  extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fixture,container,false);
+        View view = inflater.inflate(R.layout.fragment_confirmed_orders,container,false);
         recyclerViewPersonas = view.findViewById(R.id.recyclerView_fixture);
         listaFoods = new ArrayList<>();
         cargarLista();

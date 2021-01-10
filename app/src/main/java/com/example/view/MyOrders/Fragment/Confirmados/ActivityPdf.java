@@ -13,7 +13,7 @@ public class ActivityPdf extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_order_details);
+        setContentView(R.layout.activity_order_details);
 
         ImageButton fab = findViewById(R.id.button_order_details_close);
         fab.setOnClickListener(new View.OnClickListener() {

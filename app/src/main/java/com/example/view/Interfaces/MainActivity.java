@@ -20,7 +20,6 @@ import com.example.view.MyOrders.Fragment.Pendientes.FragmentPendientes;
 import com.example.view.MyOrders.HomeFragment;
 import com.example.view.R;
 import com.example.view.Saldo.fragment_balance;
-import com.example.view.otross.DetallePersonaFragment;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     //variable del fragment detalle
-    DetallePersonaFragment detallePersonaFragment;
+
     FragmentPendientes fragmentPendientes = new FragmentPendientes();
     HomeFragment homeFragment = new HomeFragment();
 
