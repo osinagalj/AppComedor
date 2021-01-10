@@ -3,15 +3,16 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="55dp">
+    >
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:stretchColumns="1"
         android:layout_marginStart="25dp"
         android:layout_marginEnd ="25dp">
@@ -20,13 +21,11 @@
             android:id="@+id/balance_profile"
             android:layout_width="145dp"
             android:layout_height="114dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="85dp"
-
-
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
             android:src="@drawable/profile_user"
             />
+
         <TextView
             android:id="@+id/balance_name_profile"
             android:layout_width="wrap_content"
@@ -156,10 +155,10 @@
             android:textColor="#fff"
             android:textColorHint="#E41A1A"
             android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="100dp"
             />
-    </TableLayout>
-    </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>
