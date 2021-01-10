@@ -60,13 +60,6 @@ public class Repositorio {
         System.out.println("repositorio size = " + ordenes.size());
     }
 
-    public void eliminarPrimeraOrdenPendiente(){
-        ordenes.remove(0);
-    }
-
-    public  ArrayList<Integer> getFilaPendientes(){
-        return filaPendientes;
-    }
 
     public void putOrder(Order o){
         ordenes.add(o);

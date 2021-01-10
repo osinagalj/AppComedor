@@ -19,7 +19,7 @@ public class Restaurant {
     private Vector<Order> orders = new Vector<Order>();;
     private HashMap<Integer, Condition> usersConditions;
 
-    private Vector<Food> productsKiosko = new Vector<Food>();;
+    private Vector<Food> productsKiosko = new Vector<Food>();
 
    public Restaurant(int id, String name, String address, int openTime, int closeTime){
        this.id = id;

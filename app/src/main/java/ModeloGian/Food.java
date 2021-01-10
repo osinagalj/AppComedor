@@ -5,9 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class Food extends Product {
+
     private int stock;
     private float price;
     private List<String> ingredients;
+
+
 
     protected Food(){}
 

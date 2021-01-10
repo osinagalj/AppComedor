@@ -8,6 +8,7 @@ public class Combo extends Product{
     private List<Product> comboItems;
     private int discount;
 
+
     public Combo(int id,String name, String description, List<Product> comboItems, int discount) {
         super(id, name, description);
         this.comboItems = comboItems;
