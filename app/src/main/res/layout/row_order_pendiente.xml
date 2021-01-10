@@ -5,79 +5,98 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
+
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:orientation="vertical"
         android:padding="10dp">
 
 
-        <ImageView
-            android:id="@+id/pendiente_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_alignParentTop="true"
 
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="27dp"
-            android:layout_toEndOf="@+id/pendiente_nombre"
-            android:src="@drawable/food_milanesas_con_fritas"></ImageView>
-
-        <TextView
-            android:id="@+id/pendiente_nombre"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/left_layout"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            >
 
-            android:layout_alignParentStart="true"
+            <TextView
+                android:id="@+id/pendiente_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="5dp"
+                android:text="Nombre de la Persona"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="28dp"
-            android:text="Nombre de la Persona"
-            android:textSize="18sp"
-            android:textStyle="bold"></TextView>
+            <TextView
+                android:id="@+id/pendiente_precio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:text="Descripcion del producto" />
 
-        <TextView
-            android:id="@+id/pendiente_precio"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pendiente_nombre"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="27dp"
+
+                android:text="Total: 110$"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/pendiente_nombre"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="23dp"
-            android:layout_toEndOf="@+id/textView8"
-            android:text="2020-01-20"></TextView>
+            android:orientation="vertical"
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/pendiente_nombre"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="27dp"
-            android:layout_marginTop="24dp"
-            android:text="Total"
-            android:textStyle="bold" />
+            android:gravity="right"
+            android:layout_toEndOf="@+id/left_layout"
+            >
 
-        <TextView
-            android:id="@+id/txt_unidades"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/pendiente_img"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="17dp"
-            android:layout_toEndOf="@+id/pendiente_nombre"
-            android:text="2 Unidades" />
+            <ImageView
+                android:id="@+id/pendiente_img"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="right"
 
-        <ImageButton
-            android:id="@+id/pendientes_button_remove_order"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="21dp"
-            android:layout_marginTop="58dp"
-            android:layout_toEndOf="@+id/pendiente_img"
-            app:srcCompat="@drawable/cross_image" />
+                android:src="@drawable/food_milanesas_con_fritas" />
+
+            <ImageButton
+                android:id="@+id/pendientes_button_remove_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_toEndOf="@+id/pendiente_img"
+                android:background="@drawable/cross_image" />
+
+            <TextView
+                android:id="@+id/txt_unidades"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pendiente_img"
+
+
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="4dp"
+
+                android:text="2 Unidades" />
+
+        </RelativeLayout>
+
+
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

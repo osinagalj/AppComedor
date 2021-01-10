@@ -10,7 +10,7 @@ public class Order implements Serializable {
     private int id;
 
     public Order(){}
-
+    //TODO ESTA ORDEN TENDRIA QUE SER LA ORDEN DEL MODELO
     public Order(int id, String nombre, String price, int imagenid) {
         this.id = id;
         this.nombre = nombre;

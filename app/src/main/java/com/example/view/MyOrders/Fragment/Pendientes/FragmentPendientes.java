@@ -39,7 +39,7 @@ public class FragmentPendientes extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_live,container,false);
+        View view = inflater.inflate(R.layout.fragment_pending_orders,container,false);
         recyclerViewPersonas = view.findViewById(R.id.recyclerView_live);
         buttonRemove = view.findViewById(R.id.pendientes_button_remove_order);
         listaFoods = new ArrayList<>();

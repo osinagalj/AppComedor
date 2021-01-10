@@ -33,23 +33,25 @@ public class Restaurant {
    }
 
    private void loadProducts(){
-       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
-       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
-       products.add(new Food(0003,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
-       products.add(new Food(0004,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
-       products.add(new Food(0005,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
-       products.add(new Food(0001,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio));
-       products.add(new Food(0002,"Name 1",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
+       //Products Buffet
+       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_tarta_pollo));
+       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_tarta_calabaza));
+       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
+       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_agua_mineral));
+       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_botella_coca));
+       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_cafe_con_leche));
+       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_tostado_jyq));
+       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_porcion_pizza));
+       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
 
        //Producots del kiosko
-       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
-       productsKiosko.add(new Food(0004,"Vaso de Coca-Cola",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
-       productsKiosko.add(new Food(0005,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
-       productsKiosko.add(new Food(0001,"Vaso de Coca-Cola",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
-       productsKiosko.add(new Food(0002,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
-       productsKiosko.add(new Food(0003,"Vaso de Coca-Cola",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
-       productsKiosko.add(new Food(0004,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
-       productsKiosko.add(new Food(0005,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
+       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_9_de_oro_agridulce));
+       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_tita));
+       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_frutigran_chocolate));
+       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio_chocotrio));
+       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_turron_arcor));
+       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
+
 
 
    }

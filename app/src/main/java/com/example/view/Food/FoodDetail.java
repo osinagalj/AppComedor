@@ -22,7 +22,7 @@ public class FoodDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detalle_persona_fragment);
+        setContentView(R.layout.activity_food_details);
 
         Intent iin= getIntent();
         Bundle b = iin.getExtras();

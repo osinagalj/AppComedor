@@ -7,6 +7,7 @@ public class User_data implements Serializable {
     private String descripcion;
 
     public User_data(){}
+    //TODO ESTE USER DATA TENDRIA QUE SER LA CLASE USER DEL MODELO
 
     public User_data(String campo,String descripcion){
         this.campo = campo;
