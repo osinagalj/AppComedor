@@ -4,6 +4,8 @@ Comedor App
 A FoodApp UI built using Android Studio. I'm super excited to have worked on this.
 
 
+ - #### User Application
+
 
 # items
 - RecyclerView
@@ -15,7 +17,7 @@ A FoodApp UI built using Android Studio. I'm super excited to have worked on thi
 
 # Screenshots
 
-<img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_1.PNG" width="150" height="250" alt="FoodApp UI"/>
+
 <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_2.PNG" width="150" height="250" alt="FoodApp UI"/>
 <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_3.PNG" width="150" height="250" alt="FoodApp UI"/>
 <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_4.PNG" width="150" height="250" alt="FoodApp UI"/>
@@ -24,3 +26,14 @@ A FoodApp UI built using Android Studio. I'm super excited to have worked on thi
 <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_7.PNG" width="150" height="250" alt="FoodApp UI"/>
 <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_8.PNG" width="150" height="250" alt="FoodApp UI"/>
 <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_9.PNG" width="150" height="250" alt="FoodApp UI"/>
+
+<br/>
+
+### Application Workflow -
+
+|1.Login                                                                                                                                            | 2. Select Food                                                                                                                                     | 3. Food                                                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------| ---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+|<img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_1.PNG" width="150" height="250" alt="FoodApp UI"/>  | <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_2.PNG" width="150" height="250" alt="FoodApp UI"/>  | <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_3.PNG" width="150" height="250" alt="FoodApp UI"/> |                                                                                                    | <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_1.PNG" width="150" height="250" alt="FoodApp UI"/> |
+
+
+<br/>
