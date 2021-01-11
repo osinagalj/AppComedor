@@ -61,7 +61,7 @@
                     android:id="@+id/row_pending_order_imageView_product_img"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/food_milanesas_con_fritas" />
+                    />
 
                 <TextView
                     android:id="@+id/row_pending_order_label_amount"

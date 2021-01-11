@@ -60,8 +60,7 @@ app:cardUseCompatPadding="true">
         <ImageView
             android:id="@+id/row_confirmed_order_imageView_product_img"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/food_milanesas_con_fritas" />
+            android:layout_height="100dp" />
 
         <TextView
             android:id="@+id/row_confirmed_order_label_amount"
