@@ -65,7 +65,7 @@ public class AdapterOrdenes  extends RecyclerView.Adapter<AdapterOrdenes.ViewHol
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
-            nombres = itemView.findViewById(R.id.nombres2);
+            nombres = itemView.findViewById(R.id.row_order_queue_number);
 
         }
     }

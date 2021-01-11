@@ -10,7 +10,7 @@
 
 
     <TextView
-        android:id="@+id/text_alimento"
+        android:id="@+id/food_details_product_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -25,56 +25,53 @@
     </TextView>
 
     <ImageView
-        android:id="@+id/imagen_detalleid"
+        android:id="@+id/food_details_product_img"
         android:layout_width="150dp"
         android:layout_height="150dp"
-
-        android:layout_below="@+id/text_alimento"
+        android:layout_below="@+id/food_details_product_name"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginStart="121dp"
-
         android:src="@drawable/food_milanesas_con_fritas">
 
     </ImageView>
 
     <TextView
-        android:id="@+id/nombre_detalle"
+        android:id="@+id/food_details_product_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imagen_detalleid"
+        android:layout_below="@+id/food_details_product_img"
         android:layout_alignParentStart="true"
         android:layout_marginStart="2dp"
         android:layout_marginTop="6dp"
         android:gravity="center"
-        android:text="Price"
+        android:text="@string/price"
         android:textSize="20sp"
         android:textStyle="bold">
 
     </TextView>
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/food_details_label_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/nombre_detalle"
+        android:layout_below="@+id/food_details_product_price"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="298dp"
         android:layout_marginTop="-159dp"
-        android:text="Cantidad:"
-        android:textSize="15dp" />
+        android:text="@string/amount"
+        android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/food_details_editText_amount"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView6"
+        android:layout_below="@+id/food_details_label_amount"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="299dp"
         android:layout_marginTop="9dp"
-
         android:layout_marginEnd="50dp"
         android:ems="10"
         android:inputType="number"
@@ -82,10 +79,10 @@
         android:textAlignment="center" />
 
     <Button
-        android:id="@+id/button_add_order"
+        android:id="@+id/food_details_button_add_order"
         android:layout_width="326dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/nombre_detalle"
+        android:layout_below="@+id/food_details_product_price"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
@@ -98,7 +95,7 @@
         android:textStyle="bold" />
 
     <ImageButton
-        android:id="@+id/imageButton_close"
+        android:id="@+id/food_details_button_close"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -106,7 +103,7 @@
         android:background="@drawable/ic_arrow_back" />
 
     <ImageButton
-        android:id="@+id/imageButton_less"
+        android:id="@+id/food_details_button_less"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -116,7 +113,7 @@
         android:background="@drawable/less" />
 
     <ImageButton
-        android:id="@+id/imageButton_add"
+        android:id="@+id/food_details_button_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

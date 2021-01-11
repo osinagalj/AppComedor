@@ -5,98 +5,91 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
-
     app:cardUseCompatPadding="true">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:orientation="vertical"
-        android:padding="10dp">
-
-
-
         <LinearLayout
-            android:id="@+id/left_layout"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="5dp"
-            >
-
-            <TextView
-                android:id="@+id/pendiente_nombre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="5dp"
-                android:text="Nombre de la Persona"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/pendiente_precio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
-                android:text="Descripcion del producto" />
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/pendiente_nombre"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="27dp"
-
-                android:text="Total: 110$"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginTop="20dp"
+            android:padding="20dp"
+            android:orientation="horizontal">
 
-            android:gravity="right"
-            android:layout_toEndOf="@+id/left_layout"
-            >
-
-            <ImageView
-                android:id="@+id/pendiente_img"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="5dp"
-                android:layout_gravity="right"
-
-                android:src="@drawable/food_milanesas_con_fritas" />
-
-            <ImageButton
-                android:id="@+id/pendientes_button_remove_order"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_toEndOf="@+id/pendiente_img"
-                android:background="@drawable/cross_image" />
+                android:layout_weight="4"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txt_unidades"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/row_pending_order_label_product_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:text="@string/product_name"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/row_pending_order_label_product_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/product_description"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/row_pending_order_label_product_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/price"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/pendiente_img"
+                android:layout_weight="2"
+                android:orientation="vertical">
 
+                <ImageView
+                    android:id="@+id/row_pending_order_imageView_product_img"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/food_milanesas_con_fritas" />
 
-                android:layout_marginStart="26dp"
-                android:layout_marginTop="4dp"
+                <TextView
+                    android:id="@+id/row_pending_order_label_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pendiente_img"
+                    android:textAlignment="center"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/product_units" />
 
-                android:text="2 Unidades" />
+            </LinearLayout>
 
-        </RelativeLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
+                <ImageButton
+                    android:id="@+id/row_pending_order_button_remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/cross_image" />
 
+            </LinearLayout>
 
-    </RelativeLayout>
+        </LinearLayout>
 
 </androidx.cardview.widget.CardView>

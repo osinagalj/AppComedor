@@ -7,30 +7,29 @@
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
-
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <TextView
-            android:id="@+id/descripcion"
+            android:id="@+id/row_myAccount_label_attribute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:text="@string/attribute" />
+
+        <TextView
+            android:id="@+id/row_myAccount_label_attribute_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/campo"
-            android:text="Nombre de la Persona"
+            android:text="@string/user_name"
             android:textSize="18sp"
-            android:textStyle="bold"></TextView>
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/campo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="3dp"
-            android:text="2020-01-20"></TextView>
-    </RelativeLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

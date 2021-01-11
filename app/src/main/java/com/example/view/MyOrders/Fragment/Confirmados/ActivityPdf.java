@@ -15,7 +15,7 @@ public class ActivityPdf extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
 
-        ImageButton fab = findViewById(R.id.button_order_details_close);
+        ImageButton fab = findViewById(R.id.order_details_button_close);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -3,20 +3,20 @@
 package com.example.view.MyOrders.Fragment.Confirmados;
 
         import android.content.Context;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ImageView;
-        import android.widget.TextView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-        import androidx.annotation.NonNull;
-        import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.view.R;
 
-        import com.example.view.MyOrders.Fragment.Pendientes.Order;
-        import com.example.view.R;
+import java.util.ArrayList;
 
-        import java.util.ArrayList;
+import DataBase.Order;
 
 public class AdapterConfirmed extends RecyclerView.Adapter<com.example.view.MyOrders.Fragment.Confirmados.AdapterConfirmed.ViewHolder> implements View.OnClickListener {
 
@@ -44,9 +44,9 @@ public class AdapterConfirmed extends RecyclerView.Adapter<com.example.view.MyOr
 
     @Override
     public void onBindViewHolder(@NonNull com.example.view.MyOrders.Fragment.Confirmados.AdapterConfirmed.ViewHolder holder, int position) {
-        String nombres = model.get(position).getNombre();
-        String fechanacimiento = model.get(position).getFechanacimiento();
-        int imageid = model.get(position).getImagenid();
+        String nombres = model.get(position).getProductName();
+        String fechanacimiento = model.get(position).getProductPrice();
+        int imageid = model.get(position).getProductImg();
         holder.nombres2.setText(nombres);
         holder.fechancimiento2.setText(fechanacimiento);
         holder.imagen2.setImageResource(imageid);
@@ -72,9 +72,9 @@ public class AdapterConfirmed extends RecyclerView.Adapter<com.example.view.MyOr
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
-            nombres2 = itemView.findViewById(R.id.confirmed_nombre);
-            fechancimiento2 = itemView.findViewById(R.id.confirmed_precio);
-            imagen2 = itemView.findViewById(R.id.confirmed_img);
+            nombres2 = itemView.findViewById(R.id.row_confirmed_order_label_product_name);
+            fechancimiento2 = itemView.findViewById(R.id.row_confirmed_order_label_product_price);
+            imagen2 = itemView.findViewById(R.id.row_confirmed_order_imageView_product_img);
         }
     }
 }

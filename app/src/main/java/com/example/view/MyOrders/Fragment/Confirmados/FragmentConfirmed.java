@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.MyOrders.Fragment.Pendientes.Order;
+import DataBase.Order;
 import com.example.view.R;
 
 import java.util.ArrayList;

@@ -6,11 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".Login.Sign_up_student"
     android:background="#105661"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <ImageButton
-        android:id="@+id/sign_up_student_close"
+        android:id="@+id/sign_up_button_close"
         android:layout_width="61dp"
         android:layout_height="60dp"
         android:background="@drawable/ic_arrow_back"
@@ -31,15 +30,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/sign_up_label_create_account"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="Crear Cuenta"
+                android:text="@string/crear_cuenta"
                 android:textColor="#fff"
                 android:textColorHighlight="#fff"
                 android:textColorHint="#fff"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints"
@@ -47,118 +45,103 @@
                 tools:layout_editor_absoluteY="65dp" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/sign_up_label_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="75dp"
                 android:layout_marginBottom="25dp"
-                android:text="Alumno"
+                android:text="@string/alumno"
                 android:textColor="#fff"
                 android:textColorHighlight="#fff"
                 android:textColorHint="#fff"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.449"
                 app:layout_constraintStart_toStartOf="parent"
-
                 tools:ignore="MissingConstraints" />
 
+            <EditText
+                android:id="@+id/sign_up_editText_name"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="#000"
+                android:hint="@string/nombre"
+                android:drawableStart="@drawable/custom_person_icon"
+                android:background="@drawable/ic_custom_input"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="15dp" />
 
             <EditText
-                android:id="@+id/editTextTextDNI"
+                android:id="@+id/sign_up_editText_lastName"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="#000"
+                android:hint="@string/apellido"
+                android:drawableStart="@drawable/custom_person_icon"
+                android:background="@drawable/ic_custom_input"
+                android:inputType="textPersonName"
+                android:layout_marginBottom="15dp" />
+
+            <EditText
+                android:id="@+id/sign_up_editText_dni"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/ic_custom_input"
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:hint="DNI"
+                android:drawableStart="@drawable/custom_dni_icon"
+                android:hint="@string/dni"
                 android:inputType="number"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:textColor="#fff" />
+                android:textColor="#000" />
 
             <EditText
-                android:id="@+id/editTextTextName"
+                android:id="@+id/sign_up_editText_variable"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:textColor="#fff"
-                android:hint="Nombre"
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:background="@drawable/ic_custom_input"
-                android:inputType="textPersonName"
-                android:layout_marginBottom="15dp"
-                />
-
-            <EditText
-                android:id="@+id/editTextTextLastName"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:textColor="#fff"
-                android:hint="Apellido"
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:background="@drawable/ic_custom_input"
-                android:inputType="textPersonName"
-                android:layout_marginBottom="15dp"
-            />
-
-
-
-            <EditText
-                android:id="@+id/editTextTextPassword2"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:textColor="#fff"
-                android:hint="Contraseña"
-                android:layout_marginBottom="15dp"
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:background="@drawable/ic_custom_input"
-                android:inputType="textPassword"
- />
-
-            <EditText
-                android:id="@+id/editTextTextPassword3"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:textColor="#fff"
-                android:hint="Repetir Contraseña"
-                android:layout_marginBottom="15dp"
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:background="@drawable/ic_custom_input"
-                android:inputType="textPassword"
-                />
-
-
-
-
-            <EditText
-                android:id="@+id/sign_up_label_variable"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:visibility="gone"
-                android:hint="Antiguedad"
+                android:hint="@string/antiguedad"
+                android:layout_marginBottom="15dp"
+                android:drawableStart="@drawable/custom_person_icon"
+                android:background="@drawable/ic_custom_input"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/sign_up_editText__password"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="#000"
+                android:hint="@string/password"
                 android:layout_marginBottom="15dp"
                 android:drawableStart="@drawable/custom_lock_icon"
                 android:background="@drawable/ic_custom_input"
-                android:inputType="number"
-                />
+                android:inputType="textPassword" />
 
-
+            <EditText
+                android:id="@+id/sign_editText_up_password2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textColor="#000"
+                android:hint="@string/repetir_password"
+                android:layout_marginBottom="15dp"
+                android:drawableStart="@drawable/custom_lock_icon"
+                android:background="@drawable/ic_custom_input"
+                android:inputType="textPassword" />
 
             <TextView
-                android:id="@+id/textView29"
+                android:id="@+id/sign_up_label_select_category"
                 android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -167,50 +150,46 @@
                 tools:layout_editor_absoluteY="570dp" />
 
             <RadioGroup
+                android:id="@+id/sign_up_radiogroup_category"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                >
+                android:layout_height="wrap_content">
 
                 <RadioButton
-                    android:id="@+id/radioButton3"
+                    android:id="@+id/sign_up_radioButton_none"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ninguna"
+                    android:text="@string/ninguna"
                     android:theme="@style/RadioButtonStyle"
-                    android:textColor="#fff"
-                    />
+                    android:textColor="#fff" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/sign_up_radioButton_vegetarian"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Vegano"
+                    android:text="@string/vegetariano"
                     android:theme="@style/RadioButtonStyle"
-                    android:textColor="#fff"
-                    />
+                    android:textColor="#fff" />
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/sign_up_radioButton_celiac"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Celiaco"
+                    android:text="@string/celiac"
                     android:textColorHighlight="#fff"
                     android:textColorLink="#fff"
                     android:shadowColor="#fff"
                     android:theme="@style/RadioButtonStyle"
-                    android:textColor="#fff"
-                    />
+                    android:textColor="#fff" />
             </RadioGroup>
 
 
             <Button
-                android:id="@+id/sign_up_student_next"
+                android:id="@+id/sign_up_button_create_account"
                 android:layout_width="190dp"
                 android:layout_height="60dp"
                 android:layout_marginBottom="100dp"
                 tools:ignore="MissingConstraints"
-                android:text="Crear Cuenta"
+                android:text="@string/crear_cuenta"
                 tools:layout_editor_absoluteX="3dp"
                 tools:layout_editor_absoluteY="5dp" />
 

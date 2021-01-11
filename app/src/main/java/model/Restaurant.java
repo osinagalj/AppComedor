@@ -34,23 +34,24 @@ public class Restaurant {
 
    private void loadProducts(){
        //Products Buffet
-       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_tarta_pollo));
-       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_tarta_calabaza));
-       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
-       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_agua_mineral));
-       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_botella_coca));
-       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_cafe_con_leche));
-       products.add(new Food(0001,"Alfajor Pepitos",6, 20.2f, new Vector<String>(), R.drawable.food_tostado_jyq));
-       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_porcion_pizza));
-       products.add(new Food(0002,"Pepas trio ",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
+       //TODO EL PRECIO DE CADA PRODUCTO HABRIA QUE CALCULARLO DEPENDIENDO EL USUARIO, EL STOCK HABRIA QUE SACARLO DE ALGUNA BASE DEDATOS 
+       products.add(new Food(0001,"Tarta de Pollo","Descripcion 1",6, 88.0f, new Vector<String>(), R.drawable.food_tarta_pollo));
+       products.add(new Food(0002,"Tarta de Calabaza","Descripcion 2",2, 85.0f, new Vector<String>(), R.drawable.food_tarta_calabaza));
+       products.add(new Food(0001,"Alfajor Pepitos","Descripcion 3",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
+       products.add(new Food(0002,"Pepas trio ","Descripcion 4",6, 20.2f, new Vector<String>(), R.drawable.food_agua_mineral));
+       products.add(new Food(0001,"Alfajor Pepitos","Descripcion 5",6, 20.2f, new Vector<String>(), R.drawable.food_botella_coca));
+       products.add(new Food(0002,"Pepas trio ","Descripcion 6",6, 20.2f, new Vector<String>(), R.drawable.food_cafe_con_leche));
+       products.add(new Food(0001,"Alfajor Pepitos","Descripcion 7",6, 20.2f, new Vector<String>(), R.drawable.food_tostado_jyq));
+       products.add(new Food(0002,"Pepas trio ","Descripcion 8",6, 20.2f, new Vector<String>(), R.drawable.food_porcion_pizza));
+       products.add(new Food(0002,"Pepas trio ","Descripcion 9",6, 20.2f, new Vector<String>(), R.drawable.food_vaso_coca));
 
        //Producots del kiosko
-       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_9_de_oro_agridulce));
-       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_tita));
-       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_frutigran_chocolate));
-       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio_chocotrio));
-       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_turron_arcor));
-       productsKiosko.add(new Food(0003,"Empanada",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
+       productsKiosko.add(new Food(0003,"Empanada","Descripcion 10",6, 20.2f, new Vector<String>(), R.drawable.food_9_de_oro_agridulce));
+       productsKiosko.add(new Food(0003,"Empanada","Descripcion 11",6, 20.2f, new Vector<String>(), R.drawable.food_tita));
+       productsKiosko.add(new Food(0003,"Empanada","Descripcion 12",6, 20.2f, new Vector<String>(), R.drawable.food_frutigran_chocolate));
+       productsKiosko.add(new Food(0003,"Empanada","Descripcion 13",6, 20.2f, new Vector<String>(), R.drawable.food_pepas_trio_chocotrio));
+       productsKiosko.add(new Food(0003,"Empanada","Descripcion 14",6, 20.2f, new Vector<String>(), R.drawable.food_turron_arcor));
+       productsKiosko.add(new Food(0003,"Empanada","Descripcion 15",6, 20.2f, new Vector<String>(), R.drawable.food_alfajor_pepitos));
 
 
 
@@ -61,7 +62,7 @@ public class Restaurant {
 
     public Vector<Food> getDailyMenu(){
        Vector<Food> aux = new Vector<Food>();
-       aux.add( new Food(0001,"Milanesa con PapaFritas",6, 90.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+       aux.add( new Food(0001,"Milanesa con PapaFritas","Unas ricas milanesas pa",6, 90.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
     return aux;
     }
 
