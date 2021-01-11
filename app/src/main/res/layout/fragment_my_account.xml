@@ -2,24 +2,176 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="55dp">
+    android:layout_height="wrap_content">
 
-
-
-    <ImageView
-        android:id="@+id/balance_profile"
-        android:layout_width="145dp"
-        android:layout_height="114dp"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="15dp"
-        android:src="@drawable/profile_user" />
-    <androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/recyclerView2"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="85dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:stretchColumns="1"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd ="25dp">
+
+            <ImageView
+
+                android:id="@+id/myAccount_imageView_profile"
+                android:layout_width="145dp"
+                android:layout_height="114dp"
+                android:layout_gravity="center"
+                android:src="@drawable/profile_user" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/mis_datos"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="30sp"
+                android:layout_marginBottom="20dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/name"
+                android:textSize="15sp"
+                android:textColor="#000" />
+
+            <TextView
+                android:id="@+id/myAccount_label_lastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_name"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:layout_marginBottom="5dp"/>
+
+            <View style="@style/Divider" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/lastname"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/myAccount_label_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_lastname"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:layout_marginBottom="5dp"/>
+
+            <View style="@style/Divider" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/dni"
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:id="@+id/myAccount_label_dni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_dni"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:layout_marginBottom="5dp"/>
+
+            <View style="@style/Divider" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/category"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:id="@+id/myAccount_label_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_category"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:layout_marginBottom="5dp"/>
+
+            <View style="@style/Divider" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/user_condition"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:id="@+id/myAccount_label_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/user_name"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:layout_marginBottom="5dp"/>
+
+            <View style="@style/Divider" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/password"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_marginTop="15dp"/>
+
+            <TextView
+                android:id="@+id/myAccount_label_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/password"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000"
+                android:layout_marginBottom="5dp"/>
+
+            <View style="@style/Divider" />
+
+
+            <Button
+                android:id="@+id/myAccount_button_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#105661"
+                android:padding="10dp"
+                android:text="@string/change_password"
+                android:textColor="#fff"
+                android:textAlignment="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

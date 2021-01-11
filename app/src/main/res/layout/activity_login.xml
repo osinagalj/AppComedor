@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#105661"
-    >
+    android:background="#105661">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,110 +17,108 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="70dp"
-            android:layout_marginTop="30dp"
-            >
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="110dp"
-                android:layout_height="132dp"
-                android:src="@drawable/logo_exactas_unicen"
-                app:srcCompat="@drawable/logo_exactas_unicen" />
 
-            <TextView
-                android:id="@+id/textView23"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="49dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="25dp"
-                android:layout_toEndOf="@+id/imageView"
-                android:text="Comedor Universitario"
-                android:textColor="#fff"
-                android:textColorHighlight="#fff"
-                android:textColorHint="#fff"
-                android:textSize="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.449"
-
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints" />
-            <TextView
-                android:id="@+id/textView53"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/imageView"
-                android:layout_below="@+id/textView23"
-                android:text=" Unicen"
-                android:layout_marginStart="49dp"
-                android:textColor="#fff"
-                android:textColorHighlight="#fff"
-                android:textColorHint="#fff"
-                android:textSize="30dp"
-
-
-                tools:ignore="MissingConstraints" />
-        </RelativeLayout>
-
-
-
-            <EditText
-                android:id="@+id/editTextTextDNI"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/ic_custom_input"
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:hint="DNI"
-                android:inputType="number"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:textColor="#000" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
 
-            <EditText
-                android:id="@+id/editTextTextName"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginBottom="15dp"
-                android:background="@drawable/ic_custom_input"
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:hint="Contraseña"
-                android:inputType="textPassword"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:textColor="#000" />
+                <ImageView
+                    android:id="@+id/login_logo"
+                    android:layout_width="250dp"
+                    android:layout_marginTop="-50dp"
+                    android:layout_height="250dp"
+                    android:layout_weight="2"
+                    android:src="@drawable/logo_exactas_unicen" />
 
-            <Button
-                android:id="@+id/login_sign_in_button"
-                android:layout_width="190dp"
-                android:layout_height="60dp"
-                android:text="Ingresar"
-                android:theme="@style/button"
-                android:background="@drawable/button"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="3dp"
-                tools:layout_editor_absoluteY="5dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="2"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginStart="10dp">
 
-            <Button
-                android:id="@+id/login_button_sign_up"
-                android:layout_width="190dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="100dp"
-                android:text="Registrarme"
-                android:theme="@style/button"
-                android:background="@drawable/button"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="3dp"
-                tools:layout_editor_absoluteY="5dp" />
+                    <TextView
+                        android:id="@+id/login_label_unicen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/unicen"
+                        android:textColor="#fff"
+                        android:textSize="50sp" />
+
+                    <TextView
+                        android:id="@+id/login_label_restaurant"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/comedor_universitario"
+                        android:textColor="#fff"
+                        android:textColorHighlight="#fff"
+                        android:textColorHint="#fff"
+                        android:textSize="15sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/login_editText_dni"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/ic_custom_input"
+                    android:drawableStart="@drawable/custom_dni_icon"
+                    android:hint="  DNI"
+                    android:inputType="number"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:textColor="#000" />
+
+                <EditText
+                    android:id="@+id/login_editText_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/ic_custom_input"
+                    android:drawableStart="@drawable/custom_lock_icon"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:textColor="#000" />
+
+                <Button
+                    android:id="@+id/login_button_sign_in"
+                    android:layout_width="190dp"
+                    android:layout_height="60dp"
+                    android:text="@string/sign_in"
+                    android:theme="@style/button"
+                    android:background="@drawable/button"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="5dp" />
+
+                <Button
+                    android:id="@+id/login_button_sign_up"
+                    android:layout_width="190dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="100dp"
+                    android:text="@string/sign_up"
+                    android:theme="@style/button"
+                    android:background="@drawable/button"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="3dp"
+                    tools:layout_editor_absoluteY="5dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </ScrollView>
-
 
 </LinearLayout>

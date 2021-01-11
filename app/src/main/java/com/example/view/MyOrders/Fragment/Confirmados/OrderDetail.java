@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.view.MyOrders.Fragment.Pendientes.Order;
+import DataBase.Order;
 import com.example.view.R;
 
 

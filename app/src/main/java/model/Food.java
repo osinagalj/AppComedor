@@ -1,27 +1,31 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Vector;
 
 public class Food implements Serializable {
     private int barcode;
     private String name;
+    private String description;
     private int stock;
     private float price;
     private Vector<String> ingredients;
 
     private int imagenId;
 
-    public Food(int barcode, String name, int stock, float price, Vector<String> ingredients,int imagenId){
+    public Food(int barcode, String name,String description, int stock, float price, Vector<String> ingredients,int imagenId){
         this.barcode = barcode;
         this.name = name;
+        this.description = description;
         this.stock = stock;
         this.price = price;
         this.ingredients = ingredients;
         this.imagenId = imagenId;
     }
 
+    public String getDescription() {
+        return description;
+    }
     public int getImagenId() {
         return imagenId;
     }

@@ -1,6 +1,5 @@
 package com.example.view.Saldo;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,12 +18,8 @@ public class fragment_balance extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_balance, container, false);
+        ((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Mi Saldo");
         return view;
 
-    }
-    @Override
-    public void onAttach(Context context) {
-        ((AppCompatActivity) context).getSupportActionBar().setTitle("Mi Saldo");
-        super.onAttach(context);
     }
 }

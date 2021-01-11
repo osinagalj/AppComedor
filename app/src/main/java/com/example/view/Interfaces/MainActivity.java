@@ -14,9 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.view.Fila.Fragment_fila;
 import com.example.view.Food.NestedRecyclerFood.FragmentFood;
-import com.example.view.MiCuenta.fragmen_myAccount;
-import com.example.view.MyOrders.Fragment.Confirmados.OrderDetail;
-import com.example.view.MyOrders.Fragment.Pendientes.FragmentPendientes;
+import com.example.view.MyAccount.fragmen_myAccount;
 import com.example.view.MyOrders.HomeFragment;
 import com.example.view.R;
 import com.example.view.Saldo.fragment_balance;
@@ -32,11 +30,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     //variable del fragment detalle
-
-    FragmentPendientes fragmentPendientes = new FragmentPendientes();
-    HomeFragment homeFragment = new HomeFragment();
-
-    OrderDetail orderDetail;
 
 
 
@@ -59,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //cargar fragment principal en la actividad
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container_fragment,new HomeFragment());
+        fragmentTransaction.add(R.id.container_fragment,new FragmentFood());
         fragmentTransaction.commit();
 
     }
@@ -108,20 +101,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } //logout
         return false;
     }
-
-    public void a(){
-
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.container_fragment,new HomeFragment());
-
-        /*
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container_fragment, new HomeFragment())
-                .addToBackStack(null).commit();*/
-    }
-
-
 
 
 

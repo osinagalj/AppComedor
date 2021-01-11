@@ -18,7 +18,7 @@ public class Sign_up_student extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_student);
 
-        ImageButton btn_close = findViewById(R.id.sign_up_student_close);
+        ImageButton btn_close = findViewById(R.id.sign_up_button_close);
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -32,7 +32,7 @@ public class Sign_up_student extends AppCompatActivity {
         Bundle b = iin.getExtras();
         final String category =(String) b.get("USER_CATEGORY");
 
-        Button brn_create_account = findViewById(R.id.sign_up_student_next);
+        Button brn_create_account = findViewById(R.id.sign_up_button_create_account);
         brn_create_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,7 +42,7 @@ public class Sign_up_student extends AppCompatActivity {
 
 
         // declaración de switch
-        EditText sign_up_label_dni = findViewById(R.id.sign_up_label_variable);
+        EditText sign_up_label_dni = findViewById(R.id.sign_up_editText_variable);
         switch(category)
         {
             case "TEACHER" :

@@ -9,8 +9,55 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="su_pedido_se_ha_realizado_exitosamente">Su pedido se ha realizado exitosamente</string>
     <string name="button_close">Button close</string>
+    <string name="comedor">Comedor</string>
+    <string name="universitario">Universitario</string>
+    <string name="unicen">Unicen</string>
+    <string name="crear_cuenta">Crear Cuenta</string>
+    <string name="alumno">Alumno</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="antiguedad">Antiguedad</string>
+    <string name="repetir_password">Repetir Contraseña</string>
+    <string name="vegetariano">Vegetariano</string>
+    <string name="celiac">Celiaco</string>
+    <string name="ninguna">Ninguna</string>
+    <string name="ticket">TICKET</string>
+    <string name="client">Cliente</string>
+    <string name="total">Total</string>
+    <string name="download">DESCARGAR</string>
+    <string name="product_name">Milanesas con Papas Fritas</string>
+    <string name="product">Producto</string>
+    <string name="product_amount">x2</string>
+    <string name="amount">Cantidad</string>
+    <string name="price">100$</string>
+    <string name="user_name">Lautaro Osinaga</string>
+    <string name="choose_your_category">Seleccione su categoria</string>
+    <string name="student">Alumno</string>
+    <string name="teacher">Docente</string>
+    <string name="no_teacher">No Docente</string>
+    <string name="external">Externo</string>
+    <string name="comedor_universitario">Comedor Universitario</string>
+    <string name="password">Contraseña</string>
+    <string name="sign_in">Ingresar</string>
+    <string name="sign_up">Registrarme</string>
+    <string name="product_description">Descripcion del producto</string>
+    <string name="product_units">2 Unidades</string>
+    <string name="order_number">#100000</string>
+    <string name="attribute">Atributo</string>
+
+    <!-- Strings used in myAccount -->
+    <string name="user_dni">41854410</string>
+    <string name="user_lastname">Osinaga</string>
+    <string name="user_category">Vegetariano</string>
+    <string name="user_condition">Condicion Alimenticia</string>
+    <string name="mis_datos">Mis Datos</string>
+    <string name="name">Nombre</string>
+    <string name="lastname">Apellido</string>
+    <string name="dni">DNI</string>
+    <string name="category">Categoria</string>
+    <string name="change_password">Cambiar Contraseña</string>
+
+
 </resources>

@@ -18,13 +18,13 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        button = findViewById(R.id.login_sign_in_button);
+        button = findViewById(R.id.login_button_sign_in);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO Hay que hacer un if, si el usuario es valido, que buscamos en el archivo de users, y
                 // la contraseña tmb, entonces hacemos el openActivity2, sino tiramos un Toast para avisar
-                openActivity2();
+                sign_in();
             }
         });
 
@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void openActivity2() {
+    public void sign_in() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

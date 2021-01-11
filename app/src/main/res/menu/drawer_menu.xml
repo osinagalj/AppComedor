@@ -27,7 +27,7 @@
 
             <item
                 android:id="@+id/myAccount"
-                android:icon="@drawable/ic_myaccount"
+                android:icon="@drawable/ic_person"
                 android:title="Mi Cuenta"/>
 
             <item

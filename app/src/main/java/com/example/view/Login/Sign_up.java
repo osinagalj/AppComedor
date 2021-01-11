@@ -15,10 +15,10 @@ public class Sign_up extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_choose_category);
 
         //Button to close activity
-        ImageButton btn_close = findViewById(R.id.sign_up_1_close);
+        ImageButton btn_close = findViewById(R.id.choose_category_button_close);
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -27,7 +27,7 @@ public class Sign_up extends AppCompatActivity {
         });
 
         //Buttons category
-        Button sign_up_button_1 = findViewById(R.id.sign_up_button_1);
+        Button sign_up_button_1 = findViewById(R.id.choose_category_button_student);
         sign_up_button_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +38,7 @@ public class Sign_up extends AppCompatActivity {
         });
 
         //Buttons category
-        Button sign_up_button_2 = findViewById(R.id.sign_up_button_2);
+        Button sign_up_button_2 = findViewById(R.id.choose_category_button_teacher);
         sign_up_button_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +48,7 @@ public class Sign_up extends AppCompatActivity {
         });
 
         //Buttons category
-        Button sign_up_button_3 = findViewById(R.id.sign_up_button_3);
+        Button sign_up_button_3 = findViewById(R.id.choose_category_button_no_teacher);
         sign_up_button_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,7 +58,7 @@ public class Sign_up extends AppCompatActivity {
         });
 
         //Buttons category
-        Button sign_up_button_4 = findViewById(R.id.sign_up_button_4);
+        Button sign_up_button_4 = findViewById(R.id.choose_category_button_external);
         sign_up_button_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +66,6 @@ public class Sign_up extends AppCompatActivity {
                 sign_up_external();
             }
         });
-
 
     }
 

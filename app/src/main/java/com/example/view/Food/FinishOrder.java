@@ -20,7 +20,7 @@ public class FinishOrder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish_order);
 
-        ImageButton btn_close = findViewById(R.id.correct_order_close);
+        ImageButton btn_close = findViewById(R.id.finish_order_button_close);
         btn_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

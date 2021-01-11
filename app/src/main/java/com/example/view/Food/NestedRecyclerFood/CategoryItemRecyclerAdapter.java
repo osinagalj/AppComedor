@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +38,10 @@ public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryIt
     public void onBindViewHolder(@NonNull CategoryItemViewHolder holder, final int position) {
 
         holder.itemImage.setImageResource(categoryItemList.get(position).getImagenId());
+        holder.product_name.setText(categoryItemList.get(position).getName());
+        holder.product_description.setText(categoryItemList.get(position).getDescription());
+        holder.product_price.setText(String.valueOf(categoryItemList.get(position).getPrice()));
+
         holder.itemView.setOnClickListener(new View.OnClickListener() { //cuando se hace un click en algun item(Food)
             @Override
             public void onClick(View view) {
@@ -55,14 +60,16 @@ public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryIt
     }
 
     public static final class CategoryItemViewHolder extends RecyclerView.ViewHolder{
-
+        TextView product_name, product_description, product_price;
         ImageView itemImage;
 
         public CategoryItemViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            itemImage = itemView.findViewById(R.id.item_image);
-
+            itemImage = itemView.findViewById(R.id.row_food_imageView_img);
+            product_name = itemView.findViewById(R.id.row_food_label_product_name);
+            product_description = itemView.findViewById(R.id.row_food_label_product_description);
+            product_price = itemView.findViewById(R.id.row_food_label_product_price);
         }
     }
 
