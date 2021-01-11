@@ -21,13 +21,9 @@ public class Repositorio {
     }
 
     public Repositorio(){
-        Order o1 = new Order(100001,1,"Milanesas con fritas","2$",R.drawable.food_vaso_coca);
-        Order o2 = new Order(100002,5,"Una coka","6$",R.drawable.food_milanesas_con_fritas);
-        Order o3 = new Order(100003,2,"Otra koka","20$",R.drawable.food_pepas_trio);
+        Order o1 = new Order(100001,1,"Milanesas con fritas","22.8$",R.drawable.food_vaso_coca);
 
         confirmedOrders.add(o1);
-        confirmedOrders.add(o2);
-        confirmedOrders.add(o3);
 
         filaPendientes.add(20001);
         filaPendientes.add(20002);
