@@ -58,6 +58,10 @@
     <string name="dni">DNI</string>
     <string name="category">Categoria</string>
     <string name="change_password">Cambiar Contraseña</string>
+    <string name="load_balance">Cargar Saldo</string>
+    <string name="amount_">Importe</string>
+    <string name="transfer_money">Transferir Saldo</string>
+    <string name="user_receiver">Destinatario</string>
 
 
 </resources>

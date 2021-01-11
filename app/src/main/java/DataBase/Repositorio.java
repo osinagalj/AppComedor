@@ -34,18 +34,13 @@ public class Repositorio {
 
     }
 
+    //Para elimianr las ordenes en MisOrdenes
     public void removePendOrder(int nro_orden){
-        System.out.println("Nroor = "+ nro_orden);
-        for(int i=0; i<ordenes.size();i++){
-
-            System.out.println("Numero de orden = " + ordenes.get(i).getId());
-            if (ordenes.get(i).getId() == nro_orden){
+        for(int i=0; i<ordenes.size();i++) {
+            if (ordenes.get(i).getId() == nro_orden) {
                 ordenes.remove(i);
-                System.out.println("Eliminoooo");
             }
-
         }
-        System.out.println("repositorio size = " + ordenes.size());
     }
 
 
