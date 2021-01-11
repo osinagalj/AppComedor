@@ -1,13 +1,16 @@
 Comedor App
 ===============
 
-A FoodApp UI built using Android Studio. I'm super excited to have worked on this.
-
+A FoodApp built using Android Studio.
 
  - #### User Application
 
-
 # Topics
+- Linear Layout
+- Card View
+- Adapters
+- Objects Serializable
+- Comunication Fragment-Fragment & Fragment-Activity
 - RecyclerView
 - RecyclerView Details
 - NestedRecyclerView
