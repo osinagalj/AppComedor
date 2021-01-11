@@ -228,14 +228,6 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/order_details_imageView_qr"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginTop="15dp"
-                android:background="#F3F3F3"
-                android:padding="10dp"
-                android:src="@drawable/barcode"/>
 
 
         </LinearLayout>
