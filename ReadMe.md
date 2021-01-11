@@ -1,13 +1,16 @@
 Comedor App
 ===============
 
-A FoodApp UI built using Android Studio. I'm super excited to have worked on this.
-
+A FoodApp built using Android Studio.
 
  - #### User Application
 
-
 # Topics
+- Linear Layout
+- Card View
+- Adapters
+- Objects Serializable
+- Comunication Fragment-Fragment & Fragment-Activity
 - RecyclerView
 - RecyclerView Details
 - NestedRecyclerView
@@ -23,11 +26,11 @@ A FoodApp UI built using Android Studio. I'm super excited to have worked on thi
 | --------------------------------------------------------------------------------------------------------------------------------------------------| ---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 |<img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_1.PNG" width="150" height="250" alt="FoodApp UI"/>  | <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_2.PNG" width="150" height="250" alt="FoodApp UI"/>  | <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_3.PNG" width="150" height="250" alt="FoodApp UI"/> |                                                                                                    | <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_1.PNG" width="150" height="250" alt="FoodApp UI"/> |
 
-|3.Login                                                                                                                                            | 5. Select Food                                                                                                                                     | 6. Food                                                                                                                                           |
+|4.Pending Orders                                                                                                                                   | 5. Confirmed orders                                                                                                                                | 6. Ticket                                                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------------------------------------| ---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 |<img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_4.PNG" width="150" height="250" alt="FoodApp UI"/>  | <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_5.PNG" width="150" height="250" alt="FoodApp UI"/>  | <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_6.PNG" width="150" height="250" alt="FoodApp UI"/> |
 
-|7.Login                                                                                                                                            | 8. Select Food                                                                                                                                     | 9. Food                                                                                                                                           |
+|7.Restaurant Queue                                                                                                                                 | 8. User Data                                                                                                                                       | 9. Balance                                                                                                                                           |
 | --------------------------------------------------------------------------------------------------------------------------------------------------| ---------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 |<img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_7.PNG" width="150" height="250" alt="FoodApp UI"/>  | <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_8.PNG" width="150" height="250" alt="FoodApp UI"/>  | <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_9.PNG" width="150" height="250" alt="FoodApp UI"/> |
 
