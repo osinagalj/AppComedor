@@ -14,5 +14,12 @@ A FoodApp UI built using Android Studio. I'm super excited to have worked on thi
 - RecyclerView click on Card
 
 # Screenshots
-
-<img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_1.PNG" width="300" height="500" alt="FoodApp UI"/>
+- <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_1.PNG" width="300" height="500" alt="FoodApp UI"/>
+- <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_2.PNG" width="300" height="500" alt="FoodApp UI"/>
+- <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_3.PNG" width="300" height="500" alt="FoodApp UI"/>
+- <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_4.PNG" width="300" height="500" alt="FoodApp UI"/>
+- <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_5.PNG" width="300" height="500" alt="FoodApp UI"/>
+- <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_6.PNG" width="300" height="500" alt="FoodApp UI"/>
+- <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_7.PNG" width="300" height="500" alt="FoodApp UI"/>
+- <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_8.PNG" width="300" height="500" alt="FoodApp UI"/>
+- <img src="https://raw.githubusercontent.com/osinagalj/AppComedor/master/app/img/AppComedor_img_9.PNG" width="300" height="500" alt="FoodApp UI"/>

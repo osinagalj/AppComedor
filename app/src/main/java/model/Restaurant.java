@@ -35,7 +35,7 @@ public class Restaurant {
    private void loadProducts(){
        //Products Buffet
        //TODO EL PRECIO DE CADA PRODUCTO HABRIA QUE CALCULARLO DEPENDIENDO EL USUARIO, EL STOCK HABRIA QUE SACARLO DE ALGUNA BASE DEDATOS 
-       products.add(new Food(0001,"Tarta de Pollo","Descripcion 1",6, 88.0f, new Vector<String>(), R.drawable.food_tarta_pollo));
+       products.add(new Food(0001,"Tarta de Pollo","Con cebolla, morron y queso",6, 88.0f, new Vector<String>(), R.drawable.food_tarta_pollo));
        products.add(new Food(0002,"Tarta de Calabaza","Descripcion 2",2, 85.0f, new Vector<String>(), R.drawable.food_tarta_calabaza));
        products.add(new Food(0001,"Alfajor Pepitos","Descripcion 3",6, 20.2f, new Vector<String>(), R.drawable.food_empanada));
        products.add(new Food(0002,"Pepas trio ","Descripcion 4",6, 20.2f, new Vector<String>(), R.drawable.food_agua_mineral));
@@ -62,7 +62,7 @@ public class Restaurant {
 
     public Vector<Food> getDailyMenu(){
        Vector<Food> aux = new Vector<Food>();
-       aux.add( new Food(0001,"Milanesa con PapaFritas","Unas ricas milanesas pa",6, 90.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
+       aux.add( new Food(0001,"Milanesa con fapas fritas","Milanesa de carne con bastones de papa",6, 22.8f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
     return aux;
     }
 
