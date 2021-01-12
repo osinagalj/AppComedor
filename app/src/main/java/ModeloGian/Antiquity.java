@@ -1,6 +1,7 @@
 package ModeloGian;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Antiquity implements PriceCalculator{
     private final LocalDate startDate;
@@ -16,10 +17,9 @@ public class Antiquity implements PriceCalculator{
 
     @Override
     public float getPrice(float standardPrice) {
-        //long daysBetween = ChronoUnit.DAYS.between(LocalDate.now().atStartOfDay(),startDate.atStartOfDay());
-        //float daysLog2 = (float)(Math.log(daysBetween)/Math.log(2));
-       // float discount = daysLog2/100;
-        //return standardPrice-(standardPrice*discount);
-        return 2f;
+        long daysBetween = ChronoUnit.DAYS.between(LocalDate.now().atStartOfDay(),startDate.atStartOfDay());
+        float daysLog2 = (float)(Math.log(daysBetween)/Math.log(2));
+        float discount = daysLog2/100;
+        return standardPrice-(standardPrice*discount);
     }
 }

@@ -8,6 +8,8 @@ import DAO.ProductDAO;
 import DAO.UserDAO;
 
 public class Restaurant {
+    public static final int MAX_SPECIAL_ORDERS = ProductDAO.maxDailyMenus();
+
     private int id;
     private String name;
     private String university;
@@ -18,36 +20,12 @@ public class Restaurant {
     private final List<Order> pendingOrders = new ArrayList<>();
     public static final Restaurant INSTANCE = new Restaurant();
 
-    //private Vector<model.Food> productsKiosko = new Vector<Food>(); TODO FALTA ESTO
-
-    //TODO estos metodos tmb faltarian
-    /*
-    public Vector<model.Food> getDailyMenu(){
-        Vector<model.Food> aux = new Vector<model.Food>();
-        aux.add( new model.Food(0001,"Milanesa con PapaFritas",6, 90.2f, new Vector<String>(), R.drawable.food_milanesas_con_fritas));
-        return aux;
-    }
-
-    public ArrayList<model.Food> getProductsKiosko() {
-        ArrayList<model.Food> r_products = new ArrayList<Food>();
-        for(int i = 0; i < this.productsKiosko.size(); i++){
-            r_products.add(this.productsKiosko.elementAt(i));
-        }
-        return r_products;
-    }
-    */
-
-
-
-
-
-
     private Restaurant(){}
 
     public static Restaurant getInstance() { return INSTANCE; }
 
     public boolean addUser(CommonUser user){
-        if (user != null && isRegistered(user.getUsername())){
+        if (user != null && !isRegistered(user)){
             return false;
         }
         else {
@@ -55,13 +33,13 @@ public class Restaurant {
         }
     }
 
-    public boolean removeUser(String username){
-        return registeredUsers.removeIf(registeredUser -> registeredUser.getUsername().equals(username));
+    public boolean removeUser(int icn){
+        return registeredUsers.removeIf(registeredUser -> registeredUser.getIdentityCardNumber() == icn);
     }
 
-    public boolean isRegistered(String username){
+    public boolean isRegistered(CommonUser user){
         for (CommonUser registeredUser : registeredUsers) {
-            if (registeredUser.getUsername().equals(username))
+            if (registeredUser.equals(user))
                 return true;
         }
         return false;
@@ -90,13 +68,13 @@ public class Restaurant {
 
     /***
      * search the orders of a specific user
-     * @param username username to search orders
+     * @param user user to search orders
      * @return unmodifiable list with the orders of the user
      */
-    public List<Order> getOrders(String username){
+    public List<Order> getOrders(CommonUser user){
         List<Order> userOrders = new ArrayList<>();
         for(Order order: orders)
-            if (order.getPlacedBy().getUsername().equals(username))
+            if (order.getPlacedBy().equals(user))
                     userOrders.add(order);
 
         return Collections.unmodifiableList(userOrders);
@@ -115,12 +93,20 @@ public class Restaurant {
         return Collections.unmodifiableList(consumableProducts);
     }
 
-    public CommonUser validateLoginData(String username, String password){
+    public CommonUser validateLoginData(int icn, String password){
         for (CommonUser user : registeredUsers){
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)){
+            if (user.getIdentityCardNumber() == icn && user.getPassword().equals(password)){
                 return user;
             }
         }
         return null;
+    }
+
+    public void addStock(int barcode,int stock){
+        for(Product product : availableProducts){
+            if(product.getId() == barcode){
+                product.addStock(stock);
+            }
+        }
     }
 }

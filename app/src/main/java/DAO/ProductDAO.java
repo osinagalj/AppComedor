@@ -16,4 +16,8 @@ public class ProductDAO {
         products.add(new Food(0004,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, 6, 20.2f, new ArrayList<>()));
         return products;
     }
+
+    public static int maxDailyMenus() {
+        return 2;
+    }
 }

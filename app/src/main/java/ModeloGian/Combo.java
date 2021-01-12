@@ -9,8 +9,8 @@ public class Combo extends Product{
     private int discount;
 
 
-    public Combo(int id,String name, String description, int imgId, List<Product> comboItems, int discount) {
-        super(id, name, description,imgId);
+    public Combo(int id,String name, String description, int imgId, ProductCategory category, List<Product> comboItems, int discount) {
+        super(id, name, description, imgId, category);
         this.comboItems = comboItems;
         this.discount = discount;
     }
@@ -26,21 +26,40 @@ public class Combo extends Product{
 
     @Override
     public List<Product> getProducts() {
-        return null;
+        List<Product> products = new ArrayList<>();
+        for (Product item : comboItems)
+            products.addAll(item.getProducts());
+        return Collections.unmodifiableList(products);
     }
 
     @Override
     public float getPrice() {
-        return 0;
+        float price = 0;
+        for (Product item : comboItems)
+            price+=item.getPrice();
+        return price;
     }
 
     @Override
     public int getStock() {
-        return 0;
+        int stock = Integer.MAX_VALUE;
+        for (Product item : comboItems)
+            stock = Integer.min(stock,item.getStock());
+        return stock;
+    }
+
+    @Override
+    public void addStock(int stock) {
+        for (Product item : comboItems){
+            item.addStock(stock);
+        }
     }
 
     @Override
     public int getDailyLimit() {
-        return 0;
+        int limit = Integer.MAX_VALUE;
+        for (Product item : comboItems)
+            limit = Integer.min(limit,item.getDailyLimit());
+        return limit;
     }
 }

@@ -10,24 +10,20 @@ public class Food extends Product {
     private float price;
     private List<String> ingredients;
 
-
-
-    protected Food(){}
-
     @Override
     public List<String> getIngredients() {
         return Collections.unmodifiableList(ingredients);
     }
 
-    public Food(int id, String name, String description, int imgId, int stock, float price) {
-        super(id, name, description, imgId);
+    public Food(int id, String name, String description, int imgId, ProductCategory category, int stock, float price) {
+        super(id, name, description, imgId, category);
         this.stock = stock;
         this.price = price;
         this.ingredients = new ArrayList<>();
     }
 
-    public Food(int id,String name, String description, int imgId, int stock, float price, List<String> ingredients) {
-        super(id,name, description,imgId);
+    public Food(int id,String name, String description, int imgId, ProductCategory category, int stock, float price, List<String> ingredients) {
+        super(id,name, description, imgId, category);
         this.stock = stock;
         this.price = price;
         this.ingredients = ingredients;
@@ -35,21 +31,28 @@ public class Food extends Product {
 
     @Override
     public List<Product> getProducts() {
-        return null;
+        List<Product> products = new ArrayList<>();
+        products.add(this);
+        return Collections.unmodifiableList(products);
     }
 
     @Override
     public float getPrice() {
-        return 0;
+        return price;
     }
 
     @Override
     public int getStock() {
-        return 0;
+        return stock;
+    }
+
+    @Override
+    public void addStock(int stock) {
+        this.stock+=stock;
     }
 
     @Override
     public int getDailyLimit() {
-        return 0;
+        return Integer.MAX_VALUE;
     }
 }

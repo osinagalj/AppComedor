@@ -30,7 +30,7 @@ public class CommonUser {
 
         this.balance = 0;
         this.completedOrders = new ArrayList<>();
-        this.dailySpecialRemaining = 2;//TODO cambiar esto
+        this.dailySpecialRemaining = Restaurant.MAX_SPECIAL_ORDERS;
     }
 
     public String getUsername() {
@@ -130,11 +130,11 @@ public class CommonUser {
         if (this == o) return true;
         if (!(o instanceof CommonUser)) return false;
         CommonUser that = (CommonUser) o;
-        return Objects.equals(username, that.username);
+        return Objects.equals(identityCardNumber, that.identityCardNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username);
+        return Objects.hash(identityCardNumber);
     }
 }

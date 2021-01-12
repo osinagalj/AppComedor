@@ -3,15 +3,17 @@ package ModeloGian;
 import java.util.List;
 
 public class DailyMenu extends Food{
-    private int dailyLimit;
 
-    public DailyMenu(String name, String description, int stock, float price, int dailyLimit) {
-        //super(name, description, stock, price);
-        this.dailyLimit = dailyLimit;
+    public DailyMenu(int id, String name, String description, int imgId, ProductCategory category, int stock, float price) {
+        super(id, name, description, imgId, category, stock, price);
     }
 
-    public DailyMenu(String name, String description, int stock, float price, List<String> ingredients) {
-        //super(name, description, stock, price, ingredients);
+    public DailyMenu(int id, String name, String description, int imgId, ProductCategory category, int stock, float price, List<String> ingredients) {
+        super(id, name, description, imgId, category, stock, price,ingredients);
     }
 
+    @Override
+    public int getDailyLimit() {
+        return Restaurant.MAX_SPECIAL_ORDERS;
+    }
 }
