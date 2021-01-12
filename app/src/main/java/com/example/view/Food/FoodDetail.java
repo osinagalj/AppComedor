@@ -16,6 +16,7 @@ import com.example.view.R;
 
 import DataBase.Order;
 import DataBase.Repositorio;
+import ModeloGian.Product;
 import model.Food;
 
 public class FoodDetail extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class FoodDetail extends AppCompatActivity {
 
         Intent iin= getIntent();
         Bundle b = iin.getExtras();
-        final Food food =(Food) b.get("food_picked");
+        final Product product =(Product) b.get("food_picked");
 
         img = findViewById(R.id.food_details_product_img);
         product_name = findViewById(R.id.food_details_product_name);
@@ -39,9 +40,9 @@ public class FoodDetail extends AppCompatActivity {
 
         if(b!=null)
         {
-            img.setImageResource(food.getImagenId());
-            product_name.setText(food.getName());
-            product_price.setText(String.valueOf(food.getPrice()));
+            img.setImageResource(product.getImgId());
+            product_name.setText(product.getName());
+            product_price.setText(String.valueOf(product.getPrice()));
 
             Button fab = findViewById(R.id.food_details_button_add_order);
             fab.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +50,7 @@ public class FoodDetail extends AppCompatActivity {
                 public void onClick(View view) {
                     int amount2 = Integer.parseInt(amount.getText().toString());
                     //TODO revisar que la cantidad sea mayor a 0 y que el usuario tenga plata enla cuena para pedir, y si tiene hay que descontarsela
-                    Order o1 = new Order(Repositorio.repo.getNroOrden(),amount2,food.getName(),String.valueOf(food.getPrice()),food.getImagenId());
+                    Order o1 = new Order(Repositorio.repo.getNroOrden(),amount2,product.getName(),String.valueOf(product.getPrice()),product.getImgId());
                     Repositorio.repo.putOrder(o1);
                     Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
 

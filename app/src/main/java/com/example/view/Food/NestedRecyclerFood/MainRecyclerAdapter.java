@@ -14,6 +14,7 @@ import com.example.view.R;
 
 import java.util.List;
 
+import ModeloGian.Product;
 import model.Food;
 
 public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.MainViewHolder> {
@@ -59,7 +60,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
         }
     }
 
-    private void setCatItemRecycler(RecyclerView recyclerView, List<Food> categoryItemList){
+    private void setCatItemRecycler(RecyclerView recyclerView, List<Product> categoryItemList){
 
         CategoryItemRecyclerAdapter itemRecyclerAdapter = new CategoryItemRecyclerAdapter(context, categoryItemList);
 

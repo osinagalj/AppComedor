@@ -1,19 +1,21 @@
 package ModeloGian;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Product {
+public abstract class Product implements Serializable {
     private int id;
     private String name;
     private String description;
-    private int imgId; //TODO la imagen de cada producto/combo
+    private int imgId;
 
     protected Product(){}
 
-    protected Product(int id, String name, String description) {
+    protected Product(int id, String name, String description,int imgId) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.imgId = imgId;
     }
 
     public int getId() {
@@ -38,6 +40,14 @@ public abstract class Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getImgId() {
+        return imgId;
+    }
+
+    public void setImgId(int imgId) {
+        this.imgId = imgId;
     }
 
     public abstract List<String> getIngredients();

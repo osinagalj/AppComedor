@@ -14,9 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.view.R;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
+import ModeloGian.CommonUser;
+import ModeloGian.Condition;
+import ModeloGian.Discount;
 import model.Restaurant;
 
 public class FragmentFood extends Fragment {
@@ -43,9 +48,13 @@ public class FragmentFood extends Fragment {
     public void loadData(){
 
         List<AllCategory> allCategoryList = new ArrayList<>();
-        allCategoryList.add(new AllCategory("Menu del Dia", Restaurant.restaurant.getDailyMenu()));
-        allCategoryList.add(new AllCategory("Buffet", Restaurant.restaurant.getProducts()));
-        allCategoryList.add(new AllCategory("Kiosko", Restaurant.restaurant.getProductsKiosko()));
+        //allCategoryList.add(new AllCategory("Menu del Dia", Restaurant.restaurant.getDailyMenu()));
+        //allCategoryList.add(new AllCategory("Buffet", Restaurant.restaurant.getProducts()));
+        //allCategoryList.add(new AllCategory("Kiosko", Restaurant.restaurant.getProductsKiosko()));
+
+        CommonUser user = new CommonUser("aaa","aaa","Juan", "Perez", LocalDate.of(2000,1,15), 11111111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
+
+        allCategoryList.add(new AllCategory("Gian", ModeloGian.Restaurant.getInstance().getUserConsumableProducts(user)));
 
         setMainCategoryRecycler(allCategoryList);
     }

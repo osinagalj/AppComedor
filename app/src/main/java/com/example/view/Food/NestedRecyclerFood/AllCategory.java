@@ -2,23 +2,24 @@ package com.example.view.Food.NestedRecyclerFood;
 
 import java.util.List;
 
+import ModeloGian.Product;
 import model.Food;
 
 public class AllCategory {
 
     String categoryTitle;
-    List<Food> categoryItemList;
+    List<Product> categoryItemList;
 
-    public AllCategory(String categoryTitle, List<Food> categoryItemList) {
+    public AllCategory(String categoryTitle, List<Product> categoryItemList) {
         this.categoryTitle = categoryTitle;
         this.categoryItemList = categoryItemList;
     }
 
-    public List<Food> getCategoryItemList() {
+    public List<Product> getCategoryItemList() {
         return categoryItemList;
     }
 
-    public void setCategoryItemList(List<Food> categoryItemList) {
+    public void setCategoryItemList(List<Product> categoryItemList) {
         this.categoryItemList = categoryItemList;
     }
 

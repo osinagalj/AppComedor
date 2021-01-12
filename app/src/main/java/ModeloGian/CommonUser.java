@@ -1,6 +1,7 @@
 package ModeloGian;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +18,20 @@ public class CommonUser {
     private List<Order> completedOrders;
     private int dailySpecialRemaining;
 
-    public CommonUser(){}
+    public CommonUser(String username, String password, String names, String lastname, LocalDate birthdate, int identityCardNumber, Condition condition, PriceCalculator priceCalculator) {
+        this.username = username;
+        this.password = password;
+        this.names = names;
+        this.lastname = lastname;
+        this.birthdate = birthdate;
+        this.identityCardNumber = identityCardNumber;
+        this.condition = condition;
+        this.priceCalculator = priceCalculator;
+
+        this.balance = 0;
+        this.completedOrders = new ArrayList<>();
+        this.dailySpecialRemaining = 2;//TODO cambiar esto
+    }
 
     public String getUsername() {
         return username;

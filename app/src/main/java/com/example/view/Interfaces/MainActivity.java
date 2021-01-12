@@ -20,6 +20,13 @@ import com.example.view.R;
 import com.example.view.Saldo.fragment_balance;
 import com.google.android.material.navigation.NavigationView;
 
+import java.time.LocalDate;
+import java.util.HashSet;
+
+import ModeloGian.CommonUser;
+import ModeloGian.Condition;
+import ModeloGian.Discount;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
@@ -31,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentTransaction fragmentTransaction;
     //variable del fragment detalle
 
+    CommonUser loggedUser = new CommonUser("aaa","aaa","Juan", "Perez", LocalDate.of(2000,1,15), 11111111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
 
 
     @Override
@@ -102,7 +110,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-
+    public void setLoggedUser(CommonUser logged){
+        this.loggedUser = logged;
+    }
 
 
 }

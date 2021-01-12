@@ -10,8 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.view.Interfaces.MainActivity;
 import com.example.view.R;
 
+import ModeloGian.CommonUser;
+import ModeloGian.Restaurant;
+
 public class Login extends AppCompatActivity {
 
+    private final Restaurant restaurant = Restaurant.getInstance();
     private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +26,12 @@ public class Login extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Hay que hacer un if, si el usuario es valido, que buscamos en el archivo de users, y
-                // la contraseña tmb, entonces hacemos el openActivity2, sino tiramos un Toast para avisar
-                sign_in();
+                CommonUser user = restaurant.validateLoginData("aaa","aaa"); //TODO obtener datos de la interfaz
+                System.out.println(user.getBirthdate());
+                if (user != null)
+                    sign_in();
+                else
+                    System.out.println();// TODO mostrar error
             }
         });
 
@@ -40,6 +47,7 @@ public class Login extends AppCompatActivity {
 
     public void sign_in() {
         Intent intent = new Intent(this, MainActivity.class);
+        //TODO Pasarle a MainActivity el usuario que se logqea o puede ponerse en el modelo y despues pedirlo
         startActivity(intent);
     }
 

@@ -16,14 +16,15 @@ import com.example.view.R;
 
 import java.util.List;
 
+import ModeloGian.Product;
 import model.Food;
 
 public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryItemRecyclerAdapter.CategoryItemViewHolder> {
 
     private Context context;
-    private List<Food> categoryItemList;
+    private List<Product> categoryItemList;
 
-    public CategoryItemRecyclerAdapter(Context context, List<Food> categoryItemList) {
+    public CategoryItemRecyclerAdapter(Context context, List<Product> categoryItemList) {
         this.context = context;
         this.categoryItemList = categoryItemList;
     }
@@ -37,7 +38,7 @@ public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryIt
     @Override
     public void onBindViewHolder(@NonNull CategoryItemViewHolder holder, final int position) {
 
-        holder.itemImage.setImageResource(categoryItemList.get(position).getImagenId());
+        holder.itemImage.setImageResource(categoryItemList.get(position).getImgId());
         holder.product_name.setText(categoryItemList.get(position).getName());
         holder.product_description.setText(categoryItemList.get(position).getDescription());
         holder.product_price.setText(String.valueOf(categoryItemList.get(position).getPrice()));

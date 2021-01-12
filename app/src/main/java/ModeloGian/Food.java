@@ -19,15 +19,15 @@ public class Food extends Product {
         return Collections.unmodifiableList(ingredients);
     }
 
-    public Food(int id, String name, String description, int stock, float price) {
-        super(id, name, description);
+    public Food(int id, String name, String description, int imgId, int stock, float price) {
+        super(id, name, description, imgId);
         this.stock = stock;
         this.price = price;
         this.ingredients = new ArrayList<>();
     }
 
-    public Food(int id,String name, String description, int stock, float price, List<String> ingredients) {
-        super(id,name, description);
+    public Food(int id,String name, String description, int imgId, int stock, float price, List<String> ingredients) {
+        super(id,name, description,imgId);
         this.stock = stock;
         this.price = price;
         this.ingredients = ingredients;

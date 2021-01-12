@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import DAO.ProductDAO;
+import DAO.UserDAO;
+
 public class Restaurant {
     private int id;
     private String name;
     private String university;
     private String timeTable;
-    private final ArrayList<CommonUser> registeredUsers = new ArrayList<>();
-    private final ArrayList<Product> availableProducts = new ArrayList<>();
-    private final ArrayList<Order> orders = new ArrayList<>();
-    private final ArrayList<Order> pendingOrders = new ArrayList<>();
+    private final List<CommonUser> registeredUsers = UserDAO.registeredUsers();
+    private final List<Product> availableProducts = ProductDAO.avalaibleProducts();
+    private final List<Order> orders = new ArrayList<>();
+    private final List<Order> pendingOrders = new ArrayList<>();
     public static final Restaurant INSTANCE = new Restaurant();
 
     //private Vector<model.Food> productsKiosko = new Vector<Food>(); TODO FALTA ESTO
@@ -51,11 +54,11 @@ public class Restaurant {
             return registeredUsers.add(user);
         }
     }
-/*
+
     public boolean removeUser(String username){
         return registeredUsers.removeIf(registeredUser -> registeredUser.getUsername().equals(username));
     }
-*/
+
     public boolean isRegistered(String username){
         for (CommonUser registeredUser : registeredUsers) {
             if (registeredUser.getUsername().equals(username))
@@ -72,11 +75,11 @@ public class Restaurant {
             return availableProducts.add(product);
         }
     }
-/*
+
     public boolean removeFood(int barcode){
         return availableProducts.removeIf(product -> product.getId() == (id));
     }
-*/
+
     public boolean existingProduct(int barcode){
         for (Product product : availableProducts) {
             if (product.getId() == barcode)
@@ -110,5 +113,14 @@ public class Restaurant {
             if (user.canConsume(product))
                 consumableProducts.add(product);
         return Collections.unmodifiableList(consumableProducts);
+    }
+
+    public CommonUser validateLoginData(String username, String password){
+        for (CommonUser user : registeredUsers){
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)){
+                return user;
+            }
+        }
+        return null;
     }
 }
