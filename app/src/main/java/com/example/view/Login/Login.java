@@ -26,7 +26,7 @@ public class Login extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonUser user = restaurant.validateLoginData("aaa","aaa"); //TODO obtener datos de la interfaz
+                CommonUser user = restaurant.validateLoginData(111,"aaa"); //TODO obtener datos de la interfaz
                 System.out.println(user.getBirthdate());
                 if (user != null)
                     sign_in();

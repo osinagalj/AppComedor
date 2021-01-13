@@ -22,6 +22,8 @@ import java.util.List;
 import ModeloGian.CommonUser;
 import ModeloGian.Condition;
 import ModeloGian.Discount;
+import ModeloGian.Product;
+import ModeloGian.ProductCategory;
 import model.Restaurant;
 
 public class FragmentFood extends Fragment {
@@ -54,7 +56,19 @@ public class FragmentFood extends Fragment {
 
         CommonUser user = new CommonUser("aaa","aaa","Juan", "Perez", LocalDate.of(2000,1,15), 11111111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
 
-        allCategoryList.add(new AllCategory("Gian", ModeloGian.Restaurant.getInstance().getUserConsumableProducts(user)));
+        List<Product> consumables = ModeloGian.Restaurant.getInstance().getUserConsumableProducts(user);
+        for (ProductCategory category : ProductCategory.values()){
+            List<Product> catList = new ArrayList<>();
+            for (Product product : consumables)
+                if (product.getCategory().equals(category))
+                    catList.add(product);
+            allCategoryList.add(new AllCategory(category.toString(), catList));
+        }
+
+
+
+
+
 
         setMainCategoryRecycler(allCategoryList);
     }
