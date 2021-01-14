@@ -91,11 +91,35 @@
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:textColor="#000" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <CheckBox
+                        android:id="@+id/login_checkBox_rememberMe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="-5dp"
+                        android:textColor="#fff"
+                        android:textSize="15sp"
+                        android:text="Recuerdame" />
+                    <TextView
+                        android:id="@+id/login_label_forgot_password"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="¿Olvidaste tu contraseña?"
+                        android:layout_gravity="end"
+                        android:textColor="#fff"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
 
                 <Button
                     android:id="@+id/login_button_sign_in"
-                    android:layout_width="190dp"
+                    android:layout_width="match_parent"
                     android:layout_height="60dp"
+                    android:layout_marginTop="30dp"
                     android:text="@string/sign_in"
                     android:theme="@style/button"
                     android:background="@drawable/button"
@@ -103,22 +127,44 @@
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="5dp" />
 
-                <Button
-                    android:id="@+id/login_button_sign_up"
-                    android:layout_width="190dp"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="100dp"
-                    android:text="@string/sign_up"
-                    android:theme="@style/button"
-                    android:background="@drawable/button"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="3dp"
-                    tools:layout_editor_absoluteY="5dp" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    >
+
+                    <TextView
+                        android:id="@+id/login_button_sign_up222"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_tienes_cuenta"
+                        android:textColor="#fff"
+                        android:textSize="15sp" />
+
+                    <Button
+                        android:id="@+id/login_button_sign_up"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginBottom="100dp"
+
+                        android:text="@string/sign_up"
+                        android:textAlignment="textStart"
+                        android:textColor="#0BA0A5"
+                        android:textStyle="bold"
+                        android:theme="@style/button"
+                        tools:ignore="MissingConstraints" />
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
+
 
 </LinearLayout>

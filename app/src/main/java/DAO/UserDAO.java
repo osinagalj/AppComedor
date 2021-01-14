@@ -13,6 +13,7 @@ public class UserDAO {
     public static List<CommonUser> registeredUsers(){
         List<CommonUser> users = new ArrayList<>();
         users.add(new CommonUser("aaa","aaa","Juan", "Perez", LocalDate.of(2000,1,15), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10)));
+        //TODO Hay que levantar los usuarios del archivo en DataBase, no crear usuarios nuevos
         return users;
     }
 }

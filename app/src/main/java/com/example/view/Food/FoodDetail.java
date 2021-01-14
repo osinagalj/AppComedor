@@ -17,7 +17,6 @@ import com.example.view.R;
 import DataBase.Order;
 import DataBase.Repositorio;
 import ModeloGian.Product;
-import model.Food;
 
 public class FoodDetail extends AppCompatActivity {
     ImageView img;
@@ -70,7 +69,7 @@ public class FoodDetail extends AppCompatActivity {
         });
 
 
-//TODO HAY QUE HACER QUE CAMBIE EL PRECIO A MEDIDA QUE SE AUMENTA O BAJA LA CANTIDAD
+    //TODO HAY QUE HACER QUE CAMBIE EL PRECIO A MEDIDA QUE SE AUMENTA O BAJA LA CANTIDAD
         ImageButton less = findViewById(R.id.food_details_button_less);
         less.setOnClickListener(new View.OnClickListener() {
             @Override
