@@ -19,6 +19,7 @@ A FoodApp built using Android Studio.
 - Fragments
 - ViewPager
 - RecyclerView click on Card
+- AdobeXD for UI/UX
 
 <br/>
 

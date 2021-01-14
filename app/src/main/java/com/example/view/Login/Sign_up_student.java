@@ -1,11 +1,13 @@
 package com.example.view.Login;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +15,7 @@ import com.example.view.R;
 
 public class Sign_up_student extends AppCompatActivity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,10 @@ public class Sign_up_student extends AppCompatActivity {
         Bundle b = iin.getExtras();
         final String category =(String) b.get("USER_CATEGORY");
 
+        TextView txt_category = findViewById(R.id.sign_up_label_category);
+
+
+
         Button brn_create_account = findViewById(R.id.sign_up_button_create_account);
         brn_create_account.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,11 +52,17 @@ public class Sign_up_student extends AppCompatActivity {
         EditText sign_up_label_dni = findViewById(R.id.sign_up_editText_variable);
         switch(category)
         {
+            case "STUDENT" :
+                txt_category.setText("Alumno");
+            case "EXTERNAL" :
+                txt_category.setText("Externo");
             case "TEACHER" :
+                txt_category.setText("Docente");
                 sign_up_label_dni.setVisibility(View.VISIBLE);
                 sign_up_label_dni.setHint("Cantidad de Materias a cargo");
                 break;
             case "NO TEACHER" :
+                txt_category.setText("No Docente");
                 sign_up_label_dni.setVisibility(View.VISIBLE);
                 sign_up_label_dni.setHint("Antiguedad");
                 break;
@@ -64,5 +77,7 @@ public class Sign_up_student extends AppCompatActivity {
     public void createAccount(String category){
         //TODO crear el usuario, y hay que chekear campo por campo que los datos esten bien y todo eso.
         //TODO Posiblemente haya que escribir en el archivo de usuarios para la persistencia
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 }

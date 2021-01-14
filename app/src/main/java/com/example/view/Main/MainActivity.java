@@ -1,5 +1,6 @@
-package com.example.view.Interfaces;
+package com.example.view.Main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -20,12 +21,7 @@ import com.example.view.R;
 import com.example.view.Saldo.fragment_balance;
 import com.google.android.material.navigation.NavigationView;
 
-import java.time.LocalDate;
-import java.util.HashSet;
-
 import ModeloGian.CommonUser;
-import ModeloGian.Condition;
-import ModeloGian.Discount;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentTransaction fragmentTransaction;
     //variable del fragment detalle
 
-    CommonUser loggedUser = new CommonUser("aaa","aaa","Juan", "Perez", LocalDate.of(2000,1,15), 11111111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
-
+    CommonUser loggedUser ;
+    //TODO get the user using DAO, find user by id
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +45,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer);
         navigationView = findViewById(R.id.navigationView);
-        //lo sgt se implementa luego de haber implementado NavigationView.OnNavigationItemSelectedListener
+
         navigationView.setNavigationItemSelectedListener(this);
+
+        //TODO
+        Intent intent= getIntent();
+        Bundle b = intent.getExtras();
+        int id_user  =(Integer) b.get("ID_LOGGER_USER"); //con este id habria que usar el DAO y obtener el usuario by id
+        //TODO loggedUser = DAO.getUser(id_user)
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);

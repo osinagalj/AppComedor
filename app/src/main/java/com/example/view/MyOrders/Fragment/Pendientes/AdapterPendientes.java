@@ -63,7 +63,11 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
         holder.product_name.setText("#"+product_nro);
         holder.product_description.setText(product_name);
         holder.product_price.setText("Total: " + product_price);
-        holder.product_amount.setText(produc_amount + " Unidades"); //TODO si la cantidad es 1 poner unidad sino unidades
+        String unidad = " Unidad";
+        if(produc_amount>1)
+            unidad = " Unidades";
+        String amount_text = produc_amount + unidad;
+        holder.product_amount.setText(amount_text); //TODO si la cantidad es 1 poner unidad sino unidades
         holder.product_img.setImageResource(product_img);
 
 
