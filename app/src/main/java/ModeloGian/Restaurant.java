@@ -109,4 +109,14 @@ public class Restaurant {
             }
         }
     }
+
+    public void getPendingOrders(CommonUser u){
+        if (registeredUsers.contains(u)) {
+            //users.add(u);
+        }
+    }
+
+    public void addOrder(Order order){
+
+    }
 }

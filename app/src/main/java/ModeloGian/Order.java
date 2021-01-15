@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.List;
 
 public class Order {
+    private static int ordersPlaced = 0;
 
     private int id;
     private Instant placed;
@@ -11,6 +12,14 @@ public class Order {
 
     private List<Product> items;
     private List<Product> toHome;
+
+    public Order(CommonUser placedBy, List<Product> items, List<Product> toHome) {
+        this.placedBy = placedBy;
+        this.items = items;
+        this.toHome = toHome;
+        this.id = ++ordersPlaced;
+        this.placed = Instant.now();
+    }
 
     public int getId() {
         return id;
