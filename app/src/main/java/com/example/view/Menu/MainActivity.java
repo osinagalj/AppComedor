@@ -1,4 +1,4 @@
-package com.example.view.Main;
+package com.example.view.Menu;
 
 import android.content.Intent;
 import android.os.Bundle;
