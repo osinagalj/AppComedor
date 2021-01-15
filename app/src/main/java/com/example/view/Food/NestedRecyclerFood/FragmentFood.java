@@ -75,7 +75,7 @@ public class FragmentFood extends Fragment {
 
     private void showCarrito(){
         if(Restaurant.getInstance().miOrden.size()==0){
-            bottom.setVisibility(View.INVISIBLE);
+            bottom.setVisibility(View.GONE);
         }else{
             bottom.setVisibility(View.VISIBLE);
         }

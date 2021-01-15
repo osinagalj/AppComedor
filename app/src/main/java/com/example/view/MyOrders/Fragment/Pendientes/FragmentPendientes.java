@@ -16,11 +16,9 @@ import com.example.view.MyOrders.Fragment.Confirmados.ActivityPdf;
 import com.example.view.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import DAO.OrderDAO;
 import ModeloGian.Order;
-import ModeloGian.Product;
-import ModeloGian.Restaurant;
 
 
 public class FragmentPendientes extends Fragment {
@@ -45,15 +43,7 @@ public class FragmentPendientes extends Fragment {
 
     public void cargarLista(){
        // CommonUser u = new CommonUser("aaa","aaa","Juan", "Perez", LocalDate.of(2000,1,15), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
-
-        List<Order> ar = Restaurant.getInstance().ordenesPendientes;
-        for(Order o : ar){
-            listaFoods.add(o);
-        }
-        List<Product> lista = new ArrayList<>();
-        listaFoods.add(new Order(200001,lista));
-        listaFoods.add(new Order(200002,lista));
-        listaFoods.add(new Order(200003,lista));
+        listaFoods.addAll(OrderDAO.getPendingOrders(null));
     }
 
 

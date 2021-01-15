@@ -1,6 +1,7 @@
 package ModeloGian;
 
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
 
 public class Order {
@@ -12,12 +13,20 @@ public class Order {
     private List<Product> items; //TODO POSIBLEMENTE ESTO SEA UN HASH, SINO ES MAS DIFICIL SACAR LAS CANTIDADES DE CADA PRODUCTO
     private List<Product> toHome;
 
+    private HashMap<Product,Integer> productos;
+
     //TODO get price, get time formato hora:min (ej: 16:32 hs), get Productos en strings para la descripcion
 
 
     public Order(int id, List<Product> items){
         this.id = id;
         this.items=items;
+
+    }
+
+    //TODO creo hay que sobreescribir el operador de product para que quede ordenado segun se fue ingresando
+    public void addFood(Product p, int amount){
+        productos.put(p,amount);
     }
 
     public String getDescripcion(){ //TODO
