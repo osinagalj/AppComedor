@@ -15,19 +15,19 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DataBase.Order;
+import ModeloGian.Product;
 
 public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.Carrito.AdapterCarrito.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
-    ArrayList<Order> model;
+    ArrayList<Product> model;
     Context context;
     private int count = 0;
     ImageButton button;
     private View.OnClickListener listener;
 
 
-    public AdapterCarrito(Context context, ArrayList<Order> model) {
+    public AdapterCarrito(Context context, ArrayList<Product> model) {
         this.inflater = LayoutInflater.from(context);
         this.model = model;
 
@@ -51,13 +51,13 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
 
     @Override
     public void onBindViewHolder(@NonNull com.example.view.Food.Carrito.AdapterCarrito.ViewHolder holder, final int position) {
-        String product_name = model.get(position).getProductName();
+        String product_name = model.get(position).getName();
         int product_nro = model.get(position).getId();
-        String product_price = model.get(position).getProductPrice();
-        int produc_amount = model.get(position).getProductAmount();
+        String product_price = String.valueOf(model.get(position).getPrice());
+        int produc_amount = model.get(position).getStock(); //TODO ACA HAY QUE PASAR LA CANTIDAD DE CADA PRODCUTO TMB
 
         //TODO ACA SE VINCULA LA VISTA CON EL MODELO
-        int product_img = model.get(position).getProductImg();
+        int product_img = model.get(position).getImgId();
 
         holder.product_name.setText("#"+product_nro);
         holder.product_description.setText(product_name);

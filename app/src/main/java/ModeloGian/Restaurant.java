@@ -20,7 +20,7 @@ public class Restaurant {
     private final List<Order> pendingOrders = new ArrayList<>();
     public static final Restaurant INSTANCE = new Restaurant();
 
-    static public ArrayList<Food> miOrden = new ArrayList<>();
+    static public ArrayList<Product> miOrden = new ArrayList<>(); //todo esto no va aca claramente
 
     private Restaurant(){}
 

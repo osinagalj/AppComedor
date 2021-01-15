@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="55dp"
-    android:orientation="vertical"
-    >
-
+    android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recycler"
@@ -28,17 +26,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-
             android:backgroundTint="@color/colorPrimary"
-            android:text="Realizar Orden" />
+            android:text="@string/ver_carrito" />
+
     </LinearLayout>
-
-
-
-
-
-
-
-
 
 </RelativeLayout>

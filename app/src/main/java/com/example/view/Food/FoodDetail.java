@@ -15,13 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.view.R;
 
-import java.util.ArrayList;
-
 import DataBase.Order;
 import DataBase.Repositorio;
-import ModeloGian.Food;
 import ModeloGian.Product;
-import ModeloGian.ProductCategory;
 import ModeloGian.Restaurant;
 
 public class FoodDetail extends AppCompatActivity {
@@ -68,10 +64,7 @@ public class FoodDetail extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     //TODO AGREGAR EL PRODUCTO A LA LISTA DE PRODUCTOS EN LA ORDEN
-                    Restaurant.getInstance().miOrden.add(new Food(0002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
-                    System.out.println("Agrego a la orden");
-
-                    System.out.println("Agrego el tamaño es = " + Restaurant.getInstance().miOrden.size());
+                    Restaurant.getInstance().miOrden.add(product);
 
                     finish();
 
