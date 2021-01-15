@@ -2,7 +2,7 @@
 
 package com.example.view.MyOrders.Fragment.Confirmados;
 
-        import android.content.Context;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

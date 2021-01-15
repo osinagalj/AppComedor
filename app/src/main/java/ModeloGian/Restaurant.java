@@ -20,6 +20,8 @@ public class Restaurant {
     private final List<Order> pendingOrders = new ArrayList<>();
     public static final Restaurant INSTANCE = new Restaurant();
 
+    static public ArrayList<Food> miOrden = new ArrayList<>();
+
     private Restaurant(){}
 
     public static Restaurant getInstance() { return INSTANCE; }

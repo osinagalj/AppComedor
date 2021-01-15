@@ -37,6 +37,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:name=".Food.Carrito.Carrito"
+            android:label="@string/title_activity_pdf"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
             android:name=".Food.FinishOrder"
             android:label="@string/title_activity_pdf"
             android:theme="@style/AppTheme.NoActionBar" />

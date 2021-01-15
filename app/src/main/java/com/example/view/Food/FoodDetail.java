@@ -14,9 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.view.R;
 
+import java.util.ArrayList;
+
 import DataBase.Order;
 import DataBase.Repositorio;
+import ModeloGian.Food;
 import ModeloGian.Product;
+import ModeloGian.ProductCategory;
+import ModeloGian.Restaurant;
 
 public class FoodDetail extends AppCompatActivity {
     ImageView img;
@@ -56,6 +61,18 @@ public class FoodDetail extends AppCompatActivity {
                     openFinishOrder();
                 }
             });
+
+            Button btn_add_products = findViewById(R.id.food_details_button_add_products);
+            btn_add_products.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO AGREGAR EL PRODUCTO A LA LISTA DE PRODUCTOS EN LA ORDEN
+                    Restaurant.getInstance().miOrden.add(new Food(0002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
+                    System.out.println("Agrego a la orden");
+                    System.out.println("Agrego el tamaño es = " + Restaurant.getInstance().miOrden.size());
+                    finish();
+                }
+            });
         }
 
 
@@ -75,8 +92,13 @@ public class FoodDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Integer number = Integer.parseInt(amount.getText().toString());
-                if(number > 0)
+                if(number > 1){
                     number--;
+                }else{
+                    Toast.makeText(getBaseContext(), "Cantidad minima", Toast.LENGTH_SHORT).show();
+                }
+
+
                 amount.setText(number.toString());
             }
         });

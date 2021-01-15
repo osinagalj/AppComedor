@@ -51,7 +51,7 @@ public class FragmentPendientes extends Fragment {
 
     private void mostrarData() {
         recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterPend = new AdapterPendientes(getContext(), listaFoods);
+        adapterPend = new AdapterPendientes(getContext(), listaFoods,this);
         recyclerViewPersonas.setAdapter(adapterPend);
 
         adapterPend.setOnclickListener(new View.OnClickListener() {

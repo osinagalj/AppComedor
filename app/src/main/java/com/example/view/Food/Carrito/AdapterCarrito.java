@@ -1,4 +1,4 @@
-package com.example.view.MyOrders.Fragment.Pendientes;
+package com.example.view.Food.Carrito;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,9 +16,8 @@ import com.example.view.R;
 import java.util.ArrayList;
 
 import DataBase.Order;
-import DataBase.Repositorio;
 
-public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder> implements View.OnClickListener {
+public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.Carrito.AdapterCarrito.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
     ArrayList<Order> model;
@@ -26,24 +25,24 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
     private int count = 0;
     ImageButton button;
     private View.OnClickListener listener;
-    FragmentPendientes fragmentPendientes;
 
-    public AdapterPendientes(Context context, ArrayList<Order> model,FragmentPendientes fragmentPendientes) {
+
+    public AdapterCarrito(Context context, ArrayList<Order> model) {
         this.inflater = LayoutInflater.from(context);
         this.model = model;
-        this.fragmentPendientes = fragmentPendientes;
+
         this.context = context;
     }
 
 
     @NonNull
     @Override
-    public com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public com.example.view.Food.Carrito.AdapterCarrito.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.row_order_pendiente, parent, false);
         view.setOnClickListener(this);
         button = (ImageButton) view.findViewById(R.id.row_pending_order_button_remove);
 
-        return new com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder(view);
+        return new com.example.view.Food.Carrito.AdapterCarrito.ViewHolder(view);
     }
 
     public void setOnclickListener(View.OnClickListener listener) {
@@ -51,13 +50,13 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull com.example.view.Food.Carrito.AdapterCarrito.ViewHolder holder, final int position) {
         String product_name = model.get(position).getProductName();
         int product_nro = model.get(position).getId();
         String product_price = model.get(position).getProductPrice();
         int produc_amount = model.get(position).getProductAmount();
 
-         //TODO ACA SE VINCULA LA VISTA CON EL MODELO
+        //TODO ACA SE VINCULA LA VISTA CON EL MODELO
         int product_img = model.get(position).getProductImg();
 
         holder.product_name.setText("#"+product_nro);
@@ -67,7 +66,7 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
         if(produc_amount>1)
             unidad = " Unidades";
         String amount_text = produc_amount + unidad;
-        holder.product_amount.setText(amount_text); //TODO si la cantidad es 1 poner unidad sino unidades
+        holder.product_amount.setText(amount_text);
         holder.product_img.setImageResource(product_img);
 
 
@@ -78,15 +77,12 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
             public void onClick(View v)
             {
 
-                //TODO ESTO ELIMINA PERO A VECES TIRA ERROR POR LA POSICION
-               // Repositorio.repo.removePendOrder(model.get(position).getId()); //TODO ACA HAY QUE PASARLE EL NRO DE ORDEN PARA ELIMINAR, NO LA POS
-                //model.remove(position);
-                //notifyDataSetChanged();
+                //Repositorio.repo.removePendOrder(model.get(position).getId()); //TODO ACA HAY QUE PASARLE EL NRO DE ORDEN PARA ELIMINAR, NO LA POS
+                //TODO ELIMINAR PRODUCTO DE LA ORDEN
+                model.remove(position);
+                notifyDataSetChanged();
                 //notifyItemRemoved(position); // esto hace andar mal a la posicion
-
-                Repositorio.repo.removePendOrder(model.get(0).getId());
-                model.remove(0);
-                notifyItemRemoved(0);
+                notifyItemRangeChanged(position,getItemCount());
 
             }
         });
@@ -112,7 +108,7 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
-        //TODO ACA SE VINCULA LA VISTA CON EL MODELO
+            //TODO ACA SE VINCULA LA VISTA CON EL MODELO
             product_name = itemView.findViewById(R.id.row_pending_order_label_product_name);
             product_description = itemView.findViewById(R.id.row_pending_order_label_product_description);
             product_price = itemView.findViewById(R.id.row_pending_order_label_product_price);
