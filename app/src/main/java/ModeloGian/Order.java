@@ -12,6 +12,10 @@ public class Order {
     private List<Product> items;
     private List<Product> toHome;
 
+    //TODO get price, get time formato hora:min (ej: 16:32 hs), get Productos en strings
+    //TODO que imagen le ponemos a la orden? y una orden por ahroa solo puede tener un producto
+
+
     public int getId() {
         return id;
     }

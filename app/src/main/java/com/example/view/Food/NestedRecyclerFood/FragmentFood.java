@@ -1,9 +1,12 @@
 package com.example.view.Food.NestedRecyclerFood;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.view.Food.Carrito.Carrito;
 import com.example.view.R;
 
 import java.time.LocalDate;
@@ -24,16 +28,22 @@ import ModeloGian.Condition;
 import ModeloGian.Discount;
 import ModeloGian.Product;
 import ModeloGian.ProductCategory;
-import model.Restaurant;
+import ModeloGian.Restaurant;
 
 public class FragmentFood extends Fragment {
 
     RecyclerView mainCategoryRecycler;
     MainRecyclerAdapter mainRecyclerAdapter;
     View view2;
+
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Mi carrito
+        //miOrden.add(new Food(0002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
 
         View view = inflater.inflate(R.layout.fragment_food,container,false);
         view2 = view;
@@ -43,10 +53,34 @@ public class FragmentFood extends Fragment {
         // here we will add data to category item model class
         // added in first category
         ((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Comidas");
+
+        Button button_finish_order = view.findViewById(R.id.fragment_food_button_make_order);
+        button_finish_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCarrito();
+            }
+        });
+
+        LinearLayout bottom = view.findViewById(R.id.fragment_food_layout_make_order);
+        System.out.println("Entro donde quiero");
+        if(Restaurant.getInstance().miOrden.size()==0){
+            System.out.println("tamaño 0");
+            bottom.setVisibility(View.INVISIBLE);
+        }else{
+            System.out.println("tamaño = " +Restaurant.getInstance().miOrden.size() );
+            bottom.setVisibility(View.VISIBLE);
+        }
+
+
         loadData();
         return view;
     }
 
+    private void openCarrito(){
+        Intent intent = new Intent(getContext(), Carrito.class);
+        startActivity(intent);
+    }
     public void loadData(){
 
         List<AllCategory> allCategoryList = new ArrayList<>();
