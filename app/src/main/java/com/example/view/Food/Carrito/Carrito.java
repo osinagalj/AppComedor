@@ -18,8 +18,8 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DataBase.Order;
-import DataBase.Repositorio;
+import ModeloGian.Product;
+import ModeloGian.Restaurant;
 
 public class Carrito extends AppCompatActivity {
         ImageView img;
@@ -28,7 +28,7 @@ public class Carrito extends AppCompatActivity {
 
         AdapterCarrito adapterPend;
         RecyclerView recyclerViewPersonas;
-        ArrayList<Order> listaFoods;
+        ArrayList<Product> listaFoods;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,7 @@ public class Carrito extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //TODO eliminar los productos de la orden actual
+                    Restaurant.getInstance().miOrden = new ArrayList<>();
                     System.out.println("Agrego a la orde3333333333333333");
                     finish();
                 }
@@ -82,8 +83,8 @@ public class Carrito extends AppCompatActivity {
 
 
     public void cargarLista(){
-        ArrayList<Order> ar = Repositorio.repo.getOrders();
-        for(Order o : ar){
+        ArrayList<Product> ar = Restaurant.getInstance().miOrden;
+        for(Product o : ar){
             listaFoods.add(o);
         }
     }

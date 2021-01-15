@@ -47,13 +47,9 @@ public class FragmentFood extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_food,container,false);
         bottom = view.findViewById(R.id.fragment_food_layout_make_order);
-
         view2 = view;
-        //setContentView(R.layout.);
+        mainCategoryRecycler = view2.findViewById(R.id.main_recycler);
 
-        // here we will add some dummy data to our model class
-        // here we will add data to category item model class
-        // added in first category
         ((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Comidas");
 
         Button button_finish_order = view.findViewById(R.id.fragment_food_button_make_order);
@@ -65,31 +61,26 @@ public class FragmentFood extends Fragment {
         });
 
         showCarrito();
-
-
         loadData();
         return view;
     }
+
     @Override
     public void onResume() { //Necesario para que se actualice la vista, y aparezca el boton de carrio si es neesario
         super.onResume();
         // Check should we need to refresh the fragment
-        System.out.println("Entro en ONRESUME");
         showCarrito();
 
     }
 
     private void showCarrito(){
-        System.out.println("Entro donde quiero");
         if(Restaurant.getInstance().miOrden.size()==0){
-            System.out.println("tamaño 0");
             bottom.setVisibility(View.INVISIBLE);
         }else{
-            System.out.println("ENTRO EN EL INVISIBLE = " +Restaurant.getInstance().miOrden.size() );
             bottom.setVisibility(View.VISIBLE);
         }
     }
-    
+
     private void openCarrito(View view){
         Intent intent = new Intent(getContext(), Carrito.class);
         startActivity(intent);
@@ -113,33 +104,17 @@ public class FragmentFood extends Fragment {
                     catList.add(product);
             allCategoryList.add(new AllCategory(category.toString(), catList));
         }
-
-
-
-
-
-
         setMainCategoryRecycler(allCategoryList);
     }
 
     private void setMainCategoryRecycler(List<AllCategory> allCategoryList){
 
         final List<AllCategory> a = allCategoryList;
-                mainCategoryRecycler = view2.findViewById(R.id.main_recycler);
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         mainCategoryRecycler.setLayoutManager(layoutManager);
         mainRecyclerAdapter = new MainRecyclerAdapter(getContext(), allCategoryList);
         mainCategoryRecycler.setAdapter(mainRecyclerAdapter);
 
     }
-
-    // Hi today we are gonna make a nested recyclerview
-    // one is horizontal and 2nd is vertical and we will place then together.
-    // before getting started make sure to subscribe and hit the bell icon to get update when i post video.
-    // so 1st we will setup verticle recyclerview.
-    // so now we will setup a horizontal recyclerview. which having category elements
-    // now lets goto the all category Model
-    // similarly u can add many types
-    // so this tutorial has been completed if u have any question and doubt plz comment
-    // see you in the next tutorial
 }
