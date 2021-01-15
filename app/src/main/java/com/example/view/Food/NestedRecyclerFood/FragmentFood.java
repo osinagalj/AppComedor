@@ -35,7 +35,7 @@ public class FragmentFood extends Fragment {
     RecyclerView mainCategoryRecycler;
     MainRecyclerAdapter mainRecyclerAdapter;
     View view2;
-
+    LinearLayout bottom;
 
 
     @Override
@@ -46,6 +46,8 @@ public class FragmentFood extends Fragment {
         //miOrden.add(new Food(0002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
 
         View view = inflater.inflate(R.layout.fragment_food,container,false);
+        bottom = view.findViewById(R.id.fragment_food_layout_make_order);
+
         view2 = view;
         //setContentView(R.layout.);
 
@@ -58,28 +60,41 @@ public class FragmentFood extends Fragment {
         button_finish_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCarrito();
+                openCarrito(view);
             }
         });
 
-        LinearLayout bottom = view.findViewById(R.id.fragment_food_layout_make_order);
-        System.out.println("Entro donde quiero");
-        if(Restaurant.getInstance().miOrden.size()==0){
-            System.out.println("tamaño 0");
-            bottom.setVisibility(View.INVISIBLE);
-        }else{
-            System.out.println("tamaño = " +Restaurant.getInstance().miOrden.size() );
-            bottom.setVisibility(View.VISIBLE);
-        }
+        showCarrito();
 
 
         loadData();
         return view;
     }
+    @Override
+    public void onResume() { //Necesario para que se actualice la vista, y aparezca el boton de carrio si es neesario
+        super.onResume();
+        // Check should we need to refresh the fragment
+        System.out.println("Entro en ONRESUME");
+        showCarrito();
 
-    private void openCarrito(){
+    }
+
+    private void showCarrito(){
+        System.out.println("Entro donde quiero");
+        if(Restaurant.getInstance().miOrden.size()==0){
+            System.out.println("tamaño 0");
+            bottom.setVisibility(View.INVISIBLE);
+        }else{
+            System.out.println("ENTRO EN EL INVISIBLE = " +Restaurant.getInstance().miOrden.size() );
+            bottom.setVisibility(View.VISIBLE);
+        }
+    }
+    
+    private void openCarrito(View view){
         Intent intent = new Intent(getContext(), Carrito.class);
         startActivity(intent);
+
+        //FragmantClass rSum = new FragmantClass(); getSupportFragmentManager().beginTransaction().remove(rSum).commit();
     }
     public void loadData(){
 
