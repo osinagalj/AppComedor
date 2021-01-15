@@ -15,8 +15,8 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DataBase.Order;
 import DataBase.Repositorio;
+import ModeloGian.Order;
 
 public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder> implements View.OnClickListener {
 
@@ -52,23 +52,23 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
 
     @Override
     public void onBindViewHolder(@NonNull com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder holder, final int position) {
-        String product_name = model.get(position).getProductName();
+        String product_name = String.valueOf(model.get(position).getId());
         int product_nro = model.get(position).getId();
-        String product_price = model.get(position).getProductPrice();
-        int produc_amount = model.get(position).getProductAmount();
-
+        //String product_price = model.get(position).getProductPrice(); // Obetener el precio de la orden
+        //int produc_amount = model.get(position).get;
+        int produc_amount = 2;
          //TODO ACA SE VINCULA LA VISTA CON EL MODELO
-        int product_img = model.get(position).getProductImg();
+        //int product_img = model.get(position).getProductImg();
 
         holder.product_name.setText("#"+product_nro);
         holder.product_description.setText(product_name);
-        holder.product_price.setText("Total: " + product_price);
+        //holder.product_price.setText("Total: " + product_price);
         String unidad = " Unidad";
         if(produc_amount>1)
             unidad = " Unidades";
         String amount_text = produc_amount + unidad;
         holder.product_amount.setText(amount_text); //TODO si la cantidad es 1 poner unidad sino unidades
-        holder.product_img.setImageResource(product_img);
+        //holder.product_img.setImageResource(product_img);
 
 
         //To remove orders

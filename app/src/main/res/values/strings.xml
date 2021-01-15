@@ -65,6 +65,7 @@
     <string name="no_tienes_cuenta">¿No tienes cuenta?</string>
     <string name="in_progress">In Progress..</string>
     <string name="ver_carrito">Ver Carrito</string>
+    <string name="precio">Precio</string>
 
 
 </resources>

@@ -15,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.view.R;
 
-import DataBase.Order;
-import DataBase.Repositorio;
+import java.util.ArrayList;
+
 import ModeloGian.Product;
 import ModeloGian.Restaurant;
 
@@ -51,9 +51,15 @@ public class FoodDetail extends AppCompatActivity {
                 public void onClick(View view) {
                     int amount2 = Integer.parseInt(amount.getText().toString());
                     //TODO revisar que la cantidad sea mayor a 0 y que el usuario tenga plata enla cuena para pedir, y si tiene hay que descontarsela
-                    Order o1 = new Order(Repositorio.repo.getNroOrden(),amount2,product.getName(),String.valueOf(product.getPrice()),product.getImgId());
-                    Repositorio.repo.putOrder(o1);
+                    //Order o1 = new Order(Repositorio.repo.getNroOrden(),amount2,product.getName(),String.valueOf(product.getPrice()),product.getImgId());
+                    //Repositorio.repo.putOrder(o1);
                     Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
+
+                    int nro = 12345;
+
+                    Restaurant.getInstance().ordenesPendientes.add(new ModeloGian.Order(nro,Restaurant.getInstance().miOrden));
+                    Restaurant.getInstance().miOrden = new ArrayList<>();
+
 
                     openFinishOrder();
                 }
@@ -64,8 +70,8 @@ public class FoodDetail extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     //TODO AGREGAR EL PRODUCTO A LA LISTA DE PRODUCTOS EN LA ORDEN
-                    Restaurant.getInstance().miOrden.add(product);
 
+                    Restaurant.getInstance().miOrden.add(product);
                     finish();
 
                 }

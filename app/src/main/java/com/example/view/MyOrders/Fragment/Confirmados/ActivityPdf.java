@@ -22,5 +22,6 @@ public class ActivityPdf extends AppCompatActivity {
                 finish();
             }
         });
+        //TODO HAY QUE HACER UN RECYCLERVIEW PARA LA DESCRIPCION DE LA ORDEN, CON CANTIDAD , NOMBRE , Y PRECIO EN TRES COLUMNAS
     }
 }
