@@ -20,6 +20,16 @@ public class Order {
         this.items=items;
     }
 
+    public String getDescripcion(){ //TODO
+        return "2x Coca-Cola + sanguchito";
+    }
+    public String getTime(){//TODO
+        return "30/01/2001, 13:03 hs";
+    }
+    public float getPrice(){//TODO
+        return 280.f;
+    }
+
     public int getId() {
         return id;
     }
