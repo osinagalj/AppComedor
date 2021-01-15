@@ -52,6 +52,8 @@ public class FragmentPendientes extends Fragment {
         }
         List<Product> lista = new ArrayList<>();
         listaFoods.add(new Order(200001,lista));
+        listaFoods.add(new Order(200002,lista));
+        listaFoods.add(new Order(200003,lista));
     }
 
 
