@@ -15,7 +15,7 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import ModeloGian.Order;
+import Model.Order;
 
 
 public class AdapterConfirmed extends RecyclerView.Adapter<com.example.view.MyOrders.Fragment.Confirmados.AdapterConfirmed.ViewHolder> implements View.OnClickListener {

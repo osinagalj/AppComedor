@@ -16,7 +16,7 @@ import com.example.view.R;
 
 import java.util.List;
 
-import ModeloGian.Product;
+import Model.Product;
 
 public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryItemRecyclerAdapter.CategoryItemViewHolder> {
 

@@ -14,8 +14,8 @@ import com.example.view.R;
 
 import java.util.List;
 
-import ModeloGian.Product;
-import model.Food;
+import Model.Product;
+
 
 public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.MainViewHolder> {
 

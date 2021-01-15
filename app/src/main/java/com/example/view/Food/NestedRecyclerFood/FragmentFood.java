@@ -23,12 +23,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import ModeloGian.CommonUser;
-import ModeloGian.Condition;
-import ModeloGian.Discount;
-import ModeloGian.Product;
-import ModeloGian.ProductCategory;
-import ModeloGian.Restaurant;
+import Model.CommonUser;
+import Model.Condition;
+import Model.Discount;
+import Model.Product;
+import Model.ProductCategory;
+import Model.Restaurant;
 
 public class FragmentFood extends Fragment {
 
@@ -96,7 +96,7 @@ public class FragmentFood extends Fragment {
 
         CommonUser user = new CommonUser("aaa","aaa","Juan", "Perez", LocalDate.of(2000,1,15), 11111111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
 
-        List<Product> consumables = ModeloGian.Restaurant.getInstance().getUserConsumableProducts(user);
+        List<Product> consumables = Model.Restaurant.getInstance().getUserConsumableProducts(user);
         for (ProductCategory category : ProductCategory.values()){
             List<Product> catList = new ArrayList<>();
             for (Product product : consumables)

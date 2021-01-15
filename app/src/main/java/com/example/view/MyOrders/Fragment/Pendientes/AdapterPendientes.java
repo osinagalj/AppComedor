@@ -15,8 +15,7 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DataBase.Repositorio;
-import ModeloGian.Order;
+import Model.Order;
 
 public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder> implements View.OnClickListener {
 
@@ -75,7 +74,7 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
                 //notifyDataSetChanged();
                 //notifyItemRemoved(position); // esto hace andar mal a la posicion
 
-                Repositorio.repo.removePendOrder(model.get(0).getId()); //no las borra porque ya no las cargo desde el repo este
+                //Repositorio.repo.removePendOrder(model.get(0).getId()); //no las borra porque ya no las cargo desde el repo este
                 model.remove(0);
                 notifyItemRemoved(0);
 

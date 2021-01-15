@@ -2,8 +2,8 @@ package com.example.view.Food.NestedRecyclerFood;
 
 import java.util.List;
 
-import ModeloGian.Product;
-import model.Food;
+import Model.Product;
+
 
 public class AllCategory {
 
