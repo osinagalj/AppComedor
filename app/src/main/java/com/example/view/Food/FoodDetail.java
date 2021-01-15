@@ -2,6 +2,7 @@ package com.example.view.Food;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,8 +70,11 @@ public class FoodDetail extends AppCompatActivity {
                     //TODO AGREGAR EL PRODUCTO A LA LISTA DE PRODUCTOS EN LA ORDEN
                     Restaurant.getInstance().miOrden.add(new Food(0002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
                     System.out.println("Agrego a la orden");
+
                     System.out.println("Agrego el tamaño es = " + Restaurant.getInstance().miOrden.size());
+
                     finish();
+
                 }
             });
         }
@@ -114,6 +118,15 @@ public class FoodDetail extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void openFinishOrder(){

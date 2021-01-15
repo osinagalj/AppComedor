@@ -22,6 +22,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     private Context context;
     private List<AllCategory> allCategoryList;
 
+
     public MainRecyclerAdapter(Context context, List<AllCategory> allCategoryList) {
         this.context = context;
         this.allCategoryList = allCategoryList;
