@@ -19,6 +19,7 @@ public class CommonUser implements Serializable {
     private List<Order> completedOrders;
     private int dailySpecialRemaining;
 
+
     public CommonUser(String username, String password, String names, String lastname, LocalDate birthdate, int identityCardNumber, Condition condition, PriceCalculator priceCalculator) {
         this.username = username;
         this.password = password;

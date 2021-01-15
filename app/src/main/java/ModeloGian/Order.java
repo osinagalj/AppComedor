@@ -9,12 +9,16 @@ public class Order {
     private Instant placed;
     private CommonUser placedBy;
 
-    private List<Product> items;
+    private List<Product> items; //TODO POSIBLEMENTE ESTO SEA UN HASH, SINO ES MAS DIFICIL SACAR LAS CANTIDADES DE CADA PRODUCTO
     private List<Product> toHome;
 
-    //TODO get price, get time formato hora:min (ej: 16:32 hs), get Productos en strings
-    //TODO que imagen le ponemos a la orden? y una orden por ahroa solo puede tener un producto
+    //TODO get price, get time formato hora:min (ej: 16:32 hs), get Productos en strings para la descripcion
 
+
+    public Order(int id, List<Product> items){
+        this.id = id;
+        this.items=items;
+    }
 
     public int getId() {
         return id;

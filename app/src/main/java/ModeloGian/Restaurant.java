@@ -20,7 +20,16 @@ public class Restaurant {
     private final List<Order> pendingOrders = new ArrayList<>();
     public static final Restaurant INSTANCE = new Restaurant();
 
-    static public ArrayList<Product> miOrden = new ArrayList<>(); //todo esto no va aca claramente
+    //para testeo
+    public ArrayList<Product> miOrden = new ArrayList<>(); //todo esto no va aca claramente
+    public ArrayList<Order> ordenesPendientes = new ArrayList<>();
+
+    public ArrayList<Order> getOrdenesPendientes(){
+        return ordenesPendientes;
+    }
+    public void addOrderPend(Order o){
+        this.ordenesPendientes.add(o);
+    }
 
     private Restaurant(){}
 

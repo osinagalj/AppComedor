@@ -54,7 +54,14 @@ public class Carrito extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //TODO eliminar los productos de la orden actual
-                    System.out.println("Agrego a la orden222222222");
+
+
+                    int nro = 12345;
+
+                    Restaurant.getInstance().ordenesPendientes.add(new ModeloGian.Order(nro,Restaurant.getInstance().miOrden));
+                    Restaurant.getInstance().miOrden = new ArrayList<>();
+
+
                     openFinishOrder();
 
                 }
