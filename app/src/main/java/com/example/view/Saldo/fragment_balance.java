@@ -20,6 +20,6 @@ public class fragment_balance extends Fragment {
         View view = inflater.inflate(R.layout.fragment_balance, container, false);
         ((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Mi Saldo");
         return view;
-
+        //TODO hay que cargar la plata al usuario y/o trasnferir a otro usuario cuando tengamos el usuaro por algun lado
     }
 }

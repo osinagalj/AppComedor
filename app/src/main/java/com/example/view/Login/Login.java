@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.view.Main.MainActivity;
+import com.example.view.Menu.MainActivity;
 import com.example.view.R;
 
 import Model.CommonUser;
