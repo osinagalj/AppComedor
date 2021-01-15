@@ -1,4 +1,4 @@
-package ModeloGian;
+package Model;
 
 import java.util.Collections;
 import java.util.Set;

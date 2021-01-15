@@ -3,10 +3,10 @@ package DAO;
 import java.util.ArrayList;
 import java.util.List;
 
-import ModeloGian.CommonUser;
-import ModeloGian.Order;
-import ModeloGian.Product;
-import ModeloGian.Restaurant;
+import Model.CommonUser;
+import Model.Order;
+import Model.Product;
+import Model.Restaurant;
 
 public class OrderDAO {
 
@@ -22,7 +22,7 @@ public class OrderDAO {
     }
 
     public static Order getOrder(int id){
-        Order o = new ModeloGian.Order(1, Restaurant.getInstance().miOrden);
+        Order o = new Model.Order(1, Restaurant.getInstance().miOrden);
         //TODO obtener una orden por su id para mostrar en el detalle de la orden
         return o;
     }

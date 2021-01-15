@@ -21,7 +21,7 @@ import com.example.view.R;
 import com.example.view.Saldo.fragment_balance;
 import com.google.android.material.navigation.NavigationView;
 
-import ModeloGian.CommonUser;
+import Model.CommonUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 

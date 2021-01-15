@@ -1,4 +1,4 @@
-package ModeloGian;
+package Model;
 
 public class Discount implements PriceCalculator{
     private float discountPercentage;

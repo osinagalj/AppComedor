@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import ModeloGian.CommonUser;
-import ModeloGian.Condition;
-import ModeloGian.Discount;
+import Model.CommonUser;
+import Model.Condition;
+import Model.Discount;
 
 public class UserDAO {
     public static CommonUser getUserById(int id){

@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.view.Main.MainActivity;
 import com.example.view.R;
 
-import ModeloGian.CommonUser;
-import ModeloGian.Restaurant;
+import Model.CommonUser;
+import Model.Restaurant;
 
 public class Login extends AppCompatActivity {
 

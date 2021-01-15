@@ -1,4 +1,4 @@
-package ModeloGian;
+package Model;
 
 public enum ProductCategory {
     DAILY_MENU,

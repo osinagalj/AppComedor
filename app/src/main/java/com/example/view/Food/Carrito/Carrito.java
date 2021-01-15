@@ -18,8 +18,8 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import ModeloGian.Product;
-import ModeloGian.Restaurant;
+import Model.Product;
+import Model.Restaurant;
 
 public class Carrito extends AppCompatActivity {
         ImageView img;
@@ -58,7 +58,7 @@ public class Carrito extends AppCompatActivity {
 
                     int nro = 12345;
 
-                    Restaurant.getInstance().ordenesPendientes.add(new ModeloGian.Order(nro,Restaurant.getInstance().miOrden));
+                    Restaurant.getInstance().ordenesPendientes.add(new Model.Order(nro,Restaurant.getInstance().miOrden));
                     Restaurant.getInstance().miOrden = new ArrayList<>();
 
 

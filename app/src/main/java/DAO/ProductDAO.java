@@ -4,9 +4,9 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import ModeloGian.Product;
-import ModeloGian.Food;
-import ModeloGian.ProductCategory;
+import Model.Product;
+import Model.Food;
+import Model.ProductCategory;
 
 public class ProductDAO {
     public static List<Product> avalaibleProducts(){

@@ -18,7 +18,7 @@ import com.example.view.R;
 import java.util.ArrayList;
 
 import DAO.OrderDAO;
-import ModeloGian.Order;
+import Model.Order;
 
 
 public class FragmentPendientes extends Fragment {

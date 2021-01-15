@@ -15,7 +15,7 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import ModeloGian.Product;
+import Model.Product;
 
 public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.Carrito.AdapterCarrito.ViewHolder> implements View.OnClickListener {
 
