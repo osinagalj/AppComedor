@@ -16,8 +16,8 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DataBase.Order;
-import DataBase.Repositorio;
+import DAO.OrderDAO;
+import ModeloGian.Order;
 
 public class FragmentConfirmed  extends Fragment {
 
@@ -38,10 +38,7 @@ public class FragmentConfirmed  extends Fragment {
         return view;
     }
     public void cargarLista(){
-        ArrayList<Order> ar = Repositorio.repo.getConfirmedOrders();
-        for(Order o : ar){
-            listaFoods.add(o);
-        }
+        listaFoods.addAll(OrderDAO.getConfirmedOrders(null));
     }
     private void mostrarData(){
         recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));

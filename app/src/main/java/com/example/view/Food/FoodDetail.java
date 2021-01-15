@@ -23,7 +23,7 @@ import ModeloGian.Restaurant;
 public class FoodDetail extends AppCompatActivity {
     ImageView img;
     EditText amount;
-    TextView product_name, product_price;
+    TextView product_name, product_price, product_description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +38,13 @@ public class FoodDetail extends AppCompatActivity {
         product_name = findViewById(R.id.food_details_product_name);
         product_price = findViewById(R.id.food_details_product_price);
         amount = findViewById(R.id.food_details_editText_amount);
-
+        product_description = findViewById(R.id.food_details_product_description);
         if(b!=null)
         {
             img.setImageResource(product.getImgId());
             product_name.setText(product.getName());
             product_price.setText(String.valueOf(product.getPrice()));
+            product_description.setText(product.getDescription());
 
             Button fab = findViewById(R.id.food_details_button_add_order);
             fab.setOnClickListener(new View.OnClickListener() {
