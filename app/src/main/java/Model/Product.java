@@ -60,6 +60,17 @@ public abstract class Product implements Serializable {
         this.category = category;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", imgId=" + imgId +
+                ", category=" + category +
+                '}';
+    }
+
     public abstract List<String> getIngredients();
     public abstract List<Product> getProducts();
     public abstract float getPrice();

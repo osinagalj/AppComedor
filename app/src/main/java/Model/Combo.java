@@ -8,11 +8,51 @@ public class Combo extends Product{
     private List<Product> comboItems;
     private int discount;
 
-
     public Combo(int id,String name, String description, int imgId, ProductCategory category, List<Product> comboItems, int discount) {
         super(id, name, description, imgId, category);
-        this.comboItems = comboItems;
+        if (comboItems != null)
+            this.comboItems = comboItems;
+        else
+            this.comboItems = new ArrayList<>();
         this.discount = discount;
+    }
+
+    public Combo(int id,String name, String description, int imgId, ProductCategory category, int discount) {
+        super(id, name, description, imgId, category);
+        this.discount = discount;
+        this.comboItems = new ArrayList<>();
+    }
+
+    public void addItem(Product comboItem){
+        comboItems.add(comboItem);
+    }
+
+    public void removeItem(int barcode){
+        comboItems.removeIf(product -> product.getId() == barcode);
+    }
+
+    public List<Product> getComboItems() {
+        return comboItems;
+    }
+
+    public void setComboItems(List<Product> comboItems) {
+        this.comboItems = comboItems;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
+
+    @Override
+    public String toString() {
+        return "Combo{" +
+                "comboItems=" + comboItems +
+                ", discount=" + discount +
+                "} " + super.toString();
     }
 
     @Override

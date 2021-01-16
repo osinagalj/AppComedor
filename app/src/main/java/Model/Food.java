@@ -1,5 +1,7 @@
 package Model;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +28,19 @@ public class Food extends Product {
         super(id,name, description, imgId, category);
         this.stock = stock;
         this.price = price;
-        this.ingredients = ingredients;
+        if (ingredients != null)
+            this.ingredients = ingredients;
+        else
+            this.ingredients = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "stock=" + stock +
+                ", price=" + price +
+                ", ingredients=" + ingredients +
+                "} " + super.toString();
     }
 
     @Override
