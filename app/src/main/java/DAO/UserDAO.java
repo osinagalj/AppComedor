@@ -22,6 +22,7 @@ public class UserDAO {
     private static final String USERS_PATH = System.getProperty("user.home") + File.separator + "comedor" + File.separator + "users.csv";
 
     public static List<CommonUser> registeredUsers(){
+        /*
         try {
             BufferedReader orderReader = new BufferedReader(new FileReader(USERS_PATH));
             String row;
@@ -46,5 +47,10 @@ public class UserDAO {
             e.printStackTrace();
         }
         throw new FileNotFoundException("Error intentando abrir el archivo de ordenes");
+
+         */
+        return null;
     }
+
+
 }

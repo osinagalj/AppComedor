@@ -22,7 +22,7 @@ public class OrderDAO {
     private static final String BUYED_PRODUCTS = System.getProperty("user.home") + File.separator + "comedor" + File.separator + "buyed_products.csv";
 
     private OrderDAO(){}
-
+/*
     public static List<Order> getOrders() throws FileNotFoundException {
         List<Order> orders = new ArrayList<>();
         List<Product> products = ProductDAO.avalaibleProducts();
@@ -34,8 +34,8 @@ public class OrderDAO {
             List<Product> orderProducts;
             while ((row = orderReader.readLine()) != null) {
                 data = row.split(",");
-                orderProducts = getProducts(data[0],)
-                orders.add(new Order())
+                //orderProducts = getProducts(data[0],)
+                //orders.add(new Order())
             }
             orderReader.close();
         } catch (FileNotFoundException e) { //If the file dont exists, create them
@@ -58,7 +58,7 @@ public class OrderDAO {
 
         String row;
         String[] data;
-        while ((row = products.readLine()) != null) {
+        while ((row = productsReader.readLine()) != null) {
             data = row.split(",");
 
         }
@@ -71,4 +71,6 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
+
+ */
 }
