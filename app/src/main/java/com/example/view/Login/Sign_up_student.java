@@ -54,8 +54,10 @@ public class Sign_up_student extends AppCompatActivity {
         {
             case "STUDENT" :
                 txt_category.setText("Alumno");
+                break;
             case "EXTERNAL" :
                 txt_category.setText("Externo");
+                break;
             case "TEACHER" :
                 txt_category.setText("Docente");
                 sign_up_label_dni.setVisibility(View.VISIBLE);

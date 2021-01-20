@@ -1,11 +1,5 @@
 package DAO;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,6 +10,13 @@ import Model.Condition;
 import Model.Discount;
 
 public class UserDAO {
+
+    public static CommonUser getLoggedUser(){
+        CommonUser user = new CommonUser("Lauta","password123.","Lautaro", "Osinaga", LocalDate.of(1999,5,20), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
+        //TODO devolver el usuario
+        return user;
+    }
+
     public static CommonUser getUserById(int id){
         CommonUser user = new CommonUser("aaa","aaa","Juan", "Perez", LocalDate.of(2000,1,15), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
         //TODO devolver el usuario
@@ -23,8 +24,8 @@ public class UserDAO {
     }
     public static List<CommonUser> registeredUsers() {
         List<CommonUser> users = new ArrayList<>();
-        users.add(new CommonUser("aaa", "aaa", "Juan", "Perez", LocalDate.of(2000, 1, 15), 111, new Condition("Celiaco", new HashSet<>()), new Discount(10)));
-        //TODO Hay que levantar los usuarios del archivo en DataBase, no crear usuarios nuevos
+     //TODO Hay que levantar los usuarios del archivo en DataBase, no crear usuarios nuevos
+        users.add(new CommonUser("Lauta","password123.","Lautaro", "Osinaga", LocalDate.of(1999,5,20), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10)));
         return users;
     }
 

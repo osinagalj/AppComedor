@@ -44,7 +44,7 @@ public class Login extends AppCompatActivity {
                 //TODO si ingreso la password y no el user se rompe pa
 
                 //CommonUser user = restaurant.validateLoginData(Integer.valueOf(dni),password);
-                CommonUser user = restaurant.validateLoginData(111,"aaa"); //TODO obtener datos de la interfaz
+                CommonUser user = restaurant.validateLoginData(111,"password123."); //TODO obtener datos de la interfaz
                 //System.out.println(user.getBirthdate()); TODO esto no puede ir aca, sino cuando mete el dato mal se rompe porque no existe el usuario
                 if (user != null)
                     sign_in(user.getIdentityCardNumber());

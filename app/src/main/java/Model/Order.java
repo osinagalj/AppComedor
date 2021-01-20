@@ -1,10 +1,11 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable {
     private static int ordersPlaced = 0;
 
     private int id;
@@ -24,7 +25,9 @@ public class Order {
         this.items=items;
 
     }
-
+    public String getAmount(int produtID){ //TODO lo necesito para mostrar en el ticket
+        return "x3";
+    }
     //TODO creo hay que sobreescribir el operador de product para que quede ordenado segun se fue ingresando
     public void addFood(Product p, int amount){
         productos.put(p,amount);
@@ -34,8 +37,13 @@ public class Order {
         return "2x Coca-Cola + sanguchito";
     }
     public String getTime(){//TODO
-        return "30/01/2001, 13:03 hs";
+        return "30/01/2001";
     }
+
+    public String getTimeHour(){//TODO
+        return "13:03 hs";
+    }
+
     public float getPrice() {//TODO
         return 280.f;
     }

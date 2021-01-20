@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,11 @@ public class AdapterConfirmed extends RecyclerView.Adapter<com.example.view.MyOr
     public com.example.view.MyOrders.Fragment.Confirmados.AdapterConfirmed.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.row_order_pendiente_new, parent, false);
         view.setOnClickListener(this);
+
+        Button btn =  view.findViewById(R.id.row_pending_order_new_button_remove);
+        btn.setText("Opinar");
+        btn.setVisibility(View.GONE);
+
         return new com.example.view.MyOrders.Fragment.Confirmados.AdapterConfirmed.ViewHolder(view);
     }
 

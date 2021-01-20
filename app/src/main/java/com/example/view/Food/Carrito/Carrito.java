@@ -1,5 +1,7 @@
 package com.example.view.Food.Carrito;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -43,9 +45,11 @@ public class Carrito extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //TODO eliminar los productos de la orden actual
-                    Restaurant.getInstance().miOrden = new ArrayList<>();
-                    System.out.println("Agrego a la orde3333333333333333");
-                    finish();
+                    if(Restaurant.getInstance().miCarrito.size()>0){
+                        showSimpleDialog(v);
+                    }else{
+                        finish();
+                    }
                 }
             });
 
@@ -58,8 +62,8 @@ public class Carrito extends AppCompatActivity {
 
                     int nro = 12345;
 
-                    Restaurant.getInstance().ordenesPendientes.add(new Model.Order(nro,Restaurant.getInstance().miOrden));
-                    Restaurant.getInstance().miOrden = new ArrayList<>();
+                    Restaurant.getInstance().ordenesPendientes.add(new Model.Order(nro,Restaurant.getInstance().miCarrito));
+                    Restaurant.getInstance().miCarrito = new ArrayList<>();
 
 
                     openFinishOrder();
@@ -90,7 +94,7 @@ public class Carrito extends AppCompatActivity {
 
 
     public void cargarLista(){
-        ArrayList<Product> ar = Restaurant.getInstance().miOrden;
+        ArrayList<Product> ar = Restaurant.getInstance().miCarrito;
         for(Product o : ar){
             listaFoods.add(o);
         }
@@ -102,5 +106,29 @@ public class Carrito extends AppCompatActivity {
         adapterPend = new AdapterCarrito(this, listaFoods);
         recyclerViewPersonas.setAdapter(adapterPend);
 
+    }
+
+    public void showSimpleDialog(View view) {
+        // Use the Builder class for convenient dialog construction
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle("Cancelar Pedido");
+        builder.setMessage("Se eliminaran los productos agregados al carrito");
+        builder.setPositiveButton("OK!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                Restaurant.getInstance().miCarrito = new ArrayList<>();
+                finish();
+            }
+        })
+                .setNegativeButton("Cancel ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+        // Create the AlertDialog object and return it
+        builder.create().show();
     }
 }

@@ -52,14 +52,13 @@ public class FoodDetail extends AppCompatActivity {
                 public void onClick(View view) {
                     int amount2 = Integer.parseInt(amount.getText().toString());
                     //TODO revisar que la cantidad sea mayor a 0 y que el usuario tenga plata enla cuena para pedir, y si tiene hay que descontarsela
-                    //Order o1 = new Order(Repositorio.repo.getNroOrden(),amount2,product.getName(),String.valueOf(product.getPrice()),product.getImgId());
-                    //Repositorio.repo.putOrder(o1);
+
                     Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
 
                     int nro = 12345;
 
-                    Restaurant.getInstance().ordenesPendientes.add(new Model.Order(nro,Restaurant.getInstance().miOrden));
-                    Restaurant.getInstance().miOrden = new ArrayList<>();
+                    Restaurant.getInstance().ordenesPendientes.add(new Model.Order(nro,Restaurant.getInstance().miCarrito));
+                    Restaurant.getInstance().miCarrito = new ArrayList<>();// Vaciamos el carrito
 
 
                     openFinishOrder();
@@ -72,7 +71,7 @@ public class FoodDetail extends AppCompatActivity {
                 public void onClick(View view) {
                     //TODO AGREGAR EL PRODUCTO A LA LISTA DE PRODUCTOS EN LA ORDEN
 
-                    Restaurant.getInstance().miOrden.add(product);
+                    Restaurant.getInstance().miCarrito.add(product);
                     finish();
 
                 }
@@ -134,4 +133,5 @@ public class FoodDetail extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }
