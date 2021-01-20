@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.MyOrders.Fragment.Confirmados.ActivityPdf;
+import com.example.view.MyOrders.Fragment.OrderDetails.ActivityPdf;
 import com.example.view.R;
 
 import java.util.ArrayList;
@@ -57,6 +57,8 @@ public class FragmentPendientes extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getActivity(), ActivityPdf.class);
+
+                intent.putExtra("ORDER_SELECTED",listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
                 startActivity(intent);
                 //voy a tener que pasarle la orden para el pedido
 
@@ -64,6 +66,9 @@ public class FragmentPendientes extends Fragment {
                 //luego en el mainactivity se hace la implementacion de la interface para implementar el metodo enviarpersona
             }
         });
+
+
+
     }
 
 

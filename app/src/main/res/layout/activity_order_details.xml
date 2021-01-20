@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ECECEC"
-    tools:context=".MyOrders.Fragment.Confirmados.ActivityPdf">
+    tools:context=".MyOrders.Fragment.OrderDetails.ActivityPdf">
 
     <LinearLayout
         android:padding="30dp"
@@ -186,15 +186,6 @@
                         android:textAlignment="textStart"
                         android:textSize="12sp"/>
 
-                    <TextView
-                        android:id="@+id/order_details_label_order_product_amount"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/product_amount"
-                        android:textAlignment="textStart"
-                        android:textSize="16sp"/>
-
                 </LinearLayout>
 
 
@@ -212,14 +203,7 @@
 
                         android:textSize="12sp"/>
 
-                    <TextView
-                        android:id="@+id/order_details_label_order_product_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/product_name"
-                        android:textAlignment="textStart"
-                        android:textSize="16sp"/>
+
 
                 </LinearLayout>
 
@@ -237,23 +221,15 @@
 
                         android:textSize="12sp"/>
 
-                    <TextView
-                        android:id="@+id/order_details_label_order_product_price"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/price"
-                        android:textAlignment="textStart"
-                        android:textSize="16sp"/>
-
                 </LinearLayout>
-
-
-
 
             </LinearLayout>
 
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/order_details_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" />
 
         </LinearLayout>
 

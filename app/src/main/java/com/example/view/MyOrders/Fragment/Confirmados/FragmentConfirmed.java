@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.view.MyOrders.Fragment.OrderDetails.ActivityPdf;
 import com.example.view.R;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class FragmentConfirmed  extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ActivityPdf.class);
+                intent.putExtra("ORDER_SELECTED",listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
                 startActivity(intent);
             }
         });

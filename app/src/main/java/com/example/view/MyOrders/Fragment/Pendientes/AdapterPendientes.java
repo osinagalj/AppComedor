@@ -23,7 +23,7 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
     ArrayList<Order> model;
     Context context;
     private int count = 0;
-    Button button;
+    Button button_remove,btn_see_details;
     private View.OnClickListener listener;
     FragmentPendientes fragmentPendientes;
 
@@ -40,7 +40,8 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
     public com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.row_order_pendiente_new, parent, false);
         view.setOnClickListener(this);
-        button = (Button) view.findViewById(R.id.row_pending_order_new_button_remove);
+        button_remove = (Button) view.findViewById(R.id.row_pending_order_new_button_remove);
+        //btn_see_details = (Button) view.findViewById(R.id.row_pending_order_new_button_details);
 
         return new com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder(view);
     }
@@ -62,7 +63,7 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
         holder.product_price.setText(product_price);
 
         //To remove orders
-        button.setOnClickListener(new View.OnClickListener()
+        button_remove.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
@@ -80,6 +81,16 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
 
             }
         });
+
+        /* //TODO SAME ERROR THAN BTN_REMOVE WITH THE POSITION
+        btn_see_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityPdf.class);
+                intent.putExtra("ORDER_SELECTED",model.get(position));
+                context.startActivity(intent);
+            }
+        });*/
 
     }
 

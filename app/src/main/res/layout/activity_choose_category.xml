@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login.Sign_up"
-    android:background="#105661"
-    >
+    android:background="#105661">
 
     <ImageButton
         android:id="@+id/choose_category_button_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="@drawable/ic_arrow_back"
         tools:ignore="MissingConstraints" />
 

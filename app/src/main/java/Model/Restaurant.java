@@ -16,12 +16,13 @@ public class Restaurant {
     private String timeTable;
     private final List<CommonUser> registeredUsers = UserDAO.registeredUsers();
     private final List<Product> availableProducts = ProductDAO.avalaibleProducts();
+
     private final List<Order> orders = new ArrayList<>();
     private final List<Order> pendingOrders = new ArrayList<>();
     public static final Restaurant INSTANCE = new Restaurant();
 
     //para testeo
-    public ArrayList<Product> miOrden = new ArrayList<>(); //todo esto no va aca claramente
+    public ArrayList<Product> miCarrito = new ArrayList<>(); //todo esto no va aca claramente
     public ArrayList<Order> ordenesPendientes = new ArrayList<>();
 
     public ArrayList<Order> getOrdenesPendientes(){
@@ -79,7 +80,7 @@ public class Restaurant {
 
     /***
      * search the orders of a specific user
-     * @param user user to search orders
+     //* @param user user to search orders
      * @return unmodifiable list with the orders of the user
      */
     public List<Order> getOrders(CommonUser user){
@@ -93,9 +94,10 @@ public class Restaurant {
 
     /***
      * filter the products that a user cant consume
-     * @param user user who wants to know what he can consume
+     //* @param user user who wants to know what he can consume
      * @return unmodifiable list with consumable products
      */
+
     public List<Product> getUserConsumableProducts(CommonUser user){
         List<Product> consumableProducts = new ArrayList<>();
         for (Product product : availableProducts)
@@ -112,7 +114,7 @@ public class Restaurant {
         }
         return null;
     }
-
+/*
     public void addStock(int barcode,int stock){
         for(Product product : availableProducts){
             if(product.getId() == barcode){
@@ -120,7 +122,7 @@ public class Restaurant {
             }
         }
     }
-
+*/
     public void getPendingOrders(CommonUser u){
         if (registeredUsers.contains(u)) {
             //users.add(u);
@@ -130,4 +132,6 @@ public class Restaurant {
     public void addOrder(Order order){
 
     }
+
+
 }

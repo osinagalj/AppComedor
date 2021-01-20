@@ -66,6 +66,8 @@
     <string name="in_progress">In Progress..</string>
     <string name="ver_carrito">Ver Carrito</string>
     <string name="precio">Precio</string>
+    <string name="lautaro">Lautaro</string>
+    <string name="ver_detalle">Ver detalle</string>
 
 
 </resources>

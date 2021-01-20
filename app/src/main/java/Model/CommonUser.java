@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CommonUser implements Serializable {
-    private String username;
+    private String username; // TODO para q queres esto?
     private String password;
     private String names;
     private String lastname;
@@ -18,6 +18,13 @@ public class CommonUser implements Serializable {
     private PriceCalculator priceCalculator;
     private List<Order> completedOrders;
     private int dailySpecialRemaining;
+    //TODO falta una imagen del perfil
+    //TODO falta la categoria del usuario
+
+    //TODO
+    public String getCategory(){
+        return "Celiaco";
+    }
 
 
     public CommonUser(String username, String password, String names, String lastname, LocalDate birthdate, int identityCardNumber, Condition condition, PriceCalculator priceCalculator) {

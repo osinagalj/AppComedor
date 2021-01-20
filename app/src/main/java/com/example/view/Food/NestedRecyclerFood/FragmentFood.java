@@ -45,7 +45,7 @@ public class FragmentFood extends Fragment {
         //Mi carrito
         //miOrden.add(new Food(0002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
 
-        View view = inflater.inflate(R.layout.fragment_food,container,false);
+        View view = inflater.inflate(R.layout.fragment_food, container, false);
         bottom = view.findViewById(R.id.fragment_food_layout_make_order);
         view2 = view;
         mainCategoryRecycler = view2.findViewById(R.id.main_recycler);
@@ -73,28 +73,29 @@ public class FragmentFood extends Fragment {
 
     }
 
-    private void showCarrito(){
-        if(Restaurant.getInstance().miOrden.size()==0){
+    private void showCarrito() {
+        if (Restaurant.getInstance().miCarrito.size() == 0) {
             bottom.setVisibility(View.GONE);
-        }else{
+        } else {
             bottom.setVisibility(View.VISIBLE);
         }
     }
 
-    private void openCarrito(View view){
+    private void openCarrito(View view) {
         Intent intent = new Intent(getContext(), Carrito.class);
         startActivity(intent);
 
         //FragmantClass rSum = new FragmantClass(); getSupportFragmentManager().beginTransaction().remove(rSum).commit();
     }
-    public void loadData(){
+
+    public void loadData() {
 
         List<AllCategory> allCategoryList = new ArrayList<>();
         //allCategoryList.add(new AllCategory("Menu del Dia", Restaurant.restaurant.getDailyMenu()));
         //allCategoryList.add(new AllCategory("Buffet", Restaurant.restaurant.getProducts()));
         //allCategoryList.add(new AllCategory("Kiosko", Restaurant.restaurant.getProductsKiosko()));
 
-        CommonUser user = new CommonUser("aaa","aaa","Juan", "Perez", LocalDate.of(2000,1,15), 11111111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
+        CommonUser user = new CommonUser("aaa", "aaa", "Juan", "Perez", LocalDate.of(2000, 1, 15), 11111111, new Condition("Celiaco", new HashSet<>()), new Discount(10));
 
         List<Product> consumables = Model.Restaurant.getInstance().getUserConsumableProducts(user);
         for (ProductCategory category : ProductCategory.values()){
@@ -104,8 +105,10 @@ public class FragmentFood extends Fragment {
                     catList.add(product);
             allCategoryList.add(new AllCategory(category.toString(), catList));
         }
+
         setMainCategoryRecycler(allCategoryList);
     }
+
 
     private void setMainCategoryRecycler(List<AllCategory> allCategoryList){
 
@@ -117,4 +120,5 @@ public class FragmentFood extends Fragment {
         mainCategoryRecycler.setAdapter(mainRecyclerAdapter);
 
     }
+
 }

@@ -17,6 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.view.R;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import DAO.OrderDAO;
+import Model.Order;
 
 public class Fragment_fila extends Fragment {
 
@@ -43,28 +47,11 @@ public class Fragment_fila extends Fragment {
     }
 
     public void cargarLista(){
-        listaFoods.add(new Orden("#12310"));
-        listaFoods.add(new Orden("#12311"));
-        listaFoods.add(new Orden("#12312"));
-        listaFoods.add(new Orden("#12313"));
-        listaFoods.add(new Orden("#12314"));
-        listaFoods.add(new Orden("#12315"));
-        listaFoods.add(new Orden("#12316"));
-        listaFoods.add(new Orden("#12317"));
-        listaFoods.add(new Orden("#12318"));
-        listaFoods.add(new Orden("#12319"));
-        listaFoods.add(new Orden("#12315"));
-        listaFoods.add(new Orden("#12316"));
-        listaFoods.add(new Orden("#12317"));
-        listaFoods.add(new Orden("#12318"));
-        listaFoods.add(new Orden("#12319"));
-        listaFoods.add(new Orden("#12318"));
-        listaFoods.add(new Orden("#12319"));
-        listaFoods.add(new Orden("#12315"));
-        listaFoods.add(new Orden("#12316"));
-        listaFoods.add(new Orden("#12317"));
-        listaFoods.add(new Orden("#12318"));
-        listaFoods.add(new Orden("#12319"));
+//todo
+        List<Order> data = OrderDAO.nextOrders();
+        for(Order order : data){
+            listaFoods.add(new Orden("#"+order.getId()));
+        }
     }
 
     private void mostrarData(){
