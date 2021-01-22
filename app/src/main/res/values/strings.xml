@@ -62,6 +62,12 @@
     <string name="amount_">Importe</string>
     <string name="transfer_money">Transferir Saldo</string>
     <string name="user_receiver">Destinatario</string>
+    <string name="no_tienes_cuenta">¿No tienes cuenta?</string>
+    <string name="in_progress">In Progress..</string>
+    <string name="ver_carrito">Ver Carrito</string>
+    <string name="precio">Precio</string>
+    <string name="lautaro">Lautaro</string>
+    <string name="ver_detalle">Ver detalle</string>
 
 
 </resources>

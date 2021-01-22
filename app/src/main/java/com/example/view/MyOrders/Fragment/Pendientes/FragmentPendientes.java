@@ -12,13 +12,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.MyOrders.Fragment.Confirmados.ActivityPdf;
+import com.example.view.MyOrders.Fragment.OrderDetails.ActivityPdf;
 import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DataBase.Order;
-import DataBase.Repositorio;
+import DAO.OrderDAO;
+import Model.Order;
 
 
 public class FragmentPendientes extends Fragment {
@@ -42,16 +42,14 @@ public class FragmentPendientes extends Fragment {
     }
 
     public void cargarLista(){
-        ArrayList<Order> ar = Repositorio.repo.getOrders();
-        for(Order o : ar){
-            listaFoods.add(o);
-        }
+       // CommonUser u = new CommonUser("aaa","aaa","Juan", "Perez", LocalDate.of(2000,1,15), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
+        listaFoods.addAll(OrderDAO.getPendingOrders(null));
     }
 
 
     private void mostrarData() {
         recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterPend = new AdapterPendientes(getContext(), listaFoods);
+        adapterPend = new AdapterPendientes(getContext(), listaFoods,this);
         recyclerViewPersonas.setAdapter(adapterPend);
 
         adapterPend.setOnclickListener(new View.OnClickListener() {
@@ -59,6 +57,8 @@ public class FragmentPendientes extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getActivity(), ActivityPdf.class);
+
+                intent.putExtra("ORDER_SELECTED",listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
                 startActivity(intent);
                 //voy a tener que pasarle la orden para el pedido
 
@@ -66,6 +66,9 @@ public class FragmentPendientes extends Fragment {
                 //luego en el mainactivity se hace la implementacion de la interface para implementar el metodo enviarpersona
             }
         });
+
+
+
     }
 
 

@@ -1,7 +1,5 @@
 package com.example.view.MyOrders.Fragment.Confirmados;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,17 +8,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import DataBase.Order;
+import com.example.view.MyOrders.Fragment.OrderDetails.ActivityPdf;
 import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DataBase.Repositorio;
+import DAO.OrderDAO;
+import Model.Order;
 
 public class FragmentConfirmed  extends Fragment {
 
@@ -28,11 +26,6 @@ public class FragmentConfirmed  extends Fragment {
     AdapterConfirmed adapterPend;
     RecyclerView recyclerViewPersonas;
     ArrayList<Order> listaFoods;
-
-
-
-    //Crear referencias para poder realizar la comunicacion entre el fragment detalle
-    Activity actividad;
 
 
     @Nullable
@@ -46,10 +39,7 @@ public class FragmentConfirmed  extends Fragment {
         return view;
     }
     public void cargarLista(){
-        ArrayList<Order> ar = Repositorio.repo.getConfirmedOrders();
-        for(Order o : ar){
-            listaFoods.add(o);
-        }
+        listaFoods.addAll(OrderDAO.getConfirmedOrders(null));
     }
     private void mostrarData(){
         recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -59,29 +49,11 @@ public class FragmentConfirmed  extends Fragment {
         adapterPend.setOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Ola");
                 Intent intent = new Intent(getActivity(), ActivityPdf.class);
+                intent.putExtra("ORDER_SELECTED",listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
                 startActivity(intent);
-                //interfaceComunicaFragments.abrirPDF(listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
-                //luego en el mainactivity se hace la implementacion de la interface para implementar el metodo enviarpersona
             }
         });
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        ((AppCompatActivity) context).getSupportActionBar().setTitle("Mis Pedidos");
-        super.onAttach(context);
-        //esto es necesario para establecer la comunicacion entre la lista y el detalle
-        //si el contexto que le esta llegando es una instancia de un activity:
-        if(context instanceof Activity){
-            //voy a decirle a mi actividad que sea igual a dicho contesto. castin correspondiente:
-            this.actividad= (Activity) context;
-            ////que la interface icomunicafragments sea igual ese contexto de la actividad:
-
-            //esto es necesario para establecer la comunicacion entre la lista y el detalle
-        }
-
     }
 
 

@@ -28,11 +28,16 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".Interfaces.MainActivity"
+            android:name=".Menu.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".MyOrders.Fragment.Confirmados.ActivityPdf"
+            android:name=".MyOrders.Fragment.OrderDetails.ActivityPdf"
+            android:label="@string/title_activity_pdf"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".Food.Carrito.Carrito"
             android:label="@string/title_activity_pdf"
             android:theme="@style/AppTheme.NoActionBar" />
 

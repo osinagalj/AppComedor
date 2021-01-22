@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
@@ -42,7 +43,7 @@ public class HomeFragment extends Fragment {
 
         viewPager = myFragment.findViewById(R.id.viewPager);
         tabLayout = myFragment.findViewById(R.id.tabLayout);
-
+        ((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Mis Pedidos");
         return myFragment;
     }
 

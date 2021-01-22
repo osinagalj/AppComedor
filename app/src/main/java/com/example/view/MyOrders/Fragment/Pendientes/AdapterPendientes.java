@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,8 +15,7 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DataBase.Order;
-import DataBase.Repositorio;
+import Model.Order;
 
 public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder> implements View.OnClickListener {
 
@@ -24,14 +23,14 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
     ArrayList<Order> model;
     Context context;
     private int count = 0;
-    ImageButton button;
+    Button button_remove,btn_see_details;
     private View.OnClickListener listener;
+    FragmentPendientes fragmentPendientes;
 
-
-    public AdapterPendientes(Context context, ArrayList<Order> model) {
+    public AdapterPendientes(Context context, ArrayList<Order> model,FragmentPendientes fragmentPendientes) {
         this.inflater = LayoutInflater.from(context);
         this.model = model;
-
+        this.fragmentPendientes = fragmentPendientes;
         this.context = context;
     }
 
@@ -39,9 +38,10 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
     @NonNull
     @Override
     public com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.row_order_pendiente, parent, false);
+        View view = inflater.inflate(R.layout.row_order_pendiente_new, parent, false);
         view.setOnClickListener(this);
-        button = (ImageButton) view.findViewById(R.id.row_pending_order_button_remove);
+        button_remove = (Button) view.findViewById(R.id.row_pending_order_new_button_remove);
+        //btn_see_details = (Button) view.findViewById(R.id.row_pending_order_new_button_details);
 
         return new com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder(view);
     }
@@ -52,35 +52,45 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
 
     @Override
     public void onBindViewHolder(@NonNull com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder holder, final int position) {
-        String product_name = model.get(position).getProductName();
-        int product_nro = model.get(position).getId();
-        String product_price = model.get(position).getProductPrice();
-        int produc_amount = model.get(position).getProductAmount();
+        String product_id = String.valueOf(model.get(position).getId());
+        String product_description = model.get(position).getDescripcion();
+        String product_time = model.get(position).getTime();
+        String product_price = String.valueOf(model.get(position).getPrice());
 
-         //TODO ACA SE VINCULA LA VISTA CON EL MODELO
-        int product_img = model.get(position).getProductImg();
-
-        holder.product_name.setText("#"+product_nro);
-        holder.product_description.setText(product_name);
-        holder.product_price.setText("Total: " + product_price);
-        holder.product_amount.setText(produc_amount + " Unidades"); //TODO si la cantidad es 1 poner unidad sino unidades
-        holder.product_img.setImageResource(product_img);
-
+        holder.product_id.setText("#"+product_id);
+        holder.product_time.setText(product_time);
+        holder.product_description.setText(product_description);
+        holder.product_price.setText(product_price);
 
         //To remove orders
-        button.setOnClickListener(new View.OnClickListener()
+        button_remove.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
 
-                Repositorio.repo.removePendOrder(model.get(position).getId()); //TODO ACA HAY QUE PASARLE EL NRO DE ORDEN PARA ELIMINAR, NO LA POS
-                model.remove(position);
+                //TODO ESTO ELIMINA PERO A VECES TIRA ERROR POR LA POSICION
+               // Repositorio.repo.removePendOrder(model.get(position).getId()); //TODO ACA HAY QUE PASARLE EL NRO DE ORDEN PARA ELIMINAR, NO LA POS
+                //model.remove(position);
+                //notifyDataSetChanged();
                 //notifyItemRemoved(position); // esto hace andar mal a la posicion
-                notifyDataSetChanged();
+
+                //Repositorio.repo.removePendOrder(model.get(0).getId()); //no las borra porque ya no las cargo desde el repo este
+                model.remove(0);
+                notifyItemRemoved(0);
 
             }
         });
+
+        /* //TODO SAME ERROR THAN BTN_REMOVE WITH THE POSITION
+        btn_see_details.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityPdf.class);
+                intent.putExtra("ORDER_SELECTED",model.get(position));
+                context.startActivity(intent);
+            }
+        });*/
 
     }
 
@@ -97,18 +107,17 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView product_name, product_description, product_price,product_amount;
+        TextView product_id, product_description, product_price,product_time;
         ImageView product_img;
-
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
-        //TODO ACA SE VINCULA LA VISTA CON EL MODELO
-            product_name = itemView.findViewById(R.id.row_pending_order_label_product_name);
-            product_description = itemView.findViewById(R.id.row_pending_order_label_product_description);
-            product_price = itemView.findViewById(R.id.row_pending_order_label_product_price);
-            product_img = itemView.findViewById(R.id.row_pending_order_imageView_product_img);
-            product_amount = itemView.findViewById(R.id.row_pending_order_label_amount);
+            product_id = itemView.findViewById(R.id.row_pending_order_new_label_product_name);
+            product_time = itemView.findViewById(R.id.row_pending_order_new_label_product_time);
+            product_description = itemView.findViewById(R.id.row_pending_order_new_label_product_description);
+            product_price = itemView.findViewById(R.id.row_pending_order_new_label_product_price);
+            //product_img = itemView.findViewById(R.id.row_pending_order_imageView_product_img);
+
 
         }
     }

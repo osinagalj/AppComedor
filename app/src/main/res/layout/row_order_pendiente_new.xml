@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="3dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginTop="10dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_shape"
+      android:padding="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/logo_exactas_unicen" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/row_pending_order_new_label_product_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000"
+                        android:textStyle="bold"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/order_number"
+                        android:textAlignment="textStart"
+                        android:textSize="26sp"/>
+                    <TextView
+                        android:id="@+id/row_pending_order_new_label_product_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="10dp"
+                        android:text="18/12/2020, 20:31"
+                        android:textAlignment="textStart"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginTop="50dp"
+
+                    android:gravity="end">
+
+                    <ImageView
+                        android:id="@+id/row_pending_order_new_label_product_descriptio2n"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+
+                        android:background="@drawable/ic_arrow_next" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+                <TextView
+                    android:id="@+id/row_pending_order_new_label_product_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="15dp"
+                    android:text="2xChoripan + Coca-Cola"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp"/>
+                <TextView
+                    android:id="@+id/row_pending_order_new_label_product_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="15dp"
+                    android:text="@string/price"
+                    android:textAlignment="textStart"
+                    android:textSize="16sp"/>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="#AEAEAE"
+            android:layout_height="1dp">
+        </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/row_pending_order_new_button_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textColor="@color/colorPrimary"
+                android:textAlignment="center"
+                android:textSize="20sp"
+
+
+                android:background="@android:color/white"
+                android:text="@string/ver_detalle" />
+
+            <Button
+                android:id="@+id/row_pending_order_new_button_remove"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFF30303"
+                android:textSize="16sp"
+                android:drawableStart="@drawable/ic_remove"
+                android:background="@android:color/white"
+                android:text="Cancelar Pedido" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

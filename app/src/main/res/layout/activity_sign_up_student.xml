@@ -48,8 +48,8 @@
                 android:id="@+id/sign_up_label_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="75dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="25dp"
                 android:text="@string/alumno"
                 android:textColor="#fff"
@@ -185,13 +185,13 @@
 
             <Button
                 android:id="@+id/sign_up_button_create_account"
-                android:layout_width="190dp"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="100dp"
                 tools:ignore="MissingConstraints"
-                android:text="@string/crear_cuenta"
-                tools:layout_editor_absoluteX="3dp"
-                tools:layout_editor_absoluteY="5dp" />
+                android:theme="@style/button"
+                android:background="@drawable/button"
+                android:text="@string/crear_cuenta" />
 
         </LinearLayout>
 

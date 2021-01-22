@@ -2,6 +2,7 @@ package com.example.view.Food;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,15 +15,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.view.R;
 
-import DataBase.Order;
-import DataBase.Repositorio;
-import ModeloGian.Product;
-import model.Food;
+import java.util.ArrayList;
+
+import Model.Product;
+import Model.Restaurant;
 
 public class FoodDetail extends AppCompatActivity {
     ImageView img;
     EditText amount;
-    TextView product_name, product_price;
+    TextView product_name, product_price, product_description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +38,13 @@ public class FoodDetail extends AppCompatActivity {
         product_name = findViewById(R.id.food_details_product_name);
         product_price = findViewById(R.id.food_details_product_price);
         amount = findViewById(R.id.food_details_editText_amount);
-
+        product_description = findViewById(R.id.food_details_product_description);
         if(b!=null)
         {
             img.setImageResource(product.getImgId());
             product_name.setText(product.getName());
             product_price.setText(String.valueOf(product.getPrice()));
+            product_description.setText(product.getDescription());
 
             Button fab = findViewById(R.id.food_details_button_add_order);
             fab.setOnClickListener(new View.OnClickListener() {
@@ -50,11 +52,28 @@ public class FoodDetail extends AppCompatActivity {
                 public void onClick(View view) {
                     int amount2 = Integer.parseInt(amount.getText().toString());
                     //TODO revisar que la cantidad sea mayor a 0 y que el usuario tenga plata enla cuena para pedir, y si tiene hay que descontarsela
-                    Order o1 = new Order(Repositorio.repo.getNroOrden(),amount2,product.getName(),String.valueOf(product.getPrice()),product.getImgId());
-                    Repositorio.repo.putOrder(o1);
+
                     Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
 
+                    int nro = 12345;
+
+                    Restaurant.getInstance().ordenesPendientes.add(new Model.Order(nro,Restaurant.getInstance().miCarrito));
+                    Restaurant.getInstance().miCarrito = new ArrayList<>();// Vaciamos el carrito
+
+
                     openFinishOrder();
+                }
+            });
+
+            Button btn_add_products = findViewById(R.id.food_details_button_add_products);
+            btn_add_products.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO AGREGAR EL PRODUCTO A LA LISTA DE PRODUCTOS EN LA ORDEN
+
+                    Restaurant.getInstance().miCarrito.add(product);
+                    finish();
+
                 }
             });
         }
@@ -70,14 +89,19 @@ public class FoodDetail extends AppCompatActivity {
         });
 
 
-//TODO HAY QUE HACER QUE CAMBIE EL PRECIO A MEDIDA QUE SE AUMENTA O BAJA LA CANTIDAD
+    //TODO HAY QUE HACER QUE CAMBIE EL PRECIO A MEDIDA QUE SE AUMENTA O BAJA LA CANTIDAD
         ImageButton less = findViewById(R.id.food_details_button_less);
         less.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Integer number = Integer.parseInt(amount.getText().toString());
-                if(number > 0)
+                if(number > 1){
                     number--;
+                }else{
+                    Toast.makeText(getBaseContext(), "Cantidad minima", Toast.LENGTH_SHORT).show();
+                }
+
+
                 amount.setText(number.toString());
             }
         });
@@ -95,9 +119,19 @@ public class FoodDetail extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void openFinishOrder(){
         Intent intent = new Intent(this,FinishOrder.class);
         startActivity(intent);
         finish();
     }
+
 }

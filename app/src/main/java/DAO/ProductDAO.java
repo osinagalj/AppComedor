@@ -1,5 +1,7 @@
 package DAO;
 
+import com.example.view.R;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,12 +12,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-import ModeloGian.Combo;
-import ModeloGian.Product;
-import ModeloGian.Food;
-import ModeloGian.ProductCategory;
+import Model.Combo;
+import Model.Food;
+import Model.Product;
+import Model.ProductCategory;
 
 public class ProductDAO {
     private static final String FILES_PATH = System.getProperty("user.home") + File.separator + "comedor" + File.separator;
@@ -26,15 +27,29 @@ public class ProductDAO {
     //barcode, item x
     private static final String ITEMS_PATH = FILES_PATH + "items.csv";
 
+
+        public static List<Product> avalaibleProducts(){
+            List<Product> products = new ArrayList<>();
+            products.add(new Food(0001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, ProductCategory.DAILY_MENU, 6, 88.0f, new ArrayList<>()));
+            //TODO habria que hacer un random para el menu del dia, o algo asi, cosa que sea distinta cada dia
+            //TODO Hay que hacer la logica para devolver un menu distinto dependeindo el tipo de usuario
+
+            products.add(new Food(0002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
+            products.add(new Food(0003,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, ProductCategory.BUFFET, 2, 85.0f, new ArrayList<>()));
+            products.add(new Food(0004,"Alfajor Pepitos","Con chips de chocolate", R.drawable.food_alfajor_pepitos, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+            products.add(new Food(0005,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+            //TODO carga todos los productos vago
+            return products;
+        }
+/*
     public static List<Product> avalaibleProducts() {
-        Map<Integer, Product> products = new HashMap<Integer, Product>();
+        Map<Integer, Product> products = new HashMap<>();
         try {
             BufferedReader productsReader = new BufferedReader(new FileReader(PRODUCTS_PATH));
             Map<Integer, List<String>> productsIngredients = getProductsIngredients();
             Map<Integer, List<Integer>> comboItems = getComboItems();
             String row;
-            String[] data = null;
-            List<String> foodIngredients;
+            String[] data;
             int barcode;
             while ((row = productsReader.readLine()) != null) {
                 data = row.split(",");
@@ -70,7 +85,7 @@ public class ProductDAO {
         System.exit(1);
         return null; //unreachable
     }
-
+*/
     private static ProductCategory getCategory(int cat) {
         switch (cat) {
             case 0:
@@ -89,7 +104,7 @@ public class ProductDAO {
         try {
             BufferedReader itemsReader = new BufferedReader(new FileReader(ITEMS_PATH));
             String row;
-            String[] data = null;
+            String[] data;
             int lastBarcode;
             List<Integer> items = new ArrayList<>();
             row = itemsReader.readLine();
@@ -132,7 +147,7 @@ public class ProductDAO {
         try {
             BufferedReader ingredientsReader = new BufferedReader(new FileReader(INGREDIENTS_PATH));
             String row;
-            String[] data = null;
+            String[] data;
             int lastBarcode;
             List<String> ingredients = new ArrayList<>();
             row = ingredientsReader.readLine();

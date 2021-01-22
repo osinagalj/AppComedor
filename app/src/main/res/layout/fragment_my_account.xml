@@ -7,12 +7,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="85dp">
+        android:layout_marginTop="55dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="20dp"
             android:stretchColumns="1"
             android:layout_marginStart="25dp"
             android:layout_marginEnd ="25dp">
@@ -43,10 +44,10 @@
                 android:textColor="#000" />
 
             <TextView
-                android:id="@+id/myAccount_label_lastName"
+                android:id="@+id/myAccount_label_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/user_name"
+                android:text="@string/lautaro"
                 android:textStyle="bold"
                 android:textColor="#000"
                 android:textSize="20sp"
@@ -63,7 +64,7 @@
                 android:layout_marginTop="20dp"/>
 
             <TextView
-                android:id="@+id/myAccount_label_"
+                android:id="@+id/myAccount_label_lastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/user_lastname"

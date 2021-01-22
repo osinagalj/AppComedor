@@ -16,16 +16,17 @@ import com.example.view.R;
 
 import java.util.List;
 
-import ModeloGian.Product;
-import model.Food;
+import Model.Product;
 
 public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryItemRecyclerAdapter.CategoryItemViewHolder> {
 
     private Context context;
     private List<Product> categoryItemList;
 
+
     public CategoryItemRecyclerAdapter(Context context, List<Product> categoryItemList) {
         this.context = context;
+
         this.categoryItemList = categoryItemList;
     }
 
@@ -50,6 +51,7 @@ public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryIt
 
                 i.putExtra("food_picked", categoryItemList.get(position)); //put the Movie object inside Intent which was clicked
                 context.startActivity(i); //start a
+
             }
         });
 
