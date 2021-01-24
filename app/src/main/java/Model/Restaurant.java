@@ -16,7 +16,7 @@ public class Restaurant {
     private String timeTable;
     private final List<CommonUser> registeredUsers = UserDAO.registeredUsers();
     private final List<Product> availableProducts = ProductDAO.avalaibleProducts();
-
+    private final List<Condition> conditions = UserDAO.usersConditions();
     private final List<Order> orders = new ArrayList<>();
     private final List<Order> pendingOrders = new ArrayList<>();
     public static final Restaurant INSTANCE = new Restaurant();
@@ -37,11 +37,13 @@ public class Restaurant {
     public static Restaurant getInstance() { return INSTANCE; }
 
     public boolean addUser(CommonUser user){
-        if (user != null && !isRegistered(user)){
+        if (user == null || isRegistered(user)){
             return false;
         }
         else {
-            return registeredUsers.add(user);
+            registeredUsers.add(user);
+            System.out.println(registeredUsers);
+            return true;
         }
     }
 
@@ -52,6 +54,14 @@ public class Restaurant {
     public boolean isRegistered(CommonUser user){
         for (CommonUser registeredUser : registeredUsers) {
             if (registeredUser.equals(user))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean isRegistered(int icn){
+        for (CommonUser registeredUser : registeredUsers) {
+            if (registeredUser.getIdentityCardNumber() == icn)
                 return true;
         }
         return false;
@@ -106,6 +116,12 @@ public class Restaurant {
         return Collections.unmodifiableList(consumableProducts);
     }
 
+    /***
+     * check if a user is registered in the system
+     * @param icn icn to validate
+     * @param password password to validad
+     * @return a CommonUser instance for which the icn was entered or null in case the user doesnt exist
+     */
     public CommonUser validateLoginData(int icn, String password){
         for (CommonUser user : registeredUsers){
             if (user.getIdentityCardNumber() == icn && user.getPassword().equals(password)){
@@ -134,4 +150,12 @@ public class Restaurant {
     }
 
 
+    public Condition getCondition(String conditionName) {
+        for (Condition condition : conditions){
+            if (condition.getName().equals(conditionName)){
+                return condition;
+            }
+        }
+        return null;
+    }
 }

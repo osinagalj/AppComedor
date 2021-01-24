@@ -2,11 +2,12 @@ package Model;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Food extends Product {
+public class Food extends Product implements Serializable {
 
     private int stock;
     private float price;

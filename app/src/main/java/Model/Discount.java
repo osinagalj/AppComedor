@@ -1,6 +1,8 @@
 package Model;
 
-public class Discount implements PriceCalculator{
+import java.io.Serializable;
+
+public class Discount implements PriceCalculator, Serializable {
     private float discountPercentage;
 
     public Discount(float discountPercentage) {

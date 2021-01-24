@@ -1,9 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.Set;
 
-public class Condition {
+public class Condition implements Serializable {
     private String name;
 
     private Set<String> cantConsume;

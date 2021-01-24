@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class DailyMenu extends Food{
+public class DailyMenu extends Food implements Serializable {
 
     public DailyMenu(int id, String name, String description, int imgId, ProductCategory category, int stock, float price) {
         super(id, name, description, imgId, category, stock, price);

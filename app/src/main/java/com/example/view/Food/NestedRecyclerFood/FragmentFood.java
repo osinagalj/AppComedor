@@ -95,7 +95,7 @@ public class FragmentFood extends Fragment {
         //allCategoryList.add(new AllCategory("Buffet", Restaurant.restaurant.getProducts()));
         //allCategoryList.add(new AllCategory("Kiosko", Restaurant.restaurant.getProductsKiosko()));
 
-        CommonUser user = new CommonUser("aaa", "aaa", "Juan", "Perez", LocalDate.of(2000, 1, 15), 11111111, new Condition("Celiaco", new HashSet<>()), new Discount(10));
+        CommonUser user = new CommonUser("aaa", "Juan", "Perez", LocalDate.of(2000, 1, 15), 11111111, new Condition("Celiaco", new HashSet<>()), new Discount(10));
 
         List<Product> consumables = Model.Restaurant.getInstance().getUserConsumableProducts(user);
         for (ProductCategory category : ProductCategory.values()){

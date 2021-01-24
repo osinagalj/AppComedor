@@ -34,8 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentTransaction fragmentTransaction;
     //variable del fragment detalle
 
-    CommonUser loggedUser ;
-    //TODO get the user using DAO, find user by id
+    CommonUser loggedUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        //TODO
-        Intent intent= getIntent();
-        Bundle b = intent.getExtras();
-        int id_user  =(Integer) b.get("ID_LOGGER_USER"); //con este id habria que usar el DAO y obtener el usuario by id
-        //TODO loggedUser = DAO.getUser(id_user)
+        loggedUser = (CommonUser) getIntent().getSerializableExtra("LOGGED_USER");
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
@@ -111,10 +106,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } //logout
         return false;
     }
-
-    public void setLoggedUser(CommonUser logged){
-        this.loggedUser = logged;
-    }
-
 
 }

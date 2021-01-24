@@ -1,9 +1,10 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Antiquity implements PriceCalculator{
+public class Antiquity implements PriceCalculator, Serializable {
     private final LocalDate startDate;
 
     public Antiquity(LocalDate startDate) {

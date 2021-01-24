@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class CommonUser implements Serializable {
-    private String username; // TODO para q queres esto?
     private String password;
     private String names;
     private String lastname;
@@ -15,20 +14,13 @@ public class CommonUser implements Serializable {
     private int identityCardNumber;
     private float balance;
     private Condition condition;
+    private Category category; //Esto probablemente lo borre
     private PriceCalculator priceCalculator;
     private List<Order> completedOrders;
     private int dailySpecialRemaining;
     //TODO falta una imagen del perfil
-    //TODO falta la categoria del usuario
 
-    //TODO
-    public String getCategory(){
-        return "Celiaco";
-    }
-
-
-    public CommonUser(String username, String password, String names, String lastname, LocalDate birthdate, int identityCardNumber, Condition condition, PriceCalculator priceCalculator) {
-        this.username = username;
+    public CommonUser(String password, String names, String lastname, LocalDate birthdate, int identityCardNumber, Condition condition, PriceCalculator priceCalculator) {
         this.password = password;
         this.names = names;
         this.lastname = lastname;
@@ -40,14 +32,6 @@ public class CommonUser implements Serializable {
         this.balance = 0;
         this.completedOrders = new ArrayList<>();
         this.dailySpecialRemaining = Restaurant.MAX_SPECIAL_ORDERS;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -98,8 +82,8 @@ public class CommonUser implements Serializable {
         this.balance = balance;
     }
 
-    public Condition getCondition() {
-        return condition;
+    public String getConditionName() {
+        return condition.getName();
     }
 
     public void setCondition(Condition condition) {
@@ -108,6 +92,18 @@ public class CommonUser implements Serializable {
 
     public PriceCalculator getPriceCalculator() {
         return priceCalculator;
+    }
+
+    public Condition getCondition() {
+        return condition;
+    }
+
+    public String getCategory() {
+        return category.toString();
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public void setPriceCalculator(PriceCalculator priceCalculator) {

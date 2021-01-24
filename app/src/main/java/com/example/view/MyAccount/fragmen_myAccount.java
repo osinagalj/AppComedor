@@ -12,7 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.view.Menu.MainActivity;
 import com.example.view.R;
+
+import java.util.Objects;
 
 import DAO.UserDAO;
 import Model.CommonUser;
@@ -27,13 +30,7 @@ public class fragmen_myAccount extends Fragment {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_my_account, container, false);
 
-
-        //Set Data
-
-        CommonUser user = UserDAO.getLoggedUser();
-        setUserData(view,user);
-
-
+        setUserData(view,(CommonUser)(requireActivity().getIntent().getSerializableExtra("LOGGED_USER")));
 
         Button button_change_password = view.findViewById(R.id.myAccount_button_change_password);
         button_change_password.setOnClickListener(new View.OnClickListener() {
@@ -56,8 +53,8 @@ public class fragmen_myAccount extends Fragment {
         name.setText(user.getNames());
         lastName.setText(user.getLastname());
         dni.setText(String.valueOf(user.getIdentityCardNumber()));
-        category.setText(user.getCategory());
-        condition.setText(user.getCondition().getName());
+        category.setText(user.getPriceCalculator().toString());
+        condition.setText(user.getConditionName());
         password.setText(user.getPassword());
     }
     public void change_password() {

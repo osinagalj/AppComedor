@@ -1,10 +1,11 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Combo extends Product{
+public class Combo extends Product implements Serializable {
     private List<Product> comboItems;
     private int discount;
 

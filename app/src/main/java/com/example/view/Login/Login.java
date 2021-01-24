@@ -33,28 +33,19 @@ public class Login extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //DNI y password que ingresa el usuario
-                String dni = user_dni.getText().toString();
-                String password = user_password.getText().toString();
-
-                //TODO no lo paso por parametro porque sino hay que ingresar el usuario y el password siempre y paja
-                //Habria que chekear que el dni sean solo numeros, y tenga tanta longitud, y alguna cosita para el password tmb, como que tenga una longitud minima
-
-                //TODO si ingreso la password y no el user se rompe pa
-
-                //CommonUser user = restaurant.validateLoginData(Integer.valueOf(dni),password);
-                CommonUser user = restaurant.validateLoginData(111,"password123."); //TODO obtener datos de la interfaz
-                //System.out.println(user.getBirthdate()); TODO esto no puede ir aca, sino cuando mete el dato mal se rompe porque no existe el usuario
-                if (user != null)
-                    sign_in(user.getIdentityCardNumber());
-                else{
-                    Toast.makeText(getBaseContext(), "Usuario y/o contraaseña incorrectos", Toast.LENGTH_LONG).show();
-                    //TODO capaz que podemos tirar el error si metio mal el usuario o la contraseña si te pinta
-                    user_password.setText("");
+                int dni = 0;
+                try {
+                    dni = Integer.parseInt(user_dni.getText().toString());
+                } catch (NumberFormatException numberFormatException){
+                    badLoginData();
                 }
-
-
+                String password = user_password.getText().toString();
+                CommonUser user = restaurant.validateLoginData(dni,password);
+                if (user != null)
+                    sign_in(user);
+                else{
+                    badLoginData();
+                }
             }
         });
 
@@ -68,11 +59,16 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void sign_in(int id_logged_user) {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("ID_LOGGER_USER",id_logged_user); //TODO en el main activity lo obtenes con el intent.getExtra("LOGGER_USER")
-        startActivity(intent);
+    public void badLoginData(){
+        Toast.makeText(getBaseContext(), "Usuario y/o contraseña incorrectos", Toast.LENGTH_LONG).show();
+        user_dni.setText("");
+        user_password.setText("");
+    }
 
+    public void sign_in(CommonUser logged_user) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("LOGGED_USER",logged_user);
+        startActivity(intent);
     }
 
     public void sign_up() {

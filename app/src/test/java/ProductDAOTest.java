@@ -5,10 +5,7 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ModeloGian.Combo;
-import ModeloGian.Food;
-import ModeloGian.Product;
-import ModeloGian.ProductCategory;
+import Model.*;
 
 import static DAO.ProductDAO.avalaibleProducts;
 import static DAO.ProductDAO.saveAvailableProducts;
