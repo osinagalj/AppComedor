@@ -2,6 +2,7 @@ package Model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Product implements Serializable {
     private int id;
@@ -69,6 +70,19 @@ public abstract class Product implements Serializable {
                 ", imgId=" + imgId +
                 ", category=" + category +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public abstract List<String> getIngredients();

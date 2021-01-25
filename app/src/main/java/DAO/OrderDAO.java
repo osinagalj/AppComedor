@@ -24,12 +24,6 @@ public class OrderDAO {
         Confirmedorders.add(o);
     }
 
-    public static Order getOrder(int id){
-        Order o = new Model.Order(1, Restaurant.getInstance().miCarrito);
-        //TODO obtener una orden por su id para mostrar en el detalle de la orden
-        return o;
-    }
-
     public static List<Order> getPendingOrders(CommonUser user){
         List<Order> products = new ArrayList<>();
         //TODO para mostrar en ordenes pendientes, creo que es mejor sacarls de la base de datos y no del usuario

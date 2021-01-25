@@ -22,15 +22,7 @@ public class Restaurant {
     public static final Restaurant INSTANCE = new Restaurant();
 
     //para testeo
-    public ArrayList<Product> miCarrito = new ArrayList<>(); //todo esto no va aca claramente
     public ArrayList<Order> ordenesPendientes = new ArrayList<>();
-
-    public ArrayList<Order> getOrdenesPendientes(){
-        return ordenesPendientes;
-    }
-    public void addOrderPend(Order o){
-        this.ordenesPendientes.add(o);
-    }
 
     private Restaurant(){}
 

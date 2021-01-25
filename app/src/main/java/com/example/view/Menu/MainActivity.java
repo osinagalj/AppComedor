@@ -13,6 +13,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.view.DataHolder;
 import com.example.view.Fila.Fragment_fila;
 import com.example.view.Food.NestedRecyclerFood.FragmentFood;
 import com.example.view.MyAccount.fragmen_myAccount;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        loggedUser = (CommonUser) getIntent().getSerializableExtra("LOGGED_USER");
+        loggedUser = DataHolder.getLoggedUser();
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);

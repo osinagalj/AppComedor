@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.view.DataHolder;
 import com.example.view.Food.Carrito.Carrito;
 import com.example.view.R;
 
@@ -41,9 +42,6 @@ public class FragmentFood extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //Mi carrito
-        //miOrden.add(new Food(0002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
 
         View view = inflater.inflate(R.layout.fragment_food, container, false);
         bottom = view.findViewById(R.id.fragment_food_layout_make_order);
@@ -74,7 +72,7 @@ public class FragmentFood extends Fragment {
     }
 
     private void showCarrito() {
-        if (Restaurant.getInstance().miCarrito.size() == 0) {
+        if (DataHolder.getLoggedUser().cartIsEmpty()) {
             bottom.setVisibility(View.GONE);
         } else {
             bottom.setVisibility(View.VISIBLE);
@@ -91,13 +89,8 @@ public class FragmentFood extends Fragment {
     public void loadData() {
 
         List<AllCategory> allCategoryList = new ArrayList<>();
-        //allCategoryList.add(new AllCategory("Menu del Dia", Restaurant.restaurant.getDailyMenu()));
-        //allCategoryList.add(new AllCategory("Buffet", Restaurant.restaurant.getProducts()));
-        //allCategoryList.add(new AllCategory("Kiosko", Restaurant.restaurant.getProductsKiosko()));
 
-        CommonUser user = new CommonUser("aaa", "Juan", "Perez", LocalDate.of(2000, 1, 15), 11111111, new Condition("Celiaco", new HashSet<>()), new Discount(10));
-
-        List<Product> consumables = Model.Restaurant.getInstance().getUserConsumableProducts(user);
+        List<Product> consumables = Model.Restaurant.getInstance().getUserConsumableProducts(DataHolder.getLoggedUser());
         for (ProductCategory category : ProductCategory.values()){
             List<Product> catList = new ArrayList<>();
             for (Product product : consumables)

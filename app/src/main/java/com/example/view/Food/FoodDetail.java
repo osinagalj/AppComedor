@@ -2,6 +2,7 @@ package com.example.view.Food;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -13,10 +14,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.view.DataHolder;
 import com.example.view.R;
 
 import java.util.ArrayList;
 
+import Model.CommonUser;
 import Model.Product;
 import Model.Restaurant;
 
@@ -24,6 +27,7 @@ public class FoodDetail extends AppCompatActivity {
     ImageView img;
     EditText amount;
     TextView product_name, product_price, product_description;
+    CommonUser loggedUser = DataHolder.getLoggedUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,45 +43,40 @@ public class FoodDetail extends AppCompatActivity {
         product_price = findViewById(R.id.food_details_product_price);
         amount = findViewById(R.id.food_details_editText_amount);
         product_description = findViewById(R.id.food_details_product_description);
-        if(b!=null)
-        {
-            img.setImageResource(product.getImgId());
-            product_name.setText(product.getName());
-            product_price.setText(String.valueOf(product.getPrice()));
-            product_description.setText(product.getDescription());
+        img.setImageResource(product.getImgId());
+        product_name.setText(product.getName());
+        product_price.setText(String.valueOf(product.getPrice()));
+        product_description.setText(product.getDescription());
 
-            Button fab = findViewById(R.id.food_details_button_add_order);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int amount2 = Integer.parseInt(amount.getText().toString());
-                    //TODO revisar que la cantidad sea mayor a 0 y que el usuario tenga plata enla cuena para pedir, y si tiene hay que descontarsela
-
+        Button fab = findViewById(R.id.food_details_button_add_order);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    int addedAmount = Integer.parseInt(amount.getText().toString());
+                    DataHolder.getLoggedUser().addProductToCart(product,addedAmount);
+                    DataHolder.getLoggedUser().confirmOrder();
                     Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
-
-                    int nro = 12345;
-
-                    Restaurant.getInstance().ordenesPendientes.add(new Model.Order(nro,Restaurant.getInstance().miCarrito));
-                    Restaurant.getInstance().miCarrito = new ArrayList<>();// Vaciamos el carrito
-
-
                     openFinishOrder();
+                } catch (NumberFormatException numberFormatException){
+                    Toast.makeText(getBaseContext(), "No ingreso un numero valido", Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+        });
 
-            Button btn_add_products = findViewById(R.id.food_details_button_add_products);
-            btn_add_products.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //TODO AGREGAR EL PRODUCTO A LA LISTA DE PRODUCTOS EN LA ORDEN
-
-                    Restaurant.getInstance().miCarrito.add(product);
+        Button btn_add_products = findViewById(R.id.food_details_button_add_products);
+        btn_add_products.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    int addedAmount = Integer.parseInt(amount.getText().toString());
+                    DataHolder.getLoggedUser().addProductToCart(product,addedAmount);
                     finish();
-
+                } catch (NumberFormatException numberFormatException){
+                    Toast.makeText(getBaseContext(), "No ingreso un numero valido", Toast.LENGTH_SHORT).show();
                 }
-            });
-        }
-
+            }
+        });
 
 
         ImageButton fab2 = findViewById(R.id.food_details_button_close);
@@ -94,15 +93,14 @@ public class FoodDetail extends AppCompatActivity {
         less.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Integer number = Integer.parseInt(amount.getText().toString());
+                int number = Integer.parseInt(amount.getText().toString());
                 if(number > 1){
                     number--;
                 }else{
                     Toast.makeText(getBaseContext(), "Cantidad minima", Toast.LENGTH_SHORT).show();
                 }
 
-
-                amount.setText(number.toString());
+                amount.setText(Integer.toString(number));
             }
         });
 

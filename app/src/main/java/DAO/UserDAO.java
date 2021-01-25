@@ -2,6 +2,7 @@ package DAO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,15 +14,11 @@ import Model.Discount;
 
 public class UserDAO {
 
-    public static CommonUser getLoggedUser(){
-        CommonUser user = new CommonUser("password123.","Lautaro", "Osinaga", LocalDate.of(1999,5,20), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
-        //TODO devolver el usuario
-        return user;
-    }
-
     public static List<CommonUser> registeredUsers() {
         List<CommonUser> users = new ArrayList<>();
-        users.add(new CommonUser("password123.","Lautaro", "Osinaga", LocalDate.of(1999,5,20), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10)));
+        CommonUser user = new CommonUser("111","Lautaro", "Osinaga", LocalDate.of(1999,5,20), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
+        user.setBalance(1000);
+        users.add(user);
         return users;
     }
 

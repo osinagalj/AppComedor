@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.view.DataHolder;
 import com.example.view.Menu.MainActivity;
 import com.example.view.R;
 
@@ -67,7 +68,7 @@ public class Login extends AppCompatActivity {
 
     public void sign_in(CommonUser logged_user) {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("LOGGED_USER",logged_user);
+        DataHolder.setLoggedUser(logged_user);
         startActivity(intent);
     }
 

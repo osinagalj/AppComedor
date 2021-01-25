@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,10 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.view.DataHolder;
 import com.example.view.Food.FinishOrder;
 import com.example.view.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Model.Product;
 import Model.Restaurant;
@@ -45,7 +48,7 @@ public class Carrito extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //TODO eliminar los productos de la orden actual
-                    if(Restaurant.getInstance().miCarrito.size()>0){
+                    if(!DataHolder.getLoggedUser().cartIsEmpty()){
                         showSimpleDialog(v);
                     }else{
                         finish();
@@ -59,12 +62,7 @@ public class Carrito extends AppCompatActivity {
                 public void onClick(View v) {
                     //TODO eliminar los productos de la orden actual
 
-
-                    int nro = 12345;
-
-                    Restaurant.getInstance().ordenesPendientes.add(new Model.Order(nro,Restaurant.getInstance().miCarrito));
-                    Restaurant.getInstance().miCarrito = new ArrayList<>();
-
+                    DataHolder.getLoggedUser().confirmOrder();
 
                     openFinishOrder();
 
@@ -91,21 +89,15 @@ public class Carrito extends AppCompatActivity {
         this.finish();
     }
 
-
-
     public void cargarLista(){
-        ArrayList<Product> ar = Restaurant.getInstance().miCarrito;
-        for(Product o : ar){
-            listaFoods.add(o);
-        }
+        listaFoods.clear(); //TODO esto lo puse aca porque
+        listaFoods.addAll(DataHolder.getLoggedUser().getCartProducts());
     }
-
 
     private void mostrarData() {
         recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         adapterPend = new AdapterCarrito(this, listaFoods);
         recyclerViewPersonas.setAdapter(adapterPend);
-
     }
 
     public void showSimpleDialog(View view) {
@@ -117,7 +109,7 @@ public class Carrito extends AppCompatActivity {
         builder.setPositiveButton("OK!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                Restaurant.getInstance().miCarrito = new ArrayList<>();
+                DataHolder.getLoggedUser().clearCart();
                 finish();
             }
         })

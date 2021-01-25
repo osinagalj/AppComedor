@@ -11,26 +11,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.view.DataHolder;
 import com.example.view.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import Model.Product;
 
 public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.Carrito.AdapterCarrito.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
-    ArrayList<Product> model;
+    List<Product> model = DataHolder.getLoggedUser().getCartProducts();
     Context context;
     private int count = 0;
     ImageButton button;
     private View.OnClickListener listener;
 
 
-    public AdapterCarrito(Context context, ArrayList<Product> model) {
+    public AdapterCarrito(Context context, ArrayList<Product> model) {//TODO borrar el segundo parametro
         this.inflater = LayoutInflater.from(context);
-        this.model = model;
-
         this.context = context;
     }
 
@@ -54,7 +54,7 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
         String product_name = model.get(position).getName();
         int product_nro = model.get(position).getId();
         String product_price = String.valueOf(model.get(position).getPrice());
-        int produc_amount = model.get(position).getStock(); //TODO ACA HAY QUE PASAR LA CANTIDAD DE CADA PRODCUTO TMB
+        int produc_amount = DataHolder.getLoggedUser().getCartProductAmount(model.get(position));
 
         //TODO ACA SE VINCULA LA VISTA CON EL MODELO
         int product_img = model.get(position).getImgId();
