@@ -18,6 +18,7 @@ public class UserDAO {
         List<CommonUser> users = new ArrayList<>();
         CommonUser user = new CommonUser("111","Lautaro", "Osinaga", LocalDate.of(1999,5,20), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
         user.setBalance(1000);
+        user.addConfirmedOrder(OrderDAO.getCompletedOrders(user).get(0));
         users.add(user);
         return users;
     }

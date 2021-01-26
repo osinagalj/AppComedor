@@ -19,6 +19,28 @@ import Model.Product;
 import Model.ProductCategory;
 
 public class ProductDAO {
+
+    public static List<Product> avalaibleProducts;
+
+    public static List<Product> avalaibleProducts(){
+        List<Product> products = new ArrayList<>();
+        products.add(new Food(0001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, ProductCategory.DAILY_MENU, 6, 88.0f, new ArrayList<>()));
+        //TODO habria que hacer un random para el menu del dia, o algo asi, cosa que sea distinta cada dia
+        //TODO Hay que hacer la logica para devolver un menu distinto dependeindo el tipo de usuario
+
+        products.add(new Food(0002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
+        products.add(new Food(0003,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, ProductCategory.BUFFET, 2, 85.0f, new ArrayList<>()));
+        products.add(new Food(0004,"Alfajor Pepitos","Con chips de chocolate", R.drawable.food_alfajor_pepitos, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+        products.add(new Food(0005,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+        //TODO carga todos los productos vago
+        avalaibleProducts = products; //Esto es para no perder las instancias originales
+        return products;
+    }
+
+    public static int maxDailyMenus() {
+        return 2;
+    }
+/*
     private static final String FILES_PATH = System.getProperty("user.home") + File.separator + "comedor" + File.separator;
     //+/-barcode, name, description, imgId, categoryId, +stock/-discount, +price
     private static final String PRODUCTS_PATH = FILES_PATH + "products.csv";
@@ -27,21 +49,6 @@ public class ProductDAO {
     //barcode, item x
     private static final String ITEMS_PATH = FILES_PATH + "items.csv";
 
-
-        public static List<Product> avalaibleProducts(){
-            List<Product> products = new ArrayList<>();
-            products.add(new Food(0001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, ProductCategory.DAILY_MENU, 6, 88.0f, new ArrayList<>()));
-            //TODO habria que hacer un random para el menu del dia, o algo asi, cosa que sea distinta cada dia
-            //TODO Hay que hacer la logica para devolver un menu distinto dependeindo el tipo de usuario
-
-            products.add(new Food(0002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
-            products.add(new Food(0003,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, ProductCategory.BUFFET, 2, 85.0f, new ArrayList<>()));
-            products.add(new Food(0004,"Alfajor Pepitos","Con chips de chocolate", R.drawable.food_alfajor_pepitos, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
-            products.add(new Food(0005,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
-            //TODO carga todos los productos vago
-            return products;
-        }
-/*
     public static List<Product> avalaibleProducts() {
         Map<Integer, Product> products = new HashMap<>();
         try {
@@ -85,7 +92,7 @@ public class ProductDAO {
         System.exit(1);
         return null; //unreachable
     }
-*/
+
     private static ProductCategory getCategory(int cat) {
         switch (cat) {
             case 0:
@@ -271,7 +278,6 @@ public class ProductDAO {
         }
     }
 
-    public static int maxDailyMenus() {
-        return 2;
-    }
+
+*/
 }

@@ -73,8 +73,6 @@ public class Carrito extends AppCompatActivity {
             button_add_products.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO no hay eliminar los productos de la orden actual
-
                     finish();
                 }
             });

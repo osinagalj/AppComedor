@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.view.R;
 
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.temporal.TemporalField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,9 +68,10 @@ public class ActivityPdf extends AppCompatActivity {
 
         order_number.setText("#"+order.getId());
         total_price.setText(String.valueOf(order.getPrice()));
-        time_hour.setText(order.getTimeHour());
-        time_day.setText(order.getTime());
-        //user.setText(order.getPlacedBy().getNames()); TODO
+        ZonedDateTime zonedDateTime = order.getPlacedInstant().atZone(ZoneOffset.UTC);
+        time_hour.setText(zonedDateTime.getHour()+":"+zonedDateTime.getMinute()+":"+zonedDateTime.getSecond());
+        time_day.setText(zonedDateTime.getDayOfMonth()+"/"+zonedDateTime.getMonthValue()+"/"+zonedDateTime.getYear());
+        user.setText(order.getPlacedBy().getNames());
 
         List<Product> products = order.getItems();
         for(Product product : products){

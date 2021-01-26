@@ -21,9 +21,6 @@ public class Restaurant {
     private final List<Order> pendingOrders = new ArrayList<>();
     public static final Restaurant INSTANCE = new Restaurant();
 
-    //para testeo
-    public ArrayList<Order> ordenesPendientes = new ArrayList<>();
-
     private Restaurant(){}
 
     public static Restaurant getInstance() { return INSTANCE; }
@@ -122,7 +119,7 @@ public class Restaurant {
         }
         return null;
     }
-/*
+
     public void addStock(int barcode,int stock){
         for(Product product : availableProducts){
             if(product.getId() == barcode){
@@ -130,15 +127,21 @@ public class Restaurant {
             }
         }
     }
-*/
-    public void getPendingOrders(CommonUser u){
+
+    public List<Order> getPendingOrders(CommonUser u){
+        List<Order> userPendingOrders = new ArrayList<>();
         if (registeredUsers.contains(u)) {
-            //users.add(u);
+            for (Order pendingOrder : pendingOrders){
+                if (pendingOrder.getPlacedBy().equals(u)){
+                    userPendingOrders.add(pendingOrder);
+                }
+            }
         }
+        return userPendingOrders;
     }
 
     public void addOrder(Order order){
-
+        pendingOrders.add(order);
     }
 
 
@@ -150,4 +153,6 @@ public class Restaurant {
         }
         return null;
     }
+
+
 }

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.view.DataHolder;
 import com.example.view.MyOrders.Fragment.OrderDetails.ActivityPdf;
 import com.example.view.R;
 
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 
 import DAO.OrderDAO;
 import Model.Order;
+import Model.Restaurant;
 
 
 public class FragmentPendientes extends Fragment {
@@ -42,8 +44,7 @@ public class FragmentPendientes extends Fragment {
     }
 
     public void cargarLista(){
-       // CommonUser u = new CommonUser("aaa","aaa","Juan", "Perez", LocalDate.of(2000,1,15), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
-        listaFoods.addAll(OrderDAO.getPendingOrders(null));
+        listaFoods.addAll(Restaurant.getInstance().getPendingOrders(DataHolder.getLoggedUser()));
     }
 
 

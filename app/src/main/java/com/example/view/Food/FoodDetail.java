@@ -88,7 +88,6 @@ public class FoodDetail extends AppCompatActivity {
         });
 
 
-    //TODO HAY QUE HACER QUE CAMBIE EL PRECIO A MEDIDA QUE SE AUMENTA O BAJA LA CANTIDAD
         ImageButton less = findViewById(R.id.food_details_button_less);
         less.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,8 +98,8 @@ public class FoodDetail extends AppCompatActivity {
                 }else{
                     Toast.makeText(getBaseContext(), "Cantidad minima", Toast.LENGTH_SHORT).show();
                 }
-
-                amount.setText(Integer.toString(number));
+                amount.setText(String.valueOf(number));
+                product_price.setText(String.valueOf(product.getPrice()*number));
             }
         });
 
@@ -110,8 +109,9 @@ public class FoodDetail extends AppCompatActivity {
             public void onClick(View view) {
 
                 String name = amount.getText().toString();
-                Integer cant = Integer.parseInt(name) + 1;
-                amount.setText(cant.toString());
+                int cant = Integer.parseInt(name) + 1;
+                amount.setText(String.valueOf(cant));
+                product_price.setText(String.valueOf(product.getPrice()*cant));
             }
         });
 

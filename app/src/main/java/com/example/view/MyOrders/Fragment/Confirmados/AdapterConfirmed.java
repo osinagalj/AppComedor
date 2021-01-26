@@ -51,8 +51,8 @@ public class AdapterConfirmed extends RecyclerView.Adapter<com.example.view.MyOr
     @Override
     public void onBindViewHolder(@NonNull com.example.view.MyOrders.Fragment.Confirmados.AdapterConfirmed.ViewHolder holder, int position) {
         String product_id = String.valueOf(model.get(position).getId());
-        String product_description = model.get(position).getDescripcion();
-        String product_time = model.get(position).getTime();
+        String product_description = model.get(position).getDescription();
+        String product_time = model.get(position).getPlacedInstant().toString();
         String product_price = String.valueOf(model.get(position).getPrice());
 
         holder.product_id.setText("#"+product_id);

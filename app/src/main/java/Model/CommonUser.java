@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import DAO.OrderDAO;
+
 public class CommonUser implements Serializable {
     private String password;
     private String names;
@@ -42,18 +44,22 @@ public class CommonUser implements Serializable {
     /***
      * recalculates the order total and confirms the order if
      * sufficient balance and stock is available
-     * If it cannot be confirmed, the cart is emptied.
      * @return true or false whether the order could be confirmed or not
      */
     public boolean confirmOrder(){
         float updatedCartPrice = 0;
         for (Product product: cart.keySet()){
             updatedCartPrice+=product.getPrice();
+            if (product.getStock() < cart.get(product)){
+                return false;
+            }
         }
         if (updatedCartPrice > getBalance()){
-            cart.clear();
             return false;
         }
+        Order newOrder = new Order(this,cart,new HashMap<>());
+        Restaurant.getInstance().addOrder(newOrder);
+        cart = new HashMap<>();
         return true;
     }
 
@@ -133,14 +139,6 @@ public class CommonUser implements Serializable {
         this.priceCalculator = priceCalculator;
     }
 
-    public List<Order> getCompletedOrders() {
-        return completedOrders;
-    }
-
-    public void setCompletedOrders(List<Order> completedOrders) {
-        this.completedOrders = completedOrders;
-    }
-
     public int getDailySpecialRemaining() {
         return dailySpecialRemaining;
     }
@@ -189,7 +187,7 @@ public class CommonUser implements Serializable {
     }
 
     public void clearCart() {
-        cart.clear();
+        cart = new HashMap<>();
     }
 
     public float getCartAmount(){
@@ -200,6 +198,14 @@ public class CommonUser implements Serializable {
         if (product != null)
             return cart.get(product);
         return 0;
+    }
+
+    public List<Order> getConfirmedOrders(){
+        return Collections.unmodifiableList(completedOrders);
+    }
+
+    public boolean addConfirmedOrder(Order order){
+        return completedOrders.add(order);
     }
 }
 

@@ -2,8 +2,11 @@ package Model;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Order implements Serializable {
     private static int ordersPlaced = 0;
@@ -12,86 +15,91 @@ public class Order implements Serializable {
     private Instant placed;
     private CommonUser placedBy;
 
-    private List<Product> items; //TODO POSIBLEMENTE ESTO SEA UN HASH, SINO ES MAS DIFICIL SACAR LAS CANTIDADES DE CADA PRODUCTO
-    private List<Product> toHome;
+    private final Map<Product,Integer> items;
+    private final Map<Product,Integer> toHome;
 
-    private HashMap<Product,Integer> productos;
-
-    //TODO get price, get time formato hora:min (ej: 16:32 hs), get Productos en strings para la descripcion
-
-
-    public Order(int id, List<Product> items){
-        this.id = id;
-        this.items=items;
-
+    public Order(CommonUser placedBy, Map<Product,Integer> items, Map<Product,Integer> toHome){
+        this.id = 5;//Restaurant.getInstance().nextOrderNum();
+        this.items= items;
+        this.toHome = toHome;
+        this.placed = Instant.now();
+        this.placedBy = placedBy;
     }
+
+    public Order(CommonUser placedBy){
+        this.id = 5;//Restaurant.getInstance().nextOrderNum();
+        this.items= new HashMap<>();
+        this.toHome = new HashMap<>();
+        this.placed = Instant.now();
+        this.placedBy = placedBy;
+    }
+
     public String getAmount(int produtID){ //TODO lo necesito para mostrar en el ticket
         return "x3";
     }
-    //TODO creo hay que sobreescribir el operador de product para que quede ordenado segun se fue ingresando
-    public void addFood(Product p, int amount){
-        productos.put(p,amount);
+
+    public boolean addProduct(Product p, int amount){
+        if (p != null) {
+            items.put(p, amount);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    public String getDescripcion(){ //TODO
-        return "2x Coca-Cola + sanguchito";
-    }
-    public String getTime(){//TODO
-        return "30/01/2001";
+    public boolean addProductToHome(Product p, int amount){
+        if (p != null) {
+            toHome.put(p, amount);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    public String getTimeHour(){//TODO
-        return "13:03 hs";
+    public String getDescription(){
+        StringBuilder description = new StringBuilder();
+        for (Product product : items.keySet()){
+            description.append(product.getDescription());
+            description.append("\n");
+        }
+        for (Product product : toHome.keySet()){
+            description.append(product.getDescription());
+            description.append("\n");
+        }
+        return description.toString();
     }
 
-    public float getPrice() {//TODO
-        return 280.f;
-    }
-    public Order(CommonUser placedBy, List<Product> items, List<Product> toHome) {
-        this.placedBy = placedBy;
-        this.items = items;
-        this.toHome = toHome;
-        this.id = ++ordersPlaced;
-        this.placed = Instant.now();
+    public float getPrice() {
+        float totalPrice = 0;
+        for (Product product : items.keySet()){
+            totalPrice+=product.getPrice()*items.get(product);
+        }
+        for (Product product : toHome.keySet()){
+            totalPrice+=product.getPrice()*toHome.get(product);
+        }
+        return totalPrice;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Instant getPlaced() {
+    public Instant getPlacedInstant() {
         return placed;
-    }
-
-    public void setPlaced(Instant placed) {
-        this.placed = placed;
     }
 
     public CommonUser getPlacedBy() {
         return placedBy;
     }
 
-    public void setPlacedBy(CommonUser placedBy) {
-        this.placedBy = placedBy;
-    }
-
     public List<Product> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Product> items) {
-        this.items = items;
+        return Collections.unmodifiableList(new ArrayList<>(items.keySet()));
     }
 
     public List<Product> getToHome() {
-        return toHome;
+        return Collections.unmodifiableList(new ArrayList<>(toHome.keySet()));
     }
 
-    public void setToHome(List<Product> toHome) {
-        this.toHome = toHome;
-    }
 }

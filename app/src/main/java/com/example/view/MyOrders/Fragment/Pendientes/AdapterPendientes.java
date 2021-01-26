@@ -53,8 +53,8 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
     @Override
     public void onBindViewHolder(@NonNull com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder holder, final int position) {
         String product_id = String.valueOf(model.get(position).getId());
-        String product_description = model.get(position).getDescripcion();
-        String product_time = model.get(position).getTime();
+        String product_description = model.get(position).getDescription();
+        String product_time = model.get(position).getPlacedInstant().toString();
         String product_price = String.valueOf(model.get(position).getPrice());
 
         holder.product_id.setText("#"+product_id);
