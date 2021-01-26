@@ -19,7 +19,7 @@ public class Order implements Serializable {
     private final Map<Product,Integer> toHome;
 
     public Order(CommonUser placedBy, Map<Product,Integer> items, Map<Product,Integer> toHome){
-        this.id = 5;//Restaurant.getInstance().nextOrderNum();
+        this.id = Restaurant.getInstance().nextOrderNum();
         this.items= items;
         this.toHome = toHome;
         this.placed = Instant.now();
@@ -27,15 +27,30 @@ public class Order implements Serializable {
     }
 
     public Order(CommonUser placedBy){
-        this.id = 5;//Restaurant.getInstance().nextOrderNum();
+        this.id = Restaurant.getInstance().nextOrderNum();
         this.items= new HashMap<>();
         this.toHome = new HashMap<>();
         this.placed = Instant.now();
         this.placedBy = placedBy;
     }
 
-    public String getAmount(int produtID){ //TODO lo necesito para mostrar en el ticket
-        return "x3";
+    public Order(int id,CommonUser placedBy, Map<Product,Integer> items, Map<Product,Integer> toHome){
+        this.id = id;
+        this.items= items;
+        this.toHome = toHome;
+        this.placed = Instant.now();
+        this.placedBy = placedBy;
+    }
+
+    public int getAmount(Product product){
+        if (items.containsKey(product)){
+            return items.get(product);
+        }
+        return -1;
+    }
+
+    public int getAmountToHome(Product product){
+        return 1;
     }
 
     public boolean addProduct(Product p, int amount){
@@ -61,10 +76,14 @@ public class Order implements Serializable {
     public String getDescription(){
         StringBuilder description = new StringBuilder();
         for (Product product : items.keySet()){
+            description.append(product.getName());
+            description.append(" ");
             description.append(product.getDescription());
             description.append("\n");
         }
         for (Product product : toHome.keySet()){
+            description.append(product.getName());
+            description.append(" ");
             description.append(product.getDescription());
             description.append("\n");
         }

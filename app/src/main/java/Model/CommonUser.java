@@ -57,6 +57,7 @@ public class CommonUser implements Serializable {
         if (updatedCartPrice > getBalance()){
             return false;
         }
+        balance-=updatedCartPrice;
         Order newOrder = new Order(this,cart,new HashMap<>());
         Restaurant.getInstance().addOrder(newOrder);
         cart = new HashMap<>();

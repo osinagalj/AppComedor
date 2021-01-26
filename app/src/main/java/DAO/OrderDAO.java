@@ -1,26 +1,22 @@
 package DAO;
 
-import com.example.view.R;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import Model.CommonUser;
-import Model.Food;
 import Model.Order;
 import Model.Product;
-import Model.ProductCategory;
-import Model.Restaurant;
 
 public class OrderDAO {
-
-    static ArrayList<Order> Confirmedorders = new ArrayList<>();
-
-    public static void addConfirmedOrder(Order o) {
-        Confirmedorders.add(o);
-    }
+    /**
+     * Al estar hardcodeadas las ordenes, este numero tiene que ser consistente
+     * con la cantidad de ordenes que se les cargan a los usuarios en getCompletedOrders()
+     * Al momento de hacer esto, hay 1 solo usuario al que se la carga solo una orden en el
+     * historial
+     */
+    public static final int LAST_ORDER_NUMBER = 1;
 
     public static List<Order> nextOrders() {
         //TODO obtener las proximas 20 ordenes
@@ -34,7 +30,7 @@ public class OrderDAO {
         Product randomProduct = ProductDAO.avalaibleProducts().get(0);
         Map<Product,Integer> orderItems = new HashMap<>();
         orderItems.put(randomProduct,1);
-        Order completedOrder = new Order(user,orderItems,new HashMap<>());
+        Order completedOrder = new Order(1,user,orderItems,new HashMap<>());
         List<Order> completedOrders = new ArrayList<>();
         completedOrders.add(completedOrder);
         return completedOrders;

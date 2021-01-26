@@ -69,13 +69,13 @@ public class ActivityPdf extends AppCompatActivity {
         order_number.setText("#"+order.getId());
         total_price.setText(String.valueOf(order.getPrice()));
         ZonedDateTime zonedDateTime = order.getPlacedInstant().atZone(ZoneOffset.UTC);
-        time_hour.setText(zonedDateTime.getHour()+":"+zonedDateTime.getMinute()+":"+zonedDateTime.getSecond());
-        time_day.setText(zonedDateTime.getDayOfMonth()+"/"+zonedDateTime.getMonthValue()+"/"+zonedDateTime.getYear());
+        time_hour.setText(zonedDateTime.toLocalTime().toString());
+        time_day.setText(zonedDateTime.toLocalDate().toString());
         user.setText(order.getPlacedBy().getNames());
 
         List<Product> products = order.getItems();
         for(Product product : products){
-            listaFoods.add(new OrderDetail(order.getAmount(0),product.getName(), String.valueOf(product.getPrice())));
+            listaFoods.add(new OrderDetail(String.valueOf(order.getAmount(product)),product.getName(), String.valueOf(product.getPrice())));
         }
     }
 

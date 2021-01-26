@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import DAO.OrderDAO;
 import DAO.ProductDAO;
 import DAO.UserDAO;
 
@@ -14,6 +15,7 @@ public class Restaurant {
     private String name;
     private String university;
     private String timeTable;
+    private int nextOrderNumber = OrderDAO.LAST_ORDER_NUMBER+1;
     private final List<CommonUser> registeredUsers = UserDAO.registeredUsers();
     private final List<Product> availableProducts = ProductDAO.avalaibleProducts();
     private final List<Condition> conditions = UserDAO.usersConditions();
@@ -155,4 +157,8 @@ public class Restaurant {
     }
 
 
+    public int nextOrderNum() {
+        nextOrderNumber++;
+        return nextOrderNumber-1;
+    }
 }
