@@ -2,10 +2,10 @@ package com.example.view.Food;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,11 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.view.DataHolder;
 import com.example.view.R;
 
-import java.util.ArrayList;
-
 import Model.CommonUser;
 import Model.Product;
-import Model.Restaurant;
 
 public class FoodDetail extends AppCompatActivity {
     ImageView img;
@@ -47,6 +44,10 @@ public class FoodDetail extends AppCompatActivity {
         product_name.setText(product.getName());
         product_price.setText(String.valueOf(product.getPrice()));
         product_description.setText(product.getDescription());
+
+        //TODO Con esto te dice si el food es para llevar o no
+        boolean isChecked = ((CheckBox) findViewById(R.id.cb_food_details_tohome)).isChecked();
+
 
         Button fab = findViewById(R.id.food_details_button_add_order);
         fab.setOnClickListener(new View.OnClickListener() {

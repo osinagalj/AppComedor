@@ -61,6 +61,7 @@ public class CommonUser implements Serializable {
         Order newOrder = new Order(this,cart,new HashMap<>());
         Restaurant.getInstance().addOrder(newOrder);
         cart = new HashMap<>();
+        cartAmount = 0;
         return true;
     }
 
@@ -207,6 +208,10 @@ public class CommonUser implements Serializable {
 
     public boolean addConfirmedOrder(Order order){
         return completedOrders.add(order);
+    }
+
+    public void removeCartProduct(Product product) {
+        cart.remove(product);
     }
 }
 

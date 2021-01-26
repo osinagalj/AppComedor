@@ -17,6 +17,7 @@ import com.example.view.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import Model.CommonUser;
 import Model.Product;
 
 public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.Carrito.AdapterCarrito.ViewHolder> implements View.OnClickListener {
@@ -70,20 +71,13 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
         holder.product_img.setImageResource(product_img);
 
 
-        //To remove orders
-        button.setOnClickListener(new View.OnClickListener()
-        {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-
-                //Repositorio.repo.removePendOrder(model.get(position).getId()); //TODO ACA HAY QUE PASARLE EL NRO DE ORDEN PARA ELIMINAR, NO LA POS
-                //TODO ELIMINAR PRODUCTO DE LA ORDEN
-                model.remove(position);
+            public void onClick(View v) {
+                DataHolder.getLoggedUser().removeCartProduct(model.get(position));
+                model = DataHolder.getLoggedUser().getCartProducts();
                 notifyDataSetChanged();
-                //notifyItemRemoved(position); // esto hace andar mal a la posicion
                 notifyItemRangeChanged(position,getItemCount());
-
             }
         });
 

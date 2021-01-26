@@ -16,13 +16,10 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/ic_arrow_back" />
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <TextView
             android:id="@+id/food_details_product_name"
@@ -97,9 +94,14 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="88dp"
                 android:layout_marginEnd="11dp"
+                android:background="@drawable/less" />
 
-                android:background="@drawable/less"
-                 />
+            <CheckBox
+                android:id="@+id/cb_food_details_tohome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="To Home" />
 
         </RelativeLayout>
 
@@ -151,7 +153,6 @@
 
 
     </LinearLayout>
-
 
 
 
