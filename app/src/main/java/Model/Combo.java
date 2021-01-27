@@ -103,4 +103,11 @@ public class Combo extends Product implements Serializable {
             limit = Integer.min(limit,item.getDailyLimit());
         return limit;
     }
+
+    @Override
+    public void decreaseStock(int amount) {
+        for (Product product : comboItems){
+            decreaseStock(amount);
+        }
+    }
 }

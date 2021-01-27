@@ -49,7 +49,7 @@ public class CommonUser implements Serializable {
     public boolean confirmOrder(){
         float updatedCartPrice = 0;
         for (Product product: cart.keySet()){
-            updatedCartPrice+=product.getPrice();
+            updatedCartPrice+=product.getPrice()*cart.get(product);
             if (product.getStock() < cart.get(product)){
                 return false;
             }
@@ -171,7 +171,7 @@ public class CommonUser implements Serializable {
     }
 
     public boolean addProductToCart(Product product, int qty){
-        if (getCartAmount() + product.getPrice()*qty > balance){
+        if (getCartTotalPrice() + product.getPrice()*qty > balance){
             return false;
         }
         else {
@@ -192,7 +192,7 @@ public class CommonUser implements Serializable {
         cart = new HashMap<>();
     }
 
-    public float getCartAmount(){
+    public float getCartTotalPrice(){
         return cartAmount;
     }
 
@@ -212,6 +212,11 @@ public class CommonUser implements Serializable {
 
     public void removeCartProduct(Product product) {
         cart.remove(product);
+    }
+
+    public void addBalance(float price) {
+        if (price > 0)
+            balance+=price;
     }
 }
 

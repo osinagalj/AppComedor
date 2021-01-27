@@ -70,4 +70,9 @@ public class Food extends Product implements Serializable {
     public int getDailyLimit() {
         return Integer.MAX_VALUE;
     }
+
+    @Override
+    public void decreaseStock(int amount) {
+        stock-=amount;
+    }
 }

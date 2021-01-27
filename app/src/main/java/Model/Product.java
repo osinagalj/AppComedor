@@ -91,4 +91,5 @@ public abstract class Product implements Serializable {
     public abstract int getStock();
     public abstract void addStock(int stock);
     public abstract int getDailyLimit();
+    public abstract void decreaseStock(int amount);
 }

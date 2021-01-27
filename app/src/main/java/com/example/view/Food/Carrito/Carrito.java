@@ -29,7 +29,7 @@ import Model.Restaurant;
 public class Carrito extends AppCompatActivity {
         ImageView img;
         EditText amount;
-        TextView product_name, product_price;
+        TextView product_name, product_price, cartAmount;
 
         AdapterCarrito adapterPend;
         RecyclerView recyclerViewPersonas;
@@ -41,7 +41,8 @@ public class Carrito extends AppCompatActivity {
             setContentView(R.layout.activity_carrito);
             recyclerViewPersonas = findViewById(R.id.recyclerView_carrito);
             listaFoods = new ArrayList<>();
-
+            cartAmount = findViewById(R.id.carrito_total_price);
+            cartAmount.setText(String.valueOf(DataHolder.getLoggedUser().getCartTotalPrice()));
 
             ImageButton button_close = findViewById(R.id.carrito_button_close);
             button_close.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +89,7 @@ public class Carrito extends AppCompatActivity {
     }
 
     public void cargarLista(){
-        listaFoods.clear(); //TODO esto lo puse aca porque
+        listaFoods.clear();
         listaFoods.addAll(DataHolder.getLoggedUser().getCartProducts());
     }
 

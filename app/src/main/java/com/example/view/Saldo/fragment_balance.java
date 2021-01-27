@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,10 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.view.DataHolder;
 import com.example.view.R;
 
 public class fragment_balance extends Fragment {
-
+    TextView balance;
     EditText transfer_amount, trasnfer_dni, load_amount;
     Button btn_transfer_amount,btn_load_amount;
 
@@ -34,6 +36,9 @@ public class fragment_balance extends Fragment {
         //btn
         btn_transfer_amount = view.findViewById(R.id.balance_button_transfer_amount);
         btn_load_amount = view.findViewById(R.id.balance_buttont_load_amount);
+
+        balance = view.findViewById(R.id.balance_label_profile_amount);
+        balance.setText(String.valueOf(DataHolder.getLoggedUser().getBalance()));
 
         setUpButtons(view);
         return view;

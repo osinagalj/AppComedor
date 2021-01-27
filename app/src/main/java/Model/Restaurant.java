@@ -143,6 +143,9 @@ public class Restaurant {
     }
 
     public void addOrder(Order order){
+        for (Product product : order.getItems()){
+            availableProducts.get(availableProducts.indexOf(product)).decreaseStock(order.getAmount(product));
+        }
         pendingOrders.add(order);
     }
 
@@ -160,5 +163,10 @@ public class Restaurant {
     public int nextOrderNum() {
         nextOrderNumber++;
         return nextOrderNumber-1;
+    }
+
+    public void cancelPending(Order order) {
+        pendingOrders.remove(order);
+        order.getPlacedBy().addBalance(order.getPrice());
     }
 }
