@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.DataHolder;
 import com.example.view.R;
 
 import java.util.ArrayList;
@@ -69,32 +68,13 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
         button_remove.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v)
-            {
-
-                //TODO ESTO ELIMINA PERO A VECES TIRA ERROR POR LA POSICION
-               // Repositorio.repo.removePendOrder(model.get(position).getId()); //TODO ACA HAY QUE PASARLE EL NRO DE ORDEN PARA ELIMINAR, NO LA POS
-                //model.remove(position);
-                //notifyDataSetChanged();
-                //notifyItemRemoved(position); // esto hace andar mal a la posicion
-
+            public void onClick(View v) {
                 Restaurant.getInstance().cancelPending(model.get(position));
-
-                //model = Restaurant.getInstance().getPendingOrders(DataHolder.getLoggedUser());
-
+                model.remove(position);
+                notifyDataSetChanged();
+                //notifyItemRemoved(position);    //TODO ESTO ELIMINA PERO A VECES TIRA ERROR POR LA POSICION
             }
         });
-
-        /* //TODO SAME ERROR THAN BTN_REMOVE WITH THE POSITION
-        btn_see_details.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ActivityPdf.class);
-                intent.putExtra("ORDER_SELECTED",model.get(position));
-                context.startActivity(intent);
-            }
-        });*/
-
     }
 
     @Override
@@ -119,9 +99,6 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
             product_time = itemView.findViewById(R.id.row_pending_order_new_label_product_time);
             product_description = itemView.findViewById(R.id.row_pending_order_new_label_product_description);
             product_price = itemView.findViewById(R.id.row_pending_order_new_label_product_price);
-            //product_img = itemView.findViewById(R.id.row_pending_order_imageView_product_img);
-
-
         }
     }
 }

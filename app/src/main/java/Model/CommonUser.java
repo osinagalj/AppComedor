@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import DAO.OrderDAO;
-
 public class CommonUser implements Serializable {
     private String password;
     private String names;
@@ -24,7 +22,7 @@ public class CommonUser implements Serializable {
     private List<Order> completedOrders;
     private int dailySpecialRemaining;
     private Map<Product,Integer> cart = new HashMap<>();
-    private float cartAmount = 0; //Variable para no realizar el calculo en cada producto que se agrega
+    private float cartAmount = 0; // ??????????????Variable para no realizar el calculo en cada producto que se agrega
     //TODO falta una imagen del perfil
 
     public CommonUser(String password, String names, String lastname, LocalDate birthdate, int identityCardNumber, Condition condition, PriceCalculator priceCalculator) {
@@ -190,6 +188,7 @@ public class CommonUser implements Serializable {
 
     public void clearCart() {
         cart = new HashMap<>();
+        cartAmount = 0;
     }
 
     public float getCartTotalPrice(){

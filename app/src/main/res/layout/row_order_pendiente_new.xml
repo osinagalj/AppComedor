@@ -7,14 +7,14 @@
     app:cardElevation="3dp"
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="5dp"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/box_shape"
-      android:padding="10dp"
+      android:padding="5dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -63,23 +63,7 @@
                         android:textAlignment="textStart"
                         android:textSize="16sp"/>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginTop="50dp"
 
-                    android:gravity="end">
-
-                    <ImageView
-                        android:id="@+id/row_pending_order_new_label_product_descriptio2n"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-
-                        android:background="@drawable/ic_arrow_next" />
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -125,12 +109,10 @@
                 android:id="@+id/row_pending_order_new_button_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_weight="5"
                 android:textColor="@color/colorPrimary"
                 android:textAlignment="center"
                 android:textSize="20sp"
-
-
                 android:background="@android:color/white"
                 android:text="@string/ver_detalle" />
 
@@ -139,8 +121,10 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FFF30303"
+                android:textColor="#F30000"
                 android:textSize="16sp"
+
+                android:textAlignment="textStart"
                 android:drawableStart="@drawable/ic_remove"
                 android:background="@android:color/white"
                 android:text="Cancelar Pedido" />
