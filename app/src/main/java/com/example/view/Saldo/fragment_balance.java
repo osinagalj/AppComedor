@@ -85,6 +85,7 @@ public class fragment_balance extends Fragment {
         Toast.makeText(getContext(), "Se ha cargado bien la platita", Toast.LENGTH_LONG).show();
         load_amount.getText().clear();
     }
+
     private void transferMoney(int DNIuserDestino,float amount){
         //TODO el dni del usuario que hace la trasnferencia lo sacas del logged user
         Toast.makeText(getContext(), "ya le diste la platita a tu compa", Toast.LENGTH_LONG).show();

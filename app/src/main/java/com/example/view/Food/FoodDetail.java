@@ -19,6 +19,7 @@ import com.example.view.R;
 
 import Model.CommonUser;
 import Model.Product;
+import Model.ProductCategory;
 
 public class FoodDetail extends AppCompatActivity {
     ImageView img;
@@ -45,8 +46,16 @@ public class FoodDetail extends AppCompatActivity {
         product_price.setText(String.valueOf(product.getPrice()));
         product_description.setText(product.getDescription());
 
-        //TODO Con esto te dice si el food es para llevar o no
-        boolean isChecked = ((CheckBox) findViewById(R.id.cb_food_details_tohome)).isChecked();
+
+
+        CheckBox toHome = findViewById(R.id.cb_food_details_tohome);
+        boolean isChecked = toHome.isChecked();//TODO por si hay que pasarlo a la orden, aca esta el booleano
+        if(product.getCategory() == ProductCategory.DAILY_MENU){
+            toHome.setVisibility(View.VISIBLE);
+        }else{
+            toHome.setVisibility(View.GONE);
+        }
+
 
 
         Button fab = findViewById(R.id.food_details_button_add_order);

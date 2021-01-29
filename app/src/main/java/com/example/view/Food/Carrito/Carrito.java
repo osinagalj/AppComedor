@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +20,8 @@ import com.example.view.Food.FinishOrder;
 import com.example.view.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import Model.Product;
-import Model.Restaurant;
 
 public class Carrito extends AppCompatActivity {
         ImageView img;
@@ -64,7 +61,7 @@ public class Carrito extends AppCompatActivity {
                     //TODO eliminar los productos de la orden actual
 
                     DataHolder.getLoggedUser().confirmOrder();
-
+                    DataHolder.getLoggedUser().clearCart();
                     openFinishOrder();
 
                 }
