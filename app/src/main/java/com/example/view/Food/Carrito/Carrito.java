@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,11 +60,13 @@ public class Carrito extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //TODO eliminar los productos de la orden actual
-
-                    DataHolder.getLoggedUser().confirmOrder();
-                    DataHolder.getLoggedUser().clearCart();
-                    openFinishOrder();
-
+                    if(DataHolder.getLoggedUser().getCartProducts().isEmpty()){
+                        Toast.makeText(getBaseContext(), "No se puede realizar un pedido sin productos", Toast.LENGTH_SHORT).show();
+                    }else{
+                        DataHolder.getLoggedUser().confirmOrder();
+                        DataHolder.getLoggedUser().clearCart();
+                        openFinishOrder();
+                    }
                 }
             });
 

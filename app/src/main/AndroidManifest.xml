@@ -13,11 +13,18 @@
         <activity
             android:name=".Login.Login"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity
+            android:name=".Menu.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
         <activity
             android:name=".Login.Sign_up_student"
@@ -27,9 +34,9 @@
             android:name=".Login.Sign_up"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name=".Menu.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+
+
+
 
         <activity
             android:name=".MyOrders.Fragment.OrderDetails.ActivityPdf"

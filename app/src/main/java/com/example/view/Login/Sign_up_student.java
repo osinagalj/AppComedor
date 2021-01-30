@@ -19,6 +19,7 @@ import com.example.view.R;
 import java.time.LocalDate;
 
 import Model.Antiquity;
+import Model.Category;
 import Model.CommonUser;
 import Model.Condition;
 import Model.Discount;
@@ -127,7 +128,8 @@ public class Sign_up_student extends AppCompatActivity {
             newUserCondition = Restaurant.getInstance().getCondition("Ninguna");
         }
         CommonUser newUser = new CommonUser(password.getText().toString(), name.getText().toString(), lastname.getText().toString(),
-                            LocalDate.of(1, 1, 1), parsedICN, newUserCondition, userCategory);
+                            LocalDate.of(1, 1, 1), parsedICN, newUserCondition,Category.ALUMNO, userCategory);
+        //TODO get the user category no category.Alumno
         Restaurant.getInstance().addUser(newUser);
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);

@@ -2,12 +2,11 @@ package DAO;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
+import Model.Category;
 import Model.CommonUser;
 import Model.Condition;
 import Model.Discount;
@@ -16,7 +15,7 @@ public class UserDAO {
 
     public static List<CommonUser> registeredUsers() {
         List<CommonUser> users = new ArrayList<>();
-        CommonUser user = new CommonUser("111","Lautaro", "Osinaga", LocalDate.of(1999,5,20), 111,new Condition("Celiaco",new HashSet<>()),new Discount(10));
+        CommonUser user = new CommonUser("111","Lautaro", "Osinaga", LocalDate.of(1999,5,20), 111,new Condition("Celiaco",new HashSet<>()), Category.ALUMNO,new Discount(10));
         user.setBalance(1000);
         user.addConfirmedOrder(OrderDAO.getCompletedOrders(user).get(0));
         users.add(user);

@@ -1,9 +1,7 @@
 package com.example.view.Food.NestedRecyclerFood;
 
 import java.util.List;
-
 import Model.Product;
-
 
 public class AllCategory {
 
@@ -18,13 +16,12 @@ public class AllCategory {
     public List<Product> getCategoryItemList() {
         return categoryItemList;
     }
+    public String getCategoryTitle() {
+        return categoryTitle;
+    }
 
     public void setCategoryItemList(List<Product> categoryItemList) {
         this.categoryItemList = categoryItemList;
-    }
-
-    public String getCategoryTitle() {
-        return categoryTitle;
     }
 
     public void setCategoryTitle(String categoryTitle) {

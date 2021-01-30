@@ -16,7 +16,7 @@ public class OrderDAO {
      * Al momento de hacer esto, hay 1 solo usuario al que se la carga solo una orden en el
      * historial
      */
-    public static final int LAST_ORDER_NUMBER = 1;
+    public static final int LAST_ORDER_NUMBER = 100000;
 
     public static List<Order> nextOrders() {
         //TODO obtener las proximas 20 ordenes

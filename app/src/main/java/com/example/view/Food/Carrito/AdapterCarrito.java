@@ -17,7 +17,6 @@ import com.example.view.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.CommonUser;
 import Model.Product;
 
 public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.Carrito.AdapterCarrito.ViewHolder> implements View.OnClickListener {
@@ -56,13 +55,15 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
         int product_nro = model.get(position).getId();
         String product_price = String.valueOf(model.get(position).getPrice());
         int produc_amount = DataHolder.getLoggedUser().getCartProductAmount(model.get(position));
-
-        //TODO ACA SE VINCULA LA VISTA CON EL MODELO
         int product_img = model.get(position).getImgId();
 
         holder.product_name.setText("#"+product_nro);
         holder.product_description.setText(product_name);
-        holder.product_price.setText("Total: " + product_price);
+        holder.product_price.setText("Precio x Unidad: " + product_price);
+        float tot = model.get(position).getPrice() * produc_amount;
+        holder.product_total_price.setText("Total: " + tot );
+
+
         String unidad = " Unidad";
         if(produc_amount>1)
             unidad = " Unidades";
@@ -96,7 +97,7 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView product_name, product_description, product_price,product_amount;
+        TextView product_name, product_description, product_price,product_amount, product_total_price;
         ImageView product_img;
 
 
@@ -106,8 +107,11 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
             product_name = itemView.findViewById(R.id.row_pending_order_label_product_name);
             product_description = itemView.findViewById(R.id.row_pending_order_label_product_description);
             product_price = itemView.findViewById(R.id.row_pending_order_label_product_price);
+            product_total_price = itemView.findViewById(R.id.row_pending_order_label_product_total_price);
             product_img = itemView.findViewById(R.id.row_pending_order_imageView_product_img);
             product_amount = itemView.findViewById(R.id.row_pending_order_label_amount);
+
+
 
         }
     }

@@ -18,7 +18,6 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DAO.OrderDAO;
 import Model.Order;
 import Model.Restaurant;
 
@@ -47,7 +46,6 @@ public class FragmentPendientes extends Fragment {
         listaFoods.addAll(Restaurant.getInstance().getPendingOrders(DataHolder.getLoggedUser()));
     }
 
-
     private void mostrarData() {
         recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterPend = new AdapterPendientes(getContext(), listaFoods,this);
@@ -58,19 +56,11 @@ public class FragmentPendientes extends Fragment {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getActivity(), ActivityPdf.class);
-
                 intent.putExtra("ORDER_SELECTED",listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
                 startActivity(intent);
-                //voy a tener que pasarle la orden para el pedido
-
-                //interfaceComunicaFragments.abrirPDF(listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view)));
-                //luego en el mainactivity se hace la implementacion de la interface para implementar el metodo enviarpersona
             }
         });
 
-
-
     }
-
 
 }

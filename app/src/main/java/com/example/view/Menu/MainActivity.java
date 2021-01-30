@@ -1,6 +1,5 @@
 package com.example.view.Menu;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -16,10 +15,10 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.view.DataHolder;
 import com.example.view.Fila.Fragment_fila;
 import com.example.view.Food.NestedRecyclerFood.FragmentFood;
-import com.example.view.MyAccount.fragmen_myAccount;
+import com.example.view.MyAccount.FragmentMyAccount;
 import com.example.view.MyOrders.HomeFragment;
 import com.example.view.R;
-import com.example.view.Saldo.fragment_balance;
+import com.example.view.Saldo.FragmentBalance;
 import com.google.android.material.navigation.NavigationView;
 
 import Model.CommonUser;
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(menuItem.getItemId() == R.id.myAccount){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment,new fragmen_myAccount());
+            fragmentTransaction.replace(R.id.container_fragment,new FragmentMyAccount());
             fragmentTransaction.commit();
         }
 
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(menuItem.getItemId() == R.id.balance){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment,new fragment_balance());
+            fragmentTransaction.replace(R.id.container_fragment,new FragmentBalance());
             fragmentTransaction.commit();
         } //logout
 
