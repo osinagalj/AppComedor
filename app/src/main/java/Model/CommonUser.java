@@ -25,12 +25,13 @@ public class CommonUser implements Serializable {
     private float cartAmount = 0; // ??????????????Variable para no realizar el calculo en cada producto que se agrega
     //TODO falta una imagen del perfil
 
-    public CommonUser(String password, String names, String lastname, LocalDate birthdate, int identityCardNumber, Condition condition, PriceCalculator priceCalculator) {
+    public CommonUser(String password, String names, String lastname, LocalDate birthdate, int identityCardNumber, Condition condition,Category category, PriceCalculator priceCalculator) {
         this.password = password;
         this.names = names;
         this.lastname = lastname;
         this.birthdate = birthdate;
         this.identityCardNumber = identityCardNumber;
+        this.category = category;
         this.condition = condition;
         this.priceCalculator = priceCalculator;
 

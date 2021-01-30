@@ -18,7 +18,7 @@
             android:layout_marginEnd ="25dp">
 
             <ImageView
-                android:id="@+id/balance_imageView_img_profile"
+                android:id="@+id/iv_profile"
                 android:layout_width="145dp"
                 android:layout_height="114dp"
                 android:layout_gravity="center"
@@ -26,7 +26,7 @@
                 android:src="@drawable/profile_user" />
 
             <TextView
-                android:id="@+id/balance_label_profile_name"
+                android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:textColor="#000"
                 android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                 android:text="@string/user_name" />
 
             <TextView
-                android:id="@+id/balance_label_profile_amount"
+                android:id="@+id/user_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -59,7 +59,7 @@
                 android:text="@string/amount_" />
 
             <EditText
-                android:id="@+id/balance_editText_load_amount"
+                android:id="@+id/load_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -67,7 +67,7 @@
                 android:drawableStart="@drawable/custom_money_icon" />
 
             <Button
-                android:id="@+id/balance_buttont_load_amount"
+                android:id="@+id/btn_load_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
@@ -94,7 +94,7 @@
                 android:text="@string/user_receiver" />
 
             <EditText
-                android:id="@+id/balance_editText_transfer_receiver"
+                android:id="@+id/trasnfer_dni"
                 android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:ems="10"
@@ -108,14 +108,14 @@
                 android:text="@string/amount_" />
 
             <EditText
-                android:id="@+id/balance_editText_transfer_amount"
+                android:id="@+id/transfer_amount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/custom_money_icon"
                 android:inputType="numberDecimal" />
 
             <Button
-                android:id="@+id/balance_button_transfer_amount"
+                android:id="@+id/btn_transfer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#105661"
