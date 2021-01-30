@@ -38,7 +38,7 @@
                     android:textStyle="bold"/>
 
                 <ImageButton
-                    android:id="@+id/order_details_button_close"
+                    android:id="@+id/btn_close"
                     android:layout_weight="1"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
@@ -68,7 +68,7 @@
                         android:textAlignment="center"/>
 
                     <TextView
-                        android:id="@+id/order_details_label_order_number"
+                        android:id="@+id/order_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -78,7 +78,7 @@
                         android:textStyle="bold"/>
 
                     <TextView
-                        android:id="@+id/order_details_label_order_time_hour"
+                        android:id="@+id/time_hour"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -87,7 +87,7 @@
                         android:textAlignment="center"/>
 
                     <TextView
-                        android:id="@+id/order_details_label_order_time_day"
+                        android:id="@+id/time_day"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -127,7 +127,7 @@
                         android:textSize="12sp"/>
 
                     <TextView
-                        android:id="@+id/order_details_label_order_user_name"
+                        android:id="@+id/user_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -151,7 +151,7 @@
                         android:textSize="12sp"/>
 
                     <TextView
-                        android:id="@+id/order_details_label_order_price"
+                        android:id="@+id/total_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -235,7 +235,7 @@
 
 
         <Button
-            android:id="@+id/order_details_button_download"
+            android:id="@+id/btn_download"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

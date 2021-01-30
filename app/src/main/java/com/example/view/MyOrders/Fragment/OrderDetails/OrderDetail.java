@@ -6,8 +6,6 @@ public class OrderDetail {
     private String price;
     private String amount;
 
-    public OrderDetail(){}
-
     public OrderDetail(String amount,String name,String price){
         this.name = name;
         this.price = price;
