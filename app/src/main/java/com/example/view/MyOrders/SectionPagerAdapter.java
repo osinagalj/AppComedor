@@ -1,4 +1,4 @@
-package com.example.view.MyOrders.Adapter;
+package com.example.view.MyOrders;
 
 
 

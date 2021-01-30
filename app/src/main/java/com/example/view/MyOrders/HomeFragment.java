@@ -15,7 +15,6 @@ import com.example.view.MyOrders.Fragment.Pendientes.FragmentPendientes;
 import com.google.android.material.tabs.TabLayout;
 
 
-import com.example.view.MyOrders.Adapter.SectionPagerAdapter;
 import com.example.view.R;
 
 public class HomeFragment extends Fragment {
