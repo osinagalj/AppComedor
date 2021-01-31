@@ -93,19 +93,20 @@
                     android:layout_height="wrap_content">
                     <CheckBox
                         android:id="@+id/rememberMe"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_marginTop="-5dp"
                         android:textColor="#fff"
                         android:textSize="15sp"
-                        android:text="Recuerdame" />
+                        android:buttonTint="#FFF"
+                        android:text="@string/recuerdame" />
                     <TextView
                         android:id="@+id/forgot_password"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:text="¿Olvidaste tu contraseña?"
+                        android:text="@string/olvidaste_tu_contrase_a"
                         android:layout_gravity="end"
                         android:textColor="#fff"
                         android:textSize="15sp" />

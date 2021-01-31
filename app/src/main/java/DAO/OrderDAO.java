@@ -15,6 +15,7 @@ public class OrderDAO {
      * con la cantidad de ordenes que se les cargan a los usuarios en getCompletedOrders()
      * Al momento de hacer esto, hay 1 solo usuario al que se la carga solo una orden en el
      * historial
+     * TODO queda feo que sean de 1 digito xd
      */
     public static final int LAST_ORDER_NUMBER = 100000;
 

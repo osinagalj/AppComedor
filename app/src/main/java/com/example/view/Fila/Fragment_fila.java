@@ -1,7 +1,5 @@
 package com.example.view.Fila;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +7,10 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.R;
+import com.example.view.databinding.FragmentFilaBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,62 +20,40 @@ import Model.Order;
 
 public class Fragment_fila extends Fragment {
 
-    AdapterOrdenes adapterPersonas;
-    RecyclerView recyclerViewPersonas;
-    ArrayList<Orden> listaFoods;
-    //Crear referencias para poder realizar la comunicacion entre el fragment detalle
-    Activity actividad;
-
+    OrdersAdapter adapter;
+    ArrayList<Orden> orders;
+    private FragmentFilaBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = FragmentFilaBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
 
-        View view = inflater.inflate(R.layout.fragment_fila, container, false);
-        recyclerViewPersonas = view.findViewById(R.id.rv_fila);
-        listaFoods = new ArrayList<>();
+        orders = new ArrayList<>();
 
-        cargarLista();
-        mostrarData();
+        loadData();
+        showData();
 
         return view;
     }
 
-    public void cargarLista(){
-//todo
+    public void loadData(){
         List<Order> data = OrderDAO.nextOrders();
         for(Order order : data){
-            listaFoods.add(new Orden("#"+order.getId()));
+            orders.add(new Orden("#"+order.getId()));
         }
+        orders.add(new Orden("#10021"));
+        orders.add(new Orden("#10021"));
     }
 
-    private void mostrarData(){
-        recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterPersonas = new AdapterOrdenes(getContext(), listaFoods);
-        recyclerViewPersonas.setAdapter(adapterPersonas);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        ((AppCompatActivity) context).getSupportActionBar().setTitle("Fila");
-        super.onAttach(context);
-        //esto es necesario para establecer la comunicacion entre la lista y el detalle
-        //si el contexto que le esta llegando es una instancia de un activity:
-        if(context instanceof Activity){
-            //voy a decirle a mi actividad que sea igual a dicho contesto. castin correspondiente:
-            this.actividad= (Activity) context;
-            ////que la interface icomunicafragments sea igual ese contexto de la actividad:
-
-            //esto es necesario para establecer la comunicacion entre la lista y el detalle
-        }
-
+    private void showData(){
+        binding.rvFila.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new OrdersAdapter(getContext(), orders);
+        binding.rvFila.setAdapter(adapter);
     }
 
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        //mListener = null;
-    }
+
 }
