@@ -28,7 +28,6 @@ public class Login extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-
         binding.btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

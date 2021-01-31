@@ -10,7 +10,6 @@ public class DataHolder {
         return loggedUser;
     }
 
-
     public static void setLoggedUser(CommonUser loggedUser) {
         DataHolder.loggedUser = loggedUser;
     }

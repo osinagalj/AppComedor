@@ -69,6 +69,12 @@
     <string name="lautaro">Lautaro</string>
     <string name="ver_detalle">Ver detalle</string>
     <string name="dayle_menu">Menu del Dia</string>
+    <string name="contrase_a_actual">Contraseña actual</string>
+    <string name="contrase_a_nueva">Contraseña Nueva</string>
+    <string name="cambiar_contrase_a">Cambiar Contraseña</string>
+    <string name="condicion_alimenticia">Condicion Alimenticia</string>
+    <string name="olvidaste_tu_contrase_a">¿Olvidaste tu contraseña?</string>
+    <string name="recuerdame">Recuerdame</string>
 
 
 </resources>
