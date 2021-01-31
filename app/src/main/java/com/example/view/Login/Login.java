@@ -12,7 +12,7 @@ import com.example.view.Menu.MainActivity;
 import com.example.view.databinding.ActivityLoginBinding;
 
 import Model.CommonUser;
-import Model.Restaurant;
+import DataBase.Restaurant;
 
 public class Login extends AppCompatActivity {
 

@@ -18,17 +18,23 @@ public class OrderDAO {
      * TODO queda feo que sean de 1 digito xd
      */
     public static final int LAST_ORDER_NUMBER = 100000;
+    //para mi el moquear la base de datos seria tener aca una lista de ordenes, y cuando hacemos una
+    // consulta al backend usamos estos dao, no tenemos persistencia pero no importa
+
+    static List<Order> products = new ArrayList<>();
+
+    public static void loadOrders(){
+        //products.add()
+    }
 
     public static List<Order> nextOrders() {
         //TODO obtener las proximas 20 ordenes
         //TODO las proximas ordenes para mostrar en FILA
-        List<Order> products = new ArrayList<>();
-
         return products;
     }
 
     public static List<Order> getCompletedOrders(CommonUser user) {
-        Product randomProduct = ProductDAO.avalaibleProducts().get(0);
+        Product randomProduct = ProductDAO.avalaibleProducts(null).get(0);
         Map<Product,Integer> orderItems = new HashMap<>();
         orderItems.put(randomProduct,1);
         Order completedOrder = new Order(1,user,orderItems,new HashMap<>());

@@ -9,7 +9,7 @@
     tools:context=".Food.FoodDetail">
 
     <ImageButton
-        android:id="@+id/food_details_button_close"
+        android:id="@+id/btn_close"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
@@ -22,14 +22,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/food_details_product_name"
+            android:id="@+id/product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
             android:layout_marginTop="80dp"
             android:gravity="center"
             android:paddingBottom="10dp"
-            android:text="Alimento"
+            android:text="@string/alimento"
             android:textSize="24sp"
             android:textStyle="bold" />
         <RelativeLayout
@@ -38,7 +38,7 @@
 
 
             <ImageView
-                android:id="@+id/food_details_product_img"
+                android:id="@+id/product_img"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
@@ -46,7 +46,7 @@
                 android:layout_marginBottom="0dp" />
 
             <TextView
-                android:id="@+id/food_details_label_amount"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -54,21 +54,20 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="12dp"
 
-                android:layout_toEndOf="@+id/food_details_product_img"
+                android:layout_toEndOf="@+id/product_img"
                 android:text="@string/amount"
                 android:textSize="15sp" />
 
             <EditText
-                android:id="@+id/food_details_editText_amount"
+                android:id="@+id/product_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="48dp"
-
                 android:layout_marginEnd="45dp"
-                android:layout_toEndOf="@+id/food_details_product_img"
+                android:layout_toEndOf="@+id/product_img"
                 android:ems="10"
                 android:inputType="number"
                 android:text="1"
@@ -76,7 +75,7 @@
 
 
             <ImageButton
-                android:id="@+id/food_details_button_add"
+                android:id="@+id/btn_add"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_alignParentTop="true"
@@ -86,10 +85,10 @@
                 android:background="@drawable/add" />
 
             <ImageButton
-                android:id="@+id/food_details_button_less"
+                android:id="@+id/btn_less"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_below="@+id/food_details_button_add"
+                android:layout_below="@+id/btn_add"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="88dp"
@@ -97,7 +96,7 @@
                 android:background="@drawable/less" />
 
             <CheckBox
-                android:id="@+id/cb_food_details_tohome"
+                android:id="@+id/cb_toHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -106,7 +105,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/food_details_product_price"
+            android:id="@+id/product_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -116,7 +115,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/food_details_product_description"
+            android:id="@+id/product_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
@@ -133,20 +132,20 @@
             >
 
             <Button
-                android:id="@+id/food_details_button_add_order"
+                android:id="@+id/btn_add_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#105661"
-                android:text="Realizar orden"
+                android:text="@string/realizar_orden"
                 android:textColor="#fff"
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/food_details_button_add_products"
+                android:id="@+id/btn_add_products"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#105661"
-                android:text="Agregar al carrito"
+                android:text="@string/agregar_al_carrito"
                 android:textColor="#fff"
                 android:textStyle="bold" />
         </LinearLayout>

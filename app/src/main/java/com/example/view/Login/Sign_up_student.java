@@ -14,6 +14,7 @@ import com.example.view.databinding.ActivitySignUpBinding;
 
 import java.time.LocalDate;
 
+import DataBase.Restaurant;
 import Model.*;
 
 public class Sign_up_student extends AppCompatActivity {

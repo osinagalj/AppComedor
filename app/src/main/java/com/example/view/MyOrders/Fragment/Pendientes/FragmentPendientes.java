@@ -19,7 +19,7 @@ import com.example.view.R;
 import java.util.ArrayList;
 
 import Model.Order;
-import Model.Restaurant;
+import DataBase.Restaurant;
 
 
 public class FragmentPendientes extends Fragment {

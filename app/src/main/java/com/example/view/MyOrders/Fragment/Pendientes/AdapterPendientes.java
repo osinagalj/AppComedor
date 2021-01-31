@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Model.Order;
-import Model.Restaurant;
+import DataBase.Restaurant;
 
 public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder> implements View.OnClickListener {
 

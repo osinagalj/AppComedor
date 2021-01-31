@@ -19,17 +19,12 @@ import com.example.view.DataHolder;
 import com.example.view.Food.Carrito.Carrito;
 import com.example.view.R;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
-import Model.CommonUser;
-import Model.Condition;
-import Model.Discount;
+import DAO.ProductDAO;
 import Model.Product;
 import Model.ProductCategory;
-import Model.Restaurant;
 
 public class FragmentFood extends Fragment {
 
@@ -90,7 +85,7 @@ public class FragmentFood extends Fragment {
 
         List<AllCategory> allCategoryList = new ArrayList<>();
 
-        List<Product> consumables = Model.Restaurant.getInstance().getUserConsumableProducts(DataHolder.getLoggedUser());
+        List<Product> consumables = ProductDAO.avalaibleProducts(DataHolder.getLoggedUser());
         for (ProductCategory category : ProductCategory.values()){
             List<Product> catList = new ArrayList<>();
             for (Product product : consumables)

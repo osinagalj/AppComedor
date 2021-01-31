@@ -16,9 +16,9 @@ import java.util.ArrayList;
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
 
     LayoutInflater inflater;
-    ArrayList<Orden> model;
+    ArrayList<String> model;
 
-    public OrdersAdapter(Context context, ArrayList<Orden> model){
+    public OrdersAdapter(Context context, ArrayList<String> model){
         this.inflater = LayoutInflater.from(context);
         this.model = model;
     }
@@ -32,7 +32,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull OrdersAdapter.ViewHolder holder, int position) {
-        holder.number.setText(model.get(position).getNombre());
+        holder.number.setText(model.get(position));
     }
 
 

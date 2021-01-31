@@ -18,10 +18,10 @@ import java.util.List;
 import DAO.OrderDAO;
 import Model.Order;
 
-public class Fragment_fila extends Fragment {
+public class Fragment_queue extends Fragment {
 
     OrdersAdapter adapter;
-    ArrayList<Orden> orders;
+    ArrayList<String> orders;
     private FragmentFilaBinding binding;
 
     @Nullable
@@ -42,10 +42,10 @@ public class Fragment_fila extends Fragment {
     public void loadData(){
         List<Order> data = OrderDAO.nextOrders();
         for(Order order : data){
-            orders.add(new Orden("#"+order.getId()));
+            orders.add("#"+order.getId());
         }
-        orders.add(new Orden("#10021"));
-        orders.add(new Orden("#10021"));
+        orders.add("#10021");
+        orders.add("#10021");
     }
 
     private void showData(){
@@ -53,7 +53,5 @@ public class Fragment_fila extends Fragment {
         adapter = new OrdersAdapter(getContext(), orders);
         binding.rvFila.setAdapter(adapter);
     }
-
-
 
 }
