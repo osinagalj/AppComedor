@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.view.DataHolder;
+import com.example.view.BackEnd;
 import com.example.view.databinding.FragmentMyaccountBinding;
 
 import Model.CommonUser;
@@ -30,7 +30,7 @@ public class FragmentMyAccount extends Fragment {
         binding = FragmentMyaccountBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
-        setUserData(DataHolder.getLoggedUser());
+        setUserData(BackEnd.getLoggedUser());
         setButtons();
 
         return view;

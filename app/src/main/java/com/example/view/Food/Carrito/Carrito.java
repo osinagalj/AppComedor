@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.DataHolder;
+import com.example.view.BackEnd;
 import com.example.view.Food.FinishOrder;
 import com.example.view.R;
 
@@ -40,14 +40,14 @@ public class Carrito extends AppCompatActivity {
             recyclerViewPersonas = findViewById(R.id.recyclerView_carrito);
             listaFoods = new ArrayList<>();
             cartAmount = findViewById(R.id.carrito_total_price);
-            cartAmount.setText(String.valueOf(DataHolder.getLoggedUser().getCartTotalPrice()));
+            cartAmount.setText(String.valueOf(BackEnd.getLoggedUser().getCartTotalPrice()));
 
             ImageButton button_close = findViewById(R.id.carrito_button_close);
             button_close.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //TODO eliminar los productos de la orden actual
-                    if(!DataHolder.getLoggedUser().cartIsEmpty()){
+                    if(!BackEnd.getLoggedUser().cartIsEmpty()){
                         showSimpleDialog(v);
                     }else{
                         finish();
@@ -60,11 +60,11 @@ public class Carrito extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     //TODO eliminar los productos de la orden actual
-                    if(DataHolder.getLoggedUser().getCartProducts().isEmpty()){
+                    if(BackEnd.getLoggedUser().getCartProducts().isEmpty()){
                         Toast.makeText(getBaseContext(), "No se puede realizar un pedido sin productos", Toast.LENGTH_SHORT).show();
                     }else{
-                        DataHolder.getLoggedUser().confirmOrder();
-                        DataHolder.getLoggedUser().clearCart();
+                        BackEnd.getLoggedUser().confirmOrder();
+                        BackEnd.getLoggedUser().clearCart();
                         openFinishOrder();
                     }
                 }
@@ -90,7 +90,7 @@ public class Carrito extends AppCompatActivity {
 
     public void cargarLista(){
         listaFoods.clear();
-        listaFoods.addAll(DataHolder.getLoggedUser().getCartProducts());
+        listaFoods.addAll(BackEnd.getLoggedUser().getCartProducts());
     }
 
     private void mostrarData() {
@@ -108,7 +108,7 @@ public class Carrito extends AppCompatActivity {
         builder.setPositiveButton("OK!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-                DataHolder.getLoggedUser().clearCart();
+                BackEnd.getLoggedUser().clearCart();
                 finish();
             }
         })

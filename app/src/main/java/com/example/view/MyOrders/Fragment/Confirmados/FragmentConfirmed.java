@@ -12,13 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.DataHolder;
+import com.example.view.BackEnd;
 import com.example.view.MyOrders.Fragment.OrderDetails.ActivityPdf;
 import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DAO.OrderDAO;
 import Model.Order;
 
 public class FragmentConfirmed  extends Fragment {
@@ -40,7 +39,7 @@ public class FragmentConfirmed  extends Fragment {
         return view;
     }
     public void cargarLista(){
-        listaFoods.addAll(DataHolder.getLoggedUser().getConfirmedOrders());
+        listaFoods.addAll(BackEnd.getLoggedUser().getConfirmedOrders());
     }
     private void mostrarData(){
         recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));

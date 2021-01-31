@@ -1,35 +1,20 @@
 package DAO;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import Model.Category;
+import DataBase.Restaurant;
 import Model.CommonUser;
 import Model.Condition;
-import Model.Discount;
 
 public class UserDAO {
 
-    static List<CommonUser> users = new ArrayList<>();
 
-    public static void loadUsers(){
-        CommonUser user = new CommonUser("111","Lautaro", "Osinaga", LocalDate.of(1999,5,20), 111,new Condition("Celiaco",new HashSet<>()), Category.ALUMNO,new Discount(10));
-        user.setBalance(1000);
-        user.addConfirmedOrder(OrderDAO.getCompletedOrders(user).get(0));
-        users.add(user);
-    }
-
-    public static List<CommonUser> registeredUsers() {
-
-        return users; //devolver una copia no esto
-    }
 
     public static CommonUser getUser(int dni, String password){
-        //TODO si la consulta vuelve vacia es porque esta mal la contraseña
-        return null;
+        return Restaurant.getInstance().getUser(dni,password); //devolver una copia no esto
     }
 
     public static void loadMoney(int dni, float amount){
@@ -40,8 +25,20 @@ public class UserDAO {
         //TODO eliminar plata del usuario
     }
 
+    public static void changePassword(int dni, String password){
+        Restaurant.getInstance().changePassword(dni,"a");
+    }
 
-    //Que hace esto aca?
+    public static void addUser(CommonUser user){
+        Restaurant.getInstance().addUser(user);
+    }
+
+
+
+
+
+
+    //Que hace esto aca? capaz esto va en el back-end
     public static List<Condition> usersConditions() {
         List<Condition> conditions = new ArrayList<>();
         Set<String> noConsumable = new HashSet<>();

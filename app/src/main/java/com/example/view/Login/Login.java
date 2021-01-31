@@ -7,12 +7,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.view.DataHolder;
+import com.example.view.BackEnd;
 import com.example.view.Menu.MainActivity;
 import com.example.view.databinding.ActivityLoginBinding;
 
-import Model.CommonUser;
 import DataBase.Restaurant;
+import Model.CommonUser;
 
 public class Login extends AppCompatActivity {
 
@@ -64,12 +64,12 @@ public class Login extends AppCompatActivity {
 
     public void sign_in(CommonUser logged_user) {
         Intent intent = new Intent(this, MainActivity.class);
-        DataHolder.setLoggedUser(logged_user);
+        BackEnd.setLoggedUser(logged_user.getIdentityCardNumber(),logged_user.getPassword());
         startActivity(intent);
     }
 
     public void sign_up() {
-        Intent intent = new Intent(this, Sign_up.class);
+        Intent intent = new Intent(this, ChooseCategory.class);
         startActivity(intent);
     }
 

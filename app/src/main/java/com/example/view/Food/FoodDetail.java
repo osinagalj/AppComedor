@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.view.DataHolder;
+import com.example.view.BackEnd;
 import com.example.view.databinding.ActivityFoodDetailsBinding;
 
 import Model.CommonUser;
@@ -17,7 +17,7 @@ import Model.ProductCategory;
 
 public class FoodDetail extends AppCompatActivity {
 
-    CommonUser loggedUser = DataHolder.getLoggedUser();
+    CommonUser loggedUser = BackEnd.getLoggedUser();
 
     private ActivityFoodDetailsBinding binding;
 
@@ -50,8 +50,8 @@ public class FoodDetail extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     int addedAmount = Integer.parseInt(binding.productAmount.getText().toString());
-                    DataHolder.getLoggedUser().addProductToCart(product,addedAmount);
-                    DataHolder.getLoggedUser().confirmOrder();
+                    BackEnd.getLoggedUser().addProductToCart(product,addedAmount);
+                    BackEnd.getLoggedUser().confirmOrder();
                     Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
                     openFinishOrder();
                 } catch (NumberFormatException numberFormatException){
@@ -65,7 +65,7 @@ public class FoodDetail extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     int addedAmount = Integer.parseInt(binding.productAmount.getText().toString());
-                    DataHolder.getLoggedUser().addProductToCart(product,addedAmount);
+                    BackEnd.getLoggedUser().addProductToCart(product,addedAmount);
                     finish();
                 } catch (NumberFormatException numberFormatException){
                     Toast.makeText(getBaseContext(), "No ingreso un numero valido", Toast.LENGTH_SHORT).show();
