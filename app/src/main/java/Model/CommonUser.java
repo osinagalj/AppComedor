@@ -39,7 +39,7 @@ public class CommonUser implements Serializable {
 
         this.balance = 0;
         this.completedOrders = new ArrayList<>();
-        this.dailySpecialRemaining = Restaurant.MAX_SPECIAL_ORDERS;
+        this.dailySpecialRemaining = 2; //todo
     }
 
     /***

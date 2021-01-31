@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.DataHolder;
+import com.example.view.BackEnd;
 import com.example.view.Food.Carrito.Carrito;
 import com.example.view.R;
 
@@ -67,7 +67,7 @@ public class FragmentFood extends Fragment {
     }
 
     private void showCarrito() {
-        if (DataHolder.getLoggedUser().cartIsEmpty()) {
+        if (BackEnd.getLoggedUser().cartIsEmpty()) {
             bottom.setVisibility(View.GONE);
         } else {
             bottom.setVisibility(View.VISIBLE);
@@ -85,13 +85,14 @@ public class FragmentFood extends Fragment {
 
         List<AllCategory> allCategoryList = new ArrayList<>();
 
-        List<Product> consumables = ProductDAO.avalaibleProducts(DataHolder.getLoggedUser());
+        List<Product> consumables = ProductDAO.getProducts(BackEnd.getLoggedUser());
         for (ProductCategory category : ProductCategory.values()){
             List<Product> catList = new ArrayList<>();
             for (Product product : consumables)
                 if (product.getCategory().equals(category))
                     catList.add(product);
-            allCategoryList.add(new AllCategory(category.toString(), catList));
+            if(!catList.isEmpty())
+                allCategoryList.add(new AllCategory(category.toString(), catList));
         }
 
         setMainCategoryRecycler(allCategoryList);

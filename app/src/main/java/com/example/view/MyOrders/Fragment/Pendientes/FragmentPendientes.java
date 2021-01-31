@@ -12,14 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.DataHolder;
+import com.example.view.BackEnd;
 import com.example.view.MyOrders.Fragment.OrderDetails.ActivityPdf;
 import com.example.view.R;
 
 import java.util.ArrayList;
 
-import Model.Order;
 import DataBase.Restaurant;
+import Model.Order;
 
 
 public class FragmentPendientes extends Fragment {
@@ -43,7 +43,7 @@ public class FragmentPendientes extends Fragment {
     }
 
     public void cargarLista(){
-        listaFoods.addAll(Restaurant.getInstance().getPendingOrders(DataHolder.getLoggedUser()));
+        listaFoods.addAll(Restaurant.getInstance().getPendingOrders(BackEnd.getLoggedUser()));
     }
 
     private void mostrarData() {

@@ -27,11 +27,11 @@
 
 
         <activity
-            android:name=".Login.Sign_up_student"
+            android:name=".Login.Sign_up"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".Login.Sign_up"
+            android:name=".Login.ChooseCategory"
             android:theme="@style/AppTheme.NoActionBar" />
 
 

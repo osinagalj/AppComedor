@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.view.DataHolder;
+import com.example.view.BackEnd;
 import com.example.view.databinding.FragmentBalanceBinding;
 
 public class FragmentBalance extends Fragment {
@@ -26,7 +26,7 @@ public class FragmentBalance extends Fragment {
         binding = FragmentBalanceBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
-        binding.userAmount.setText(String.valueOf(DataHolder.getLoggedUser().getBalance()));
+        binding.userAmount.setText(String.valueOf(BackEnd.getLoggedUser().getBalance()));
 
         setUpButtons(view);
         return view;

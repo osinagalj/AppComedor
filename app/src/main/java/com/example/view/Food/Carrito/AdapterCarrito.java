@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.DataHolder;
+import com.example.view.BackEnd;
 import com.example.view.R;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import Model.Product;
 public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.Carrito.AdapterCarrito.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
-    List<Product> model = DataHolder.getLoggedUser().getCartProducts();
+    List<Product> model = BackEnd.getLoggedUser().getCartProducts();
     Context context;
     private int count = 0;
     ImageButton button;
@@ -54,7 +54,7 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
         String product_name = model.get(position).getName();
         int product_nro = model.get(position).getId();
         String product_price = String.valueOf(model.get(position).getPrice());
-        int produc_amount = DataHolder.getLoggedUser().getCartProductAmount(model.get(position));
+        int produc_amount = BackEnd.getLoggedUser().getCartProductAmount(model.get(position));
         int product_img = model.get(position).getImgId();
 
         holder.product_name.setText("#"+product_nro);
@@ -75,8 +75,8 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DataHolder.getLoggedUser().removeCartProduct(model.get(position));
-                model = DataHolder.getLoggedUser().getCartProducts();
+                BackEnd.getLoggedUser().removeCartProduct(model.get(position));
+                model = BackEnd.getLoggedUser().getCartProducts();
                 notifyDataSetChanged();
                 notifyItemRangeChanged(position,getItemCount());
             }

@@ -12,7 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.view.DataHolder;
+import com.example.view.BackEnd;
 import com.example.view.Fila.Fragment_queue;
 import com.example.view.Food.NestedRecyclerFood.FragmentFood;
 import com.example.view.MyAccount.FragmentMyAccount;
@@ -21,9 +21,6 @@ import com.example.view.R;
 import com.example.view.Saldo.FragmentBalance;
 import com.google.android.material.navigation.NavigationView;
 
-import DAO.OrderDAO;
-import DAO.ProductDAO;
-import DAO.UserDAO;
 import Model.CommonUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -51,12 +48,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        System.out.println("Entro1");
-        //Load the DataBase
-        initiateDAO();
-        System.out.println("Entro2");
-        loggedUser = DataHolder.getLoggedUser();
-        System.out.println("Entro3");
+        loggedUser = BackEnd.getLoggedUser();
+
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
@@ -71,11 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void initiateDAO(){
-        ProductDAO.loadProducts();
-        UserDAO.loadUsers();
-        OrderDAO.loadOrders();
-    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

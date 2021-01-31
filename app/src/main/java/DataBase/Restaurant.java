@@ -2,68 +2,73 @@ package DataBase;
 
 import com.example.view.R;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
-import DAO.OrderDAO;
-import DAO.ProductDAO;
 import DAO.UserDAO;
+import Model.Category;
 import Model.CommonUser;
 import Model.Condition;
+import Model.Discount;
 import Model.Food;
 import Model.Order;
 import Model.Product;
 import Model.ProductCategory;
 
 public class Restaurant {
-    public static final int MAX_SPECIAL_ORDERS = ProductDAO.maxDailyMenus();
 
     private int id;
     private String name;
     private String university;
     private String timeTable;
-    private int nextOrderNumber = OrderDAO.LAST_ORDER_NUMBER+1;
-    private final List<CommonUser> registeredUsers = UserDAO.registeredUsers();
-    private final List<Product> availableProducts = ProductDAO.avalaibleProducts(null);
-    private final List<Condition> conditions = UserDAO.usersConditions();
+
+    public static final int LAST_ORDER_NUMBER = 100000;
+
+    private int nextOrderNumber = 2;
+    private final List<CommonUser> registeredUsers = new ArrayList<>();
+    private final List<Product> availableProducts = new ArrayList<>();
     private final List<Order> orders = new ArrayList<>();
-    private final List<Order> pendingOrders = new ArrayList<>();
+    private final List<Condition> conditions = UserDAO.usersConditions();
+
     public static final Restaurant INSTANCE = new Restaurant();
+    public static Restaurant getInstance() { return INSTANCE; }
 
-    private Restaurant(){ }
-
-
-    //TODO el restaurant tiene que ser el backend, seria la base de datos "moqueada" , entonces aca tenemos que
-    // cargarle todo los productos y cuando desde la vista se llame al DAO, el dao en vez de tener consultas SQL llama a los metodos de aca,
-    // entonces todo el procesamiento de informacion se hace en el backend y no en el lado del usuario
-    // Por ejemplo si tengo que obtener el precio del menu del dia, desde la vista unicamente llamo al dao para
-    // que me de el producto del dia, y el dao le pedi al restaurant que le devuelva el menu del dia con el
-    // descuento correspondiente, pero este descuento se aplica en restaurant, no en la vista ni en otro lado.
-    // A la vista ya le llega el menu con descuento, calculado previamente por el restaurant dependiendo el tipo del usuario
-
-
-    private void loadProducs(){
-        //getDailyMenu();
-
-        //Buffet
-        availableProducts.add(new Food(1002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
-        availableProducts.add(new Food(1003,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, ProductCategory.BUFFET, 2, 85.0f, new ArrayList<>()));
-        availableProducts.add(new Food(1007,"Cafe con leche", "Con queso", R.drawable.food_cafe_con_leche, ProductCategory.BUFFET, 2, 85.0f, new ArrayList<>()));
-        availableProducts.add(new Food(1008,"Pebete de JyQ","Con chips de chocolate", R.drawable.food_pebete_jyq, ProductCategory.BUFFET,6, 20.2f, new ArrayList<>()));
-
-        //Kiosko
-        availableProducts.add(new Food(1006,"Galletitas 9 de oro","Con cebolla, morron y queso", R.drawable.food_9_de_oro_agridulce, ProductCategory.KIOSKO, 6, 88.0f, new ArrayList<>()));
-        availableProducts.add(new Food(1004,"Alfajor Pepitos","Con chips de chocolate", R.drawable.food_alfajor_pepitos, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
-        availableProducts.add(new Food(1005,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
-        availableProducts.add(new Food(1009,"Frutigram de chocolate","Rellenas de membrillo", R.drawable.food_frutigran_chocolate, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
-        //TODO carga todos los productos vago
+    private Restaurant(){
+        loadOrders();
+        loadProducts();
+        loadUsers();
     }
 
 
+    public Product getProduct(int id){
+        return availableProducts.get(0);//TODO
+    }
+    public List<Order> getOrders(CommonUser user){
+        return orders;
+    }
 
+    //Get next orders
+    public List<Order> getNextOrders(){
+        //TODO obtener las proximas 20 ordenes
+        //TODO las proximas ordenes para mostrar en FILA
+        return orders;
+    }
 
-    public static Restaurant getInstance() { return INSTANCE; }
+    public void changePassword(int dni,String password){
+        //todo
+    }
+
+    public List<Product> getAvailableProducts(CommonUser user){
+        return availableProducts;//TODO
+    }
+
+    public CommonUser getUser(int dni, String password){
+        return registeredUsers.get(0);//TODO si estan mal la password y dni entonces retorna null, si en la vista retorna null muestra el mensaje de error
+    }
+
 
     public boolean addUser(CommonUser user){
         if (user == null || isRegistered(user)){
@@ -75,6 +80,7 @@ public class Restaurant {
             return true;
         }
     }
+
 
     public boolean removeUser(int icn){
         return registeredUsers.removeIf(registeredUser -> registeredUser.getIdentityCardNumber() == icn);
@@ -106,7 +112,7 @@ public class Restaurant {
     }
 
     public boolean removeFood(int barcode){
-        return availableProducts.removeIf(product -> product.getId() == (id));
+        return availableProducts.removeIf(product -> product.getId() == (barcode));
     }
 
     public boolean existingProduct(int barcode){
@@ -117,16 +123,17 @@ public class Restaurant {
         return false;
     }
 
+
     /***
      * search the orders of a specific user
      //* @param user user to search orders
      * @return unmodifiable list with the orders of the user
      */
-    public List<Order> getOrders(CommonUser user){
+    public List<Order> getOrders2(CommonUser user){
         List<Order> userOrders = new ArrayList<>();
         for(Order order: orders)
             if (order.getPlacedBy().equals(user))
-                    userOrders.add(order);
+                userOrders.add(order);
 
         return Collections.unmodifiableList(userOrders);
     }
@@ -171,7 +178,7 @@ public class Restaurant {
     public List<Order> getPendingOrders(CommonUser u){
         List<Order> userPendingOrders = new ArrayList<>();
         if (registeredUsers.contains(u)) {
-            for (Order pendingOrder : pendingOrders){
+            for (Order pendingOrder : orders){
                 if (pendingOrder.getPlacedBy().equals(u)){
                     userPendingOrders.add(pendingOrder);
                 }
@@ -184,7 +191,17 @@ public class Restaurant {
         for (Product product : order.getItems()){
             availableProducts.get(availableProducts.indexOf(product)).decreaseStock(order.getAmount(product));
         }
-        pendingOrders.add(order);
+        orders.add(order);
+    }
+
+    public int nextOrderNum() {
+        nextOrderNumber++;
+        return nextOrderNumber-1;
+    }
+
+    public void cancelPending(Order order) {
+        orders.remove(order);
+        order.getPlacedBy().addBalance(order.getPrice());
     }
 
 
@@ -197,14 +214,36 @@ public class Restaurant {
         return null;
     }
 
+    //-----------------------------------------------------------------------------------------------------------//
+    //-----------------------------------            LOAD DATA    -----------------------------------------------//
+    //-----------------------------------------------------------------------------------------------------------//
 
-    public int nextOrderNum() {
-        nextOrderNumber++;
-        return nextOrderNumber-1;
+    private void loadOrders(){
+
     }
 
-    public void cancelPending(Order order) {
-        pendingOrders.remove(order);
-        order.getPlacedBy().addBalance(order.getPrice());
+    public void loadUsers(){
+        CommonUser user = new CommonUser("111","Lautaro", "Osinaga", LocalDate.of(1999,5,20), 111,new Condition("Celiaco",new HashSet<>()), Category.ALUMNO,new Discount(10));
+        user.setBalance(1000);
+        registeredUsers.add(user);
+    }
+
+    private void loadProducts(){
+
+        availableProducts.add((new Food(1001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, ProductCategory.DAILY_MENU, 6, 88.0f, new ArrayList<>())));
+
+
+        //Buffet
+        availableProducts.add(new Food(1002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
+        availableProducts.add(new Food(1003,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, ProductCategory.BUFFET, 2, 85.0f, new ArrayList<>()));
+        availableProducts.add(new Food(1007,"Cafe con leche", "Con queso", R.drawable.food_cafe_con_leche, ProductCategory.BUFFET, 2, 85.0f, new ArrayList<>()));
+        availableProducts.add(new Food(1008,"Pebete de JyQ","Con chips de chocolate", R.drawable.food_pebete_jyq, ProductCategory.BUFFET,6, 20.2f, new ArrayList<>()));
+
+        //Kiosko
+        availableProducts.add(new Food(1006,"Galletitas 9 de oro","Con cebolla, morron y queso", R.drawable.food_9_de_oro_agridulce, ProductCategory.KIOSKO, 6, 88.0f, new ArrayList<>()));
+        availableProducts.add(new Food(1004,"Alfajor Pepitos","Con chips de chocolate", R.drawable.food_alfajor_pepitos, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+        availableProducts.add(new Food(1005,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+        availableProducts.add(new Food(1009,"Frutigram de chocolate","Rellenas de membrillo", R.drawable.food_frutigran_chocolate, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+        //TODO carga todos los productos vago
     }
 }
