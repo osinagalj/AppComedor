@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import DataBase.Restaurant;
+
 public class CommonUser implements Serializable {
     private String password;
     private String names;

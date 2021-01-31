@@ -1,4 +1,6 @@
-package Model;
+package DataBase;
+
+import com.example.view.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +9,12 @@ import java.util.List;
 import DAO.OrderDAO;
 import DAO.ProductDAO;
 import DAO.UserDAO;
+import Model.CommonUser;
+import Model.Condition;
+import Model.Food;
+import Model.Order;
+import Model.Product;
+import Model.ProductCategory;
 
 public class Restaurant {
     public static final int MAX_SPECIAL_ORDERS = ProductDAO.maxDailyMenus();
@@ -17,13 +25,43 @@ public class Restaurant {
     private String timeTable;
     private int nextOrderNumber = OrderDAO.LAST_ORDER_NUMBER+1;
     private final List<CommonUser> registeredUsers = UserDAO.registeredUsers();
-    private final List<Product> availableProducts = ProductDAO.avalaibleProducts();
+    private final List<Product> availableProducts = ProductDAO.avalaibleProducts(null);
     private final List<Condition> conditions = UserDAO.usersConditions();
     private final List<Order> orders = new ArrayList<>();
     private final List<Order> pendingOrders = new ArrayList<>();
     public static final Restaurant INSTANCE = new Restaurant();
 
-    private Restaurant(){}
+    private Restaurant(){ }
+
+
+    //TODO el restaurant tiene que ser el backend, seria la base de datos "moqueada" , entonces aca tenemos que
+    // cargarle todo los productos y cuando desde la vista se llame al DAO, el dao en vez de tener consultas SQL llama a los metodos de aca,
+    // entonces todo el procesamiento de informacion se hace en el backend y no en el lado del usuario
+    // Por ejemplo si tengo que obtener el precio del menu del dia, desde la vista unicamente llamo al dao para
+    // que me de el producto del dia, y el dao le pedi al restaurant que le devuelva el menu del dia con el
+    // descuento correspondiente, pero este descuento se aplica en restaurant, no en la vista ni en otro lado.
+    // A la vista ya le llega el menu con descuento, calculado previamente por el restaurant dependiendo el tipo del usuario
+
+
+    private void loadProducs(){
+        //getDailyMenu();
+
+        //Buffet
+        availableProducts.add(new Food(1002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
+        availableProducts.add(new Food(1003,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, ProductCategory.BUFFET, 2, 85.0f, new ArrayList<>()));
+        availableProducts.add(new Food(1007,"Cafe con leche", "Con queso", R.drawable.food_cafe_con_leche, ProductCategory.BUFFET, 2, 85.0f, new ArrayList<>()));
+        availableProducts.add(new Food(1008,"Pebete de JyQ","Con chips de chocolate", R.drawable.food_pebete_jyq, ProductCategory.BUFFET,6, 20.2f, new ArrayList<>()));
+
+        //Kiosko
+        availableProducts.add(new Food(1006,"Galletitas 9 de oro","Con cebolla, morron y queso", R.drawable.food_9_de_oro_agridulce, ProductCategory.KIOSKO, 6, 88.0f, new ArrayList<>()));
+        availableProducts.add(new Food(1004,"Alfajor Pepitos","Con chips de chocolate", R.drawable.food_alfajor_pepitos, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+        availableProducts.add(new Food(1005,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+        availableProducts.add(new Food(1009,"Frutigram de chocolate","Rellenas de membrillo", R.drawable.food_frutigran_chocolate, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+        //TODO carga todos los productos vago
+    }
+
+
+
 
     public static Restaurant getInstance() { return INSTANCE; }
 

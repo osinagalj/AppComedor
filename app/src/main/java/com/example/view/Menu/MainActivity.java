@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.view.DataHolder;
-import com.example.view.Fila.Fragment_fila;
+import com.example.view.Fila.Fragment_queue;
 import com.example.view.Food.NestedRecyclerFood.FragmentFood;
 import com.example.view.MyAccount.FragmentMyAccount;
 import com.example.view.MyOrders.HomeFragment;
@@ -21,6 +21,9 @@ import com.example.view.R;
 import com.example.view.Saldo.FragmentBalance;
 import com.google.android.material.navigation.NavigationView;
 
+import DAO.OrderDAO;
+import DAO.ProductDAO;
+import DAO.UserDAO;
 import Model.CommonUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,12 +50,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener(this);
 
-        loggedUser = DataHolder.getLoggedUser();
 
+        System.out.println("Entro1");
+        //Load the DataBase
+        initiateDAO();
+        System.out.println("Entro2");
+        loggedUser = DataHolder.getLoggedUser();
+        System.out.println("Entro3");
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
+
 
         //cargar fragment principal en la actividad
         fragmentManager = getSupportFragmentManager();
@@ -60,6 +69,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.add(R.id.container_fragment,new FragmentFood());
         fragmentTransaction.commit();
 
+    }
+
+    private void initiateDAO(){
+        ProductDAO.loadProducts();
+        UserDAO.loadUsers();
+        OrderDAO.loadOrders();
     }
 
     @Override
@@ -90,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(menuItem.getItemId() == R.id.Fila){
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment,new Fragment_fila());
+            fragmentTransaction.replace(R.id.container_fragment,new Fragment_queue());
             fragmentTransaction.commit();
         }
         if(menuItem.getItemId() == R.id.balance){

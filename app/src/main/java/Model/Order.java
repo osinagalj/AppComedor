@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import DataBase.Restaurant;
+
 public class Order implements Serializable {
     private static int ordersPlaced = 0;
 
