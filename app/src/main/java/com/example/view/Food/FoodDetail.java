@@ -11,13 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.view.BackEnd;
 import com.example.view.databinding.ActivityFoodDetailsBinding;
 
-import Model.CommonUser;
 import Model.Product;
 import Model.ProductCategory;
 
 public class FoodDetail extends AppCompatActivity {
-
-    CommonUser loggedUser = BackEnd.getLoggedUser();
 
     private ActivityFoodDetailsBinding binding;
 
@@ -29,13 +26,18 @@ public class FoodDetail extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        final Product product =(Product) getIntent().getExtras().get("food_picked");
+        final Product product = (Product) getIntent().getExtras().get("food_picked");
 
+        setProductDetails(product);
+        setUpButtons(product);
+
+    }
+
+    private void setProductDetails(Product product){
         binding.productImg.setImageResource(product.getImgId());
         binding.productName.setText(product.getName());
         binding.productPrice.setText(String.valueOf(product.getPrice()));
         binding.productDescription.setText(product.getDescription());
-
 
 
         boolean isChecked = binding.cbToHome.isChecked();//TODO por si hay que pasarlo a la orden, aca esta el booleano
@@ -44,14 +46,19 @@ public class FoodDetail extends AppCompatActivity {
         }else{
             binding.cbToHome.setVisibility(View.GONE);
         }
+    }
+
+    private void setUpButtons(Product product){
 
         binding.btnAddOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
+                    //TODO aca hay que hacer BackEnd.addProduct(); O BackEnd.addProductHome(); segun corresponda
+                    // la orden esta en backend no en el usuario
                     int addedAmount = Integer.parseInt(binding.productAmount.getText().toString());
-                    BackEnd.getLoggedUser().addProductToCart(product,addedAmount);
-                    BackEnd.getLoggedUser().confirmOrder();
+                    BackEnd.addProduct(product,addedAmount);
+                    BackEnd.confirmOrder();
                     Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
                     openFinishOrder();
                 } catch (NumberFormatException numberFormatException){
@@ -65,7 +72,7 @@ public class FoodDetail extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     int addedAmount = Integer.parseInt(binding.productAmount.getText().toString());
-                    BackEnd.getLoggedUser().addProductToCart(product,addedAmount);
+                    BackEnd.addProduct(product,addedAmount);
                     finish();
                 } catch (NumberFormatException numberFormatException){
                     Toast.makeText(getBaseContext(), "No ingreso un numero valido", Toast.LENGTH_SHORT).show();
@@ -108,7 +115,6 @@ public class FoodDetail extends AppCompatActivity {
         });
 
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

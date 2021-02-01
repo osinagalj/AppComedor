@@ -39,7 +39,7 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.MyO
 
     @NonNull
     @Override
-    public com.example.view.MyOrders.Fragment.Pendientes.AdapterPendientes.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterPendientes.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.row_order_pendiente_new, parent, false);
         view.setOnClickListener(this);
         button_remove = (Button) view.findViewById(R.id.row_pending_order_new_button_remove);

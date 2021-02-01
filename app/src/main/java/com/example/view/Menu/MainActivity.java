@@ -12,7 +12,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.view.BackEnd;
 import com.example.view.Fila.Fragment_queue;
 import com.example.view.Food.NestedRecyclerFood.FragmentFood;
 import com.example.view.MyAccount.FragmentMyAccount;
@@ -20,8 +19,6 @@ import com.example.view.MyOrders.HomeFragment;
 import com.example.view.R;
 import com.example.view.Saldo.FragmentBalance;
 import com.google.android.material.navigation.NavigationView;
-
-import Model.CommonUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FragmentTransaction fragmentTransaction;
     //variable del fragment detalle
 
-    CommonUser loggedUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        loggedUser = BackEnd.getLoggedUser();
-
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
@@ -59,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //cargar fragment principal en la actividad
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container_fragment,new FragmentFood());
+        fragmentTransaction.add(R.id.container_fragment,new HomeFragment());
         fragmentTransaction.commit();
 
     }

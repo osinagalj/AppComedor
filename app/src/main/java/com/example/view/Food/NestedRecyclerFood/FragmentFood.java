@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,46 +14,42 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.view.BackEnd;
-import com.example.view.Food.Carrito.Carrito;
-import com.example.view.R;
+import com.example.view.Food.Carrito.ActivityCart;
+import com.example.view.databinding.FragmentFoodBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import DAO.ProductDAO;
 import Model.Product;
 import Model.ProductCategory;
 
 public class FragmentFood extends Fragment {
 
-    RecyclerView mainCategoryRecycler;
     MainRecyclerAdapter mainRecyclerAdapter;
-    View view2;
-    LinearLayout bottom;
+    private FragmentFoodBinding binding;
 
-
+    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        View view = inflater.inflate(R.layout.fragment_food, container, false);
-        bottom = view.findViewById(R.id.fragment_food_layout_make_order);
-        view2 = view;
-        mainCategoryRecycler = view2.findViewById(R.id.main_recycler);
-
         ((AppCompatActivity) getContext()).getSupportActionBar().setTitle("Comidas");
+        super.onCreate(savedInstanceState);
+        binding = FragmentFoodBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
 
-        Button button_finish_order = view.findViewById(R.id.fragment_food_button_make_order);
-        button_finish_order.setOnClickListener(new View.OnClickListener() {
+        setUpButtons();
+        loadData();
+       // showCarrito();
+
+        return view;
+    }
+
+    private void setUpButtons(){
+        binding.openCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openCarrito(view);
+                openCarrito();
             }
         });
-
-        showCarrito();
-        loadData();
-        return view;
     }
 
     @Override
@@ -63,29 +57,26 @@ public class FragmentFood extends Fragment {
         super.onResume();
         // Check should we need to refresh the fragment
         showCarrito();
-
     }
 
     private void showCarrito() {
-        if (BackEnd.getLoggedUser().cartIsEmpty()) {
-            bottom.setVisibility(View.GONE);
+        if (BackEnd.getProductsOrder().isEmpty()) {
+            binding.layoutCart.setVisibility(View.GONE);
         } else {
-            bottom.setVisibility(View.VISIBLE);
+            binding.layoutCart.setVisibility(View.VISIBLE);
         }
     }
 
-    private void openCarrito(View view) {
-        Intent intent = new Intent(getContext(), Carrito.class);
+    private void openCarrito() {
+        Intent intent = new Intent(getContext(), ActivityCart.class);
         startActivity(intent);
-
-        //FragmantClass rSum = new FragmantClass(); getSupportFragmentManager().beginTransaction().remove(rSum).commit();
     }
 
     public void loadData() {
 
         List<AllCategory> allCategoryList = new ArrayList<>();
 
-        List<Product> consumables = ProductDAO.getProducts(BackEnd.getLoggedUser());
+        List<Product> consumables = BackEnd.getProducts();
         for (ProductCategory category : ProductCategory.values()){
             List<Product> catList = new ArrayList<>();
             for (Product product : consumables)
@@ -98,15 +89,12 @@ public class FragmentFood extends Fragment {
         setMainCategoryRecycler(allCategoryList);
     }
 
-
     private void setMainCategoryRecycler(List<AllCategory> allCategoryList){
 
-        final List<AllCategory> a = allCategoryList;
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        mainCategoryRecycler.setLayoutManager(layoutManager);
+        binding.mainRecycler.setLayoutManager(layoutManager);
         mainRecyclerAdapter = new MainRecyclerAdapter(getContext(), allCategoryList);
-        mainCategoryRecycler.setAdapter(mainRecyclerAdapter);
+        binding.mainRecycler.setAdapter(mainRecyclerAdapter);
 
     }
 

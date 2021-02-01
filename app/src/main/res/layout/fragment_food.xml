@@ -4,32 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="50dp"
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="55dp"
         android:orientation="vertical" />
 
     <LinearLayout
-        android:id="@+id/fragment_food_layout_make_order"
+        android:id="@+id/layout_cart"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:background="@drawable/rectangule"
         android:padding="5dp"
         android:layout_height="wrap_content">
         <Button
-            android:id="@+id/fragment_food_button_make_order"
+            android:id="@+id/open_cart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="@string/ver_carrito" />
 
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Realizar Orden" />
     </LinearLayout>
 
 </RelativeLayout>

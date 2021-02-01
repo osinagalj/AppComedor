@@ -21,12 +21,13 @@ public class UserDAO {
         //TODO Cargar plata al usuario
     }
 
-    public static void chargeUser(int dni, float amount){
+    public static boolean chargeUser(int dni, float amount){
         //TODO eliminar plata del usuario
+        return true;
     }
 
     public static void changePassword(int dni, String password){
-        Restaurant.getInstance().changePassword(dni,"a");
+        Restaurant.getInstance().changePassword(dni,password);
     }
 
     public static void addUser(CommonUser user){
