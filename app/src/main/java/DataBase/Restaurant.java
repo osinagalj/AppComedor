@@ -64,6 +64,14 @@ public class Restaurant {
     public List<Product> getAvailableProducts(CommonUser user){
         return availableProducts;//TODO
     }
+    public void getDailyMenu(CommonUser user){
+        //TODO
+
+
+
+    }
+
+
 
     public CommonUser getUser(int dni, String password){
         return registeredUsers.get(0);//TODO si estan mal la password y dni entonces retorna null, si en la vista retorna null muestra el mensaje de error
@@ -187,10 +195,16 @@ public class Restaurant {
         return userPendingOrders;
     }
 
+    /*
     public void addOrder(Order order){
         for (Product product : order.getItems()){
             availableProducts.get(availableProducts.indexOf(product)).decreaseStock(order.getAmount(product));
         }
+        orders.add(order);
+    }
+    */
+
+    public void addOrder(Order order){
         orders.add(order);
     }
 
@@ -230,8 +244,9 @@ public class Restaurant {
 
     private void loadProducts(){
 
-        availableProducts.add((new Food(1001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, ProductCategory.DAILY_MENU, 6, 88.0f, new ArrayList<>())));
 
+        Food f = new Food(1001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, ProductCategory.DAILY_MENU, 6, 88.0f, new ArrayList<>());
+        availableProducts.add(f);
 
         //Buffet
         availableProducts.add(new Food(1002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));

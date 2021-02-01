@@ -4,12 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
-
-import DataBase.Restaurant;
 
 public class CommonUser implements Serializable {
     private String password;
@@ -21,9 +17,9 @@ public class CommonUser implements Serializable {
     private Condition condition;
     private Category category; //Esto probablemente lo borre
     private PriceCalculator priceCalculator;
-    private List<Order> completedOrders;
-    private int dailySpecialRemaining;
-    private Map<Product,Integer> cart = new HashMap<>();
+    private List<Order> completedOrders; //no se si va
+    private int dailySpecialRemaining; //se consulta a la base esto
+
     private float cartAmount = 0; // ??????????????Variable para no realizar el calculo en cada producto que se agrega
     //TODO falta una imagen del perfil
 
@@ -47,7 +43,8 @@ public class CommonUser implements Serializable {
      * sufficient balance and stock is available
      * @return true or false whether the order could be confirmed or not
      */
-    public boolean confirmOrder(){
+    /*
+    public boolean confirmOrder(){ //todo ESTO NO VA ACA TAMPOCO
         float updatedCartPrice = 0;
         for (Product product: cart.keySet()){
             updatedCartPrice+=product.getPrice()*cart.get(product);
@@ -64,7 +61,7 @@ public class CommonUser implements Serializable {
         cart = new HashMap<>();
         cartAmount = 0;
         return true;
-    }
+    }*/
 
     public String getPassword() {
         return password;
@@ -167,10 +164,11 @@ public class CommonUser implements Serializable {
         return Objects.hash(identityCardNumber);
     }
 
-    public boolean cartIsEmpty() {
+    /*public boolean cartIsEmpty() {
         return cart.isEmpty();
     }
-
+*/
+    /*
     public boolean addProductToCart(Product product, int qty){
         if (getCartTotalPrice() + product.getPrice()*qty > balance){
             return false;
@@ -203,7 +201,7 @@ public class CommonUser implements Serializable {
             return cart.get(product);
         return 0;
     }
-
+*/
     public List<Order> getConfirmedOrders(){
         return Collections.unmodifiableList(completedOrders);
     }
@@ -211,11 +209,11 @@ public class CommonUser implements Serializable {
     public boolean addConfirmedOrder(Order order){
         return completedOrders.add(order);
     }
-
+/*
     public void removeCartProduct(Product product) {
         cart.remove(product);
     }
-
+*/
     public void addBalance(float price) {
         if (price > 0)
             balance+=price;

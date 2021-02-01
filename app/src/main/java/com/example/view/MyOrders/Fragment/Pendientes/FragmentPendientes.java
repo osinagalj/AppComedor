@@ -18,7 +18,6 @@ import com.example.view.R;
 
 import java.util.ArrayList;
 
-import DataBase.Restaurant;
 import Model.Order;
 
 
@@ -43,7 +42,7 @@ public class FragmentPendientes extends Fragment {
     }
 
     public void cargarLista(){
-        listaFoods.addAll(Restaurant.getInstance().getPendingOrders(BackEnd.getLoggedUser()));
+        listaFoods.addAll(BackEnd.getPendingOrders());
     }
 
     private void mostrarData() {

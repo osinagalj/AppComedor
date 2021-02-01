@@ -13,14 +13,16 @@ public class ProductDAO {
         return Restaurant.getInstance().getAvailableProducts(user);
     }
 
+    public static void getDailyMenu(CommonUser user){
+        Restaurant.getInstance().getDailyMenu(user);
+    }
+
     public static Product getProductById(int id){
         return Restaurant.getInstance().getProduct(id);
     }
-    public static void loadProduct(){
 
-    }
-    public static void removeProduct(){
+    public static void loadProduct(){ }
 
-    }
+    public static void removeProduct(){ }
 
 }

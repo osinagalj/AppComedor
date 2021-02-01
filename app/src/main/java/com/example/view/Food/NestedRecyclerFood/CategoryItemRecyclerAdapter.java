@@ -48,7 +48,6 @@ public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryIt
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context, FoodDetail.class);
-
                 i.putExtra("food_picked", categoryItemList.get(position)); //put the Movie object inside Intent which was clicked
                 context.startActivity(i); //start a
 

@@ -123,4 +123,10 @@ public class Order implements Serializable {
         return Collections.unmodifiableList(new ArrayList<>(toHome.keySet()));
     }
 
+    public void changeAmount(Product product, int amount){
+        //TODO
+        int old = items.get(product);
+        items.remove(product);
+        items.put(product, old + amount);
+    }
 }

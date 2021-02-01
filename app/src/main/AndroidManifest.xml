@@ -44,7 +44,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".Food.Carrito.Carrito"
+            android:name=".Food.Carrito.ActivityCart"
             android:label="@string/title_activity_pdf"
             android:theme="@style/AppTheme.NoActionBar" />
 

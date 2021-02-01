@@ -19,12 +19,11 @@ import java.util.List;
 
 import Model.Product;
 
-public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.Carrito.AdapterCarrito.ViewHolder> implements View.OnClickListener {
+public class AdapterCarrito extends RecyclerView.Adapter<AdapterCarrito.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
-    List<Product> model = BackEnd.getLoggedUser().getCartProducts();
+    List<Product> model =  new ArrayList<>();
     Context context;
-    private int count = 0;
     ImageButton button;
     private View.OnClickListener listener;
 
@@ -32,17 +31,19 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
     public AdapterCarrito(Context context, ArrayList<Product> model) {//TODO borrar el segundo parametro
         this.inflater = LayoutInflater.from(context);
         this.context = context;
+        this.model = model;
     }
 
 
     @NonNull
     @Override
-    public com.example.view.Food.Carrito.AdapterCarrito.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterCarrito.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.row_order_pendiente, parent, false);
-        view.setOnClickListener(this);
-        button = (ImageButton) view.findViewById(R.id.row_pending_order_button_remove);
 
-        return new com.example.view.Food.Carrito.AdapterCarrito.ViewHolder(view);
+        view.setOnClickListener(this);
+        button = view.findViewById(R.id.row_pending_order_button_remove);
+
+        return new AdapterCarrito.ViewHolder(view);
     }
 
     public void setOnclickListener(View.OnClickListener listener) {
@@ -50,17 +51,20 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.example.view.Food.Carrito.AdapterCarrito.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull AdapterCarrito.ViewHolder holder, final int position) {
         String product_name = model.get(position).getName();
         int product_nro = model.get(position).getId();
         String product_price = String.valueOf(model.get(position).getPrice());
-        int produc_amount = BackEnd.getLoggedUser().getCartProductAmount(model.get(position));
+
+        int produc_amount = BackEnd.getAmount(model.get(position));
+
+        //float produc_amount = BackEnd.getProducts().get(model.get(position))model.get(position).getPrice(); //todo
         int product_img = model.get(position).getImgId();
 
         holder.product_name.setText("#"+product_nro);
         holder.product_description.setText(product_name);
         holder.product_price.setText("Precio x Unidad: " + product_price);
-        float tot = model.get(position).getPrice() * produc_amount;
+        float tot = model.get(position).getPrice() * produc_amount; //TODO
         holder.product_total_price.setText("Total: " + tot );
 
 
@@ -75,8 +79,9 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BackEnd.getLoggedUser().removeCartProduct(model.get(position));
-                model = BackEnd.getLoggedUser().getCartProducts();
+                //BackEnd.removeProduct(model.get(position));
+                model.remove(model.get(position));
+                //model = BackEnd.getProducts();
                 notifyDataSetChanged();
                 notifyItemRangeChanged(position,getItemCount());
             }
@@ -100,19 +105,14 @@ public class AdapterCarrito extends RecyclerView.Adapter<com.example.view.Food.C
         TextView product_name, product_description, product_price,product_amount, product_total_price;
         ImageView product_img;
 
-
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
-            //TODO ACA SE VINCULA LA VISTA CON EL MODELO
             product_name = itemView.findViewById(R.id.row_pending_order_label_product_name);
             product_description = itemView.findViewById(R.id.row_pending_order_label_product_description);
             product_price = itemView.findViewById(R.id.row_pending_order_label_product_price);
             product_total_price = itemView.findViewById(R.id.row_pending_order_label_product_total_price);
             product_img = itemView.findViewById(R.id.row_pending_order_imageView_product_img);
             product_amount = itemView.findViewById(R.id.row_pending_order_label_amount);
-
-
-
         }
     }
 }

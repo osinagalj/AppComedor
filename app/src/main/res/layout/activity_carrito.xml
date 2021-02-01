@@ -2,15 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content">
         <ImageButton
-            android:id="@+id/carrito_button_close"
+            android:id="@+id/btn_close"
             android:layout_width="61dp"
             android:layout_height="60dp"
             android:background="@drawable/ic_close" />
@@ -31,7 +30,7 @@
             android:text="@string/price" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_carrito"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_marginBottom="100dp"
             android:layout_height="wrap_content" />
@@ -39,7 +38,6 @@
 
 
     <LinearLayout
-        android:id="@+id/fragment_food_layout_make_order"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         android:background="@drawable/rectangule"
@@ -47,21 +45,21 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <Button
-            android:id="@+id/carrito_button_add"
+            android:id="@+id/btn_add_products"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-
             android:backgroundTint="@color/colorPrimary"
-            android:text="Agregar Productos" />
+            android:text="@string/agregar_productos" />
+
         <Button
-            android:id="@+id/carrito_button_make_order"
+            android:id="@+id/btn_finish_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-
             android:backgroundTint="@color/colorPrimary"
-            android:text="Realizar Orden" />
+            android:text="@string/realizar_orden" />
+
     </LinearLayout>
 
 

@@ -11,8 +11,8 @@ public class OrderDAO {
 
 
 
-    public static void loadOrder(CommonUser user,Order order){
-        //DataBase.add(order, user)
+    public static void loadOrder(Order order){
+        Restaurant.getInstance().addOrder(order);
     }
 
     public static void confimOrder(Order order){
@@ -38,7 +38,6 @@ public class OrderDAO {
 
     //No se si hay que diferenciar en la base de datos entre ordenes confimadas y pendientes
     public static List<Order> getPendingOrders(CommonUser user) {
-        List<Order> completedOrders = new ArrayList<>();
-        return completedOrders;
+        return Restaurant.getInstance().getPendingOrders(user);
     }
 }
