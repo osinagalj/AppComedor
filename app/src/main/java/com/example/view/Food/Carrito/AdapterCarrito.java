@@ -79,7 +79,7 @@ public class AdapterCarrito extends RecyclerView.Adapter<AdapterCarrito.ViewHold
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //BackEnd.removeProduct(model.get(position));
+                BackEnd.removeProduct(model.get(position));
                 model.remove(model.get(position));
                 //model = BackEnd.getProducts();
                 notifyDataSetChanged();

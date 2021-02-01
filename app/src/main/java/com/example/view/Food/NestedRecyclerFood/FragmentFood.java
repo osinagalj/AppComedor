@@ -38,7 +38,6 @@ public class FragmentFood extends Fragment {
 
         setUpButtons();
         loadData();
-       // showCarrito();
 
         return view;
     }

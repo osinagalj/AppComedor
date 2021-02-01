@@ -54,10 +54,14 @@ public class FoodDetail extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    //TODO aca hay que hacer BackEnd.addProduct(); O BackEnd.addProductHome(); segun corresponda
-                    // la orden esta en backend no en el usuario
+                    //Get the amount
                     int addedAmount = Integer.parseInt(binding.productAmount.getText().toString());
-                    BackEnd.addProduct(product,addedAmount);
+                    //Add the food
+                    if(product.getCategory().equals(ProductCategory.DAILY_MENU) && binding.cbToHome.isChecked())
+                        BackEnd.addProductHome(product,addedAmount);
+                    else
+                        BackEnd.addProduct(product,addedAmount);
+                    //Send the order to the DataBase
                     BackEnd.confirmOrder();
                     Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
                     openFinishOrder();
@@ -79,7 +83,6 @@ public class FoodDetail extends AppCompatActivity {
                 }
             }
         });
-
 
         binding.btnClose.setOnClickListener(new View.OnClickListener() {
             @Override

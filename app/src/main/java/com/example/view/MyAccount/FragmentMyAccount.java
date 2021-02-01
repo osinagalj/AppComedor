@@ -60,4 +60,10 @@ public class FragmentMyAccount extends Fragment {
         });
     }
 
+    @Override
+    public void onResume() { //Necesario para que se actualice la vista
+        super.onResume();
+        binding.myAccountLabelPassword.setText(BackEnd.getLoggedUser().getPassword());
+    }
+
 }

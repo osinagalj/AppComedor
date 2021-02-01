@@ -32,8 +32,8 @@
             android:layout_marginStart="19dp"
             android:layout_marginTop="14dp"
             android:layout_marginEnd="31dp"
-            android:text="Tiempo de Espera aprox"
-            android:textSize="20dp"
+            android:text="@string/tiempo_de_espera_aprox"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.092"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/order_number"
             android:layout_width="138dp"
             android:layout_height="38dp"
             android:layout_alignParentTop="true"
@@ -68,14 +68,14 @@
             tools:layout_editor_absoluteY="40dp" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/fila_nro_order"
             android:layout_marginStart="24dp"
             android:layout_marginTop="12dp"
             android:text="00:00"
-            android:textSize="20dp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="119dp" />
@@ -87,14 +87,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
-        android:text="Proximos pedidos en el Comedor"
+        android:text="@string/proximos_pedidos_en_el_comedor"
         android:textColor="#105661"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linear_fila" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_fila"
+        android:id="@+id/rv_queue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

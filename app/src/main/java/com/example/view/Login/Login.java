@@ -12,7 +12,6 @@ import com.example.view.Menu.MainActivity;
 import com.example.view.databinding.ActivityLoginBinding;
 
 import DataBase.Restaurant;
-import Model.CommonUser;
 
 public class Login extends AppCompatActivity {
 
@@ -38,9 +37,9 @@ public class Login extends AppCompatActivity {
                     badLoginData();
                 }
                 String password = binding.userPassword.getText().toString();
-                CommonUser user = restaurant.validateLoginData(dni,password);
-                if (user != null)
-                    sign_in(user);
+                if(BackEnd.setLoggedUser(dni,password)){
+                    sign_in();
+                }
                 else{
                     badLoginData();
                 }
@@ -62,9 +61,9 @@ public class Login extends AppCompatActivity {
         binding.userPassword.setText("");
     }
 
-    public void sign_in(CommonUser logged_user) {
+    public void sign_in() {
         Intent intent = new Intent(this, MainActivity.class);
-        BackEnd.setLoggedUser(logged_user.getIdentityCardNumber(),logged_user.getPassword());
+        //BackEnd.setLoggedUser(logged_user.getIdentityCardNumber(),logged_user.getPassword());
         startActivity(intent);
     }
 

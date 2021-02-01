@@ -39,7 +39,7 @@ public class FragmentConfirmed  extends Fragment {
         return view;
     }
     public void cargarLista(){
-        listaFoods.addAll(BackEnd.getLoggedUser().getConfirmedOrders());
+        listaFoods.addAll(BackEnd.getConfirmedOrders());
     }
     private void mostrarData(){
         recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));

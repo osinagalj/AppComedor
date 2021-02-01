@@ -8,6 +8,7 @@
     android:layout_marginStart="10dp"
     android:layout_marginEnd="10dp"
     android:layout_marginTop="5dp"
+    android:background="@color/colorPrimary"
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -59,11 +60,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_marginStart="10dp"
+                        android:textColor="#000"
                         android:text="18/12/2020, 20:31"
                         android:textAlignment="textStart"
                         android:textSize="16sp"/>
                 </LinearLayout>
-
 
             </LinearLayout>
 
@@ -113,6 +114,7 @@
                 android:textColor="@color/colorPrimary"
                 android:textAlignment="center"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 android:background="@android:color/white"
                 android:text="@string/ver_detalle" />
 
@@ -121,7 +123,7 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#F30000"
+                android:textColor="#EF2828"
                 android:textSize="16sp"
 
                 android:textAlignment="textStart"

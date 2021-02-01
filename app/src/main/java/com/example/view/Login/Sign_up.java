@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.view.BackEnd;
 import com.example.view.databinding.ActivitySignUpBinding;
 
 import java.time.LocalDate;
@@ -125,9 +126,20 @@ public class Sign_up extends AppCompatActivity {
         } else {
             newUserCondition = Restaurant.getInstance().getCondition("Ninguna");
         }
-        CommonUser newUser = new CommonUser(binding.password.getText().toString(), binding.name.getText().toString(), binding.lastName.getText().toString(),
-                LocalDate.of(1, 1, 1), parsedICN, newUserCondition,getCategory(category), userCategory);
-        Restaurant.getInstance().addUser(newUser);
+
+        CommonUser newUser = new CommonUser(
+                parsedICN,
+                binding.password.getText().toString(),
+                0f,
+                binding.name.getText().toString(),
+                binding.lastName.getText().toString(),
+                LocalDate.of(1, 1, 1),
+                newUserCondition,
+                getCategory(category),
+                userCategory
+        );
+
+        BackEnd.addUser(newUser);
 
         success();
     }
@@ -164,7 +176,6 @@ public class Sign_up extends AppCompatActivity {
                 finish();
             }
         });
-
 
         // Create the AlertDialog object and return it
         builder.create().show();
