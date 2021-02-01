@@ -129,4 +129,13 @@ public class Order implements Serializable {
         items.remove(product);
         items.put(product, old + amount);
     }
+
+    public void removeProduct(Product product){
+        if (items.containsKey(product))
+            items.remove(product);
+        else
+            if(toHome.containsKey(product))
+                toHome.remove(product);
+    }
+
 }

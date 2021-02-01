@@ -46,7 +46,7 @@ public class ActivityCart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO eliminar los productos de la orden actual
-                if(!BackEnd.getProducts().isEmpty()){
+                if(!BackEnd.orderIsEmpty()){
                     showSimpleDialog(v);
                 }else{
                     finish();

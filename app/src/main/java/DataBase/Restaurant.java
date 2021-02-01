@@ -5,6 +5,7 @@ import com.example.view.R;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
@@ -25,23 +26,36 @@ public class Restaurant {
     private String university;
     private String timeTable;
 
-    public static final int LAST_ORDER_NUMBER = 100000;
+    public static final int LAST_ORDER_NUMBER = 10000;
 
-    private int nextOrderNumber = 2;
+    private int nextOrderNumber = 10000;
     private final List<CommonUser> registeredUsers = new ArrayList<>();
     private final List<Product> availableProducts = new ArrayList<>();
     private final List<Order> orders = new ArrayList<>();
+    private final List<Order> ordersCompleted = new ArrayList<>();
+
     private final List<Condition> conditions = UserDAO.usersConditions();
 
     public static final Restaurant INSTANCE = new Restaurant();
+
     public static Restaurant getInstance() { return INSTANCE; }
 
     private Restaurant(){
-        loadOrders();
-        loadProducts();
         loadUsers();
+        loadProducts();
+
+    }
+    public void loadOrdersDB(){
+        loadOrders(); //TODO hay que cargarlasdespues porque se rompe sino al no estar creada la instancia y querer acceder al proximo numero de orden
     }
 
+    public List<Order> getOrdersCompleted(CommonUser user){
+        List<Order> user_orders = new ArrayList<>();
+        for(Order order : ordersCompleted)
+            if(order.getPlacedBy().getIdentityCardNumber() == user.getIdentityCardNumber())
+                user_orders.add(order);
+        return user_orders;
+    }
 
     public Product getProduct(int id){
         return availableProducts.get(0);//TODO
@@ -51,30 +65,41 @@ public class Restaurant {
     }
 
     //Get next orders
-    public List<Order> getNextOrders(){
-        //TODO obtener las proximas 20 ordenes
-        //TODO las proximas ordenes para mostrar en FILA
-        return orders;
+    public List<String> getNextOrders(){
+
+        List<String> next_orders = new ArrayList<>();
+        int i = 0;
+        while(i<20 && i < orders.size()){
+            next_orders.add("#"+ String.valueOf(orders.get(i).getId()));
+            i++;
+        }
+        return next_orders;
     }
 
-    public void changePassword(int dni,String password){
-        //todo
-    }
+
 
     public List<Product> getAvailableProducts(CommonUser user){
         return availableProducts;//TODO
     }
-    public void getDailyMenu(CommonUser user){
-        //TODO
 
 
+    //-------------------------------------------------------------------------------------------//
+    //-----------------------------      User    ------------------------------------------------//
+    //-------------------------------------------------------------------------------------------//
 
-    }
-
-
-
-    public CommonUser getUser(int dni, String password){
-        return registeredUsers.get(0);//TODO si estan mal la password y dni entonces retorna null, si en la vista retorna null muestra el mensaje de error
+    /***
+     * check if a user is registered in the system
+     * @param icn icn to validate
+     * @param password password to validad
+     * @return a CommonUser instance for which the icn was entered or null in case the user doesnt exist
+     */
+    public CommonUser validateLoginData(int icn, String password){
+        for (CommonUser user : registeredUsers){
+            if (user.getIdentityCardNumber() == icn && user.getPassword().equals(password)){
+                return user;
+            }
+        }
+        return null;
     }
 
 
@@ -88,7 +113,6 @@ public class Restaurant {
             return true;
         }
     }
-
 
     public boolean removeUser(int icn){
         return registeredUsers.removeIf(registeredUser -> registeredUser.getIdentityCardNumber() == icn);
@@ -110,6 +134,29 @@ public class Restaurant {
         return false;
     }
 
+    public boolean loadMoney(int icn, float amount){
+        for (CommonUser user : registeredUsers) {
+            if (user.getIdentityCardNumber() == icn){
+                user.addBalance(amount);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean changePassword(int icn, String new_password){
+        for (CommonUser user : registeredUsers) {
+            if (user.getIdentityCardNumber() == icn){
+                user.setPassword(new_password);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //-------------------------------------------------------------------------------------------//
+    //-----------------------------   Products   ------------------------------------------------//
+    //-------------------------------------------------------------------------------------------//
     public boolean addProduct(Product product){
         if (product != null && existingProduct(product.getId())){
             return false;
@@ -131,6 +178,10 @@ public class Restaurant {
         return false;
     }
 
+
+    //-------------------------------------------------------------------------------------------//
+    //-----------------------------     Orders   ------------------------------------------------//
+    //-------------------------------------------------------------------------------------------//
 
     /***
      * search the orders of a specific user
@@ -160,20 +211,7 @@ public class Restaurant {
         return Collections.unmodifiableList(consumableProducts);
     }
 
-    /***
-     * check if a user is registered in the system
-     * @param icn icn to validate
-     * @param password password to validad
-     * @return a CommonUser instance for which the icn was entered or null in case the user doesnt exist
-     */
-    public CommonUser validateLoginData(int icn, String password){
-        for (CommonUser user : registeredUsers){
-            if (user.getIdentityCardNumber() == icn && user.getPassword().equals(password)){
-                return user;
-            }
-        }
-        return null;
-    }
+
 
     public void addStock(int barcode,int stock){
         for(Product product : availableProducts){
@@ -233,32 +271,57 @@ public class Restaurant {
     //-----------------------------------------------------------------------------------------------------------//
 
     private void loadOrders(){
+        HashMap<Product,Integer> products = new HashMap<>();
+        products.put(availableProducts.get(0),4);
+
+        //Completed orders
+        ordersCompleted.add( new Order(registeredUsers.get(0),products,new HashMap<>()));
+        ordersCompleted.add(new Order(registeredUsers.get(0),products,new HashMap<>()));
+
+        //Pending orders
+        orders.add( new Order(registeredUsers.get(1),products,new HashMap<>()));
+        orders.add( new Order(registeredUsers.get(0),products,new HashMap<>()));
+        orders.add( new Order(registeredUsers.get(1),products,new HashMap<>()));
+        orders.add( new Order(registeredUsers.get(1),products,new HashMap<>()));
+        orders.add( new Order(registeredUsers.get(1),products,new HashMap<>()));
+        orders.add( new Order(registeredUsers.get(0),products,new HashMap<>()));
+        orders.add( new Order(registeredUsers.get(2),products,new HashMap<>()));
+        orders.add( new Order(registeredUsers.get(2),products,new HashMap<>()));
+        orders.add(new Order(registeredUsers.get(2),products,new HashMap<>()));
+
 
     }
 
     public void loadUsers(){
-        CommonUser user = new CommonUser("111","Lautaro", "Osinaga", LocalDate.of(1999,5,20), 111,new Condition("Celiaco",new HashSet<>()), Category.ALUMNO,new Discount(10));
-        user.setBalance(1000);
-        registeredUsers.add(user);
+
+        registeredUsers.add(new CommonUser(111,"111",1200f,"Lautaro", "Osinaga", LocalDate.of(1999,5,20), new Condition("Celiaco",new HashSet<>()), Category.ALUMNO,new Discount(10)));
+        registeredUsers.add(new CommonUser(222,"222",700f,"Gian", "Capo", LocalDate.of(1999,5,20), new Condition("Celiaco",new HashSet<>()), Category.ALUMNO,new Discount(10)));
+        registeredUsers.add(new CommonUser(333,"333",800f,"Gian", "Capo", LocalDate.of(1999,5,20), new Condition("Celiaco",new HashSet<>()), Category.ALUMNO,new Discount(10)));
     }
 
     private void loadProducts(){
 
-
-        Food f = new Food(1001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, ProductCategory.DAILY_MENU, 6, 88.0f, new ArrayList<>());
-        availableProducts.add(f);
+        //Menu del dia
+        availableProducts.add(new Food(1001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, ProductCategory.DAILY_MENU, 6, 88.0f, new ArrayList<>()));
 
         //Buffet
         availableProducts.add(new Food(1002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo, ProductCategory.BUFFET, 6, 88.0f, new ArrayList<>()));
         availableProducts.add(new Food(1003,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, ProductCategory.BUFFET, 2, 85.0f, new ArrayList<>()));
         availableProducts.add(new Food(1007,"Cafe con leche", "Con queso", R.drawable.food_cafe_con_leche, ProductCategory.BUFFET, 2, 85.0f, new ArrayList<>()));
         availableProducts.add(new Food(1008,"Pebete de JyQ","Con chips de chocolate", R.drawable.food_pebete_jyq, ProductCategory.BUFFET,6, 20.2f, new ArrayList<>()));
+        availableProducts.add(new Food(1009,"Pizza","Porcion de 200 g", R.drawable.food_porcion_pizza, ProductCategory.BUFFET,6, 20.2f, new ArrayList<>()));
+        availableProducts.add(new Food(1009,"Tostado","de JyQ", R.drawable.food_tostado_jyq, ProductCategory.BUFFET,6, 20.2f, new ArrayList<>()));
+        availableProducts.add(new Food(1009,"Vaso de Coca-Cola","200 ml", R.drawable.food_vaso_coca, ProductCategory.BUFFET,6, 20.2f, new ArrayList<>()));
+        availableProducts.add(new Food(1009,"Coca-Cola 500 ml","Botella de Coca-Cola", R.drawable.food_botella_coca, ProductCategory.BUFFET,6, 20.2f, new ArrayList<>()));
+        availableProducts.add(new Food(1009,"Empanada","De carne, cebolla y morron", R.drawable.food_empanada, ProductCategory.BUFFET,6, 20.2f, new ArrayList<>()));
 
         //Kiosko
-        availableProducts.add(new Food(1006,"Galletitas 9 de oro","Con cebolla, morron y queso", R.drawable.food_9_de_oro_agridulce, ProductCategory.KIOSKO, 6, 88.0f, new ArrayList<>()));
+        availableProducts.add(new Food(1006,"Galletitas 9 de oro","Agridulce", R.drawable.food_9_de_oro_agridulce, ProductCategory.KIOSKO, 6, 88.0f, new ArrayList<>()));
         availableProducts.add(new Food(1004,"Alfajor Pepitos","Con chips de chocolate", R.drawable.food_alfajor_pepitos, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
         availableProducts.add(new Food(1005,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
-        availableProducts.add(new Food(1009,"Frutigram de chocolate","Rellenas de membrillo", R.drawable.food_frutigran_chocolate, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
-        //TODO carga todos los productos vago
+        availableProducts.add(new Food(1009,"Frutigram de chocolate","Con chips de chocolate", R.drawable.food_frutigran_chocolate, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+        availableProducts.add(new Food(1009,"Pepas 9 de Oro","Rellenas con membrillo", R.drawable.food_pepas_9_de_oro, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+        availableProducts.add(new Food(1009,"Pepas chocotrio","Rellenas con membrillo recubiertas de chocolate", R.drawable.food_pepas_trio_chocotrio, ProductCategory.KIOSKO,6, 20.2f, new ArrayList<>()));
+
     }
 }

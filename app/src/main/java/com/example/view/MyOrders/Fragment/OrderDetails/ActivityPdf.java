@@ -58,7 +58,9 @@ public class ActivityPdf extends AppCompatActivity {
         ZonedDateTime zonedDateTime = order.getPlacedInstant().atZone(ZoneOffset.UTC);
         binding.timeHour.setText(zonedDateTime.toLocalTime().toString());
         binding.timeDay.setText(zonedDateTime.toLocalDate().toString());
-        binding.userName.setText(order.getPlacedBy().getNames());
+        String full_name = order.getPlacedBy().getNames() + " " + order.getPlacedBy().getLastname();
+        binding.userName.setText(full_name);
+
 
         List<Product> products = order.getItems();
         for(Product product : products){

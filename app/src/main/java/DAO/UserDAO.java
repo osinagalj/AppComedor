@@ -12,27 +12,27 @@ import Model.Condition;
 public class UserDAO {
 
 
-
+    //@GET
     public static CommonUser getUser(int dni, String password){
-        return Restaurant.getInstance().getUser(dni,password); //devolver una copia no esto
+        return Restaurant.getInstance().validateLoginData(dni,password); //devolver una copia no esto
     }
 
-    public static void loadMoney(int dni, float amount){
-        //TODO Cargar plata al usuario
+    //@POST
+    public static void addUser(CommonUser user){
+        Restaurant.getInstance().addUser(user);
     }
 
-    public static boolean chargeUser(int dni, float amount){
-        //TODO eliminar plata del usuario
-        return true;
+    //@UPDATE
+    public static boolean loadMoney(int icn, float amount){
+        return Restaurant.getInstance().loadMoney(icn,amount); //Return false if the operation fails
     }
 
+    //@UPDATE
     public static void changePassword(int dni, String password){
         Restaurant.getInstance().changePassword(dni,password);
     }
 
-    public static void addUser(CommonUser user){
-        Restaurant.getInstance().addUser(user);
-    }
+
 
 
 

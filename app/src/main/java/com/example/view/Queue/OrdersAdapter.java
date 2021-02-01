@@ -1,4 +1,4 @@
-package com.example.view.Fila;
+package com.example.view.Queue;
 
 import android.content.Context;
 import android.view.LayoutInflater;

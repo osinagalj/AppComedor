@@ -7,7 +7,6 @@ import java.util.List;
 import DAO.OrderDAO;
 import DAO.ProductDAO;
 import DAO.UserDAO;
-import DataBase.Restaurant;
 import Model.CommonUser;
 import Model.Order;
 import Model.Product;
@@ -20,10 +19,15 @@ public class BackEnd {
     private static Order myOrder = new Order(loggedUser,new HashMap<>(),new HashMap<>());
 
     public static CommonUser getLoggedUser() {
-        return loggedUser;
+        return UserDAO.getUser(loggedUser.getIdentityCardNumber(), loggedUser.getPassword());
     }
 
-    public static void setLoggedUser(int dni, String password) { BackEnd.loggedUser = UserDAO.getUser(dni, password); }
+    public static boolean setLoggedUser(int dni, String password) {
+        BackEnd.loggedUser = UserDAO.getUser(dni, password);
+        if(BackEnd.loggedUser == null)
+            return false;
+        return true;
+    }
 
 
     //-------------------------------------------------------------------------------------------------//
@@ -31,20 +35,19 @@ public class BackEnd {
     //-------------------------------------------------------------------------------------------------//
 
     //TODO
-    public static void getConfirmedOrders() {
-        OrderDAO.getCompletedOrders(loggedUser);
+    public static List<Order> getConfirmedOrders() {
+        return OrderDAO.getCompletedOrders(loggedUser);
     }
 
     public static List<Order> getPendingOrders() {
         return OrderDAO.getPendingOrders(loggedUser);
     }
 
-    public static void getNextOrders() {
-        OrderDAO.nextOrders();
-    }//todo
+    public static List<String> getNextOrders() {
+        return OrderDAO.nextOrders();
+    }
 
     public static void addProduct(Product product, int amount ) {
-        System.out.println("ENTRO EN ADD PRODUCT");
         if (!myOrder.getItems().contains(product))
             myOrder.addProduct(product, amount);
         else
@@ -52,15 +55,18 @@ public class BackEnd {
     }
 
     public static void addProductHome(Product product, int amount ){
-        //Chequear si se puede
-        myOrder.addProductToHome(product,amount);
+        //todo agregar chequeo de cantidad disponible
+        if (!myOrder.getToHome().contains(product))
+            myOrder.addProductToHome(product, amount);
+        else
+            myOrder.changeAmount(product, amount);//todo change this
     }
 
     public static Order getOrder(){
         return myOrder;
     }
     public static void confirmOrder(){
-        OrderDAO.loadOrder(myOrder);
+        OrderDAO.loadPendingOrder(myOrder);
         BackEnd.clearOrder();
     }
 
@@ -70,7 +76,7 @@ public class BackEnd {
     }
 
     public static float getOrderPrice(){
-        return 1770f;
+        return myOrder.getPrice();//todo
     }
 
     public static List<Product> getProductsOrder(){
@@ -81,11 +87,25 @@ public class BackEnd {
     }
 
     public static void removeProduct(Product product){
-        myOrder.getItems().remove(product); //todo hacerlo bien
+
+        myOrder.removeProduct(product); //todo hacerlo bien
     }
 
     public static int getAmount(Product product){
         return myOrder.getAmount(product);
+    }
+
+    public static String getTimeToNextOrder(){
+        return OrderDAO.timeNextOrder(loggedUser);
+    }
+    public static String getNextOrder(){
+        return "#100322";
+    }
+
+    public static boolean orderIsEmpty(){
+        if(myOrder.getItems().isEmpty() && myOrder.getToHome().isEmpty())
+            return true;
+        return false;
     }
 
 
@@ -99,7 +119,6 @@ public class BackEnd {
     public static List<Product> getProducts(){
         //TODO aca se aplicaria la logica de negocio capaz para el descuento y eso
         List<Product> products = new ArrayList<>();
-        ProductDAO.getDailyMenu(loggedUser);
         products.addAll(ProductDAO.getProducts(loggedUser));
         return products;
     }
@@ -112,30 +131,18 @@ public class BackEnd {
         UserDAO.addUser(user);
     }
 
-    public static CommonUser getUser(int dni, String password){
-        return Restaurant.getInstance().getUser(dni,password); //devolver una copia no esto
+    public static boolean loadMoney(float amount){
+        return UserDAO.loadMoney(loggedUser.getIdentityCardNumber(),amount);
     }
-
-    public static void loadMoney(float amount){
-        UserDAO.loadMoney(loggedUser.getIdentityCardNumber(),amount);
-    }
-    public static boolean trasnferMoney(int dni, float amount){
-        if(UserDAO.chargeUser(loggedUser.getIdentityCardNumber(),amount)) //Si se pudo descontar el dinero al usuario
-            UserDAO.loadMoney(dni,amount);                                //agregar dinero al destinatario
+    public static boolean transferMoney(int dni, float amount){
+        if(UserDAO.loadMoney(loggedUser.getIdentityCardNumber(),amount * -1)) //Si se pudo descontar el dinero al usuario
+            return UserDAO.loadMoney(dni,amount);                                //agregar dinero al destinatario
         else
             return false;                                                 //Sino devolver false indicando que no se pudo
-        return true;
     }
 
     public static void changePassword(String password){
         UserDAO.changePassword(loggedUser.getIdentityCardNumber(),password);
     }
-
-
-    /**
-     * EL RESTO DE METODOS IRIAN ACA, SON BASICAMENTE LOS MISMOS UQE EL DAO, ENTONCES
-     * EL CONTROLADOR NO SE COMUNICA CON EL DAO, SINO CON ESTE BACKEND, Y SE PODRIA APLICAR LA LOGICA QUE SE NECESITE
-     * lO BUENO ES QUE YA TENEMOS EL USUARIO LOGGEADO ACA
-     */
 
 }

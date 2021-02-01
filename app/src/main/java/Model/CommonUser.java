@@ -23,7 +23,7 @@ public class CommonUser implements Serializable {
     private float cartAmount = 0; // ??????????????Variable para no realizar el calculo en cada producto que se agrega
     //TODO falta una imagen del perfil
 
-    public CommonUser(String password, String names, String lastname, LocalDate birthdate, int identityCardNumber, Condition condition,Category category, PriceCalculator priceCalculator) {
+    public CommonUser(int identityCardNumber,String password, float balance, String names, String lastname, LocalDate birthdate,  Condition condition,Category category, PriceCalculator priceCalculator) {
         this.password = password;
         this.names = names;
         this.lastname = lastname;
@@ -33,7 +33,7 @@ public class CommonUser implements Serializable {
         this.condition = condition;
         this.priceCalculator = priceCalculator;
 
-        this.balance = 0;
+        this.balance = balance;
         this.completedOrders = new ArrayList<>();
         this.dailySpecialRemaining = 2; //todo
     }
@@ -214,9 +214,9 @@ public class CommonUser implements Serializable {
         cart.remove(product);
     }
 */
+    //todo price puede ser negativo, usando cuando se hace una transferencia y se quiere restar plata al usuario
     public void addBalance(float price) {
-        if (price > 0)
-            balance+=price;
+        balance+=price;
     }
 }
 

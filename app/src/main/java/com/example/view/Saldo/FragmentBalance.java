@@ -28,6 +28,9 @@ public class FragmentBalance extends Fragment {
 
         binding.userAmount.setText(String.valueOf(BackEnd.getLoggedUser().getBalance()));
 
+        String full_name = BackEnd.getLoggedUser().getNames() + " " +BackEnd.getLoggedUser().getLastname();
+        binding.userName.setText(full_name);
+
         setUpButtons(view);
         return view;
     }
@@ -52,10 +55,10 @@ public class FragmentBalance extends Fragment {
             public void onClick(View v) {
 
                 if(binding.trasnferDni.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(), "No ha indicado el usuario destino pete", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "No ha indicado el usuario destino ", Toast.LENGTH_LONG).show();
                 }else{
                     if(binding.transferAmount.getText().toString().isEmpty()){
-                        Toast.makeText(getContext(), "No ha indicado la cantidad pete", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "No ha indicado la cantidad ", Toast.LENGTH_LONG).show();
                     }else{
                         int dni = Integer.parseInt(binding.trasnferDni.getText().toString());
                         float amount = Float.parseFloat(binding.transferAmount.getText().toString());
@@ -68,14 +71,26 @@ public class FragmentBalance extends Fragment {
     }
 
     private void loadMoney(float amount){
-        //TODO el dni del usuario que hace la trasnferencia lo sacas del logged user
-        Toast.makeText(getContext(), "Se ha cargado bien la platita", Toast.LENGTH_LONG).show();
+        if(BackEnd.loadMoney(amount)){
+            Toast.makeText(getContext(), "Se ha cargado bien la platita", Toast.LENGTH_LONG).show();
+            binding.userAmount.setText(String.valueOf(BackEnd.getLoggedUser().getBalance()));
+        }
+        else
+            Toast.makeText(getContext(), "No se ha podido cargar la plata", Toast.LENGTH_LONG).show();
+
+
         binding.loadAmount.getText().clear();
     }
 
     private void transferMoney(int DNIuserDestino,float amount){
-        //TODO el dni del usuario que hace la trasnferencia lo sacas del logged user
-        Toast.makeText(getContext(), "ya le diste la platita a tu compa", Toast.LENGTH_LONG).show();
+
+        if(BackEnd.transferMoney(DNIuserDestino,amount)){
+            Toast.makeText(getContext(), "Se ha transferido bien la platita", Toast.LENGTH_LONG).show();
+            binding.userAmount.setText(String.valueOf(BackEnd.getLoggedUser().getBalance()));
+        }
+        else
+            Toast.makeText(getContext(), "No se ha podido cargar la plata", Toast.LENGTH_LONG).show();
+
         binding.transferAmount.getText().clear();
     }
 

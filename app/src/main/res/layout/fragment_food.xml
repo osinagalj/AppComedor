@@ -25,9 +25,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#fff"
-
+            android:drawableStart="@drawable/ic_shopping_cart"
             android:backgroundTint="@color/colorPrimary"
-            android:text="Realizar Orden" />
+            android:text="Ver Carrito" />
     </LinearLayout>
 
 </RelativeLayout>
