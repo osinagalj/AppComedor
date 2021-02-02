@@ -47,19 +47,21 @@ public class BackEnd {
         return OrderDAO.nextOrders();
     }
 
-    public static void addProduct(Product product, int amount ) {
-        if (!myOrder.getItems().contains(product))
-            myOrder.addProduct(product, amount);
-        else
-            myOrder.changeAmount(product, amount);
-    }
 
-    public static void addProductHome(Product product, int amount ){
-        //todo agregar chequeo de cantidad disponible
-        if (!myOrder.getToHome().contains(product))
-            myOrder.addProductToHome(product, amount);
-        else
-            myOrder.changeAmount(product, amount);//todo change this
+    public static boolean addProduct(Product product, int amount, boolean toHome) {
+        //Tengo que devolver true si se pudo agregar el pedido,sino false porque no hay stock
+        //Si hay stock
+        //
+        if(!ProductDAO.decreaseStock(product.getId(),amount)){      //SI Hay stock
+            return false;
+        }else{
+            if (!myOrder.getItems().contains(product)){         //Si no existe en la orden lo agrego
+                 myOrder.addProduct(product, amount,toHome);
+            }else{
+                 myOrder.changeAmount(product, amount, toHome); //Si existe en la orden aumento la cantidad
+            }
+        }
+        return true;
     }
 
     public static Order getOrder(){
@@ -86,9 +88,15 @@ public class BackEnd {
         return list;
     }
 
-    public static void removeProduct(Product product){
 
-        myOrder.removeProduct(product); //todo hacerlo bien
+    /**
+     *     //Primero se elimina el producto y despues se incrementa el stock para evitar que un usuario agregue un producto
+     *     // (suponiendo que ya se actualizo el stock pero en realidad el usuario loggeado lo sigue teniendo en el carro)
+     */
+    public static void removeProduct(Product product){
+        int amount = myOrder.getAmount(product);
+        myOrder.removeProduct(product);
+        ProductDAO.increaseStock(product.getId(),amount);
     }
 
     public static int getAmount(Product product){
