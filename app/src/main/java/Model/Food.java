@@ -1,7 +1,5 @@
 package Model;
 
-import androidx.annotation.NonNull;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,7 +70,11 @@ public class Food extends Product implements Serializable {
     }
 
     @Override
-    public void decreaseStock(int amount) {
-        stock-=amount;
+    public boolean decreaseStock(int amount) {
+        if(stock >= amount ){
+            stock-=amount;
+            return true;
+        }
+        return false;
     }
 }

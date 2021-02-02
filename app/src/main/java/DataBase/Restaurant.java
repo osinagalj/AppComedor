@@ -78,6 +78,7 @@ public class Restaurant {
 
 
 
+    //TODO no devolver los elementos que no cuenten con stock
     public List<Product> getAvailableProducts(CommonUser user){
         return availableProducts;//TODO
     }
@@ -176,6 +177,24 @@ public class Restaurant {
                 return true;
         }
         return false;
+    }
+
+    public boolean decreaseStock(int productId, int amount) {
+        for (Product p : availableProducts) {
+            if (p.getId() == productId) {
+                if (p.decreaseStock(amount))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public void increaseStock(int productId, int amount) {
+        for (Product p : availableProducts) {
+            if (p.getId() == productId) {
+                p.addStock(amount);
+            }
+        }
     }
 
 

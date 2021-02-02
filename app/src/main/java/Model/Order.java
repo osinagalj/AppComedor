@@ -65,6 +65,14 @@ public class Order implements Serializable {
         }
     }
 
+    public void addProduct(Product p, int amount, boolean home){
+        if(home)
+             addProductToHome(p,amount);
+        else
+             addProduct(p,amount);
+    }
+
+
     public boolean addProductToHome(Product p, int amount){
         if (p != null) {
             toHome.put(p, amount);
@@ -123,11 +131,17 @@ public class Order implements Serializable {
         return Collections.unmodifiableList(new ArrayList<>(toHome.keySet()));
     }
 
-    public void changeAmount(Product product, int amount){
-        //TODO
-        int old = items.get(product);
-        items.remove(product);
-        items.put(product, old + amount);
+    public void changeAmount(Product product, int amount, boolean Home){
+        if(Home){
+            int old = toHome.get(product);
+            toHome.remove(product);
+            toHome.put(product, old + amount);
+        }else{
+            int old = items.get(product);
+            items.remove(product);
+            items.put(product, old + amount);
+        }
+
     }
 
     public void removeProduct(Product product){

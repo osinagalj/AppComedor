@@ -105,9 +105,10 @@ public class Combo extends Product implements Serializable {
     }
 
     @Override
-    public void decreaseStock(int amount) {
+    public boolean decreaseStock(int amount) { //TODO
         for (Product product : comboItems){
             decreaseStock(amount);
         }
+        return true; //Hacer la logica para retornar true o false si hay o no stock
     }
 }
