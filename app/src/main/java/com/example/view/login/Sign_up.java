@@ -122,9 +122,11 @@ public class Sign_up extends AppCompatActivity {
         if (conditionId != -1) {
             RadioButton radioButton = binding.condition.findViewById(conditionId);
             String conditionName = radioButton.getText().toString();
-            newUserCondition = Restaurant.getInstance().getCondition(conditionName);
+            //newUserCondition = Restaurant.getInstance().getCondition(conditionName);
+            newUserCondition = Condition.NONE;//TODO get the righ condition
         } else {
-            newUserCondition = Restaurant.getInstance().getCondition("Ninguna");
+            //newUserCondition = Restaurant.getInstance().getCondition("Ninguna");
+            newUserCondition = Condition.NONE;
         }
 
         CommonUser newUser = new CommonUser(

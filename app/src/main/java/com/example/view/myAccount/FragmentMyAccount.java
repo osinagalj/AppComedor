@@ -40,7 +40,7 @@ public class FragmentMyAccount extends Fragment {
         binding.myAccountLabelLastName.setText(user.getLastname());
         binding.myAccountLabelDni.setText(String.valueOf(user.getIdentityCardNumber()));
         binding.myAccountLabelCategory.setText(user.getCategory());
-        binding.myAccountLabelCondition.setText(user.getConditionName());
+        binding.myAccountLabelCondition.setText(user.getConditionName().toString());
         binding.myAccountLabelPassword.setText(user.getPassword());
         //binding.myAccountImageViewProfile.setImageResource();
     }

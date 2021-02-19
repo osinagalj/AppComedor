@@ -13,6 +13,11 @@ public class ProductDAO {
         return Restaurant.getInstance().getAvailableProducts(user);
     }
 
+    //@GET
+    public static Product getSpecialProduct(CommonUser user){
+        return Restaurant.getInstance().getSpecialMenu(user);
+    }
+
     //@UPDATE
     public static boolean decreaseStock(int productId,int amount){
         return Restaurant.getInstance().decreaseStock(productId,amount);

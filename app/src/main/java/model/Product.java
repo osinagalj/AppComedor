@@ -10,17 +10,22 @@ public abstract class Product implements Serializable {
     private String description;
     private int imgId;
     private ProductCategory category;
+    private Condition condition;
 
     protected Product(){}
 
-    protected Product(int id, String name, String description, int imgId, ProductCategory category) {
+    protected Product(int id, String name, String description, int imgId, ProductCategory category, Condition condition) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.imgId = imgId;
         this.category = category;
+        this.condition = condition;
     }
 
+    public Condition getCondition(){
+        return condition;
+    }
     public int getId() {
         return id;
     }

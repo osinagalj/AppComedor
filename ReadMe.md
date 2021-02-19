@@ -1,7 +1,7 @@
 Restaurant App
 ===============
 
-A FoodApp built using Android Studio.
+A Java FoodApp built using Android Studio.
 
  - #### User Application
 
