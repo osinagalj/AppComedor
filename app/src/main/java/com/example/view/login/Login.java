@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
                 }
                 String password = binding.userPassword.getText().toString();
                 if(BackEnd.setLoggedUser(dni,password)){
-                    sign_in();
+                    sign_in(dni,password);
                 }
                 else{
                     badLoginData();
@@ -61,9 +61,12 @@ public class Login extends AppCompatActivity {
         binding.userPassword.setText("");
     }
 
-    public void sign_in() {
+    public void sign_in(int dni, String password) {
         Intent intent = new Intent(this, MainActivity.class);
-        //BackEnd.setLoggedUser(logged_user.getIdentityCardNumber(),logged_user.getPassword());
+        BackEnd.setLoggedUser(dni,password);
+        BackEnd.setDailyMenu();
+        binding.userDni.setText("");
+        binding.userPassword.setText("");
         startActivity(intent);
     }
 

@@ -17,6 +17,9 @@ public class BackEnd {
 
     private static CommonUser loggedUser = UserDAO.getUser(111, "111"); //TODO inicializado solo para saltear el login en el manifest
     private static Order myOrder = new Order(loggedUser,new HashMap<>(),new HashMap<>());
+    private static Product dailyMenu;
+
+
 
     public static CommonUser getLoggedUser() {
         return UserDAO.getUser(loggedUser.getIdentityCardNumber(), loggedUser.getPassword());
@@ -29,6 +32,9 @@ public class BackEnd {
         return true;
     }
 
+    public static void setDailyMenu(){
+        dailyMenu = ProductDAO.getSpecialProduct(loggedUser);
+    }
 
     //-------------------------------------------------------------------------------------------------//
     //------------------------------------------   OrderDAO   -----------------------------------------//
@@ -127,6 +133,7 @@ public class BackEnd {
     public static List<Product> getProducts(){
         //TODO aca se aplicaria la logica de negocio capaz para el descuento y eso
         List<Product> products = new ArrayList<>();
+        products.add(dailyMenu);
         products.addAll(ProductDAO.getProducts(loggedUser));
         return products;
     }

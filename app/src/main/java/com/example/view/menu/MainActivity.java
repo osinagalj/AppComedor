@@ -12,12 +12,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.view.queue.Fragment_queue;
+import com.example.view.R;
+import com.example.view.balance.FragmentBalance;
 import com.example.view.food.nestedRecyclerFood.FragmentFood;
 import com.example.view.myAccount.FragmentMyAccount;
 import com.example.view.myOrders.HomeFragment;
-import com.example.view.R;
-import com.example.view.balance.FragmentBalance;
+import com.example.view.queue.Fragment_queue;
 import com.google.android.material.navigation.NavigationView;
 
 import dataBase.Restaurant;
@@ -102,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } //logout
 
         if(menuItem.getItemId() == R.id.logout){
+            //Restaurant.getInstance().removeDailyFood();
+            Restaurant.getInstance().removeOrders();
             finish();
 
         } //logout

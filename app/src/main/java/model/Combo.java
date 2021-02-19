@@ -9,8 +9,8 @@ public class Combo extends Product implements Serializable {
     private List<Product> comboItems;
     private int discount;
 
-    public Combo(int id,String name, String description, int imgId, ProductCategory category, List<Product> comboItems, int discount) {
-        super(id, name, description, imgId, category);
+    public Combo(int id,String name, String description, int imgId, ProductCategory category,Condition condition, List<Product> comboItems, int discount) {
+        super(id, name, description, imgId, category,condition);
         if (comboItems != null)
             this.comboItems = comboItems;
         else
@@ -18,8 +18,8 @@ public class Combo extends Product implements Serializable {
         this.discount = discount;
     }
 
-    public Combo(int id,String name, String description, int imgId, ProductCategory category, int discount) {
-        super(id, name, description, imgId, category);
+    public Combo(int id,String name, String description, int imgId, ProductCategory category,Condition condition, int discount) {
+        super(id, name, description, imgId, category,condition);
         this.discount = discount;
         this.comboItems = new ArrayList<>();
     }

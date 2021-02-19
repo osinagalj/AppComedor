@@ -16,15 +16,15 @@ public class Food extends Product implements Serializable {
         return Collections.unmodifiableList(ingredients);
     }
 
-    public Food(int id, String name, String description, int imgId, ProductCategory category, int stock, float price) {
-        super(id, name, description, imgId, category);
+    public Food(int id, String name, String description, int imgId, ProductCategory category, Condition condition, int stock, float price) {
+        super(id, name, description, imgId, category,condition);
         this.stock = stock;
         this.price = price;
         this.ingredients = new ArrayList<>();
     }
 
-    public Food(int id,String name, String description, int imgId, ProductCategory category, int stock, float price, List<String> ingredients) {
-        super(id,name, description, imgId, category);
+    public Food(int id,String name, String description, int imgId, ProductCategory category, Condition condition, int stock, float price, List<String> ingredients) {
+        super(id,name, description, imgId, category,condition);
         this.stock = stock;
         this.price = price;
         if (ingredients != null)

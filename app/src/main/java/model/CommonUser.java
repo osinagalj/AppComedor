@@ -111,8 +111,8 @@ public class CommonUser implements Serializable {
         this.balance = balance;
     }
 
-    public String getConditionName() {
-        return condition.getName();
+    public Condition getConditionName() {
+        return condition;
     }
 
     public void setCondition(Condition condition) {
@@ -147,9 +147,9 @@ public class CommonUser implements Serializable {
         this.dailySpecialRemaining = dailySpecialRemaining;
     }
 
-    public boolean canConsume(Product product){
-        return condition.canConsume(product);
-    }
+    //public boolean canConsume(Product product){
+     //   return condition.canConsume(product);
+   // }
 
     @Override
     public boolean equals(Object o) {
