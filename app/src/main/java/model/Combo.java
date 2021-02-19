@@ -7,20 +7,20 @@ import java.util.List;
 
 public class Combo extends Product implements Serializable {
     private List<Product> comboItems;
-    private int discount;
+    private Discount discount;
 
-    public Combo(int id,String name, String description, int imgId, ProductCategory category,Condition condition, List<Product> comboItems, int discount) {
+    public Combo(int id,String name, String description, int imgId, ProductCategory category,Condition condition, List<Product> comboItems, float discount) {
         super(id, name, description, imgId, category,condition);
         if (comboItems != null)
             this.comboItems = comboItems;
         else
             this.comboItems = new ArrayList<>();
-        this.discount = discount;
+        this.discount = new Discount(discount);//todo tiene ueq ser menor a 1
     }
 
-    public Combo(int id,String name, String description, int imgId, ProductCategory category,Condition condition, int discount) {
+    public Combo(int id,String name, String description, int imgId, ProductCategory category,Condition condition, float discount) {
         super(id, name, description, imgId, category,condition);
-        this.discount = discount;
+        this.discount = new Discount(discount);
         this.comboItems = new ArrayList<>();
     }
 
@@ -40,13 +40,13 @@ public class Combo extends Product implements Serializable {
         this.comboItems = comboItems;
     }
 
-    public int getDiscount() {
-        return discount;
-    }
+   // public int getDiscount() {
+      //  return discount;
+   // }
 
-    public void setDiscount(int discount) {
-        this.discount = discount;
-    }
+    //public void setDiscount(int discount) {
+      //  this.discount = discount;
+  //  }
 
     @Override
     public String toString() {
@@ -78,7 +78,8 @@ public class Combo extends Product implements Serializable {
         float price = 0;
         for (Product item : comboItems)
             price+=item.getPrice();
-        return price;
+
+        return discount.getPrice(price);
     }
 
     @Override
@@ -107,7 +108,7 @@ public class Combo extends Product implements Serializable {
     @Override
     public boolean decreaseStock(int amount) { //TODO
         for (Product product : comboItems){
-            decreaseStock(amount);
+            product.decreaseStock(amount);
         }
         return true; //Hacer la logica para retornar true o false si hay o no stock
     }

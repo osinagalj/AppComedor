@@ -365,7 +365,7 @@ public class Restaurant {
         promo1.add(f1);
         promo1.add(f2);
 
-        availableProducts.add(new Combo(123,"Combo1","desp",R.drawable.food_porcion_pizza,ProductCategory.BUFFET,Condition.NONE,promo1,2));
+        availableProducts.add(new Combo(123,"Combo1","2 porciones de pizza + un vaso de Coca-Cola",R.drawable.food_porcion_pizza,ProductCategory.BUFFET,Condition.NONE,promo1,0.3f));
 
 
         //Kiosko
