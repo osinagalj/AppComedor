@@ -11,27 +11,27 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".Login.Login"
+            android:name=".login.Login"
             android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
-        <activity
-            android:name=".Menu.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".menu.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
+
 
         <activity
-            android:name=".Login.Sign_up"
+            android:name=".login.Sign_up"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".Login.ChooseCategory"
+            android:name=".login.ChooseCategory"
             android:theme="@style/AppTheme.NoActionBar" />
 
 
@@ -39,27 +39,27 @@
 
 
         <activity
-            android:name=".MyOrders.Fragment.OrderDetails.ActivityPdf"
+            android:name=".myOrders.Fragment.OrderDetails.ActivityPdf"
             android:label="@string/title_activity_pdf"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".Food.Carrito.ActivityCart"
+            android:name=".food.cart.ActivityCart"
             android:label="@string/title_activity_pdf"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".Food.FinishOrder"
+            android:name=".food.FinishOrder"
             android:label="@string/title_activity_pdf"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".Food.FoodDetail"
+            android:name=".food.FoodDetail"
             android:label="@string/title_activity_pdf"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".MyAccount.Activity_change_password"
+            android:name=".myAccount.Activity_change_password"
             android:theme="@style/AppTheme.NoActionBar" />
 
     </application>

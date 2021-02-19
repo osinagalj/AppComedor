@@ -5,10 +5,10 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.*;
+import model.*;
 
-import static DAO.ProductDAO.avalaibleProducts;
-import static DAO.ProductDAO.saveAvailableProducts;
+import static dao.ProductDAO.avalaibleProducts;
+import static dao.ProductDAO.saveAvailableProducts;
 
 public class ProductDAOTest extends TestCase {
 

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import DAO.OrderDAO;
-import DAO.ProductDAO;
-import DAO.UserDAO;
-import Model.CommonUser;
-import Model.Order;
-import Model.Product;
+import dao.OrderDAO;
+import dao.ProductDAO;
+import dao.UserDAO;
+import model.CommonUser;
+import model.Order;
+import model.Product;
 
 //Aca va la logica de negocio, por ejemplo para pedir un menu del dia, primero se
 // hacen los chekeos: que tenga saldo y que tenga menus disponibles en el dia(el maximo es 2)
