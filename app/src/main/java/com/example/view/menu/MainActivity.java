@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Restaurant.getInstance().loadOrdersDB();
 
+
+
+
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);

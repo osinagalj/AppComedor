@@ -36,7 +36,7 @@ public class FoodDetail extends AppCompatActivity {
     private void setProductDetails(Product product){
         binding.productImg.setImageResource(product.getImgId());
         binding.productName.setText(product.getName());
-        binding.productPrice.setText(String.valueOf(product.getPrice()));
+        binding.productPrice.setText(String.valueOf(product.getPrice(BackEnd.getLoggedUser())));
         binding.productDescription.setText(product.getDescription());
 
         if(product.getCategory() == ProductCategory.DAILY_MENU){
@@ -100,7 +100,7 @@ public class FoodDetail extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Cantidad minima", Toast.LENGTH_SHORT).show();
                 }
                 binding.productAmount.setText(String.valueOf(number));
-                binding.productPrice.setText(String.valueOf(product.getPrice()*number));
+                binding.productPrice.setText(String.valueOf(product.getPrice(BackEnd.getLoggedUser())*number));
             }
         });
 
@@ -111,7 +111,7 @@ public class FoodDetail extends AppCompatActivity {
                 String name = binding.productAmount.getText().toString();
                 int cant = Integer.parseInt(name) + 1;
                 binding.productAmount.setText(String.valueOf(cant));
-                binding.productPrice.setText(String.valueOf(product.getPrice()*cant));
+                binding.productPrice.setText(String.valueOf(product.getPrice(BackEnd.getLoggedUser())*cant));
             }
         });
 
@@ -128,7 +128,7 @@ public class FoodDetail extends AppCompatActivity {
         //Controlar la cantidad de menus del dia que puede pedir
         //Controlar Stock
 
-        if(product.getPrice() * addedAmount <= BackEnd.getLoggedUser().getBalance()){ //Si hay suficiente saldo
+        if(product.getPrice(BackEnd.getLoggedUser()) * addedAmount <= BackEnd.getLoggedUser().getBalance()){ //Si hay suficiente saldo
             if(product.getCategory().equals(ProductCategory.DAILY_MENU)){
                 if(BackEnd.getLoggedUser().getDailySpecialRemaining() >= addedAmount){
                     BackEnd.getLoggedUser().setDailySpecialRemaining(BackEnd.getLoggedUser().getDailySpecialRemaining() - addedAmount);

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "264159593061",
+    "project_id": "appcomedor-c9680",
+    "storage_bucket": "appcomedor-c9680.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264159593061:android:770feff9dc7a3dafbdfc8c",
+        "android_client_info": {
+          "package_name": "com.example.view"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264159593061-hfo6ci6an6htqp5aitokm9lus5v74u1o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZpBypE33B5d7hJx5f2siKRpOshpHg7xM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264159593061-hfo6ci6an6htqp5aitokm9lus5v74u1o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

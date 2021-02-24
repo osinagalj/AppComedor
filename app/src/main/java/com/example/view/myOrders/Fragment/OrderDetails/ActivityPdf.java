@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.view.BackEnd;
 import com.example.view.databinding.ActivityOrderDetailsBinding;
 
 import java.time.ZoneOffset;
@@ -64,7 +65,7 @@ public class ActivityPdf extends AppCompatActivity {
 
         List<Product> products = order.getItems();
         for(Product product : products){
-            listaFoods.add(new OrderDetail(String.valueOf(order.getAmount(product)),product.getName(), String.valueOf(product.getPrice())));
+            listaFoods.add(new OrderDetail(String.valueOf(order.getAmount(product)),product.getName(), String.valueOf(product.getPrice(BackEnd.getLoggedUser()))));
         }
     }
 

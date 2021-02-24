@@ -37,11 +37,15 @@ public class Login extends AppCompatActivity {
                     badLoginData();
                 }
                 String password = binding.userPassword.getText().toString();
-                if(BackEnd.setLoggedUser(dni,password)){
-                    sign_in(dni,password);
-                }
-                else{
-                    badLoginData();
+                try {
+                    if(BackEnd.setLoggedUser(dni,password)){
+                        sign_in(dni,password);
+                    }
+                    else{
+                        badLoginData();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -61,7 +65,7 @@ public class Login extends AppCompatActivity {
         binding.userPassword.setText("");
     }
 
-    public void sign_in(int dni, String password) {
+    public void sign_in(int dni, String password) throws InterruptedException {
         Intent intent = new Intent(this, MainActivity.class);
         BackEnd.setLoggedUser(dni,password);
         BackEnd.setDailyMenu();
@@ -69,6 +73,8 @@ public class Login extends AppCompatActivity {
         binding.userPassword.setText("");
         startActivity(intent);
     }
+
+
 
     public void sign_up() {
         Intent intent = new Intent(this, ChooseCategory.class);

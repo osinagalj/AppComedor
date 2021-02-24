@@ -23,6 +23,29 @@ public abstract class Product implements Serializable {
         this.condition = condition;
     }
 
+
+    public abstract float getPrice(CommonUser user);
+    public abstract boolean toHome();
+    public abstract int getStock();
+    public abstract int getDailyLimit();
+    public abstract List<Product> getProducts();
+    public abstract void addStock(int stock);
+    public abstract boolean decreaseStock(int amount);
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + category +
+                '}';
+    }
+
+    //--------------------------------------------------------------------------------------------//
+    //------------------------        Getters && Setters         ---------------------------------//
+    //--------------------------------------------------------------------------------------------//
+
     public Condition getCondition(){
         return condition;
     }
@@ -67,17 +90,6 @@ public abstract class Product implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", imgId=" + imgId +
-                ", category=" + category +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -90,11 +102,5 @@ public abstract class Product implements Serializable {
         return Objects.hash(id);
     }
 
-    public abstract List<String> getIngredients();
-    public abstract List<Product> getProducts();
-    public abstract float getPrice();
-    public abstract int getStock();
-    public abstract void addStock(int stock);
-    public abstract int getDailyLimit();
-    public abstract boolean decreaseStock(int amount);
+
 }

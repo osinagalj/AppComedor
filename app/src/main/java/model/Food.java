@@ -11,11 +11,6 @@ public class Food extends Product implements Serializable {
     private float price;
     private List<String> ingredients;
 
-    @Override
-    public List<String> getIngredients() {
-        return Collections.unmodifiableList(ingredients);
-    }
-
     public Food(int id, String name, String description, int imgId, ProductCategory category, Condition condition, int stock, float price) {
         super(id, name, description, imgId, category,condition);
         this.stock = stock;
@@ -23,14 +18,14 @@ public class Food extends Product implements Serializable {
         this.ingredients = new ArrayList<>();
     }
 
-    public Food(int id,String name, String description, int imgId, ProductCategory category, Condition condition, int stock, float price, List<String> ingredients) {
-        super(id,name, description, imgId, category,condition);
-        this.stock = stock;
-        this.price = price;
-        if (ingredients != null)
-            this.ingredients = ingredients;
-        else
-            this.ingredients = new ArrayList<>();
+    @Override
+    public boolean toHome() {
+        return false;
+    }
+
+    @Override
+    public float getPrice(CommonUser user) {
+        return price;
     }
 
     @Override
@@ -47,11 +42,6 @@ public class Food extends Product implements Serializable {
         List<Product> products = new ArrayList<>();
         products.add(this);
         return Collections.unmodifiableList(products);
-    }
-
-    @Override
-    public float getPrice() {
-        return price;
     }
 
     @Override

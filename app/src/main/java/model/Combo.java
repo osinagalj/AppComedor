@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Combo extends Product implements Serializable {
     private List<Product> comboItems;
-    private Discount discount;
+    private FixedDiscount discount;
 
     public Combo(int id,String name, String description, int imgId, ProductCategory category,Condition condition, List<Product> comboItems, float discount) {
         super(id, name, description, imgId, category,condition);
@@ -15,12 +15,12 @@ public class Combo extends Product implements Serializable {
             this.comboItems = comboItems;
         else
             this.comboItems = new ArrayList<>();
-        this.discount = new Discount(discount);//todo tiene ueq ser menor a 1
+        this.discount = new FixedDiscount(discount);//todo tiene ueq ser menor a 1
     }
 
     public Combo(int id,String name, String description, int imgId, ProductCategory category,Condition condition, float discount) {
         super(id, name, description, imgId, category,condition);
-        this.discount = new Discount(discount);
+        this.discount = new FixedDiscount(discount);
         this.comboItems = new ArrayList<>();
     }
 
@@ -40,13 +40,10 @@ public class Combo extends Product implements Serializable {
         this.comboItems = comboItems;
     }
 
-   // public int getDiscount() {
-      //  return discount;
-   // }
-
-    //public void setDiscount(int discount) {
-      //  this.discount = discount;
-  //  }
+    @Override
+    public boolean toHome() {
+        return false;
+    }
 
     @Override
     public String toString() {
@@ -54,15 +51,6 @@ public class Combo extends Product implements Serializable {
                 "comboItems=" + comboItems +
                 ", discount=" + discount +
                 "} " + super.toString();
-    }
-
-    @Override
-    public List<String> getIngredients() {
-        List<String> ingredients= new ArrayList<>();
-        for (Product item : comboItems)
-            ingredients.addAll(item.getIngredients());
-
-        return Collections.unmodifiableList(ingredients);
     }
 
     @Override
@@ -74,12 +62,9 @@ public class Combo extends Product implements Serializable {
     }
 
     @Override
-    public float getPrice() {
-        float price = 0;
-        for (Product item : comboItems)
-            price+=item.getPrice();
+    public float getPrice(CommonUser user) {
 
-        return discount.getPrice(price);
+        return discount.getPrice(comboItems);
     }
 
     @Override

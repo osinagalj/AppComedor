@@ -1,5 +1,7 @@
 package model;
 
+import com.example.view.BackEnd;
+
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -103,10 +105,10 @@ public class Order implements Serializable {
     public float getPrice() {
         float totalPrice = 0;
         for (Product product : items.keySet()){
-            totalPrice+=product.getPrice()*items.get(product);
+            totalPrice+=product.getPrice(BackEnd.getLoggedUser())*items.get(product);
         }
         for (Product product : toHome.keySet()){
-            totalPrice+=product.getPrice()*toHome.get(product);
+            totalPrice+=product.getPrice(BackEnd.getLoggedUser())*toHome.get(product);
         }
         return totalPrice;
     }

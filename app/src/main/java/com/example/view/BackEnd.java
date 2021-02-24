@@ -11,26 +11,34 @@ import model.CommonUser;
 import model.Order;
 import model.Product;
 
+
 //Aca va la logica de negocio, por ejemplo para pedir un menu del dia, primero se
 // hacen los chekeos: que tenga saldo y que tenga menus disponibles en el dia(el maximo es 2)
 public class BackEnd {
 
-    private static CommonUser loggedUser = UserDAO.getUser(111, "111"); //TODO inicializado solo para saltear el login en el manifest
+    private static CommonUser loggedUser; //TODO inicializado solo para saltear el login en el manifest
     private static Order myOrder = new Order(loggedUser,new HashMap<>(),new HashMap<>());
     private static Product dailyMenu;
 
 
-
     public static CommonUser getLoggedUser() {
-        return UserDAO.getUser(loggedUser.getIdentityCardNumber(), loggedUser.getPassword());
+        return loggedUser;
     }
 
-    public static boolean setLoggedUser(int dni, String password) {
-        BackEnd.loggedUser = UserDAO.getUser(dni, password);
+    public static boolean setLoggedUser(int dni, String password) throws InterruptedException {
+        UserDAO.getUser(dni, password);
         if(BackEnd.loggedUser == null)
             return false;
         return true;
+       // Thread.sleep(10000);
     }
+
+
+
+    public static void setLoggedUser(CommonUser user) {
+        BackEnd.loggedUser = user;
+    }
+
 
     public static void setDailyMenu(){
         dailyMenu = ProductDAO.getSpecialProduct(loggedUser);

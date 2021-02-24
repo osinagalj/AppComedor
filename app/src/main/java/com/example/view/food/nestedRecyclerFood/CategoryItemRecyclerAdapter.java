@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.view.BackEnd;
 import com.example.view.food.FoodDetail;
 import com.example.view.R;
 
@@ -42,7 +43,7 @@ public class CategoryItemRecyclerAdapter extends RecyclerView.Adapter<CategoryIt
         holder.itemImage.setImageResource(categoryItemList.get(position).getImgId());
         holder.product_name.setText(categoryItemList.get(position).getName());
         holder.product_description.setText(categoryItemList.get(position).getDescription());
-        holder.product_price.setText(String.valueOf(categoryItemList.get(position).getPrice()));
+        holder.product_price.setText(String.valueOf(categoryItemList.get(position).getPrice(BackEnd.getLoggedUser())));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() { //cuando se hace un click en algun item(Food)
             @Override
