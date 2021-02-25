@@ -20,25 +20,13 @@ public class BackEnd {
     private static Order myOrder = new Order(loggedUser,new HashMap<>(),new HashMap<>());
     private static Product dailyMenu;
 
-
     public static CommonUser getLoggedUser() {
         return loggedUser;
     }
 
-    public static boolean setLoggedUser(int dni, String password) throws InterruptedException {
-        UserDAO.getUser(dni, password);
-        if(BackEnd.loggedUser == null)
-            return false;
-        return true;
-       // Thread.sleep(10000);
-    }
-
-
-
     public static void setLoggedUser(CommonUser user) {
         BackEnd.loggedUser = user;
     }
-
 
     public static void setDailyMenu(){
         dailyMenu = ProductDAO.getSpecialProduct(loggedUser);

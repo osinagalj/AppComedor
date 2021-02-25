@@ -6,26 +6,32 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.view.BackEnd;
-import com.example.view.menu.MainActivity;
 import com.example.view.databinding.ActivityLoginBinding;
+import com.example.view.menu.MainActivity;
 
-import dataBase.Restaurant;
+import model.CommonUser;
 
 public class Login extends AppCompatActivity {
 
-    private final Restaurant restaurant = Restaurant.getInstance();
-
     private ActivityLoginBinding binding;
+
+    LoginViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Data Binding
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        //ViewModel
+        mViewModel = ViewModelProviders.of(this).get(LoginViewModel.class); //ViewModel para la DB
 
         binding.btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,16 +43,9 @@ public class Login extends AppCompatActivity {
                     badLoginData();
                 }
                 String password = binding.userPassword.getText().toString();
-                try {
-                    if(BackEnd.setLoggedUser(dni,password)){
-                        sign_in(dni,password);
-                    }
-                    else{
-                        badLoginData();
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+                sign_in(dni,password);
+
             }
         });
 
@@ -57,21 +56,36 @@ public class Login extends AppCompatActivity {
             }
         });
 
+
     }
 
     public void badLoginData(){
-        Toast.makeText(getBaseContext(), "Usuario y/o contraseña incorrectos", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Usuario y/o contraseña incorrectos", Toast.LENGTH_SHORT).show();
         binding.userDni.setText("");
         binding.userPassword.setText("");
     }
 
-    public void sign_in(int dni, String password) throws InterruptedException {
-        Intent intent = new Intent(this, MainActivity.class);
-        BackEnd.setLoggedUser(dni,password);
-        BackEnd.setDailyMenu();
-        binding.userDni.setText("");
-        binding.userPassword.setText("");
-        startActivity(intent);
+    public void sign_in(int dni, String password)  {
+        mViewModel.setUser(String.valueOf(dni),password);
+        mViewModel.live_user.observe(this, new Observer<CommonUser>() {
+            @Override
+            public void onChanged(CommonUser user) {
+                System.out.println("YA SE CARGO EL USUARIO = dni =" + user.getIdentityCardNumber() + " , names = "+user.getNames());
+                if(user.getIdentityCardNumber() != -1){
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    BackEnd.setLoggedUser(user);
+                    BackEnd.setDailyMenu();
+                    binding.userDni.setText("");
+                    binding.userPassword.setText("");
+                    startActivity(intent);
+                }else{
+                    badLoginData();
+                }
+
+            }
+        });
+
+
     }
 
 
