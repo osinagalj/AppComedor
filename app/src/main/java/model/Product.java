@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,23 +10,67 @@ public abstract class Product implements Serializable {
     private String name;
     private String description;
     private int imgId;
-    private ProductCategory category;
-    private Condition condition;
+
+    public int getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(int productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public List<Integer> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<Integer> conditions) {
+        this.conditions = conditions;
+    }
+
+    private int productCategory;
+    private List<Integer> conditions; //Condiciones que no pueden consumir este alimento
 
     protected Product(){}
 
-    protected Product(int id, String name, String description, int imgId, ProductCategory category, Condition condition) {
+    protected Product(int id, String name, String description, int imgId, int productCategory) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.imgId = imgId;
-        this.category = category;
-        this.condition = condition;
+        this.productCategory = productCategory;
+        this.conditions = new ArrayList<>();
     }
 
-    public Condition getCondition(){
-        return condition;
+    public void addCondition(int condition){
+        conditions.add(condition);
     }
+
+    public abstract float getPrice(CommonUser user);
+    public abstract boolean toHome();
+    public abstract int getStock();
+    public abstract int getDailyLimit();
+    public abstract List<Product> getProducts();
+    public abstract void addStock(int stock);
+    public abstract boolean decreaseStock(int amount);
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + productCategory +
+                '}';
+    }
+
+    //--------------------------------------------------------------------------------------------//
+    //------------------------        Getters && Setters         ---------------------------------//
+    //--------------------------------------------------------------------------------------------//
+
+    public List<Integer> getCondition(){
+        return conditions;
+    }
+
     public int getId() {
         return id;
     }
@@ -58,23 +103,12 @@ public abstract class Product implements Serializable {
         this.imgId = imgId;
     }
 
-    public ProductCategory getCategory() {
-        return category;
+    public int getCategory() {
+        return productCategory;
     }
 
-    public void setCategory(ProductCategory category) {
-        this.category = category;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", imgId=" + imgId +
-                ", category=" + category +
-                '}';
+    public void setCategory(int category) {
+        this.productCategory = category;
     }
 
     @Override
@@ -90,11 +124,5 @@ public abstract class Product implements Serializable {
         return Objects.hash(id);
     }
 
-    public abstract List<String> getIngredients();
-    public abstract List<Product> getProducts();
-    public abstract float getPrice();
-    public abstract int getStock();
-    public abstract void addStock(int stock);
-    public abstract int getDailyLimit();
-    public abstract boolean decreaseStock(int amount);
+
 }

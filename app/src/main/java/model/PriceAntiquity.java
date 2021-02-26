@@ -1,13 +1,13 @@
 package model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class Antiquity implements PriceCalculator, Serializable {
+public class PriceAntiquity extends PriceCalculator {
     private final LocalDate startDate;
 
-    public Antiquity(LocalDate startDate) {
+    public PriceAntiquity(LocalDate startDate) {
+
         this.startDate = startDate;
     }
 
@@ -17,10 +17,10 @@ public class Antiquity implements PriceCalculator, Serializable {
     }
 
     @Override
-    public float getPrice(float standardPrice) {
+    public float getPrice(CommonUser user,DailyMenu product) {
         long daysBetween = ChronoUnit.DAYS.between(LocalDate.now().atStartOfDay(),startDate.atStartOfDay());
         float daysLog2 = (float)(Math.log(daysBetween)/Math.log(2));
         float discount = daysLog2/100;
-        return standardPrice-(standardPrice*discount);
+        return product.getPrice(user) - (product.getPrice(user)*discount);
     }
 }

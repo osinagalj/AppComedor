@@ -42,7 +42,7 @@ public class FragmentBalance extends Fragment {
             public void onClick(View v) {
 
                 if(binding.loadAmount.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(), "No ha indicado la platita todavia", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "No ha indicado el monto", Toast.LENGTH_LONG).show();
                 }else{
                     float amount = Float.parseFloat(binding.loadAmount.getText().toString());
                     loadMoney(amount);
@@ -72,11 +72,11 @@ public class FragmentBalance extends Fragment {
 
     private void loadMoney(float amount){
         if(BackEnd.loadMoney(amount)){
-            Toast.makeText(getContext(), "Se ha cargado bien la platita", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "El dinero ha sido acreditado correctamente", Toast.LENGTH_LONG).show();
             binding.userAmount.setText(String.valueOf(BackEnd.getLoggedUser().getBalance()));
         }
         else
-            Toast.makeText(getContext(), "No se ha podido cargar la plata", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "No se ha podido cargar el dinero", Toast.LENGTH_LONG).show();
 
 
         binding.loadAmount.getText().clear();
@@ -85,11 +85,11 @@ public class FragmentBalance extends Fragment {
     private void transferMoney(int DNIuserDestino,float amount){
 
         if(BackEnd.transferMoney(DNIuserDestino,amount)){
-            Toast.makeText(getContext(), "Se ha transferido bien la platita", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "La transferencia ha sido exitosa", Toast.LENGTH_LONG).show();
             binding.userAmount.setText(String.valueOf(BackEnd.getLoggedUser().getBalance()));
         }
         else
-            Toast.makeText(getContext(), "No se ha podido cargar la plata", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "No se ha podido relizar la transferencia", Toast.LENGTH_LONG).show();
 
         binding.transferAmount.getText().clear();
     }

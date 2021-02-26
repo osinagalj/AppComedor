@@ -16,12 +16,14 @@ import com.example.view.databinding.ActivitySignUpBinding;
 import java.time.LocalDate;
 
 import dataBase.Restaurant;
-import model.Antiquity;
 import model.Category;
 import model.CommonUser;
 import model.Condition;
-import model.Discount;
+import model.PriceAntiquity;
 import model.PriceCalculator;
+import model.PriceExternal;
+import model.PriceProfessor;
+import model.PriceStudent;
 
 public class Sign_up extends AppCompatActivity {
 
@@ -92,15 +94,16 @@ public class Sign_up extends AppCompatActivity {
             if (!Restaurant.getInstance().isRegistered(parsedICN)) {
                 switch (category) {
                     case "STUDENT":
-                        userCategory = new Discount(15);
+                        userCategory = new PriceStudent(0.6f);
                         break;
                     case "EXTERNAL":
-                        userCategory = new Discount(0);
+                        userCategory = new PriceExternal();
                         break;
                     case "TEACHER":
+                        userCategory = new PriceProfessor(6);//todo agarrar bien el numero del field
                     case "NO TEACHER":
                         int yearsOfWork = Integer.parseInt(binding.antiquity.getText().toString());
-                        userCategory = new Antiquity(LocalDate.of(LocalDate.now().getYear() - yearsOfWork, 1, 1));
+                        userCategory = new PriceAntiquity(LocalDate.of(LocalDate.now().getYear() - yearsOfWork, 1, 1));
                         break;
                 }
                 rigthSignUp(parsedICN,userCategory,category);
@@ -114,7 +117,7 @@ public class Sign_up extends AppCompatActivity {
         }
     }
 
-    private void rigthSignUp(int parsedICN,PriceCalculator userCategory,String category){
+    private void rigthSignUp(int parsedICN, PriceCalculator userCategory, String category){
         //TODO falta agregar chequeos en varios campos, que no esten vacios por ejemplo, y que no este en uso el dni ya por ejemplo
 
         int conditionId = binding.condition.getCheckedRadioButtonId();

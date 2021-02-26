@@ -10,23 +10,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.view.BackEnd;
-import com.example.view.food.cart.ActivityCart;
 import com.example.view.databinding.FragmentFoodBinding;
+import com.example.view.food.cart.ActivityCart;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import dataBase.Restaurant;
+import model.Food;
 import model.Product;
-import model.ProductCategory;
 
 public class FragmentFood extends Fragment {
 
     MainRecyclerAdapter mainRecyclerAdapter;
     private FragmentFoodBinding binding;
+
+    private List<Food> foods = new ArrayList<>();
+    FoodViewModel viewModel;
 
     @Nullable
     @Override
@@ -35,6 +41,22 @@ public class FragmentFood extends Fragment {
         super.onCreate(savedInstanceState);
         binding = FragmentFoodBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+
+        viewModel = ViewModelProviders.of(this).get(FoodViewModel.class); //ViewModel para la DB
+
+        viewModel.setFoods();
+        viewModel.list_foods.observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
+            @Override
+            public void onChanged(List<Food> list_foods) {
+                for(Food f : list_foods)
+                    System.out.println("Id del food:" + f.getId());
+
+                foods.addAll(list_foods);
+                loadData();
+            }
+        });
+
+
 
         setUpButtons();
         loadData();
@@ -71,18 +93,30 @@ public class FragmentFood extends Fragment {
         startActivity(intent);
     }
 
+    private String getCategory(int category){
+        switch (category){
+            case 1:
+                return "Menu del Dia";
+            case 2:
+                return "Buffet";
+            default:
+                return "Kiosko";
+
+        }
+    }
+
     public void loadData() {
 
         List<AllCategory> allCategoryList = new ArrayList<>();
 
-        List<Product> consumables = BackEnd.getProducts();
-        for (ProductCategory category : ProductCategory.values()){
+        List<Food> consumables = foods; // Hacer que sean productos tmb
+        for (int category : Restaurant.getInstance().productsCategories){
             List<Product> catList = new ArrayList<>();
             for (Product product : consumables)
-                if (product.getCategory().equals(category))
+                if (product.getCategory() == category)
                     catList.add(product);
             if(!catList.isEmpty())
-                allCategoryList.add(new AllCategory(category.toString(), catList));
+                allCategoryList.add(new AllCategory(getCategory(category), catList));
         }
 
         setMainCategoryRecycler(allCategoryList);

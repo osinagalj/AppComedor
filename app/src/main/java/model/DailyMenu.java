@@ -8,8 +8,8 @@ public class DailyMenu extends Food  {
 
     private int limit;
 
-    public DailyMenu(int id,String name, String description, int imgId, ProductCategory category, Condition condition, int stock, float price, int limit) {
-        super(id,name, description, imgId, category,condition,stock,price);
+    public DailyMenu(int id,String name, String description, int imgId, int productCategory, int stock, float price, int limit) {
+        super(id,name, description, imgId, productCategory,stock,price);
         this.limit = limit;
 
     }
@@ -18,9 +18,10 @@ public class DailyMenu extends Food  {
     public String toString() {
         return "Menu del Dia {" +
                 "stock=" + super.getStock() +
-                ", price=" + super.getPrice() +
+                ", price=" + super.getPrice(null) +
                 "} " + super.toString();
     }
+    //todo tener el tohone en bool y agregarlo al to strng
 
     @Override
     public List<Product> getProducts() {
@@ -30,8 +31,11 @@ public class DailyMenu extends Food  {
     }
 
     @Override
-    public float getPrice() {
-        return super.getPrice();
+    public float getPrice(CommonUser user ) {
+        if(user.getCategory().equals(Category.ALUMNO.toString()))
+            return super.getPrice(user) * 0.6f;
+
+        return super.getPrice(user);
     }
 
     @Override

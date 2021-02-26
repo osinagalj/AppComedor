@@ -1,5 +1,8 @@
 package dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import dataBase.Restaurant;
 import model.CommonUser;
 
@@ -7,18 +10,25 @@ public class UserDAO {
 
 
     //@GET
-    public static CommonUser getUser(int dni, String password){
-        return Restaurant.getInstance().validateLoginData(dni,password); //devolver una copia no esto
-    }
-/*
-    //@GET
-    public static int getUserMenus(int dni, String password){
-        return Restaurant.getInstance().validateLoginData(dni,password);
-    }
-*/
+    public static void getUser(int dni, String password) {}
+
     //@POST
     public static void addUser(CommonUser user){
-        Restaurant.getInstance().addUser(user);
+
+        // Create a new user with a first and last name
+        Map<String, Object> user_db = new HashMap<>();
+        user_db.put("identityCardNumber", user.getIdentityCardNumber());
+        user_db.put("password", user.getPassword());
+        user_db.put("names", user.getNames());
+        user_db.put("lastName", user.getLastname());
+        user_db.put("birthDate", user.getBirthdate().toString());
+        user_db.put("balance", user.getBalance());
+        user_db.put("condition", user.getCondition().toString());
+        user_db.put("category", user.getCategory());
+
+        // Add a new document with a generated ID
+        Restaurant.getInstance().db.collection("users").document(String.valueOf(user.getIdentityCardNumber())).set(user_db);
+
     }
 
     //@UPDATE

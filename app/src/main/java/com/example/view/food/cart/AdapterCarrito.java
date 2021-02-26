@@ -54,7 +54,7 @@ public class AdapterCarrito extends RecyclerView.Adapter<AdapterCarrito.ViewHold
     public void onBindViewHolder(@NonNull AdapterCarrito.ViewHolder holder, final int position) {
         String product_name = model.get(position).getName();
         int product_nro = model.get(position).getId();
-        String product_price = String.valueOf(model.get(position).getPrice());
+        String product_price = String.valueOf(model.get(position).getPrice(BackEnd.getLoggedUser()));
 
         int produc_amount = BackEnd.getAmount(model.get(position));
 
@@ -64,7 +64,7 @@ public class AdapterCarrito extends RecyclerView.Adapter<AdapterCarrito.ViewHold
         holder.product_name.setText("#"+product_nro);
         holder.product_description.setText(product_name);
         holder.product_price.setText("Precio x Unidad: " + product_price);
-        float tot = model.get(position).getPrice() * produc_amount; //TODO
+        float tot = model.get(position).getPrice(BackEnd.getLoggedUser()) * produc_amount; //TODO
         holder.product_total_price.setText("Total: " + tot );
 
 
