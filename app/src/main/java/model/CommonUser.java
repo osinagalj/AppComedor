@@ -11,7 +11,7 @@ public class CommonUser implements Serializable {
     private LocalDate birthdate;
     private int identityCardNumber = -1;
     private float balance;
-    private Condition condition = Condition.NONE;
+    private int condition = 0; // por defecto pueden comer todo
     private Category category = Category.ALUMNO; //Este enumerado se justifica porque no va a ser posible agregar mas categorias, por lo que no tiene que ser dinamico
     private PriceCalculator discountCalculator;
 
@@ -25,7 +25,7 @@ public class CommonUser implements Serializable {
 
     public CommonUser(){}
 
-    public CommonUser(int identityCardNumber,String password, float balance, String names, String lastname, LocalDate birthdate,  Condition condition,Category category, PriceCalculator discountCalculator) {
+    public CommonUser(int identityCardNumber,String password, float balance, String names, String lastname, LocalDate birthdate,  int condition,Category category, PriceCalculator discountCalculator) {
         this.password = password;
         this.names = names;
         this.lastname = lastname;
@@ -89,11 +89,11 @@ public class CommonUser implements Serializable {
         this.balance = balance;
     }
 
-    public Condition getConditionName() {
+    public int getConditionName() {
         return condition;
     }
 
-    public void setCondition(Condition condition) {
+    public void setCondition(int condition) {
         this.condition = condition;
     }
 
@@ -101,7 +101,7 @@ public class CommonUser implements Serializable {
         return discountCalculator;
     }
 
-    public Condition getCondition() {
+    public int getCondition() {
         return condition;
     }
 

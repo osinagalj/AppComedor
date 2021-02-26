@@ -11,7 +11,6 @@ import java.time.LocalDate;
 
 import dataBase.Restaurant;
 import model.CommonUser;
-import model.Condition;
 import model.PriceStudent;
 import utils.Utils;
 
@@ -43,7 +42,7 @@ public class LoginViewModel extends ViewModel {
                         String birthDate = (String)document.getData().get("birthDate");
                         String condition = (String)document.getData().get("condition");
                         user.setBirthdate(LocalDate.now());
-                        user.setCondition(Condition.NONE);
+                        user.setCondition(0);
 
                         //Send the user
                         live_user.postValue(user);

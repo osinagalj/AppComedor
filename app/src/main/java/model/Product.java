@@ -11,21 +11,6 @@ public abstract class Product implements Serializable {
     private String description;
     private int imgId;
 
-    public int getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(int productCategory) {
-        this.productCategory = productCategory;
-    }
-
-    public List<Integer> getConditions() {
-        return conditions;
-    }
-
-    public void setConditions(List<Integer> conditions) {
-        this.conditions = conditions;
-    }
 
     private int productCategory;
     private List<Integer> conditions; //Condiciones que no pueden consumir este alimento
@@ -66,6 +51,21 @@ public abstract class Product implements Serializable {
     //--------------------------------------------------------------------------------------------//
     //------------------------        Getters && Setters         ---------------------------------//
     //--------------------------------------------------------------------------------------------//
+    public int getProductCategory() {
+        return productCategory;
+    }
+
+    public void setProductCategory(int productCategory) {
+        this.productCategory = productCategory;
+    }
+
+    public List<Integer> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<Integer> conditions) {
+        this.conditions = conditions;
+    }
 
     public List<Integer> getCondition(){
         return conditions;

@@ -10,17 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 
 import dao.ProductDAO;
-import model.Category;
 import model.CommonUser;
-import model.Condition;
 import model.DailyMenu;
 import model.Food;
 import model.Menu;
 import model.Order;
-import model.PriceAntiquity;
-import model.PriceExternal;
-import model.PriceProfessor;
-import model.PriceStudent;
 import model.Product;
 
 public class Restaurant {
@@ -55,6 +49,7 @@ public class Restaurant {
         //loadProducts();
         loadMenus();
 
+        productsCategories.add(0); //Menu del Dia
         productsCategories.add(1); //Menu del Dia
         productsCategories.add(2); //Buffet
         productsCategories.add(3); //Kiosko
@@ -63,6 +58,36 @@ public class Restaurant {
     public void loadOrdersDB(){
 //        loadOrders(); //TODO hay que cargar las despues porque se rompe sino al no estar creada la instancia y querer acceder al proximo numero de orden
        // loadProducts();
+        //0 NONE,
+        //1 VEGETARIAN,
+        //2 VEGAN,
+        //3 CELIAC
+
+        //La alternativa es poner las condiciones que no pueden comer ese menu, pero es un poco mas complicado
+
+        /*
+        //Para los que no tienen nada
+        DailyMenu m1 = new DailyMenu(1001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 88.0f, 2);
+        m1.addCondition(0);
+
+        //Para vegetariano
+        DailyMenu m2 = new DailyMenu(1002,"Milanesa con papas fritas","Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1, MAX_STOCK, 88.0f, 2);
+        m2.addCondition(1);
+
+        //Para vegano
+        DailyMenu m3 =new DailyMenu(1003,"Ensalada con papas fritas","Ensalada y papas McCain", R.drawable.food_carne_papas, 1,  MAX_STOCK, 88.0f, 2);
+        m3.addCondition(2);
+
+        //Para celiaco
+        DailyMenu m4 =new DailyMenu(1004,"Milanesa con papas fritas","Harina sin TACC, de Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 88.0f, 2);
+        m4.addCondition(3);
+
+        ProductDAO.loadProduct(m1);
+        ProductDAO.loadProduct(m2);
+        ProductDAO.loadProduct(m3);
+        ProductDAO.loadProduct(m4);
+        */
+
     }
 
     public List<Order> getOrdersCompleted(CommonUser user){
@@ -344,11 +369,12 @@ public class Restaurant {
     }
 
     public void loadUsers(){
-
+/*
         registeredUsers.add(new CommonUser(111,"111",1200f,"Lautaro", "Osinaga", LocalDate.of(1999,5,20), Condition.NONE, Category.ALUMNO,new PriceStudent(0.6f)));
         registeredUsers.add(new CommonUser(222,"222",700f,"Gian", "Capozzo", LocalDate.of(1999,5,20), Condition.CELIAC, Category.DOCENTE,new PriceProfessor(6)));
         registeredUsers.add(new CommonUser(333,"333",800f,"Juan", "Perez", LocalDate.of(1999,5,20), Condition.VEGETARIAN, Category.NO_DOCENTE,new PriceAntiquity(LocalDate.now())));
         registeredUsers.add(new CommonUser(444,"444",800f,"Leo", "Messi", LocalDate.of(1999,5,20), Condition.VEGAN, Category.EXTERNO,new PriceExternal()));
+  */
     }
 
     private void loadProducts(){

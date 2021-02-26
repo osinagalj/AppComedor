@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import dataBase.Restaurant;
 import model.Category;
 import model.CommonUser;
-import model.Condition;
 import model.PriceAntiquity;
 import model.PriceCalculator;
 import model.PriceExternal;
@@ -121,15 +120,15 @@ public class Sign_up extends AppCompatActivity {
         //TODO falta agregar chequeos en varios campos, que no esten vacios por ejemplo, y que no este en uso el dni ya por ejemplo
 
         int conditionId = binding.condition.getCheckedRadioButtonId();
-        Condition newUserCondition;
+        int newUserCondition;
         if (conditionId != -1) {
             RadioButton radioButton = binding.condition.findViewById(conditionId);
             String conditionName = radioButton.getText().toString();
             //newUserCondition = Restaurant.getInstance().getCondition(conditionName);
-            newUserCondition = Condition.NONE;//TODO get the righ condition
+            newUserCondition = 1;//TODO get the righ condition
         } else {
             //newUserCondition = Restaurant.getInstance().getCondition("Ninguna");
-            newUserCondition = Condition.NONE;
+            newUserCondition = 0;
         }
 
         CommonUser newUser = new CommonUser(

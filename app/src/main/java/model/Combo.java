@@ -18,7 +18,7 @@ public class Combo extends Product implements Serializable {
         this.discount = new FixedDiscount(discount);//todo tiene ueq ser menor a 1
     }
 
-    public Combo(int id,String name, String description, int imgId, int productCategory,Condition condition, float discount) {
+    public Combo(int id,String name, String description, int imgId, int productCategory, float discount) {
         super(id, name, description, imgId, productCategory);
         this.discount = new FixedDiscount(discount);
         this.comboItems = new ArrayList<>();
