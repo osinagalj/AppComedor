@@ -1,4 +1,4 @@
-package com.example.view.myOrders.Fragment.Confirmados;
+package com.example.view.myOrders.fragment.confirmados;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,14 +9,16 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.view.BackEnd;
-import com.example.view.myOrders.Fragment.OrderDetails.ActivityPdf;
 import com.example.view.R;
+import com.example.view.myOrders.fragment.orderDetails.ActivityPdf;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Order;
 
@@ -25,8 +27,9 @@ public class FragmentConfirmed  extends Fragment {
 
     AdapterConfirmed adapterPend;
     RecyclerView recyclerViewPersonas;
-    ArrayList<Order> listaFoods;
+    List<Order> listaFoods;
 
+    ConfirmedOrdersViewModel viewModel;
 
     @Nullable
     @Override
@@ -34,13 +37,27 @@ public class FragmentConfirmed  extends Fragment {
         View view = inflater.inflate(R.layout.fragment_confirmed_orders,container,false);
         recyclerViewPersonas = view.findViewById(R.id.recyclerView_fixture);
         listaFoods = new ArrayList<>();
-        cargarLista();
-        mostrarData();
+
+
+        viewModel = ViewModelProviders.of(this).get(ConfirmedOrdersViewModel.class); //ViewModel para la DB
+
+        viewModel.setOrders();
+
+        viewModel.list_orders.observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
+            @Override
+            public void onChanged(List<Order> orders) {
+                listaFoods = orders;
+                //foods1.addAll(list_foods); se agregan repetidos si hago esto
+                mostrarData();
+            }
+        });
+
+
+        //cargarLista();
+
         return view;
     }
-    public void cargarLista(){
-        listaFoods.addAll(BackEnd.getConfirmedOrders());
-    }
+
     private void mostrarData(){
         recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterPend = new AdapterConfirmed(getContext(), listaFoods);

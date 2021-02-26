@@ -8,13 +8,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import dao.OrderDAO;
 import dao.ProductDAO;
+import dao.UserDAO;
+import model.Category;
+import model.Combo;
 import model.CommonUser;
 import model.DailyMenu;
 import model.Food;
 import model.Menu;
 import model.Order;
+import model.PriceStudent;
 import model.Product;
 
 public class Restaurant {
@@ -33,7 +39,7 @@ public class Restaurant {
 
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public List<Integer> productsCategories = new ArrayList<>(); //TODO Capaz esto tiene uqe ser int y despues hacer el mapeo. Preguntar
+    public List<Integer> productsCategories = new ArrayList<>();
 
 
 
@@ -45,50 +51,19 @@ public class Restaurant {
 
 
     private Restaurant(){
-        loadUsers();
-        //loadProducts();
-        loadMenus();
 
-        productsCategories.add(0); //Menu del Dia
+        productsCategories.add(0); //Menu del Dia todo
         productsCategories.add(1); //Menu del Dia
         productsCategories.add(2); //Buffet
         productsCategories.add(3); //Kiosko
     }
 
     public void loadOrdersDB(){
-//        loadOrders(); //TODO hay que cargar las despues porque se rompe sino al no estar creada la instancia y querer acceder al proximo numero de orden
-       // loadProducts();
-        //0 NONE,
-        //1 VEGETARIAN,
-        //2 VEGAN,
-        //3 CELIAC
-
-        //La alternativa es poner las condiciones que no pueden comer ese menu, pero es un poco mas complicado
-
-        /*
-        //Para los que no tienen nada
-        DailyMenu m1 = new DailyMenu(1001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 88.0f, 2);
-        m1.addCondition(0);
-
-        //Para vegetariano
-        DailyMenu m2 = new DailyMenu(1002,"Milanesa con papas fritas","Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1, MAX_STOCK, 88.0f, 2);
-        m2.addCondition(1);
-
-        //Para vegano
-        DailyMenu m3 =new DailyMenu(1003,"Ensalada con papas fritas","Ensalada y papas McCain", R.drawable.food_carne_papas, 1,  MAX_STOCK, 88.0f, 2);
-        m3.addCondition(2);
-
-        //Para celiaco
-        DailyMenu m4 =new DailyMenu(1004,"Milanesa con papas fritas","Harina sin TACC, de Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 88.0f, 2);
-        m4.addCondition(3);
-
-        ProductDAO.loadProduct(m1);
-        ProductDAO.loadProduct(m2);
-        ProductDAO.loadProduct(m3);
-        ProductDAO.loadProduct(m4);
-        */
-
+        //loadDataToDataBase();
     }
+
+
+
 
     public List<Order> getOrdersCompleted(CommonUser user){
         List<Order> user_orders = new ArrayList<>();
@@ -353,80 +328,119 @@ public class Restaurant {
         orders.clear();
     }
 
-    private void loadOrders(){
-        HashMap<Product,Integer> products = new HashMap<>();
-        products.put(availableProducts.get(0),4);
 
-        //Completed orders
-        ordersCompleted.add( new Order(registeredUsers.get(0),products,new HashMap<>()));
-        ordersCompleted.add(new Order(registeredUsers.get(0),products,new HashMap<>()));
 
-        //Pending orders
-        orders.add( new Order(registeredUsers.get(1),products,new HashMap<>()));
-        orders.add( new Order(registeredUsers.get(0),products,new HashMap<>()));
-        orders.add( new Order(registeredUsers.get(2),products,new HashMap<>()));
+    private void loadDataToDataBase(){
 
-    }
+     //todo Users
+        CommonUser user1 = new CommonUser(111,"111",1200f,"Lautaro", "Osinaga", LocalDate.of(1999,5,20),0, Category.ALUMNO,new PriceStudent(0.6f));
+        CommonUser user2 = new CommonUser(222,"222",1200f,"Lautaro", "Osinaga", LocalDate.of(1999,5,20),1, Category.ALUMNO,new PriceStudent(0.6f));
+        CommonUser user3 = new CommonUser(333,"333",1200f,"Lautaro", "Osinaga", LocalDate.of(1999,5,20),2, Category.ALUMNO,new PriceStudent(0.6f));
+        CommonUser user4 = new CommonUser(444,"444",1200f,"Lautaro", "Osinaga", LocalDate.of(1999,5,20),3, Category.ALUMNO,new PriceStudent(0.6f));
 
-    public void loadUsers(){
-/*
-        registeredUsers.add(new CommonUser(111,"111",1200f,"Lautaro", "Osinaga", LocalDate.of(1999,5,20), Condition.NONE, Category.ALUMNO,new PriceStudent(0.6f)));
-        registeredUsers.add(new CommonUser(222,"222",700f,"Gian", "Capozzo", LocalDate.of(1999,5,20), Condition.CELIAC, Category.DOCENTE,new PriceProfessor(6)));
-        registeredUsers.add(new CommonUser(333,"333",800f,"Juan", "Perez", LocalDate.of(1999,5,20), Condition.VEGETARIAN, Category.NO_DOCENTE,new PriceAntiquity(LocalDate.now())));
-        registeredUsers.add(new CommonUser(444,"444",800f,"Leo", "Messi", LocalDate.of(1999,5,20), Condition.VEGAN, Category.EXTERNO,new PriceExternal()));
-  */
-    }
+        UserDAO.addUser(user1);
+        UserDAO.addUser(user2);
+        UserDAO.addUser(user3);
+        UserDAO.addUser(user4);
 
-    private void loadProducts(){
 
-        ProductDAO.loadProduct(new Food(1009,"Pizza","Porcion de 200 g", R.drawable.food_porcion_pizza, 2,6, 20.2f ));
+        //todo dallyMenu
 
-        ProductDAO.loadProduct(new Food(1009,"Vaso de Coca-Cola","200 ml", R.drawable.food_vaso_coca, 2,6, 20.2f));
+        //0 NONE,
+        //1 VEGETARIAN,
+        //2 VEGAN,
+        //3 CELIAC
+        //La alternativa es poner las condiciones que no pueden comer ese menu, pero es un poco mas complicado
 
+        //Para los que no tienen nada
+        DailyMenu m1 = new DailyMenu(100,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 88.0f, 2);
+        m1.addCondition(0);
+
+        //Para vegetariano
+        DailyMenu m2 = new DailyMenu(101,"Milanesa con papas fritas","Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1, MAX_STOCK, 88.0f, 2);
+        m2.addCondition(1);
+
+        //Para vegano
+        DailyMenu m3 =new DailyMenu(102,"Ensalada con papas fritas","Ensalada y papas McCain", R.drawable.food_carne_papas, 1,  MAX_STOCK, 88.0f, 2);
+        m3.addCondition(2);
+
+        //Para celiaco
+        DailyMenu m4 =new DailyMenu(103,"Milanesa con papas fritas","Harina sin TACC, de Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 88.0f, 2);
+        m4.addCondition(3);
+
+        ProductDAO.loadProduct(m1);
+        ProductDAO.loadProduct(m2);
+        ProductDAO.loadProduct(m3);
+        ProductDAO.loadProduct(m4);
+
+    //TODO foods
         //Buffet
-        ProductDAO.loadProduct(new Food(1002,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo,2,6, 88.0f));
-        ProductDAO.loadProduct(new Food(1003,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, 2, 2, 85.0f));
-        ProductDAO.loadProduct(new Food(1007,"Cafe con leche", "Con queso", R.drawable.food_cafe_con_leche, 2, 2, 85.0f));
-        ProductDAO.loadProduct(new Food(1008,"Pebete de JyQ","Con chips de chocolate", R.drawable.food_pebete_jyq, 2,6, 20.2f));
-        ProductDAO.loadProduct(new Food(1009,"Pizza","Porcion de 200 g", R.drawable.food_porcion_pizza, 2,6, 20.2f));
-        ProductDAO.loadProduct(new Food(1009,"Tostado","de JyQ", R.drawable.food_tostado_jyq, 2,6, 20.2f));
-
-        ProductDAO.loadProduct(new Food(1009,"Coca-Cola 500 ml","Botella de Coca-Cola", R.drawable.food_botella_coca, 2,6, 20.2f));
-        ProductDAO.loadProduct(new Food(1009,"Empanada","De carne, cebolla y morron", R.drawable.food_empanada, 2,6, 20.2f));
-
-        //List<Product> promo1 = new ArrayList<>();
-        //promo1.add(f1);
-        //promo1.add(f1);
-        //promo1.add(f2);
-
-        //availableProducts.add(new Combo(123,"Combo1","2 porciones de pizza + un vaso de Coca-Cola",R.drawable.food_porcion_pizza,2,promo1,0.3f));
-
+        Food f1 = new Food(1000,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo,2,6, 88.0f);
+        Food f2 = new Food(1001,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, 2, 2, 85.0f);
+        Food f3 = new Food(1002,"Cafe con leche", "Con queso", R.drawable.food_cafe_con_leche, 2, 2, 85.0f);
+        Food f4 = new Food(1003,"Pebete de JyQ","Con chips de chocolate", R.drawable.food_pebete_jyq, 2,6, 20.2f);
+        Food f5 = new Food(1004,"Pizza","Porcion de 200 g", R.drawable.food_porcion_pizza, 2,6, 20.2f);
+        Food f6 = new Food(1005,"Tostado","de JyQ", R.drawable.food_tostado_jyq, 2,6, 20.2f);
+        Food f7 = new Food(1006,"Coca-Cola 500 ml","Botella de Coca-Cola", R.drawable.food_botella_coca, 2,6, 20.2f);
+        Food f8 = new Food(1007,"Empanada","De carne, cebolla y morron", R.drawable.food_empanada, 2,6, 20.2f);
+        Food f9 = new Food(1008,"Vaso de Coca-Cola","200 ml", R.drawable.food_vaso_coca, 2,6, 20.2f);
         //Kiosko
-        ProductDAO.loadProduct(new Food(1004,"Alfajor Pepitos","Con chips de chocolate", R.drawable.food_alfajor_pepitos, 3,6, 20.2f));
-        ProductDAO.loadProduct(new Food(1006,"Galletitas 9 de oro","Agridulce", R.drawable.food_9_de_oro_agridulce, 3, 6, 88.0f));
-        ProductDAO.loadProduct(new Food(1005,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, 3,6, 20.2f));
-        ProductDAO.loadProduct(new Food(1009,"Frutigram de chocolate","Con chips de chocolate", R.drawable.food_frutigran_chocolate, 3,6, 20.2f));
-        ProductDAO.loadProduct(new Food(1009,"Pepas 9 de Oro","Rellenas con membrillo", R.drawable.food_pepas_9_de_oro, 3,6, 20.2f));
-        ProductDAO.loadProduct(new Food(1009,"Pepas chocotrio","Rellenas con membrillo recubiertas de chocolate", R.drawable.food_pepas_trio_chocotrio, 3,6, 20.2f));
+        Food f10 = new Food(1009,"Alfajor Pepitos","Con chips de chocolate", R.drawable.food_alfajor_pepitos, 3,6, 20.2f);
+        Food f11 = new Food(1010,"Galletitas 9 de oro","Agridulce", R.drawable.food_9_de_oro_agridulce, 3, 6, 88.0f);
+        Food f12 = new Food(1011,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, 3,6, 20.2f);
+        Food f13 = new Food(1012,"Frutigram de chocolate","Con chips de chocolate", R.drawable.food_frutigran_chocolate, 3,6, 20.2f);
+        Food f14 = new Food(1013,"Pepas 9 de Oro","Rellenas con membrillo", R.drawable.food_pepas_9_de_oro, 3,6, 20.2f);
+        Food f15 = new Food(1014,"Pepas chocotrio","Rellenas con membrillo recubiertas de chocolate", R.drawable.food_pepas_trio_chocotrio, 3,6, 20.2f);
+
+        //Combos
+        List<Product> promo1 = new ArrayList<>();
+        promo1.add(f1);promo1.add(f9);promo1.add(f5);
+        Combo combo1 = new Combo(2000,"Combo1","Tarta de Pollo + Coca-Cola + Pizza",R.drawable.food_porcion_pizza,2,promo1,0.3f);
+
+        ProductDAO.loadProduct(f1);
+        ProductDAO.loadProduct(f2);
+        ProductDAO.loadProduct(f3);
+        ProductDAO.loadProduct(f4);
+        ProductDAO.loadProduct(f5);
+        ProductDAO.loadProduct(f6);
+        ProductDAO.loadProduct(f7);
+        ProductDAO.loadProduct(f8);
+        ProductDAO.loadProduct(f9);
+        ProductDAO.loadProduct(f10);
+        ProductDAO.loadProduct(f11);
+        ProductDAO.loadProduct(f12);
+        ProductDAO.loadProduct(f13);
+        ProductDAO.loadProduct(f14);
+        ProductDAO.loadProduct(f15);
+
+        ProductDAO.loadProduct(combo1);
+
+
+
+
+    //TODO Orders
+
+        Map<Product,Integer> products = new HashMap<>();
+        products.put(f1,2);
+        products.put(f2,1);
+        products.put(f3,1);
+
+        Map<Product,Integer> products2 = new HashMap<>();
+        products2.put(f4,5);
+        products2.put(f2,3);
+        products2.put(f8,2);
+
+        Order order1 = new Order(user1,products);
+        Order order2 = new Order(user1,products2);
+        Order order3 = new Order(user2,products);
+        Order order4 = new Order(user2,products2);
+
+        OrderDAO.loadPendingOrder(order1);
+        OrderDAO.loadPendingOrder(order3);
+
+        OrderDAO.loadConfirmedOrder(order2);
+        OrderDAO.loadConfirmedOrder(order4);
 
     }
 
-    private void loadMenus() {
-
-        Menu menu = new Menu(LocalDate.now());
-        menu.add(new DailyMenu(1001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 88.0f, 2));
-        menu.add(new DailyMenu(1001,"Milanesa con papas fritas","Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1, MAX_STOCK, 88.0f, 2));
-        menu.add(new DailyMenu(1001,"Carne con papas fritas","Carne vacuna y papas McCain", R.drawable.food_carne_papas, 1,  MAX_STOCK, 88.0f, 2));
-        menu.add(new DailyMenu(1001,"Milanesa con papas fritas","Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 88.0f, 2));
-
-        Menu menu2 = new Menu(LocalDate.of(2021,1,13));
-        menu.add(new DailyMenu(1001,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, 1, MAX_STOCK, 88.0f, 2));
-        menu.add(new DailyMenu(1001,"Milanesa con papas fritas","Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1, MAX_STOCK, 88.0f, 2));
-        menu.add(new DailyMenu(1001,"Carne con papas fritas","Carne vacuna y papas McCain", R.drawable.food_carne_papas, 1, MAX_STOCK, 88.0f, 2));
-        menu.add(new DailyMenu(1001,"Milanesa con papas fritas","Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1, MAX_STOCK, 88.0f, 2));
-
-        menus.add(menu);
-        menus.add(menu2);
-
-    }
 }

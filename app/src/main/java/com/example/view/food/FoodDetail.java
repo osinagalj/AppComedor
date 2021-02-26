@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.view.BackEnd;
 import com.example.view.databinding.ActivityFoodDetailsBinding;
 
+import java.time.LocalDate;
+
 import model.Product;
 
 public class FoodDetail extends AppCompatActivity {
@@ -38,7 +40,7 @@ public class FoodDetail extends AppCompatActivity {
         binding.productPrice.setText(String.valueOf(product.getPrice(BackEnd.getLoggedUser())));
         binding.productDescription.setText(product.getDescription());
 
-        if(product.getCategory() == 1 ){ //todo
+        if(product.toHome()){
             binding.cbToHome.setVisibility(View.VISIBLE);
         }else{
             binding.cbToHome.setVisibility(View.GONE);
@@ -129,8 +131,8 @@ public class FoodDetail extends AppCompatActivity {
 
         if(product.getPrice(BackEnd.getLoggedUser()) * addedAmount <= BackEnd.getLoggedUser().getBalance()){ //Si hay suficiente saldo
             if(product.getCategory() == 1){ //todo capaz es mejor obtener el numero del restaurant
-                if(BackEnd.getLoggedUser().getDailySpecialRemaining() >= addedAmount){
-                    BackEnd.getLoggedUser().setDailySpecialRemaining(BackEnd.getLoggedUser().getDailySpecialRemaining() - addedAmount);
+                if(BackEnd.getMenusRestantes(LocalDate.now()) >= addedAmount){ //todo ACA esta la papa
+
                     if(BackEnd.addProduct(product,addedAmount,toHome)){
                         return true;
                     }else{

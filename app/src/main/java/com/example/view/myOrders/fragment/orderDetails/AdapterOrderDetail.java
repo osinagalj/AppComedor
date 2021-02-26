@@ -1,4 +1,4 @@
-package com.example.view.myOrders.Fragment.OrderDetails;
+package com.example.view.myOrders.fragment.orderDetails;
 
 import android.content.Context;
 import android.view.LayoutInflater;

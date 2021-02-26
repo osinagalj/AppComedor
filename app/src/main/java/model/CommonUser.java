@@ -25,11 +25,11 @@ public class CommonUser implements Serializable {
 
     public CommonUser(){}
 
-    public CommonUser(int identityCardNumber,String password, float balance, String names, String lastname, LocalDate birthdate,  int condition,Category category, PriceCalculator discountCalculator) {
+    public CommonUser(int identityCardNumber,String password, float balance, String names, String lastName, LocalDate birthDate,  int condition,Category category, PriceCalculator discountCalculator) {
         this.password = password;
         this.names = names;
-        this.lastname = lastname;
-        this.birthdate = birthdate;
+        this.lastname = lastName;
+        this.birthdate = birthDate;
         this.identityCardNumber = identityCardNumber;
         this.category = category;
         this.condition = condition;

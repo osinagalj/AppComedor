@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Combo extends Product implements Serializable {
     private List<Product> comboItems;
-    private FixedDiscount discount;
+    private DiscountCalculator discount;
 
     public Combo(int id,String name, String description, int imgId, int productCategory, List<Product> comboItems, float discount) {
         super(id, name, description, imgId, productCategory);
@@ -15,7 +15,7 @@ public class Combo extends Product implements Serializable {
             this.comboItems = comboItems;
         else
             this.comboItems = new ArrayList<>();
-        this.discount = new FixedDiscount(discount);//todo tiene ueq ser menor a 1
+        this.discount = new FixedDiscount(discount);//todo tiene ueq ser menor a 1 Puede ser otro tipo de discount
     }
 
     public Combo(int id,String name, String description, int imgId, int productCategory, float discount) {
@@ -97,4 +97,14 @@ public class Combo extends Product implements Serializable {
         }
         return true; //Hacer la logica para retornar true o false si hay o no stock
     }
+
+
+    public DiscountCalculator getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(FixedDiscount discount) {
+        this.discount = discount;
+    }
+
 }

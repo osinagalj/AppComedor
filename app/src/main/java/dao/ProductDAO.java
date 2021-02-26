@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import dataBase.Restaurant;
+import model.Combo;
 import model.CommonUser;
 import model.DailyMenu;
 import model.Food;
@@ -76,6 +77,33 @@ public class ProductDAO {
 
         // Add a new document with a generated ID
         Restaurant.getInstance().db.collection("dailyMenus").document(String.valueOf(food.getId())).set(new_food);
+    }
+
+    public static void loadProduct(Combo food){
+
+        Map<String, Object> new_food = new HashMap<>();
+        new_food.put("id", food.getId());
+        new_food.put("name", food.getName());
+        new_food.put("description", food.getDescription());
+        new_food.put("imgId", food.getImgId());
+        new_food.put("productCategory", food.getCategory());
+
+        new_food.put("discount", "0.3");//todo
+
+        List<Integer> conditions = new ArrayList<>(food.getCondition());
+        new_food.put("conditions", conditions);
+
+
+        List<Integer> foods = new ArrayList<>();
+        for(Product p : food.getComboItems()){
+            System.out.println("ID del food en combo = " + p.getId());
+            foods.add(p.getId());
+        }
+
+        new_food.put("items", foods);
+
+        // Add a new document with a generated ID
+        Restaurant.getInstance().db.collection("combos").document(String.valueOf(food.getId())).set(new_food);
     }
 
 

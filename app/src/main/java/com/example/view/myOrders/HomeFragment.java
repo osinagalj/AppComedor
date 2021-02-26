@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.view.myOrders.Fragment.Confirmados.FragmentConfirmed;
-import com.example.view.myOrders.Fragment.Pendientes.FragmentPendientes;
+import com.example.view.myOrders.fragment.confirmados.FragmentConfirmed;
+import com.example.view.myOrders.fragment.pendientes.FragmentPendientes;
 import com.google.android.material.tabs.TabLayout;
 
 

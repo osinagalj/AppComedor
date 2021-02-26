@@ -84,7 +84,7 @@ public class ActivityCart extends AppCompatActivity {
     public void cargarLista(){
         products = new ArrayList<>();
         products.addAll(BackEnd.getOrder().getItems());
-        products.addAll(BackEnd.getOrder().getToHome());
+        //products.addAll(BackEnd.getOrder().getToHome());
     }
 
     private void mostrarData() {

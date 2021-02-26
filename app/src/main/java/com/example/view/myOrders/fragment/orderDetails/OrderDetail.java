@@ -1,4 +1,4 @@
-package com.example.view.myOrders.Fragment.OrderDetails;
+package com.example.view.myOrders.fragment.orderDetails;
 
 public class OrderDetail {
 

@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataBase.Restaurant;
-import model.DailyMenu;
-import model.Food;
 import model.Product;
 
 public class FragmentFood extends Fragment {
@@ -32,7 +30,7 @@ public class FragmentFood extends Fragment {
     MainRecyclerAdapter mainRecyclerAdapter;
     private FragmentFoodBinding binding;
 
-    private List<Food> foods1 = new ArrayList<>();
+    private List<Product> foods1;
     FoodViewModel viewModel;
 
 
@@ -46,31 +44,24 @@ public class FragmentFood extends Fragment {
 
         viewModel = ViewModelProviders.of(this).get(FoodViewModel.class); //ViewModel para la DB
 
+
+
         viewModel.setDailyMenuFoods();
         viewModel.setFoods();
 
-        viewModel.dailyMenu.observe(getViewLifecycleOwner(), new Observer<DailyMenu>() {
-            @Override
-            public void onChanged(DailyMenu dailyMenu) {
-                foods1.add(dailyMenu);
-                System.out.println("Id del food:" + dailyMenu.getId());
-                loadData();
-            }
-        });
+        foods1 = new ArrayList<>();
 
-        viewModel.list_foods.observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
+        viewModel.list_foods.observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
-            public void onChanged(List<Food> list_foods) {
-                for(Food f : list_foods)
-                    System.out.println("Id del food:" + f.getId());
-
-                foods1.addAll(list_foods);
+            public void onChanged(List<Product> list_foods) {
+                foods1.clear();
+                foods1 = new ArrayList<>(list_foods);
+                //foods1.addAll(list_foods); se agregan repetidos si hago esto
                 loadData();
             }
         });
 
         setUpButtons();
-
 
         return view;
     }
@@ -79,21 +70,13 @@ public class FragmentFood extends Fragment {
     public void loadData() {
 
         List<AllCategory> allCategoryList = new ArrayList<>();
-        System.out.println("Tamaño del food = " + foods1.size());
-        for (Food food : foods1)
-            System.out.println("id del product"+food.getId() + " , category:" + food.getCategory());
 
-        System.out.println("termino el tamaño");
-
-        List<Food> consumables = foods1; // Hacer que sean productos tmb
         for (int category : Restaurant.getInstance().productsCategories){
-            System.out.println("Categoria: " + category);
             List<Product> catList = new ArrayList<>();
-            for (Product product : foods1){
-                System.out.println("id del product"+product.getId() + " , category:" + product.getCategory() + "category del if = " + category);
+
+            for (Product product : foods1)
                 if (product.getCategory() == category)
                     catList.add(product);
-            }
 
             if(!catList.isEmpty())
                 allCategoryList.add(new AllCategory(getCategory(category), catList));

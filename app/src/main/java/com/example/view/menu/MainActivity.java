@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //cargar fragment principal en la actividad
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container_fragment,new HomeFragment());
+        fragmentTransaction.add(R.id.container_fragment,new FragmentFood());
         fragmentTransaction.commit();
 
     }
