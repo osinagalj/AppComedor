@@ -18,22 +18,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataBase.Restaurant;
+import model.Combo;
 import model.DailyMenu;
 import model.Food;
 import model.Menu;
+import model.Product;
 
 public class FoodViewModel extends ViewModel {
 
     private static final String TAG = "a";
-    public MutableLiveData<List<Food>> list_foods = new MutableLiveData<List<Food>>();
-    List<Food> list_of_foods = new ArrayList<Food>();
-
-    public MutableLiveData<DailyMenu> dailyMenu = new MutableLiveData<DailyMenu>();
-    Menu menu = new Menu(LocalDate.now());
-
+    public MutableLiveData<List<Product>> list_foods = new MutableLiveData<List<Product>>();
+    public static List<Product> list_of_foods = new ArrayList<Product>();
 
     public void setDailyMenuFoods(){
 
+        list_foods = new MutableLiveData<List<Product>>();
+        list_of_foods = new ArrayList<Product>();
 
         CollectionReference colRef = Restaurant.getInstance().db.collection("dailyMenus");
         colRef.get()
@@ -41,6 +41,8 @@ public class FoodViewModel extends ViewModel {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+
+                            Menu menu = new Menu(LocalDate.now()); //todo get the local date
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
@@ -54,20 +56,22 @@ public class FoodViewModel extends ViewModel {
                                         2
                                 );
 
-                                //document.getData().get("conditions")
-                                f.addCondition(0);
-                                f.addCondition(1);
-                                f.addCondition(2);
-                                f.addCondition(3);
+                                ArrayList<Long> arrList = new ArrayList<Long>();
+                                arrList = (ArrayList) document.getData().get("conditions");
+
+                                for(int i=0;i<arrList.size();i++){
+                                   System.out.println("Numero de condicion = " + arrList.get(i));
+                                    f.addCondition(Math.toIntExact((arrList.get(i))));
+                                }
 
                                 menu.add(f);
                                 System.out.println("Data del dailyfood");
                                 System.out.println("Id del dailymenu = " + f.getId());
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }
-                            System.out.println("Cantdad de menus del dia = " + menu.foods.size());
-                            //TODO error aca obteniendo el menu
-                            dailyMenu.postValue(menu.getMenu(BackEnd.getLoggedUser()));
+
+                            list_of_foods.add(menu.getMenu(BackEnd.getLoggedUser()));
+                            list_foods.postValue(list_of_foods);
 
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -98,7 +102,7 @@ public class FoodViewModel extends ViewModel {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }
                             list_foods.postValue(list_of_foods);
-
+                            setCombos();
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -107,5 +111,49 @@ public class FoodViewModel extends ViewModel {
 
     }
 
+    public void setCombos(){
+
+        CollectionReference colRef = Restaurant.getInstance().db.collection("combos");
+        colRef.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                List<Product> comboItems = new ArrayList<>();
+
+                                ArrayList<Long> arrList = new ArrayList<Long>();
+                                arrList = (ArrayList) document.getData().get("items");
+
+                                for(int i=0;i<arrList.size();i++){
+                                    for(Product f : list_of_foods){
+                                        System.out.println("Numero de food = " + Math.toIntExact((arrList.get(i))));
+                                        if(f.getId() == Math.toIntExact((arrList.get(i)))){
+                                            comboItems.add(f);
+                                        }
+                                    }
+                                }
+
+                                Combo c = new Combo (Integer.parseInt(document.getData().get("id").toString()),
+                                        document.getData().get("name").toString(),
+                                        document.getData().get("description").toString(),
+                                        Integer.parseInt(document.getData().get("imgId").toString()),
+                                        Integer.parseInt(document.getData().get("productCategory").toString()),
+                                        comboItems,0.3f
+                                );
+
+                                list_of_foods.add(c);
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                            }
+                            list_foods.postValue(list_of_foods);
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+    }
 
 }

@@ -1,5 +1,8 @@
 package com.example.view;
 
+import com.example.view.myOrders.fragment.pendientes.PendingOrdersViewModel;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +20,7 @@ import model.Product;
 public class BackEnd {
 
     private static CommonUser loggedUser; //TODO inicializado solo para saltear el login en el manifest
-    private static Order myOrder = new Order(loggedUser,new HashMap<>(),new HashMap<>());
+    private static Order myOrder;
     private static Product dailyMenu;
 
     public static CommonUser getLoggedUser() {
@@ -26,6 +29,7 @@ public class BackEnd {
 
     public static void setLoggedUser(CommonUser user) {
         BackEnd.loggedUser = user;
+        myOrder = new Order(loggedUser,new HashMap<>());
     }
 
     public static void setDailyMenu(){
@@ -51,9 +55,13 @@ public class BackEnd {
 
 
     public static boolean addProduct(Product product, int amount, boolean toHome) {
+        //TODO
+        
         //Tengo que devolver true si se pudo agregar el pedido,sino false porque no hay stock
         //Si hay stock
         //
+        myOrder.addProduct(product, amount,toHome);
+        /*
         if(!ProductDAO.decreaseStock(product.getId(),amount)){      //SI Hay stock
             return false;
         }else{
@@ -62,8 +70,23 @@ public class BackEnd {
             }else{
                  myOrder.changeAmount(product, amount, toHome); //Si existe en la orden aumento la cantidad
             }
-        }
+        }*/
         return true;
+    }
+
+    public static int getMenusRestantes(LocalDate date) {
+        int suma = 0;
+        for (Order o : PendingOrdersViewModel.list_of_orders)
+            //if(o.getPlacedInstant() == date) todo
+            for (Product p : o.getItems()) {
+                if (p.getCategory() == 1) {
+                    suma++;
+                }
+            }
+        if(suma < 2)
+            return 2 - suma;
+        else
+            return 0;
     }
 
     public static Order getOrder(){
@@ -76,7 +99,7 @@ public class BackEnd {
 
     public static void clearOrder(){
         //todo capaz hay que liberar memoria
-        myOrder = new Order(loggedUser,new HashMap<>(),new HashMap<>());
+        myOrder = new Order(loggedUser,new HashMap<>());
     }
 
     public static float getOrderPrice(){
@@ -86,7 +109,7 @@ public class BackEnd {
     public static List<Product> getProductsOrder(){
         List<Product> list = new ArrayList<>();
         list.addAll(myOrder.getItems());
-        list.addAll(myOrder.getToHome());
+        //list.addAll(myOrder.getToHome());
         return list;
     }
 
@@ -113,7 +136,7 @@ public class BackEnd {
     }
 
     public static boolean orderIsEmpty(){
-        if(myOrder.getItems().isEmpty() && myOrder.getToHome().isEmpty())
+        if(myOrder.getItems().isEmpty())
             return true;
         return false;
     }

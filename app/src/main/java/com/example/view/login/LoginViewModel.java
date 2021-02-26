@@ -40,7 +40,7 @@ public class LoginViewModel extends ViewModel {
 
                         //todo
                         String birthDate = (String)document.getData().get("birthDate");
-                        String condition = (String)document.getData().get("condition");
+                        int condition = (Integer.parseInt(document.getData().get("condition").toString()));
                         user.setBirthdate(LocalDate.now());
                         user.setCondition(0);
 

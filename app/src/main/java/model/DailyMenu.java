@@ -7,11 +7,21 @@ import java.util.List;
 public class DailyMenu extends Food  {
 
     private int limit;
+    private boolean home = false;
 
     public DailyMenu(int id,String name, String description, int imgId, int productCategory, int stock, float price, int limit) {
         super(id,name, description, imgId, productCategory,stock,price);
         this.limit = limit;
 
+    }
+
+    public void setHome(){
+        this.home = true;
+    }
+
+    @Override
+    public boolean toHome() {
+        return true;
     }
 
     @Override

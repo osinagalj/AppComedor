@@ -1,4 +1,4 @@
-package com.example.view.myOrders.Fragment.OrderDetails;
+package com.example.view.myOrders.fragment.orderDetails;
 
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +35,7 @@ public class ActivityPdf extends AppCompatActivity {
         listaFoods = new ArrayList<>();
 
 
-        final Order order =(Order) getIntent().getExtras().get("ORDER_SELECTED");
+        Order order =(Order) getIntent().getExtras().get("ORDER_SELECTED");
 
         if(order != null) {
             setData(order);

@@ -39,7 +39,7 @@
 
 
         <activity
-            android:name=".myOrders.Fragment.OrderDetails.ActivityPdf"
+            android:name=".myOrders.fragment.orderDetails.ActivityPdf"
             android:label="@string/title_activity_pdf"
             android:theme="@style/AppTheme.NoActionBar" />
 
