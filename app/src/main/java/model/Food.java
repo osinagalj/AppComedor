@@ -6,17 +6,7 @@ import java.util.List;
 
 public class Food extends Product  {
 
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
 
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
 
     private int stock;
     private float price;
@@ -78,5 +68,17 @@ public class Food extends Product  {
             return true;
         }
         return false;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 }

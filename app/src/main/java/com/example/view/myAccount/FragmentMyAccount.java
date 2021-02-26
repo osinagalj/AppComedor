@@ -34,13 +34,27 @@ public class FragmentMyAccount extends Fragment {
         return view;
     }
 
+    private String getConditio(int number){
+        switch (number){
+
+            case 1 :
+                return "VEGETARIANA";
+            case 2 :
+                return "VEGANA";
+            case 3 :
+                return "CELIACO";
+            default:
+                return "NINGUNA";
+        }
+    }
+
 
     private void setUserData(CommonUser user){
         binding.myAccountLabelName.setText(user.getNames());
         binding.myAccountLabelLastName.setText(user.getLastname());
         binding.myAccountLabelDni.setText(String.valueOf(user.getIdentityCardNumber()));
         binding.myAccountLabelCategory.setText(user.getCategory());
-        binding.myAccountLabelCondition.setText(user.getConditionName().toString());
+        binding.myAccountLabelCondition.setText(getConditio(user.getCondition()));
         binding.myAccountLabelPassword.setText(user.getPassword());
         //binding.myAccountImageViewProfile.setImageResource();
     }
