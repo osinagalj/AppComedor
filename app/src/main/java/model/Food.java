@@ -1,22 +1,35 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Food extends Product implements Serializable {
+public class Food extends Product  {
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
 
     private int stock;
     private float price;
-    private List<String> ingredients;
 
-    public Food(int id, String name, String description, int imgId, ProductCategory category, Condition condition, int stock, float price) {
-        super(id, name, description, imgId, category,condition);
+    public Food(){}
+
+    public Food(int id, String name, String description, int imgId, int productCategory, int stock, float price) {
+        super(id, name, description, imgId, productCategory);
         this.stock = stock;
         this.price = price;
-        this.ingredients = new ArrayList<>();
     }
+
+
 
     @Override
     public boolean toHome() {
@@ -33,7 +46,6 @@ public class Food extends Product implements Serializable {
         return "Food{" +
                 "stock=" + stock +
                 ", price=" + price +
-                ", ingredients=" + ingredients +
                 "} " + super.toString();
     }
 

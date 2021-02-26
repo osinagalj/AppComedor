@@ -129,7 +129,7 @@ public class BackEnd {
     public static List<Product> getProducts(){
         //TODO aca se aplicaria la logica de negocio capaz para el descuento y eso
         List<Product> products = new ArrayList<>();
-        products.add(dailyMenu);
+        //products.add(dailyMenu);
         products.addAll(ProductDAO.getProducts(loggedUser));
         return products;
     }

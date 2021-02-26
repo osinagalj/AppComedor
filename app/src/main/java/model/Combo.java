@@ -9,8 +9,8 @@ public class Combo extends Product implements Serializable {
     private List<Product> comboItems;
     private FixedDiscount discount;
 
-    public Combo(int id,String name, String description, int imgId, ProductCategory category,Condition condition, List<Product> comboItems, float discount) {
-        super(id, name, description, imgId, category,condition);
+    public Combo(int id,String name, String description, int imgId, int productCategory, List<Product> comboItems, float discount) {
+        super(id, name, description, imgId, productCategory);
         if (comboItems != null)
             this.comboItems = comboItems;
         else
@@ -18,8 +18,8 @@ public class Combo extends Product implements Serializable {
         this.discount = new FixedDiscount(discount);//todo tiene ueq ser menor a 1
     }
 
-    public Combo(int id,String name, String description, int imgId, ProductCategory category,Condition condition, float discount) {
-        super(id, name, description, imgId, category,condition);
+    public Combo(int id,String name, String description, int imgId, int productCategory,Condition condition, float discount) {
+        super(id, name, description, imgId, productCategory);
         this.discount = new FixedDiscount(discount);
         this.comboItems = new ArrayList<>();
     }

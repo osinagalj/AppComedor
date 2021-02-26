@@ -12,7 +12,6 @@ import com.example.view.BackEnd;
 import com.example.view.databinding.ActivityFoodDetailsBinding;
 
 import model.Product;
-import model.ProductCategory;
 
 public class FoodDetail extends AppCompatActivity {
 
@@ -39,7 +38,7 @@ public class FoodDetail extends AppCompatActivity {
         binding.productPrice.setText(String.valueOf(product.getPrice(BackEnd.getLoggedUser())));
         binding.productDescription.setText(product.getDescription());
 
-        if(product.getCategory() == ProductCategory.DAILY_MENU){
+        if(product.getCategory() == 1 ){ //todo
             binding.cbToHome.setVisibility(View.VISIBLE);
         }else{
             binding.cbToHome.setVisibility(View.GONE);
@@ -129,7 +128,7 @@ public class FoodDetail extends AppCompatActivity {
         //Controlar Stock
 
         if(product.getPrice(BackEnd.getLoggedUser()) * addedAmount <= BackEnd.getLoggedUser().getBalance()){ //Si hay suficiente saldo
-            if(product.getCategory().equals(ProductCategory.DAILY_MENU)){
+            if(product.getCategory() == 1){ //todo capaz es mejor obtener el numero del restaurant
                 if(BackEnd.getLoggedUser().getDailySpecialRemaining() >= addedAmount){
                     BackEnd.getLoggedUser().setDailySpecialRemaining(BackEnd.getLoggedUser().getDailySpecialRemaining() - addedAmount);
                     if(BackEnd.addProduct(product,addedAmount,toHome)){

@@ -15,7 +15,6 @@ import com.example.view.R;
 import java.util.List;
 
 import model.Product;
-import model.ProductCategory;
 
 
 public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapter.MainViewHolder> {
@@ -39,14 +38,8 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
 
         String title = allCategoryList.get(position).getCategoryTitle();
-        if(title == ProductCategory.DAILY_MENU.toString()){
-            holder.categoryTitle.setText(R.string.dayle_menu);
-        }else{
-            holder.categoryTitle.setText(title);
-        }
-
+        holder.categoryTitle.setText(title);
         setCatItemRecycler(holder.itemRecycler, allCategoryList.get(position).getCategoryItemList());
-
     }
 
     @Override

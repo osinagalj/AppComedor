@@ -1,9 +1,13 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dataBase.Restaurant;
 import model.CommonUser;
+import model.Food;
 import model.Product;
 
 public class ProductDAO {
@@ -35,7 +39,26 @@ public class ProductDAO {
     }
 
     //@POST
-    public static void loadProduct(){ }
+    public static void loadProduct(Food food){
+
+
+        Map<String, Object> new_food = new HashMap<>();
+        new_food.put("id", food.getId());
+        new_food.put("name", food.getName());
+        new_food.put("description", food.getDescription());
+        new_food.put("imgId", food.getImgId());
+        new_food.put("productCategory", food.getCategory());
+        new_food.put("stock", food.getStock());
+        new_food.put("price", food.getPrice(null));
+
+        List<Integer> conditions = new ArrayList<>(food.getCondition());
+        new_food.put("conditions", conditions);
+
+        // Add a new document with a generated ID
+        Restaurant.getInstance().db.collection("foods").document(String.valueOf(1100)).set(new_food);
+    }
+
+
 
     //DELETE
     public static void removeProduct(){ }

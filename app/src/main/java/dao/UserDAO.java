@@ -10,10 +10,7 @@ public class UserDAO {
 
 
     //@GET
-
-    public static void getUser(int dni, String password){
-
-    }
+    public static void getUser(int dni, String password) {}
 
     //@POST
     public static void addUser(CommonUser user){
@@ -27,11 +24,10 @@ public class UserDAO {
         user_db.put("birthDate", user.getBirthdate().toString());
         user_db.put("balance", user.getBalance());
         user_db.put("condition", user.getCondition().toString());
-        user_db.put("category", user.getCategory().toString());
+        user_db.put("category", user.getCategory());
 
         // Add a new document with a generated ID
         Restaurant.getInstance().db.collection("users").document(String.valueOf(user.getIdentityCardNumber())).set(user_db);
-
 
     }
 

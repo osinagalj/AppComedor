@@ -1,5 +1,7 @@
 package utils;
 
+import com.example.view.R;
+
 import java.time.LocalDate;
 
 import model.Category;
@@ -28,5 +30,9 @@ public class Utils {
         }
 
         return category;
+    }
+
+    static public int getImg(int imgId){
+        return R.drawable.food_milanesas_con_fritas;
     }
 }

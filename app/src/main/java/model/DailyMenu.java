@@ -8,8 +8,8 @@ public class DailyMenu extends Food  {
 
     private int limit;
 
-    public DailyMenu(int id,String name, String description, int imgId, ProductCategory category, Condition condition, int stock, float price, int limit) {
-        super(id,name, description, imgId, category,condition,stock,price);
+    public DailyMenu(int id,String name, String description, int imgId, int productCategory, int stock, float price, int limit) {
+        super(id,name, description, imgId, productCategory,stock,price);
         this.limit = limit;
 
     }
