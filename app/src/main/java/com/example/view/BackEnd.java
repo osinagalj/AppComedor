@@ -163,7 +163,7 @@ public class BackEnd {
     //-------------------------------------------------------------------------------------------------//
 
     public static void addUser(CommonUser user){
-        UserDAO.addUser(user);
+        UserDAO.addUser2(user);
     }
 
     public static boolean loadMoney(float amount){

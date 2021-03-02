@@ -349,15 +349,11 @@ public class Restaurant {
         CommonUser user3 = new CommonUser(333,"333",1200f,"Lautar3o", "Osinaga", date,2, Category.ALUMNO);
         CommonUser user4 = new CommonUser(444,"444",1200f,"Lautaro3", "Osinaga", date,3, Category.ALUMNO);
 
-        UserDAO.addUser(user1);
-        UserDAO.addUser(user2);
-        UserDAO.addUser(user3);
-        UserDAO.addUser(user4);
-
         UserDAO.addUser2(user1);
         UserDAO.addUser2(user2);
         UserDAO.addUser2(user3);
         UserDAO.addUser2(user4);
+
 
         //todo dallyMenu
 
@@ -450,10 +446,10 @@ public class Restaurant {
         products2.put(f2,3);
         products2.put(f8,2);
 
-        Order order1 = new Order(8,user1,products);
-        Order order2 = new Order(9,user1,products2);
-        Order order3 = new Order(10,user2,products);
-        Order order4 = new Order(11,user2,products2);
+        Order order1 = new Order(3,user1,products);
+        Order order2 = new Order(1,user1,products2);
+        Order order3 = new Order(4,user2,products);
+        Order order4 = new Order(2,user2,products2);
 
         OrderDAO.loadPendingOrder2(order1);
         OrderDAO.loadPendingOrder2(order3);
