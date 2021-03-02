@@ -92,7 +92,6 @@ public class Login extends AppCompatActivity {
                 if(user.getIdentityCardNumber() != -1){
                     Intent intent = new Intent(getBaseContext(), MainActivity.class);
                     BackEnd.setLoggedUser(user);
-                    BackEnd.setDailyMenu();
                     binding.userDni.setText("");
                     binding.userPassword.setText("");
                     startActivity(intent);

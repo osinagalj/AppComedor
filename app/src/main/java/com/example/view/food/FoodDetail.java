@@ -7,15 +7,17 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 
 import com.example.view.BackEnd;
 import com.example.view.databinding.ActivityFoodDetailsBinding;
 
 import java.time.LocalDate;
 
+import dao.OrderDAO;
 import model.Product;
 
-public class FoodDetail extends AppCompatActivity {
+public class FoodDetail extends AppCompatActivity  {
 
     private ActivityFoodDetailsBinding binding;
 
@@ -26,6 +28,7 @@ public class FoodDetail extends AppCompatActivity {
         binding = ActivityFoodDetailsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
 
         final Product product = (Product) getIntent().getExtras().get("food_picked");
 
@@ -46,7 +49,23 @@ public class FoodDetail extends AppCompatActivity {
             binding.cbToHome.setVisibility(View.GONE);
         }
     }
+    private void completOrder(){
 
+        //OrderDAO.setNumberNextOrder2();
+        //final boolean[] cargo = {false}; //necesario sino inserta una orden vacia
+        OrderDAO.setNumberNextOrder2().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer id) {
+                //if(!cargo[0]){
+                 //   cargo[0] = true;
+                    BackEnd.confirmOrder(id + 1);
+                    openFinishOrder();
+                    binding.cbToHome.setChecked(false);
+              //  }
+
+            }
+        });
+    }
     private void setUpButtons(Product product){
 
         binding.btnAddOrder.setOnClickListener(new View.OnClickListener() {
@@ -55,10 +74,8 @@ public class FoodDetail extends AppCompatActivity {
                 try {
                     if(addProduct(product)){
                         //Send the order to the DataBase
-                        BackEnd.confirmOrder();
                         Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
-                        openFinishOrder();
-                        binding.cbToHome.setChecked(false);
+                        completOrder();
                     }
 
                 } catch (NumberFormatException numberFormatException){

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.view.BackEnd;
@@ -16,6 +17,7 @@ import com.example.view.databinding.ActivityCarritoBinding;
 
 import java.util.ArrayList;
 
+import dao.OrderDAO;
 import model.Product;
 
 public class ActivityCart extends AppCompatActivity {
@@ -68,9 +70,19 @@ public class ActivityCart extends AppCompatActivity {
                 if(BackEnd.getProducts().isEmpty()){
                     Toast.makeText(getBaseContext(), "No se puede realizar un pedido sin productos", Toast.LENGTH_SHORT).show();
                 }else{
-                    BackEnd.confirmOrder();
-                    openFinishOrder();
+                    completOrder();
                 }
+            }
+        });
+    }
+
+    private void completOrder(){
+        //OrderDAO.setNumberNextOrder2();
+        OrderDAO.setNumberNextOrder2().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer id) {
+                BackEnd.confirmOrder(id + 1);
+                openFinishOrder();
             }
         });
     }

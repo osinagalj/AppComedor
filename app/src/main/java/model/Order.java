@@ -17,16 +17,16 @@ public class Order implements Serializable {
     private int id;
     private Instant placed;
     private CommonUser placedBy;
-
     private Map<Product,Integer> items;
 
+    /*
     public Order(CommonUser placedBy, Map<Product,Integer> items){
         this.id = Restaurant.getInstance().nextOrderNum(); //TODO change
         this.items= items;
         this.placed = Instant.now();
         this.placedBy = placedBy;
     }
-
+*/
     public Order(CommonUser placedBy){
         this.id = Restaurant.getInstance().nextOrderNum();
         this.items= new HashMap<>();
@@ -113,6 +113,27 @@ public class Order implements Serializable {
         if (items.containsKey(product))
             items.remove(product);
 
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Instant getPlaced() {
+        return placed;
+    }
+
+    public void setPlaced(Instant placed) {
+        this.placed = placed;
+    }
+
+    public void setPlacedBy(CommonUser placedBy) {
+        this.placedBy = placedBy;
+    }
+
+    public void setItems(Map<Product, Integer> items) {
+        this.items = items;
     }
 
 }

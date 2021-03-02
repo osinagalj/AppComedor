@@ -63,8 +63,8 @@ public class PendingOrdersViewModel extends ViewModel {
 
 
 
-
-                                Order o = new Order (BackEnd.getLoggedUser(), items);
+                                int nro = Integer.parseInt(document.getData().get("id").toString());
+                                Order o = new Order (nro,BackEnd.getLoggedUser(), items);
 
                                 list_of_orders.add(o);
 
