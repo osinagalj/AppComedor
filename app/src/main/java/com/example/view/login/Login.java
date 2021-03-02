@@ -14,8 +14,6 @@ import com.example.view.BackEnd;
 import com.example.view.databinding.ActivityLoginBinding;
 import com.example.view.menu.MainActivity;
 
-import java.util.List;
-
 import model.CommonUser;
 
 public class Login extends AppCompatActivity {
@@ -52,15 +50,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        mViewModel.getProductList().observe(this, new Observer<List<CommonUser>>() {
-            @Override
-            public void onChanged(@Nullable List<CommonUser> users) {
-                //Log.i(TAG, "viewModel: productsObjects is "+productsObjects.get(0).getCode());
-                //adapter.submitList(productsObjects);
-                for(CommonUser user : users)
-                    System.out.println("Id del usuario eaeaea : " + user.getIdentityCardNumber() );
-            }
-        });
+
 
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,9 +70,22 @@ public class Login extends AppCompatActivity {
 
     public void sign_in(int dni, String password)  {
 
+        mViewModel.getUser(dni).observe(this, new Observer<CommonUser>() {
+            @Override
+            public void onChanged(@Nullable CommonUser user) {
+                if(user.getIdentityCardNumber() != -1){
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    BackEnd.setLoggedUser(user);
+                    binding.userDni.setText("");
+                    binding.userPassword.setText("");
+                    startActivity(intent);
+                }else{
+                    badLoginData();
+                }
+            }
+        });
 
-
-
+        /*
         mViewModel.setUser(String.valueOf(dni),password);
         mViewModel.setUser2();
         mViewModel.live_user.observe(this, new Observer<CommonUser>() {
@@ -101,7 +104,7 @@ public class Login extends AppCompatActivity {
 
             }
         });
-
+*/
 
     }
 

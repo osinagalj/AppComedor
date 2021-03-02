@@ -29,7 +29,6 @@ public class FirestoreLiveData<T> extends LiveData<T> {
         this.clazz = clazz;
     }
 
-
     EventListener<QuerySnapshot> eventListener = new EventListener<QuerySnapshot>() {
         @Override
         public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {

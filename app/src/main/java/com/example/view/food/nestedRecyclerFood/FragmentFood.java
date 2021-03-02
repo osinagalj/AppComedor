@@ -49,10 +49,6 @@ public class FragmentFood extends Fragment {
         viewModel = ViewModelProviders.of(this).get(FoodViewModel.class); //ViewModel para la DB
 
 
-
-        //viewModel.setDailyMenuFoods();
-        //viewModel.setFoods();
-
         foods1 = new ArrayList<>();
 
         viewModel.getDailyMenu().observe(getViewLifecycleOwner(), new Observer<List<DailyMenu>>() {
@@ -63,7 +59,6 @@ public class FragmentFood extends Fragment {
                     m.add(p);
 
                 }
-
 
                 foods1.add(m.getMenu(BackEnd.getLoggedUser()));
                 FoodViewModel.list_of_foods.add(m.getMenu(BackEnd.getLoggedUser()));
