@@ -59,20 +59,25 @@ public class FragmentFood extends Fragment {
             @Override
             public void onChanged(@Nullable List<DailyMenu> menus) {
                 Menu m = new Menu(LocalDate.now());
-                for(DailyMenu p : menus)
+                for(DailyMenu p : menus){
                     m.add(p);
 
+                }
+
+
                 foods1.add(m.getMenu(BackEnd.getLoggedUser()));
+                FoodViewModel.list_of_foods.add(m.getMenu(BackEnd.getLoggedUser()));
                 loadData();
             }
         });
 
         viewModel.getProductFoods().observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
             @Override
-            public void onChanged(@Nullable List<Food> users) {
+            public void onChanged(@Nullable List<Food> products) {
                 //Log.i(TAG, "viewModel: productsObjects is "+productsObjects.get(0).getCode());
                 //adapter.submitList(productsObjects);
-                foods1.addAll(users);
+                foods1.addAll(products);
+                FoodViewModel.list_of_foods.addAll(products);
                 loadData();
             }
         });
