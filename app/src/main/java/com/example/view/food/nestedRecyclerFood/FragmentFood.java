@@ -19,10 +19,14 @@ import com.example.view.BackEnd;
 import com.example.view.databinding.FragmentFoodBinding;
 import com.example.view.food.cart.ActivityCart;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import dataBase.Restaurant;
+import model.DailyMenu;
+import model.Food;
+import model.Menu;
 import model.Product;
 
 public class FragmentFood extends Fragment {
@@ -46,16 +50,40 @@ public class FragmentFood extends Fragment {
 
 
 
-        viewModel.setDailyMenuFoods();
-        viewModel.setFoods();
+        //viewModel.setDailyMenuFoods();
+        //viewModel.setFoods();
 
         foods1 = new ArrayList<>();
 
-        viewModel.list_foods.observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
+        viewModel.getDailyMenu().observe(getViewLifecycleOwner(), new Observer<List<DailyMenu>>() {
             @Override
-            public void onChanged(List<Product> list_foods) {
-                foods1.clear();
-                foods1 = new ArrayList<>(list_foods);
+            public void onChanged(@Nullable List<DailyMenu> menus) {
+                Menu m = new Menu(LocalDate.now());
+                for(DailyMenu p : menus)
+                    m.add(p);
+
+                foods1.add(m.getMenu(BackEnd.getLoggedUser()));
+                loadData();
+            }
+        });
+
+        viewModel.getProductFoods().observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
+            @Override
+            public void onChanged(@Nullable List<Food> users) {
+                //Log.i(TAG, "viewModel: productsObjects is "+productsObjects.get(0).getCode());
+                //adapter.submitList(productsObjects);
+                foods1.addAll(users);
+                loadData();
+            }
+        });
+
+        viewModel.setCombos().observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
+            @Override
+            public void onChanged(List<Product> products) {
+                //foods1.clear();
+                //foods1.addAll(viewModel.list_foods.getValue());
+                foods1.addAll(products);
+                System.out.println("Entro en los combos perreke");
                 //foods1.addAll(list_foods); se agregan repetidos si hago esto
                 loadData();
             }
@@ -100,6 +128,7 @@ public class FragmentFood extends Fragment {
         super.onResume();
         // Check should we need to refresh the fragment
         showCarrito();
+        foods1 = new ArrayList<>(); //para que no aparezcan repetidos
     }
 
     private void showCarrito() {

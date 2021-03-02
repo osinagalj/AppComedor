@@ -1,6 +1,6 @@
 package model;
 
-public class PriceExternal extends PriceCalculator {
+public class PriceExternal implements PriceCalculator {
 
     public PriceExternal() {}
 
@@ -10,7 +10,7 @@ public class PriceExternal extends PriceCalculator {
     }
 
     @Override
-    public float getPrice(CommonUser user, DailyMenu product) {
-        return product.getPrice(user);
+    public float getPrice(float price) {
+        return price;
     }
 }

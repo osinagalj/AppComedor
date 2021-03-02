@@ -40,6 +40,7 @@ public class ProductDAO {
         return Restaurant.getInstance().getProduct(id);
     }
 
+    /*
     //@POST
     public static void loadProduct(Food food){
 
@@ -53,13 +54,25 @@ public class ProductDAO {
         new_food.put("stock", food.getStock());
         new_food.put("price", food.getPrice(null));
 
-        List<Integer> conditions = new ArrayList<>(food.getCondition());
+        List<Integer> conditions = new ArrayList<>(food.getConditions());
         new_food.put("conditions", conditions);
 
         // Add a new document with a generated ID
         Restaurant.getInstance().db.collection("foods").document(String.valueOf(food.getId())).set(new_food);
     }
+*/
+    public static void loadProduct(Food food){
 
+        // Add a new document with a generated ID
+        Restaurant.getInstance().db.collection("foods").document(String.valueOf(food.getId())).set(food);
+    }
+
+    public static void loadProduct(DailyMenu food){
+
+        // Add a new document with a generated ID
+        Restaurant.getInstance().db.collection("dailyMenus").document(String.valueOf(food.getId())).set(food);
+    }
+/*
     public static void loadProduct(DailyMenu food){
 
         Map<String, Object> new_food = new HashMap<>();
@@ -72,13 +85,13 @@ public class ProductDAO {
         new_food.put("price", "100.0");
         new_food.put("limit", "2");
 
-        List<Integer> conditions = new ArrayList<>(food.getCondition());
+        List<Integer> conditions = new ArrayList<>(food.getConditions());
         new_food.put("conditions", conditions);
 
         // Add a new document with a generated ID
         Restaurant.getInstance().db.collection("dailyMenus").document(String.valueOf(food.getId())).set(new_food);
     }
-
+*/
     public static void loadProduct(Combo food){
 
         Map<String, Object> new_food = new HashMap<>();
@@ -90,7 +103,8 @@ public class ProductDAO {
 
         new_food.put("discount", "0.3");//todo
 
-        List<Integer> conditions = new ArrayList<>(food.getCondition());
+        ArrayList<Integer> conditions = new ArrayList<>(food.getConditions());
+
         new_food.put("conditions", conditions);
 
 

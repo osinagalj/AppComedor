@@ -1,25 +1,37 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class Food extends Product implements Serializable {
 
+    private int stock2;
+    private float price2;
 
-
-    private int stock;
-    private float price;
 
     public Food(){}
 
-    public Food(int id, String name, String description, int imgId, int productCategory, int stock, float price) {
+    public Food(int id, String name, String description, int imgId, int productCategory, int stock2, float price2) {
         super(id, name, description, imgId, productCategory);
-        this.stock = stock;
-        this.price = price;
+        this.stock2 = stock2;
+        this.price2 = price2;
     }
 
+
+    public int getStock2() {
+        return stock2;
+    }
+
+    public void setStock2(int stock2) {
+        this.stock2 = stock2;
+    }
+
+    public float getPrice2() {
+        return price2;
+    }
+
+    public void setPrice2(float price2) {
+        this.price2 = price2;
+    }
 
 
     @Override
@@ -29,32 +41,32 @@ public class Food extends Product implements Serializable {
 
     @Override
     public float getPrice(CommonUser user) {
-        return price;
+        return price2;
     }
 
     @Override
     public String toString() {
         return "Food{" +
-                "stock=" + stock +
-                ", price=" + price +
+                "stock=" + stock2 +
+                ", price=" + price2 +
                 "} " + super.toString();
     }
-
+/*
     @Override
-    public List<Product> getProducts() {
-        List<Product> products = new ArrayList<>();
+    public ArrayList<Product> getProducts() {
+        ArrayList<Product> products = new ArrayList<>();
         products.add(this);
-        return Collections.unmodifiableList(products);
+        return products; //Collections.unmodifiableList(
     }
-
+*/
     @Override
     public int getStock() {
-        return stock;
+        return stock2;
     }
 
     @Override
     public void addStock(int stock) {
-        this.stock+=stock;
+        this.stock2+=stock;
     }
 
     @Override
@@ -64,22 +76,14 @@ public class Food extends Product implements Serializable {
 
     @Override
     public boolean decreaseStock(int amount) {
-        if(stock >= amount ){
-            stock-=amount;
+        if(stock2 >= amount ){
+            stock2-=amount;
             return true;
         }
         return false;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
 
-    public float getPrice() {
-        return price;
-    }
 
-    public void setPrice(float price) {
-        this.price = price;
-    }
+
 }

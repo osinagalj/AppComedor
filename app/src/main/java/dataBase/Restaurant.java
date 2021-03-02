@@ -3,9 +3,11 @@ package dataBase;
 import com.example.view.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,6 @@ import model.DailyMenu;
 import model.Food;
 import model.Menu;
 import model.Order;
-import model.PriceStudent;
 import model.Product;
 
 public class Restaurant {
@@ -59,7 +60,15 @@ public class Restaurant {
     }
 
     public void loadOrdersDB(){
-        //loadDataToDataBase();
+
+        //Restaurant.getInstance().db.collection("abtract").document(String.valueOf("3")).set(c);
+
+        Date date = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
+
+        // System.out.println("Proximo numero de orden = " + OrderDAO.getNumberNextOrder());
+        CommonUser user4 = new CommonUser(888,"888",1200f,"L3autaro", "Osinaga",date,3, Category.ALUMNO);
+        //UserDAO.addUser3(user4);
+        loadDataToDataBase();
     }
 
 
@@ -98,9 +107,9 @@ public class Restaurant {
         System.out.println("TAMAÑO D EMENUS = " + menus.size());
         //Add the menu
         for(Menu menu: menus){
-            if(menu.getDate().equals(LocalDate.now())){
+           // if(menu.getDate().equals(LocalDate.now())){ todo
                 return menu.getMenu(user);
-            }
+           // }
         }
         return null;
     }
@@ -332,17 +341,23 @@ public class Restaurant {
 
     private void loadDataToDataBase(){
 
+        Date date = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
+
      //todo Users
-        CommonUser user1 = new CommonUser(111,"111",1200f,"Lautaro", "Osinaga", LocalDate.of(1999,5,20),0, Category.ALUMNO,new PriceStudent(0.6f));
-        CommonUser user2 = new CommonUser(222,"222",1200f,"Lautaro", "Osinaga", LocalDate.of(1999,5,20),1, Category.ALUMNO,new PriceStudent(0.6f));
-        CommonUser user3 = new CommonUser(333,"333",1200f,"Lautaro", "Osinaga", LocalDate.of(1999,5,20),2, Category.ALUMNO,new PriceStudent(0.6f));
-        CommonUser user4 = new CommonUser(444,"444",1200f,"Lautaro", "Osinaga", LocalDate.of(1999,5,20),3, Category.ALUMNO,new PriceStudent(0.6f));
+        CommonUser user1 = new CommonUser(111,"111",1200f,"Lautaro1", "Osinaga", date,0, Category.ALUMNO);
+        CommonUser user2 = new CommonUser(222,"222",1200f,"Lautaro2", "Osinaga", date,1, Category.ALUMNO);
+        CommonUser user3 = new CommonUser(333,"333",1200f,"Lautar3o", "Osinaga", date,2, Category.ALUMNO);
+        CommonUser user4 = new CommonUser(444,"444",1200f,"Lautaro3", "Osinaga", date,3, Category.ALUMNO);
 
         UserDAO.addUser(user1);
         UserDAO.addUser(user2);
         UserDAO.addUser(user3);
         UserDAO.addUser(user4);
 
+        UserDAO.addUser2(user1);
+        UserDAO.addUser2(user2);
+        UserDAO.addUser2(user3);
+        UserDAO.addUser2(user4);
 
         //todo dallyMenu
 
@@ -374,6 +389,9 @@ public class Restaurant {
         ProductDAO.loadProduct(m4);
 
     //TODO foods
+
+
+
         //Buffet
         Food f1 = new Food(1000,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo,2,6, 88.0f);
         Food f2 = new Food(1001,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, 2, 2, 85.0f);
@@ -414,6 +432,8 @@ public class Restaurant {
         ProductDAO.loadProduct(f15);
 
         ProductDAO.loadProduct(combo1);
+
+
 
 
 

@@ -21,7 +21,7 @@ public class Menu {
 
         if(cant >= foods.size()){
             for(DailyMenu food: foods){
-                if(food.getCondition() == menu.getCondition())
+                if(food.getConditions() == menu.getConditions()) //todo
                     return;
             }
             //Si no existe una comida con la misma condicion
@@ -34,7 +34,7 @@ public class Menu {
         for(DailyMenu food: foods){
             System.out.println("food_id = "+food.getId());
 
-            for(int condition : food.getCondition()){
+            for(int condition : food.getConditions()){
                 System.out.println("food_condition = "+condition);
                 System.out.println("user condition = "+user.getCondition());
                 if(condition == user.getCondition())

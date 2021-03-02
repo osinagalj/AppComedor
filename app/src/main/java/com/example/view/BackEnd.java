@@ -56,7 +56,7 @@ public class BackEnd {
 
     public static boolean addProduct(Product product, int amount, boolean toHome) {
         //TODO
-        
+
         //Tengo que devolver true si se pudo agregar el pedido,sino false porque no hay stock
         //Si hay stock
         //

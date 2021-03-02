@@ -1,8 +1,18 @@
 package model;
 
-public class PriceStudent extends PriceCalculator {
+public class PriceStudent implements PriceCalculator {
+
+    public float getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(float discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
 
     private float discountPercentage;
+
+    public PriceStudent(){}
 
     public PriceStudent(float discountPercentage) {
         this.discountPercentage = discountPercentage;
@@ -14,7 +24,7 @@ public class PriceStudent extends PriceCalculator {
     }
 
     @Override
-    public float getPrice(CommonUser user, DailyMenu product) {
-        return product.getPrice(user) - product.getPrice(user) * discountPercentage;
+    public float getPrice(float price) {
+        return price - price * discountPercentage;
     }
 }
