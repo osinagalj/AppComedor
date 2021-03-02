@@ -10,12 +10,12 @@ public abstract class Product implements Serializable {
     private String name;
     private String description;
     private int imgId;
-
-
     private int productCategory;
-    private List<Integer> conditions; //Condiciones que no pueden consumir este alimento
+    private ArrayList<Integer> conditions = new ArrayList<>(); //Condiciones que no pueden consumir este alimento
 
-    protected Product(){}
+    protected Product(){
+
+    }
 
     protected Product(int id, String name, String description, int imgId, int productCategory) {
         this.id = id;
@@ -23,20 +23,21 @@ public abstract class Product implements Serializable {
         this.description = description;
         this.imgId = imgId;
         this.productCategory = productCategory;
-        this.conditions = new ArrayList<>();
     }
 
     public void addCondition(int condition){
         conditions.add(condition);
     }
 
-    public abstract float getPrice(CommonUser user);
+
     public abstract boolean toHome();
     public abstract int getStock();
     public abstract int getDailyLimit();
-    public abstract List<Product> getProducts();
     public abstract void addStock(int stock);
     public abstract boolean decreaseStock(int amount);
+
+    public abstract float getPrice(CommonUser user);
+    //public abstract ArrayList<Product> getProducts(); tiene problemas para serializar esto
 
     @Override
     public String toString() {
@@ -63,12 +64,8 @@ public abstract class Product implements Serializable {
         return conditions;
     }
 
-    public void setConditions(List<Integer> conditions) {
+    public void setConditions(ArrayList<Integer> conditions) {
         this.conditions = conditions;
-    }
-
-    public List<Integer> getCondition(){
-        return conditions;
     }
 
     public int getId() {

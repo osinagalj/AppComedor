@@ -14,6 +14,9 @@ import com.example.view.BackEnd;
 import com.example.view.databinding.ActivitySignUpBinding;
 
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import dataBase.Restaurant;
 import model.Category;
@@ -130,17 +133,16 @@ public class Sign_up extends AppCompatActivity {
             //newUserCondition = Restaurant.getInstance().getCondition("Ninguna");
             newUserCondition = 0;
         }
-
+        Date date = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
         CommonUser newUser = new CommonUser(
                 parsedICN,
                 binding.password.getText().toString(),
                 0f,
                 binding.name.getText().toString(),
                 binding.lastName.getText().toString(),
-                LocalDate.of(1, 1, 1),
+                date,
                 newUserCondition,
-                getCategory(category),
-                userCategory
+                getCategory(category)
         );
 
         BackEnd.addUser(newUser);

@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class PriceAntiquity extends PriceCalculator {
+public class PriceAntiquity implements PriceCalculator {
     private final LocalDate startDate;
 
     public PriceAntiquity(LocalDate startDate) {
@@ -17,10 +17,10 @@ public class PriceAntiquity extends PriceCalculator {
     }
 
     @Override
-    public float getPrice(CommonUser user,DailyMenu product) {
+    public float getPrice(float price) {
         long daysBetween = ChronoUnit.DAYS.between(LocalDate.now().atStartOfDay(),startDate.atStartOfDay());
         float daysLog2 = (float)(Math.log(daysBetween)/Math.log(2));
         float discount = daysLog2/100;
-        return product.getPrice(user) - (product.getPrice(user)*discount);
+        return price - (price*discount);
     }
 }

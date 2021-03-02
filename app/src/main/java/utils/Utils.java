@@ -10,6 +10,7 @@ public class Utils {
         //convertir el string 0001-01-01 de la base de datos a un tipo LocalDate
         return LocalDate.now();
     }
+
     static public Category getCategory(String name){
         Category category;
 

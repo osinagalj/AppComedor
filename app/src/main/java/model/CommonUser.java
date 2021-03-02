@@ -1,31 +1,40 @@
 package model;
 
+
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public class CommonUser implements Serializable {
     private String password;
     private String names;
     private String lastname;
-    private LocalDate birthdate;
+    private Date birthdate;
     private int identityCardNumber = -1;
     private float balance;
     private int condition = 0; // por defecto pueden comer todo
     private Category category = Category.ALUMNO; //Este enumerado se justifica porque no va a ser posible agregar mas categorias, por lo que no tiene que ser dinamico
-    private PriceCalculator discountCalculator;
 
+    public ArrayList<Integer> getCondi() {
+        return condi;
+    }
+
+    public void setCondi(ArrayList<Integer> condi) {
+        this.condi = condi;
+    }
+
+    //private PriceCalculator discountCalculator;
+    private ArrayList<Integer> condi = new ArrayList<>();
 
 
     //todo falta la cantidad de materias y la fecha de inicio para guardar en la database
-
-    private int dailySpecialRemaining; //se consulta a la base esto
 
     //TODO falta una imagen del perfil
 
     public CommonUser(){}
 
-    public CommonUser(int identityCardNumber,String password, float balance, String names, String lastName, LocalDate birthDate,  int condition,Category category, PriceCalculator discountCalculator) {
+    public CommonUser(int identityCardNumber,String password, float balance, String names, String lastName, Date birthDate,  int condition,Category category) {
         this.password = password;
         this.names = names;
         this.lastname = lastName;
@@ -33,13 +42,15 @@ public class CommonUser implements Serializable {
         this.identityCardNumber = identityCardNumber;
         this.category = category;
         this.condition = condition;
-        this.discountCalculator = discountCalculator;
+       // this.discountCalculator = discountCalculator;
         this.balance = balance;
-        this.dailySpecialRemaining = 2; //todo
+        condi.add(6);
     }
 
-    public float getPrice(DailyMenu product){
-        return discountCalculator.getPrice(this,product);
+
+
+    public float getPrice(PriceCalculator calculator, float price){
+        return calculator.getPrice(price);
     }
     public String getPassword() {
         return password;
@@ -65,11 +76,11 @@ public class CommonUser implements Serializable {
         this.lastname = lastname;
     }
 
-    public LocalDate getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -97,10 +108,10 @@ public class CommonUser implements Serializable {
         this.condition = condition;
     }
 
-    public PriceCalculator getDiscountCalculator() {
+   /* public PriceCalculator getDiscountCalculator() {
         return discountCalculator;
     }
-
+*/
     public int getCondition() {
         return condition;
     }
@@ -112,18 +123,12 @@ public class CommonUser implements Serializable {
     public void setCategory(Category category) {
         this.category = category;
     }
-
+/*
     public void setDiscountCalculator(PriceCalculator discountCalculator) {
         this.discountCalculator = discountCalculator;
     }
+*/
 
-    public int getDailySpecialRemaining() {
-        return dailySpecialRemaining;
-    }
-
-    public void setDailySpecialRemaining(int dailySpecialRemaining) {
-        this.dailySpecialRemaining = dailySpecialRemaining;
-    }
 
     @Override
     public boolean equals(Object o) {

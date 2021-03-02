@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Combo extends Product implements Serializable {
@@ -52,14 +51,14 @@ public class Combo extends Product implements Serializable {
                 ", discount=" + discount +
                 "} " + super.toString();
     }
-
+/*
     @Override
-    public List<Product> getProducts() {
-        List<Product> products = new ArrayList<>();
+    public ArrayList<Product> getProducts() {
+        ArrayList<Product> products = new ArrayList<>();
         for (Product item : comboItems)
             products.addAll(item.getProducts());
-        return Collections.unmodifiableList(products);
-    }
+        return products;//Collections.unmodifiableList(
+    }*/
 
     @Override
     public float getPrice(CommonUser user) {

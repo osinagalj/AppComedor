@@ -6,6 +6,7 @@ A Java FoodApp built using Android Studio.
  - #### User Application
 
 # Topics
+- DB using Firebase - Firestone
 - Linear Layout
 - Card View
 - Adapters
@@ -21,6 +22,7 @@ A Java FoodApp built using Android Studio.
 - RecyclerView click on Card
 - NotifyItemRemoved
 - AdobeXD for UI/UX
+
 
 <br/>
 

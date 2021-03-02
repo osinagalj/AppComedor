@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dataBase.Restaurant;
+import model.Category;
 import model.CommonUser;
+import model.ExtenUser;
 
 public class UserDAO {
 
@@ -28,6 +30,22 @@ public class UserDAO {
 
         // Add a new document with a generated ID
         Restaurant.getInstance().db.collection("users").document(String.valueOf(user.getIdentityCardNumber())).set(user_db);
+
+
+    }
+
+    public static void addUser2(CommonUser user){
+
+        // Add a new document with a generated ID
+        Restaurant.getInstance().db.collection("users2").document(String.valueOf(user.getIdentityCardNumber())).set(user);
+
+    }
+
+    public static void addUser3(CommonUser user){
+
+        ExtenUser e = new ExtenUser(user.getIdentityCardNumber(),user.getPassword(),user.getBalance(),user.getNames(),user.getLastname(),user.getBirthdate(),user.getCondition(), Category.ALUMNO,"kaka");
+        // Add a new document with a generated ID
+        Restaurant.getInstance().db.collection("users3").document(String.valueOf(user.getIdentityCardNumber())).set(e);
 
     }
 

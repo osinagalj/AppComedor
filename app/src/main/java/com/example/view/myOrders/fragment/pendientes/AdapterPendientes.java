@@ -14,7 +14,7 @@ import com.example.view.R;
 
 import java.util.List;
 
-import dataBase.Restaurant;
+import dao.OrderDAO;
 import model.Order;
 
 public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.myOrders.fragment.pendientes.AdapterPendientes.ViewHolder> implements View.OnClickListener {
@@ -67,7 +67,9 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.myO
         {
             @Override
             public void onClick(View v) {
-                Restaurant.getInstance().cancelPending(model.get(position));
+
+                OrderDAO.removeOrder("pending_orders",String.valueOf(model.get(position).getId()));
+                //Restaurant.getInstance().cancelPending(model.get(position));
                 model.remove(position);
                 notifyDataSetChanged();
                 //notifyItemRemoved(position);    //TODO ESTO ELIMINA PERO A VECES TIRA ERROR POR LA POSICION

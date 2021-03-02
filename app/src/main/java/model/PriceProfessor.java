@@ -1,6 +1,6 @@
 package model;
 
-public class PriceProfessor extends PriceCalculator {
+public class PriceProfessor implements PriceCalculator {
 
     private int subjects;
 
@@ -14,9 +14,9 @@ public class PriceProfessor extends PriceCalculator {
     }
 
     @Override
-    public float getPrice(CommonUser user,DailyMenu product) {
+    public float getPrice(float price) {
         if(subjects > 3)
-            return product.getPrice(user) - product.getPrice(user) * 0.3f;
-        return product.getPrice(user) - subjects * 0.1f;
+            return price - price * 0.3f;
+        return price - subjects * 0.1f;
     }
 }

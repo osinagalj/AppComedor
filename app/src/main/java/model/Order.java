@@ -21,7 +21,7 @@ public class Order implements Serializable {
     private Map<Product,Integer> items;
 
     public Order(CommonUser placedBy, Map<Product,Integer> items){
-        this.id = Restaurant.getInstance().nextOrderNum();
+        this.id = Restaurant.getInstance().nextOrderNum(); //TODO change
         this.items= items;
         this.placed = Instant.now();
         this.placedBy = placedBy;

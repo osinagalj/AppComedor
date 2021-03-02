@@ -1,5 +1,17 @@
 package dao;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +23,8 @@ import model.Order;
 import model.Product;
 
 public class OrderDAO {
+
+    private static final String TAG = "ok";
 
     //@POST
     public static void loadPendingOrder(Order order){
@@ -74,10 +88,48 @@ public class OrderDAO {
     }
 
     //@DELETE
-    public static Order removeOrder(int id){
-        //TODO
-        return null;
+    public static void removeOrder(String collection, String id){
+
+        Restaurant.getInstance().db.collection(collection).document(id)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error deleting document", e);
+                    }
+                });
+
     }
+
+    //@GET
+    public static int getNumberNextOrder(){
+
+        int[] number = {0};
+        CollectionReference docRef = Restaurant.getInstance().db.collection("pending_orders");
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        System.out.println("Proximo numero de orden xd = " + Integer.parseInt(document.getData().get("id").toString()));
+                        if(Integer.parseInt(document.getData().get("id").toString()) >  number[0])
+                            number[0] = Integer.parseInt(document.getData().get("id").toString());
+                    }
+                }
+            }
+        });
+
+        return number[0];
+    }
+
 
 
 }
