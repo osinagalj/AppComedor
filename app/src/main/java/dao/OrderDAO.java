@@ -3,6 +3,7 @@ package dao;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,8 +27,14 @@ public class OrderDAO {
 
     private static final String TAG = "ok";
 
+    public static MutableLiveData<Integer> next_number = new MutableLiveData<>();
+
+
+
     //@POST
-    public static void loadPendingOrder(Order order){
+    public static void loadPendingOrder2(Order order){
+
+
 
             Map<String, Object> new_order = new HashMap<>();
             new_order.put("id", order.getId());
@@ -108,28 +115,30 @@ public class OrderDAO {
     }
 
     //@GET
-    public static int getNumberNextOrder(){
-
-        int[] number = {0};
+    public static MutableLiveData<Integer> setNumberNextOrder2(){
+        //Todo  hay que buscar en las ordenes completas tambien
+        MutableLiveData<Integer> el_number = new MutableLiveData<>();
         CollectionReference docRef = Restaurant.getInstance().db.collection("pending_orders");
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
+                int num = -1;
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         System.out.println("Proximo numero de orden xd = " + Integer.parseInt(document.getData().get("id").toString()));
-                        if(Integer.parseInt(document.getData().get("id").toString()) >  number[0])
-                            number[0] = Integer.parseInt(document.getData().get("id").toString());
+                        if(Integer.parseInt(document.getData().get("id").toString()) >  num){
+                            num = Integer.parseInt(document.getData().get("id").toString());
+                        }
                     }
+                    if(num == -1)
+                        el_number.postValue(0); //primer numero de orden
+                    else
+                        el_number.postValue(num);
                 }
             }
         });
-
-        return number[0];
+        return el_number;
     }
-
-
 
 }

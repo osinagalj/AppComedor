@@ -450,13 +450,13 @@ public class Restaurant {
         products2.put(f2,3);
         products2.put(f8,2);
 
-        Order order1 = new Order(user1,products);
-        Order order2 = new Order(user1,products2);
-        Order order3 = new Order(user2,products);
-        Order order4 = new Order(user2,products2);
+        Order order1 = new Order(8,user1,products);
+        Order order2 = new Order(9,user1,products2);
+        Order order3 = new Order(10,user2,products);
+        Order order4 = new Order(11,user2,products2);
 
-        OrderDAO.loadPendingOrder(order1);
-        OrderDAO.loadPendingOrder(order3);
+        OrderDAO.loadPendingOrder2(order1);
+        OrderDAO.loadPendingOrder2(order3);
 
         OrderDAO.loadConfirmedOrder(order2);
         OrderDAO.loadConfirmedOrder(order4);

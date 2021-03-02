@@ -63,9 +63,9 @@ public class ConfirmedOrdersViewModel extends ViewModel {
                                         System.out.println("Key: " + k + ": Value: " + v));
 
 
+                                int nro = Integer.parseInt(document.getData().get("id").toString());
 
-
-                                Order o = new Order (BackEnd.getLoggedUser(), items);
+                                Order o = new Order (nro,BackEnd.getLoggedUser(), items);
 
                                 list_of_orders.add(o);
 

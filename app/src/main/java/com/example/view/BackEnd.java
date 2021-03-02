@@ -19,9 +19,8 @@ import model.Product;
 // hacen los chekeos: que tenga saldo y que tenga menus disponibles en el dia(el maximo es 2)
 public class BackEnd {
 
-    private static CommonUser loggedUser; //TODO inicializado solo para saltear el login en el manifest
-    private static Order myOrder;
-    private static Product dailyMenu;
+    private static CommonUser loggedUser;
+    private static Order myOrder; //todo Capaz que hay que tener la lista de productos y no la orden
 
     public static CommonUser getLoggedUser() {
         return loggedUser;
@@ -29,13 +28,14 @@ public class BackEnd {
 
     public static void setLoggedUser(CommonUser user) {
         BackEnd.loggedUser = user;
-        myOrder = new Order(loggedUser,new HashMap<>());
+
+
+        myOrder = new Order(1,loggedUser,new HashMap<>()); //todo
     }
 
-    public static void setDailyMenu(){
-        dailyMenu = ProductDAO.getSpecialProduct(loggedUser);
+    public static void setOrderNumber(int id){
+        myOrder.setId(id);
     }
-
     //-------------------------------------------------------------------------------------------------//
     //------------------------------------------   OrderDAO   -----------------------------------------//
     //-------------------------------------------------------------------------------------------------//
@@ -92,18 +92,19 @@ public class BackEnd {
     public static Order getOrder(){
         return myOrder;
     }
-    public static void confirmOrder(){
-        OrderDAO.loadPendingOrder(myOrder);
+    public static void confirmOrder(int id){
+        myOrder.setId(id);
+        OrderDAO.loadPendingOrder2(myOrder);
         BackEnd.clearOrder();
     }
 
     public static void clearOrder(){
         //todo capaz hay que liberar memoria
-        myOrder = new Order(loggedUser,new HashMap<>());
+        myOrder = new Order(1,loggedUser,new HashMap<>()); //todo
     }
 
     public static float getOrderPrice(){
-        return myOrder.getPrice();//todo
+        return myOrder.getPrice();
     }
 
     public static List<Product> getProductsOrder(){
