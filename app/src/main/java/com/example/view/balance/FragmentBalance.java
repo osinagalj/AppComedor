@@ -26,16 +26,20 @@ public class FragmentBalance extends Fragment {
         binding = FragmentBalanceBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
+        setUpData();
+        setUpButtons();
+
+        return view;
+    }
+
+    private void setUpData(){
         binding.userAmount.setText(String.valueOf(BackEnd.getLoggedUser().getBalance()));
 
         String full_name = BackEnd.getLoggedUser().getNames() + " " +BackEnd.getLoggedUser().getLastName();
         binding.userName.setText(full_name);
-
-        setUpButtons(view);
-        return view;
     }
 
-    private void setUpButtons(View view) {
+    private void setUpButtons() {
 
         binding.btnLoadAmount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,9 +86,9 @@ public class FragmentBalance extends Fragment {
         binding.loadAmount.getText().clear();
     }
 
-    private void transferMoney(int DNIuserDestino,float amount){
+    private void transferMoney(int icnUTargetUser,float amount){
 
-        if(BackEnd.transferMoney(DNIuserDestino,amount)){
+        if(BackEnd.transferMoney(icnUTargetUser,amount)){
             Toast.makeText(getContext(), "La transferencia ha sido exitosa", Toast.LENGTH_LONG).show();
             binding.userAmount.setText(String.valueOf(BackEnd.getLoggedUser().getBalance()));
         }

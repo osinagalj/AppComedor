@@ -73,7 +73,7 @@ public class Login extends AppCompatActivity {
         mViewModel.getUser(dni).observe(this, new Observer<CommonUser>() {
             @Override
             public void onChanged(@Nullable CommonUser user) {
-                if(user.getIdentityCardNumber() != -1){
+                if(user.getIdentityCardNumber() != -1 && user.getPassword().equals(password)){
                     Intent intent = new Intent(getBaseContext(), MainActivity.class);
                     BackEnd.setLoggedUser(user);
                     binding.userDni.setText("");

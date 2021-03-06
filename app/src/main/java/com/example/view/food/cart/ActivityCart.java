@@ -37,8 +37,8 @@ public class ActivityCart extends AppCompatActivity {
         products = new ArrayList<>();
         binding.carritoTotalPrice.setText(String.valueOf(BackEnd.getOrderPrice()));
 
-        cargarLista();
-        mostrarData();
+        loadData();
+        showData();
         setUpButtons();
     }
 
@@ -67,7 +67,7 @@ public class ActivityCart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO eliminar los productos de la orden actual
-                if(BackEnd.getProducts().isEmpty()){
+                if(BackEnd.orderIsEmpty()){
                     Toast.makeText(getBaseContext(), "No se puede realizar un pedido sin productos", Toast.LENGTH_SHORT).show();
                 }else{
                     completOrder();
@@ -77,7 +77,6 @@ public class ActivityCart extends AppCompatActivity {
     }
 
     private void completOrder(){
-        //OrderDAO.setNumberNextOrder2();
         OrderDAO.setNumberNextOrder2().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer id) {
@@ -93,13 +92,12 @@ public class ActivityCart extends AppCompatActivity {
         this.finish();
     }
 
-    public void cargarLista(){
+    public void loadData(){
         products = new ArrayList<>();
         products.addAll(BackEnd.getOrder().getItems());
-        //products.addAll(BackEnd.getOrder().getToHome());
     }
 
-    private void mostrarData() {
+    private void showData() {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         adapter = new AdapterCart(this, products);
         binding.recyclerView.setAdapter(adapter);
