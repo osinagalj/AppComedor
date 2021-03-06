@@ -42,8 +42,6 @@ public class Restaurant {
 
     public List<Integer> productsCategories = new ArrayList<>();
 
-
-
     private final int MAX_STOCK = 10000;
 
     public static final Restaurant INSTANCE = new Restaurant();
@@ -53,7 +51,6 @@ public class Restaurant {
 
     private Restaurant(){
 
-        productsCategories.add(0); //Menu del Dia todo
         productsCategories.add(1); //Menu del Dia
         productsCategories.add(2); //Buffet
         productsCategories.add(3); //Kiosko
@@ -61,13 +58,6 @@ public class Restaurant {
 
     public void loadOrdersDB(){
 
-        //Restaurant.getInstance().db.collection("abtract").document(String.valueOf("3")).set(c);
-
-        Date date = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
-
-        // System.out.println("Proximo numero de orden = " + OrderDAO.getNumberNextOrder());
-        CommonUser user4 = new CommonUser(888,"888",1200f,"L3autaro", "Osinaga",date,3, Category.ALUMNO);
-        //UserDAO.addUser3(user4);
         loadDataToDataBase();
     }
 

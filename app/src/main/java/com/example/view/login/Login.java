@@ -85,27 +85,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        /*
-        mViewModel.setUser(String.valueOf(dni),password);
-        mViewModel.setUser2();
-        mViewModel.live_user.observe(this, new Observer<CommonUser>() {
-            @Override
-            public void onChanged(CommonUser user) {
-                System.out.println("YA SE CARGO EL USUARIO = dni =" + user.getIdentityCardNumber() + " , names = "+user.getNames());
-                if(user.getIdentityCardNumber() != -1){
-                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                    BackEnd.setLoggedUser(user);
-                    binding.userDni.setText("");
-                    binding.userPassword.setText("");
-                    startActivity(intent);
-                }else{
-                    badLoginData();
-                }
-
-            }
-        });
-*/
-
     }
 
 

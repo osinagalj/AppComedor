@@ -6,11 +6,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import dataBase.Restaurant;
 
 public class Order implements Serializable {
 
@@ -18,21 +15,6 @@ public class Order implements Serializable {
     private Instant placed;
     private CommonUser placedBy;
     private Map<Product,Integer> items;
-
-    /*
-    public Order(CommonUser placedBy, Map<Product,Integer> items){
-        this.id = Restaurant.getInstance().nextOrderNum(); //TODO change
-        this.items= items;
-        this.placed = Instant.now();
-        this.placedBy = placedBy;
-    }
-*/
-    public Order(CommonUser placedBy){
-        this.id = Restaurant.getInstance().nextOrderNum();
-        this.items= new HashMap<>();
-        this.placed = Instant.now();
-        this.placedBy = placedBy;
-    }
 
     public Order(int id,CommonUser placedBy, Map<Product,Integer> items){
         this.id = id;
@@ -48,9 +30,6 @@ public class Order implements Serializable {
         return -1;
     }
 
-    public int getAmountToHome(Product product){
-        return 2;
-    } //todo?
 
     public boolean addProduct(Product p, int amount){
         if (p != null) {
@@ -61,11 +40,6 @@ public class Order implements Serializable {
             return false;
         }
     }
-
-    public void addProduct(Product p, int amount, boolean home){
-        addProduct(p,amount);
-    }
-
 
     public String getDescription(){
         StringBuilder description = new StringBuilder();

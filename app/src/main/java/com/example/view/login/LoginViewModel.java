@@ -25,7 +25,7 @@ public class LoginViewModel extends ViewModel {
                     m_user.postValue(user);
                     System.out.println("Nombre de user2 = " + user.getNames() + " ," + user.getIdentityCardNumber());
                 }else{
-                    System.out.println("Contraseña incorrecta o algo asi hay que poner");
+                    System.out.println("Contraseña incorrecta");
                 }
             }
         });

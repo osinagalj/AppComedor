@@ -19,7 +19,7 @@ import java.util.List;
 
 import model.Product;
 
-public class AdapterCarrito extends RecyclerView.Adapter<AdapterCarrito.ViewHolder> implements View.OnClickListener {
+public class AdapterCart extends RecyclerView.Adapter<AdapterCart.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
     List<Product> model =  new ArrayList<>();
@@ -28,7 +28,7 @@ public class AdapterCarrito extends RecyclerView.Adapter<AdapterCarrito.ViewHold
     private View.OnClickListener listener;
 
 
-    public AdapterCarrito(Context context, ArrayList<Product> model) {//TODO borrar el segundo parametro
+    public AdapterCart(Context context, ArrayList<Product> model) {//TODO borrar el segundo parametro
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.model = model;
@@ -37,13 +37,13 @@ public class AdapterCarrito extends RecyclerView.Adapter<AdapterCarrito.ViewHold
 
     @NonNull
     @Override
-    public AdapterCarrito.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterCart.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.row_order_pendiente, parent, false);
 
         view.setOnClickListener(this);
         button = view.findViewById(R.id.row_pending_order_button_remove);
 
-        return new AdapterCarrito.ViewHolder(view);
+        return new AdapterCart.ViewHolder(view);
     }
 
     public void setOnclickListener(View.OnClickListener listener) {
@@ -51,7 +51,7 @@ public class AdapterCarrito extends RecyclerView.Adapter<AdapterCarrito.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterCarrito.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull AdapterCart.ViewHolder holder, final int position) {
         String product_name = model.get(position).getName();
         int product_nro = model.get(position).getId();
         String product_price = String.valueOf(model.get(position).getPrice(BackEnd.getLoggedUser()));
