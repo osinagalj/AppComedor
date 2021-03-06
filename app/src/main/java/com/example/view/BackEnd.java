@@ -60,7 +60,7 @@ public class BackEnd {
         //Tengo que devolver true si se pudo agregar el pedido,sino false porque no hay stock
         //Si hay stock
         //
-        myOrder.addProduct(product, amount,toHome);
+        myOrder.addProduct(product, amount);
         /*
         if(!ProductDAO.decreaseStock(product.getId(),amount)){      //SI Hay stock
             return false;
@@ -99,7 +99,6 @@ public class BackEnd {
     }
 
     public static void clearOrder(){
-        //todo capaz hay que liberar memoria
         myOrder = new Order(1,loggedUser,new HashMap<>()); //todo
     }
 
@@ -110,7 +109,6 @@ public class BackEnd {
     public static List<Product> getProductsOrder(){
         List<Product> list = new ArrayList<>();
         list.addAll(myOrder.getItems());
-        //list.addAll(myOrder.getToHome());
         return list;
     }
 

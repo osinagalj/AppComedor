@@ -13,19 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.view.BackEnd;
 import com.example.view.databinding.ActivitySignUpBinding;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import dataBase.Restaurant;
 import model.Category;
 import model.CommonUser;
-import model.PriceAntiquity;
-import model.PriceCalculator;
-import model.PriceExternal;
-import model.PriceProfessor;
-import model.PriceStudent;
 
 public class Sign_up extends AppCompatActivity {
 
@@ -90,36 +83,12 @@ public class Sign_up extends AppCompatActivity {
     private void createAccount(String category){
 
         int parsedICN = 0;
-        PriceCalculator userCategory = null;
-        try {
-            parsedICN = Integer.parseInt(binding.dni.getText().toString());
-            if (!Restaurant.getInstance().isRegistered(parsedICN)) {
-                switch (category) {
-                    case "STUDENT":
-                        userCategory = new PriceStudent(0.6f);
-                        break;
-                    case "EXTERNAL":
-                        userCategory = new PriceExternal();
-                        break;
-                    case "TEACHER":
-                        userCategory = new PriceProfessor(6);//todo agarrar bien el numero del field
-                    case "NO TEACHER":
-                        int yearsOfWork = Integer.parseInt(binding.antiquity.getText().toString());
-                        userCategory = new PriceAntiquity(LocalDate.of(LocalDate.now().getYear() - yearsOfWork, 1, 1));
-                        break;
-                }
-                rigthSignUp(parsedICN,userCategory,category);
-            }
-            else {
-                showAlert();
-            }
-        } catch (NumberFormatException numberFormatException){
-            numberFormatException.printStackTrace();
-            showAlert();
-        }
+        parsedICN = Integer.parseInt(binding.dni.getText().toString());
+        rigthSignUp(parsedICN,category);
+
     }
 
-    private void rigthSignUp(int parsedICN, PriceCalculator userCategory, String category){
+    private void rigthSignUp(int parsedICN, String category){
         //TODO falta agregar chequeos en varios campos, que no esten vacios por ejemplo, y que no este en uso el dni ya por ejemplo
 
         int conditionId = binding.condition.getCheckedRadioButtonId();
@@ -130,9 +99,9 @@ public class Sign_up extends AppCompatActivity {
             //newUserCondition = Restaurant.getInstance().getCondition(conditionName);
             newUserCondition = 1;//TODO get the righ condition
         } else {
-            //newUserCondition = Restaurant.getInstance().getCondition("Ninguna");
             newUserCondition = 0;
         }
+
         Date date = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
         CommonUser newUser = new CommonUser(
                 parsedICN,

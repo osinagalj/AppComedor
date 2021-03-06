@@ -1,13 +1,11 @@
 package model;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.util.Date;
 
 public class PriceAntiquity implements PriceCalculator {
-    private final LocalDate startDate;
+    private final Date startDate;
 
-    public PriceAntiquity(LocalDate startDate) {
-
+    public PriceAntiquity(Date startDate) {
         this.startDate = startDate;
     }
 
@@ -18,7 +16,8 @@ public class PriceAntiquity implements PriceCalculator {
 
     @Override
     public float getPrice(float price) {
-        long daysBetween = ChronoUnit.DAYS.between(LocalDate.now().atStartOfDay(),startDate.atStartOfDay());
+        int milisecondsByDay = 86400000;
+        int daysBetween = (int) (((new Date()).getTime()-startDate.getTime()) / milisecondsByDay);
         float daysLog2 = (float)(Math.log(daysBetween)/Math.log(2));
         float discount = daysLog2/100;
         return price - (price*discount);

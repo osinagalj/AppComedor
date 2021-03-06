@@ -28,7 +28,7 @@ public class FragmentBalance extends Fragment {
 
         binding.userAmount.setText(String.valueOf(BackEnd.getLoggedUser().getBalance()));
 
-        String full_name = BackEnd.getLoggedUser().getNames() + " " +BackEnd.getLoggedUser().getLastname();
+        String full_name = BackEnd.getLoggedUser().getNames() + " " +BackEnd.getLoggedUser().getLastName();
         binding.userName.setText(full_name);
 
         setUpButtons(view);

@@ -2,33 +2,23 @@ package model;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
 public class CommonUser implements Serializable {
     private String password;
     private String names;
-    private String lastname;
-    private Date birthdate;
-    private int identityCardNumber = -1;
+    private String lastName;
+    private Date birthDate;
+    private int identityCardNumber;
     private float balance;
     private int condition = 0; // por defecto pueden comer todo
-    private Category category = Category.ALUMNO; //Este enumerado se justifica porque no va a ser posible agregar mas categorias, por lo que no tiene que ser dinamico
+    private Category category;
 
-    public ArrayList<Integer> getCondi() {
-        return condi;
-    }
-
-    public void setCondi(ArrayList<Integer> condi) {
-        this.condi = condi;
-    }
+    private int subjects = 0;
+    private Date startDate = new Date();
 
     //private PriceCalculator discountCalculator;
-    private ArrayList<Integer> condi = new ArrayList<>();
-
-
-    //todo falta la cantidad de materias y la fecha de inicio para guardar en la database
 
     //TODO falta una imagen del perfil
 
@@ -37,21 +27,43 @@ public class CommonUser implements Serializable {
     public CommonUser(int identityCardNumber,String password, float balance, String names, String lastName, Date birthDate,  int condition,Category category) {
         this.password = password;
         this.names = names;
-        this.lastname = lastName;
-        this.birthdate = birthDate;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
         this.identityCardNumber = identityCardNumber;
         this.category = category;
         this.condition = condition;
        // this.discountCalculator = discountCalculator;
         this.balance = balance;
-        condi.add(6);
     }
-
 
 
     public float getPrice(PriceCalculator calculator, float price){
         return calculator.getPrice(price);
     }
+
+    public void addBalance(float price) {
+        balance+=price;
+    }//price puede ser negativo, usado cuando se hace una transferencia y se quiere restar plata al usuario
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CommonUser)) return false;
+        CommonUser that = (CommonUser) o;
+        return Objects.equals(identityCardNumber, that.identityCardNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(identityCardNumber);
+    }
+
+
+    //---------------------------------------------------------------------------------------------//
+    //------------------------------ Getters && Setters -------------------------------------------//
+    //---------------------------------------------------------------------------------------------//
+
     public String getPassword() {
         return password;
     }
@@ -68,20 +80,20 @@ public class CommonUser implements Serializable {
         this.names = names;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastname) {
+        this.lastName = lastname;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public int getIdentityCardNumber() {
@@ -108,45 +120,43 @@ public class CommonUser implements Serializable {
         this.condition = condition;
     }
 
-   /* public PriceCalculator getDiscountCalculator() {
-        return discountCalculator;
+    public int getSubjects() {
+        return subjects;
     }
-*/
+
+    public void setSubjects(int subjects) {
+        this.subjects = subjects;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
     public int getCondition() {
         return condition;
     }
 
-    public String getCategory() {
-        return category.toString();
+    public Category getCategory() {
+        return category;
     }
 
     public void setCategory(Category category) {
         this.category = category;
     }
-/*
+
+
+       /* public PriceCalculator getDiscountCalculator() {
+        return discountCalculator;
+    }
+*/
+    /*
     public void setDiscountCalculator(PriceCalculator discountCalculator) {
         this.discountCalculator = discountCalculator;
     }
 */
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CommonUser)) return false;
-        CommonUser that = (CommonUser) o;
-        return Objects.equals(identityCardNumber, that.identityCardNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(identityCardNumber);
-    }
-
-
-    //todo price puede ser negativo, usando cuando se hace una transferencia y se quiere restar plata al usuario
-    public void addBalance(float price) {
-        balance+=price;
-    }
 }
 

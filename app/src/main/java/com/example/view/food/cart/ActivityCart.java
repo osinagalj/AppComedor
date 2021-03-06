@@ -22,7 +22,7 @@ import model.Product;
 
 public class ActivityCart extends AppCompatActivity {
 
-    AdapterCarrito adapter;
+    AdapterCart adapter;
     ArrayList<Product> products;
     private ActivityCarritoBinding binding;
 
@@ -101,7 +101,7 @@ public class ActivityCart extends AppCompatActivity {
 
     private void mostrarData() {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-        adapter = new AdapterCarrito(this, products);
+        adapter = new AdapterCart(this, products);
         binding.recyclerView.setAdapter(adapter);
     }
 

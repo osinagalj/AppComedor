@@ -2,14 +2,6 @@ package model;
 
 public class PriceStudent implements PriceCalculator {
 
-    public float getDiscountPercentage() {
-        return discountPercentage;
-    }
-
-    public void setDiscountPercentage(float discountPercentage) {
-        this.discountPercentage = discountPercentage;
-    }
-
     private float discountPercentage;
 
     public PriceStudent(){}
@@ -27,4 +19,14 @@ public class PriceStudent implements PriceCalculator {
     public float getPrice(float price) {
         return price - price * discountPercentage;
     }
+
+
+    public float getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(float discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
+
 }

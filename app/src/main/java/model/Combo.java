@@ -14,13 +14,7 @@ public class Combo extends Product implements Serializable {
             this.comboItems = comboItems;
         else
             this.comboItems = new ArrayList<>();
-        this.discount = new FixedDiscount(discount);//todo tiene ueq ser menor a 1 Puede ser otro tipo de discount
-    }
-
-    public Combo(int id,String name, String description, int imgId, int productCategory, float discount) {
-        super(id, name, description, imgId, productCategory);
-        this.discount = new FixedDiscount(discount);
-        this.comboItems = new ArrayList<>();
+        this.discount = new FixedDiscount(discount);//todo tiene que ser menor a 1 Puede ser otro tipo de discount
     }
 
     public void addItem(Product comboItem){
@@ -51,14 +45,6 @@ public class Combo extends Product implements Serializable {
                 ", discount=" + discount +
                 "} " + super.toString();
     }
-/*
-    @Override
-    public ArrayList<Product> getProducts() {
-        ArrayList<Product> products = new ArrayList<>();
-        for (Product item : comboItems)
-            products.addAll(item.getProducts());
-        return products;//Collections.unmodifiableList(
-    }*/
 
     @Override
     public float getPrice(CommonUser user) {
@@ -97,6 +83,15 @@ public class Combo extends Product implements Serializable {
         return true; //Hacer la logica para retornar true o false si hay o no stock
     }
 
+
+    /*
+    @Override
+    public ArrayList<Product> getProducts() {
+        ArrayList<Product> products = new ArrayList<>();
+        for (Product item : comboItems)
+            products.addAll(item.getProducts());
+        return products;//Collections.unmodifiableList(
+    }*/
 
     public DiscountCalculator getDiscount() {
         return discount;

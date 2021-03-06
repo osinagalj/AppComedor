@@ -7,7 +7,6 @@ public class Food extends Product implements Serializable {
     private int stock2;
     private float price2;
 
-
     public Food(){}
 
     public Food(int id, String name, String description, int imgId, int productCategory, int stock2, float price2) {
@@ -15,7 +14,6 @@ public class Food extends Product implements Serializable {
         this.stock2 = stock2;
         this.price2 = price2;
     }
-
 
     public int getStock2() {
         return stock2;
@@ -51,14 +49,7 @@ public class Food extends Product implements Serializable {
                 ", price=" + price2 +
                 "} " + super.toString();
     }
-/*
-    @Override
-    public ArrayList<Product> getProducts() {
-        ArrayList<Product> products = new ArrayList<>();
-        products.add(this);
-        return products; //Collections.unmodifiableList(
-    }
-*/
+
     @Override
     public int getStock() {
         return stock2;
@@ -84,6 +75,13 @@ public class Food extends Product implements Serializable {
     }
 
 
-
+    /*
+    @Override
+    public ArrayList<Product> getProducts() {
+        ArrayList<Product> products = new ArrayList<>();
+        products.add(this);
+        return products; //Collections.unmodifiableList(
+    }
+    */
 
 }
