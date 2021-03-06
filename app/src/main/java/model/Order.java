@@ -3,23 +3,23 @@ package model;
 import com.example.view.BackEnd;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class Order implements Serializable {
 
     private int id;
-    private Instant placed;
+    private Date placed;
     private CommonUser placedBy;
     private Map<Product,Integer> items;
 
     public Order(int id,CommonUser placedBy, Map<Product,Integer> items){
         this.id = id;
         this.items= items;
-        this.placed = Instant.now();
+        this.placed = new Date();
         this.placedBy = placedBy;
     }
 
@@ -64,7 +64,7 @@ public class Order implements Serializable {
         return id;
     }
 
-    public Instant getPlacedInstant() {
+    public Date getPlacedInstant() {
         return placed;
     }
 
@@ -94,11 +94,11 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public Instant getPlaced() {
+    public Date getPlaced() {
         return placed;
     }
 
-    public void setPlaced(Instant placed) {
+    public void setPlaced(Date placed) {
         this.placed = placed;
     }
 

@@ -1,9 +1,8 @@
 package com.example.view;
 
-import com.example.view.myOrders.fragment.pendientes.PendingOrdersViewModel;
-
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -74,17 +73,29 @@ public class BackEnd {
         return true;
     }
 
-    public static int getMenusRestantes(LocalDate date) {
-        int suma = 0;
-        for (Order o : PendingOrdersViewModel.list_of_orders)
+    /** Obtiene la cantidad de menus del dia que ha pedido un usuario en el dia actual
+    */
+    public static int getMenusRestantes(Date date, List<Order> orders) {
+
+        String today = new SimpleDateFormat("dd/MM/yyyy").format(date);
+
+        int total = 0;
+        for (Order o : orders){
             //if(o.getPlacedInstant() == date) todo
-            for (Product p : o.getItems()) {
-                if (p.getCategory() == 1) {
-                    suma++;
+            if(o.getPlacedBy().getIdentityCardNumber() == loggedUser.getIdentityCardNumber()){
+                String dat = new SimpleDateFormat("dd/MM/yyyy").format(o.getPlaced());
+                if(today.equals(dat)){
+                    for (Product p : o.getItems()) {
+                        if (p.getCategory() == 1) {
+                            total++;
+                        }
+                    }
                 }
             }
-        if(suma < 2)
-            return 2 - suma;
+        }
+
+        if(total < 2)
+            return 2 - total;
         else
             return 0;
     }

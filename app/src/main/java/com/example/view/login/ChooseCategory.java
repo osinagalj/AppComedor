@@ -22,6 +22,12 @@ public class ChooseCategory extends AppCompatActivity {
         setUpButtons();
     }
 
+    private void sign_up(String category){
+        Intent intent = new Intent(this, Sign_up.class);
+        intent.putExtra("USER_CATEGORY", category);
+        startActivity(intent);
+    }
+
     private void setUpButtons(){
 
         //Button to close activity
@@ -38,18 +44,21 @@ public class ChooseCategory extends AppCompatActivity {
                 sign_up("STUDENT");
             }
         });
+
         binding.btnTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sign_up("TEACHER");
             }
         });
+
         binding.btnNoTeacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sign_up("NO TEACHER");
             }
         });
+
         binding.btnExternal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,13 +67,6 @@ public class ChooseCategory extends AppCompatActivity {
         });
     }
 
-    private void sign_up(String category){
 
-        //TODO Hay que hacer un if, si el usuario es valido, que buscamos en el archivo de users, y
-        // la contraseña tmb, entonces hacemos el openActivity2, sino tiramos un Toast para avisar
-        Intent intent = new Intent(this, Sign_up.class);
-        intent.putExtra("USER_CATEGORY",category);
-        startActivity(intent);
-    }
 
 }

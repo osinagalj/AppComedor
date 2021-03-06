@@ -23,7 +23,6 @@ public class LoginViewModel extends ViewModel {
                 if(document != null){
                     CommonUser user = document.toObject(CommonUser.class);
                     m_user.postValue(user);
-                    System.out.println("Nombre de user2 = " + user.getNames() + " ," + user.getIdentityCardNumber());
                 }else{
                     System.out.println("Contraseña incorrecta");
                 }

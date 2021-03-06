@@ -18,7 +18,12 @@ public class UserDAO {
     }
 
     //@UPDATE
-    public static void changePassword(int dni, String password){
+    public static void changePassword(int icn, String password){
+        Restaurant.getInstance().db.collection("users2").document(String.valueOf(icn))
+                .update(
+                        "password", password
+                );
+
         //Restaurant.getInstance().changePassword(dni,password); // TODO
     }
 

@@ -58,7 +58,6 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.ViewHolder> im
 
         int produc_amount = BackEnd.getAmount(model.get(position));
 
-        //float produc_amount = BackEnd.getProducts().get(model.get(position))model.get(position).getPrice(); //todo
         int product_img = model.get(position).getImgId();
 
         holder.product_name.setText("#"+product_nro);

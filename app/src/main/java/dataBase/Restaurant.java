@@ -58,7 +58,7 @@ public class Restaurant {
 
     public void loadOrdersDB(){
 
-        loadDataToDataBase();
+       // loadDataToDataBase();
     }
 
 
@@ -126,100 +126,7 @@ public class Restaurant {
     }
 
 
-    //-------------------------------------------------------------------------------------------//
-    //-----------------------------      User    ------------------------------------------------//
-    //-------------------------------------------------------------------------------------------//
 
-    /***
-     * check if a user is registered in the system
-     * @param icn icn to validate
-     * @param password password to validad
-     * @return a CommonUser instance for which the icn was entered or null in case the user doesnt exist
-     */
-    public CommonUser validateLoginData(int icn, String password){
-        for (CommonUser user : registeredUsers){
-            if (user.getIdentityCardNumber() == icn && user.getPassword().equals(password)){
-                return user;
-            }
-        }
-        return null;
-    }
-
-
-    public boolean addUser(CommonUser user){
-        if (user == null || isRegistered(user)){
-            return false;
-        }
-        else {
-            registeredUsers.add(user);
-            System.out.println(registeredUsers);
-            return true;
-        }
-    }
-
-    public boolean removeUser(int icn){
-        return registeredUsers.removeIf(registeredUser -> registeredUser.getIdentityCardNumber() == icn);
-    }
-
-    public boolean isRegistered(CommonUser user){
-        for (CommonUser registeredUser : registeredUsers) {
-            if (registeredUser.equals(user))
-                return true;
-        }
-        return false;
-    }
-
-    public boolean isRegistered(int icn){
-        for (CommonUser registeredUser : registeredUsers) {
-            if (registeredUser.getIdentityCardNumber() == icn)
-                return true;
-        }
-        return false;
-    }
-
-    public boolean loadMoney(int icn, float amount){
-        for (CommonUser user : registeredUsers) {
-            if (user.getIdentityCardNumber() == icn){
-                user.addBalance(amount);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean changePassword(int icn, String new_password){
-        for (CommonUser user : registeredUsers) {
-            if (user.getIdentityCardNumber() == icn){
-                user.setPassword(new_password);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    //-------------------------------------------------------------------------------------------//
-    //-----------------------------   Products   ------------------------------------------------//
-    //-------------------------------------------------------------------------------------------//
-    public boolean addProduct(Product product){
-        if (product != null && existingProduct(product.getId())){
-            return false;
-        }
-        else {
-            return availableProducts.add(product);
-        }
-    }
-
-    public boolean removeFood(int barcode){
-        return availableProducts.removeIf(product -> product.getId() == (barcode));
-    }
-
-    public boolean existingProduct(int barcode){
-        for (Product product : availableProducts) {
-            if (product.getId() == barcode)
-                return true;
-        }
-        return false;
-    }
 
     public boolean decreaseStock(int productId, int amount) {
 

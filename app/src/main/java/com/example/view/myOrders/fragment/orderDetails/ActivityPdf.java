@@ -9,8 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.view.BackEnd;
 import com.example.view.databinding.ActivityOrderDetailsBinding;
 
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,9 +55,12 @@ public class ActivityPdf extends AppCompatActivity {
 
         binding.orderNumber.setText("#"+order.getId());
         binding.totalPrice.setText(String.valueOf(order.getPrice()));
-        ZonedDateTime zonedDateTime = order.getPlacedInstant().atZone(ZoneOffset.UTC);
-        binding.timeHour.setText(zonedDateTime.toLocalTime().toString());
-        binding.timeDay.setText(zonedDateTime.toLocalDate().toString());
+        String day = new SimpleDateFormat("dd/MM/yyyy").format(order.getPlaced());
+        int hours = order.getPlaced().getHours();
+        int seconds = order.getPlaced().getSeconds();
+        String time = hours + "hs : " + seconds + " seg";
+        binding.timeHour.setText(time);
+        binding.timeDay.setText(day);
         String full_name = order.getPlacedBy().getNames() + " " + order.getPlacedBy().getLastName();
         binding.userName.setText(full_name);
 

@@ -6,20 +6,26 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.example.view.BackEnd;
 import com.example.view.databinding.ActivityFoodDetailsBinding;
 
-import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 import dao.OrderDAO;
+import model.Order;
 import model.Product;
 
 public class FoodDetail extends AppCompatActivity  {
 
     private ActivityFoodDetailsBinding binding;
+
+    MutableLiveData<Boolean> state = new MutableLiveData<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,39 +72,56 @@ public class FoodDetail extends AppCompatActivity  {
             }
         });
     }
+
+
+
+    private void observe(Product product){
+
+        OrderDAO.getOrders().observe(this, new Observer<List<Order>>() { //actualizo las ordenes
+            @Override
+            public void onChanged(@Nullable List<Order> orders) {
+                if(addProduct(product,orders)){
+                    //Send the order to the DataBase
+                    Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
+                    completOrder();
+                }
+            }
+            });
+    }
+
+    private void observe2(Product product){
+
+        OrderDAO.getOrders().observe(this, new Observer<List<Order>>() { //actualizo las ordenes
+            @Override
+            public void onChanged(@Nullable List<Order> orders) {
+                if(addProduct(product,orders)){
+                    binding.cbToHome.setChecked(false);
+                    Toast.makeText(getBaseContext(), "Se ha agregado el producto al carrito", Toast.LENGTH_SHORT).show();
+                    finish();
+                }else{
+
+                }
+            }
+        });
+    }
+
+
     private void setUpButtons(Product product){
 
         binding.btnAddOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    if(addProduct(product)){
-                        //Send the order to the DataBase
-                        Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
-                        completOrder();
-                    }
-
-                } catch (NumberFormatException numberFormatException){
-                    Toast.makeText(getBaseContext(), "No ingreso un numero valido", Toast.LENGTH_SHORT).show();
-                }
+                observe(product);
             }
         });
 
         binding.btnAddProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    if(addProduct(product)){
-                        //Send the order to the DataBase
-                        binding.cbToHome.setChecked(false);
-                        Toast.makeText(getBaseContext(), "Se ha agregado el producto al carrito", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                } catch (NumberFormatException numberFormatException){
-                    Toast.makeText(getBaseContext(), "No ingreso un numero valido", Toast.LENGTH_SHORT).show();
-                }
+                observe2(product);
             }
         });
+
 
         binding.btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +158,7 @@ public class FoodDetail extends AppCompatActivity  {
 
     }
 
-    private boolean addProduct(Product product){
+    private boolean addProduct(Product product, List<Order> orders){
         //TODO mejorar estafuncion y modularizar, posiblemente algunas cosas haya que hacerlas en el backend y no aca
         //Get the amount
         int addedAmount = Integer.parseInt(binding.productAmount.getText().toString());
@@ -148,31 +171,30 @@ public class FoodDetail extends AppCompatActivity  {
 
         if(product.getPrice(BackEnd.getLoggedUser()) * addedAmount <= BackEnd.getLoggedUser().getBalance()){ //Si hay suficiente saldo
             if(product.getCategory() == 1){ //todo capaz es mejor obtener el numero del restaurant
-                if(BackEnd.getMenusRestantes(LocalDate.now()) >= addedAmount){ //todo ACA esta la papa
-
+                if(BackEnd.getMenusRestantes(new Date(),orders) >= addedAmount){
                     if(BackEnd.addProduct(product,addedAmount,toHome)){
                         return true;
                     }else{
                         Toast.makeText(getBaseContext(), "No hay stock suficiente", Toast.LENGTH_SHORT).show();
-                        return false;
                     }
                 }else{
-                    Toast.makeText(getBaseContext(), "Cantidad maxima superada de este producto", Toast.LENGTH_SHORT).show();
-                    return false;
+                            Toast.makeText(getBaseContext(), "Cantidad maxima superada de este producto", Toast.LENGTH_SHORT).show();
                 }
+
+
             }else{
                 if(BackEnd.addProduct(product,addedAmount,toHome)){
                     return true;
                 }else{
                     Toast.makeText(getBaseContext(), "No hay stock suficiente", Toast.LENGTH_SHORT).show();
-                    return false;
                 }
             }
 
         }else{
             Toast.makeText(getBaseContext(), "No suficiente saldo en la cuenta", Toast.LENGTH_SHORT).show();
-            return false;
         }
+
+        return false;
     }
 
 
