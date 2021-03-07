@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if(menuItem.getItemId() == R.id.logout){
             //Restaurant.getInstance().removeDailyFood();
-            Restaurant.getInstance().removeOrders();
+            //Restaurant.getInstance().removeOrders();
             finish();
 
         } //logout

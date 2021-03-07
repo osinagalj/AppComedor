@@ -12,13 +12,10 @@ public class Repository {
     public Repository() { }
 
     public LiveData<List<Food>> productListening() {
-        // return new FirestoreLiveData<CommonUser>(DatabaseRouter.getCollectionRef(group.getGroupCreator()).document(group.getGroupKey()).collection("ProductList"), CommonUser.class);
         return new FirestoreLiveData<List<Food>>(Restaurant.getInstance().db.collection("foods"), Food.class);
-
     }
 
     public LiveData<List<DailyMenu>> menuListening() {
-        // return new FirestoreLiveData<CommonUser>(DatabaseRouter.getCollectionRef(group.getGroupCreator()).document(group.getGroupKey()).collection("ProductList"), CommonUser.class);
         return new FirestoreLiveData<List<DailyMenu>>(Restaurant.getInstance().db.collection("dailyMenus"), DailyMenu.class);
 
     }

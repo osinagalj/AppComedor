@@ -20,6 +20,7 @@ import dataBase.Repository;
 import dataBase.Restaurant;
 import model.Combo;
 import model.DailyMenu;
+import model.FixedDiscount;
 import model.Food;
 import model.Product;
 
@@ -76,7 +77,7 @@ public class FoodViewModel extends ViewModel {
                                         document.getData().get("description").toString(),
                                         Integer.parseInt(document.getData().get("imgId").toString()),
                                         Integer.parseInt(document.getData().get("productCategory").toString()),
-                                        comboItems,0.3f
+                                        comboItems,new FixedDiscount(0.3f)
                                 );
 
                                 list_.add(c);

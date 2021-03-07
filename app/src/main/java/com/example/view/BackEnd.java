@@ -7,19 +7,19 @@ import java.util.HashMap;
 import java.util.List;
 
 import dao.OrderDAO;
-import dao.ProductDAO;
 import dao.UserDAO;
 import model.CommonUser;
 import model.Order;
 import model.Product;
 
-
-//Aca va la logica de negocio, por ejemplo para pedir un menu del dia, primero se
-// hacen los chekeos: que tenga saldo y que tenga menus disponibles en el dia(el maximo es 2)
 public class BackEnd {
 
     private static CommonUser loggedUser;
-    private static Order myOrder; //todo Capaz que hay que tener la lista de productos y no la orden
+    private static Order myOrder;
+
+    //-------------------------------------------------------------------------------------------------//
+    //------------------------------------------ UserDAO   --------------------------------------------//
+    //-------------------------------------------------------------------------------------------------//
 
     public static CommonUser getLoggedUser() {
         return loggedUser;
@@ -27,50 +27,43 @@ public class BackEnd {
 
     public static void setLoggedUser(CommonUser user) {
         BackEnd.loggedUser = user;
-
-
         myOrder = new Order(1,loggedUser,new HashMap<>()); //todo
     }
 
-    public static void setOrderNumber(int id){
-        myOrder.setId(id);
+    public static void addUser(CommonUser user){
+        UserDAO.addUser2(user);
     }
+
+    public static boolean loadMoney(float amount){
+        return UserDAO.loadMoney(loggedUser.getIdentityCardNumber(),loggedUser.getBalance() + amount);
+    }
+    public static boolean transferMoney(int dni, float amount){
+        if(UserDAO.loadMoney(loggedUser.getIdentityCardNumber(),loggedUser.getBalance() - amount)) //Si se pudo descontar el dinero al usuario
+            return UserDAO.loadMoney(dni,amount);                                //agregar dinero al destinatario
+        else
+            return false;                                                 //Sino devolver false indicando que no se pudo
+    }
+
+    public static void changePassword(String password){
+        UserDAO.changePassword(loggedUser.getIdentityCardNumber(),password);
+    }
+
     //-------------------------------------------------------------------------------------------------//
     //------------------------------------------   OrderDAO   -----------------------------------------//
     //-------------------------------------------------------------------------------------------------//
 
-    //TODO
-    public static List<Order> getConfirmedOrders() {
-        return OrderDAO.getCompletedOrders(loggedUser);
+    public static void setOrderNumber(int id){
+        myOrder.setId(id);
     }
 
-    public static List<Order> getPendingOrders() {
-        return OrderDAO.getPendingOrders(loggedUser);
-    }
+    public static void addProduct(Product product, int amount, boolean toHome) {
 
-    public static List<String> getNextOrders() {
-        return OrderDAO.nextOrders();
-    }
-
-
-    public static boolean addProduct(Product product, int amount, boolean toHome) {
-        //TODO
-
-        //Tengo que devolver true si se pudo agregar el pedido,sino false porque no hay stock
-        //Si hay stock
-        //
         myOrder.addProduct(product, amount);
-        /*
-        if(!ProductDAO.decreaseStock(product.getId(),amount)){      //SI Hay stock
-            return false;
-        }else{
             if (!myOrder.getItems().contains(product)){         //Si no existe en la orden lo agrego
-                 myOrder.addProduct(product, amount,toHome);
+                 myOrder.addProduct(product, amount);
             }else{
                  myOrder.changeAmount(product, amount, toHome); //Si existe en la orden aumento la cantidad
             }
-        }*/
-        return true;
     }
 
     /** Obtiene la cantidad de menus del dia que ha pedido un usuario en el dia actual
@@ -81,7 +74,6 @@ public class BackEnd {
 
         int total = 0;
         for (Order o : orders){
-            //if(o.getPlacedInstant() == date) todo
             if(o.getPlacedBy().getIdentityCardNumber() == loggedUser.getIdentityCardNumber()){
                 String dat = new SimpleDateFormat("dd/MM/yyyy").format(o.getPlaced());
                 if(today.equals(dat)){
@@ -131,7 +123,7 @@ public class BackEnd {
     public static void removeProduct(Product product){
         int amount = myOrder.getAmount(product);
         myOrder.removeProduct(product);
-        ProductDAO.increaseStock(product.getId(),amount);
+        //ProductDAO.increaseStock(product.getId(),amount); todo
     }
 
     public static int getAmount(Product product){
@@ -155,10 +147,7 @@ public class BackEnd {
     //-------------------------------------------------------------------------------------------------//
     //------------------------------------------ ProductDAO   -----------------------------------------//
     //-------------------------------------------------------------------------------------------------//
-    public static void getProductById(int id){
-        ProductDAO.getProductById(id);
-    }
-
+/*
     public static List<Product> getProducts(){
         //TODO aca se aplicaria la logica de negocio capaz para el descuento y eso
         List<Product> products = new ArrayList<>();
@@ -166,27 +155,7 @@ public class BackEnd {
         products.addAll(ProductDAO.getProducts(loggedUser));
         return products;
     }
+*/
 
-    //-------------------------------------------------------------------------------------------------//
-    //------------------------------------------ UserDAO   --------------------------------------------//
-    //-------------------------------------------------------------------------------------------------//
-
-    public static void addUser(CommonUser user){
-        UserDAO.addUser2(user);
-    }
-
-    public static boolean loadMoney(float amount){
-        return UserDAO.loadMoney(loggedUser.getIdentityCardNumber(),amount);
-    }
-    public static boolean transferMoney(int dni, float amount){
-        if(UserDAO.loadMoney(loggedUser.getIdentityCardNumber(),amount * -1)) //Si se pudo descontar el dinero al usuario
-            return UserDAO.loadMoney(dni,amount);                                //agregar dinero al destinatario
-        else
-            return false;                                                 //Sino devolver false indicando que no se pudo
-    }
-
-    public static void changePassword(String password){
-        UserDAO.changePassword(loggedUser.getIdentityCardNumber(),password);
-    }
 
 }

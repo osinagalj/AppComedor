@@ -81,6 +81,7 @@
     <string name="agregar_productos">Agregar Productos</string>
     <string name="tiempo_de_espera_aprox">Tiempo de Espera aprox</string>
     <string name="proximos_pedidos_en_el_comedor">Proximos pedidos en el Comedor</string>
+    <string name="vegano">Vegano</string>
 
 
 </resources>

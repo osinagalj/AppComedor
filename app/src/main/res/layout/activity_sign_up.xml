@@ -172,6 +172,18 @@
                     android:shadowColor="#fff"
                     android:theme="@style/RadioButtonStyle"
                     android:textColor="#fff" />
+
+                <RadioButton
+                    android:id="@+id/rb_vegan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vegano"
+                    android:textColorHighlight="#fff"
+                    android:textColorLink="#fff"
+                    android:shadowColor="#fff"
+                    android:theme="@style/RadioButtonStyle"
+                    android:textColor="#fff" />
+
             </RadioGroup>
 
 

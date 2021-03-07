@@ -172,22 +172,25 @@ public class FoodDetail extends AppCompatActivity  {
         if(product.getPrice(BackEnd.getLoggedUser()) * addedAmount <= BackEnd.getLoggedUser().getBalance()){ //Si hay suficiente saldo
             if(product.getCategory() == 1){ //todo capaz es mejor obtener el numero del restaurant
                 if(BackEnd.getMenusRestantes(new Date(),orders) >= addedAmount){
-                    if(BackEnd.addProduct(product,addedAmount,toHome)){
+                    //todo chkear stock
+                    BackEnd.addProduct(product,addedAmount,toHome);
                         return true;
-                    }else{
-                        Toast.makeText(getBaseContext(), "No hay stock suficiente", Toast.LENGTH_SHORT).show();
-                    }
+
+                     //   else{
+                     //   Toast.makeText(getBaseContext(), "No hay stock suficiente", Toast.LENGTH_SHORT).show();
+                  //  }
                 }else{
                             Toast.makeText(getBaseContext(), "Cantidad maxima superada de este producto", Toast.LENGTH_SHORT).show();
                 }
 
 
             }else{
-                if(BackEnd.addProduct(product,addedAmount,toHome)){
+                //todo chekear stock
+                BackEnd.addProduct(product,addedAmount,toHome);
                     return true;
-                }else{
-                    Toast.makeText(getBaseContext(), "No hay stock suficiente", Toast.LENGTH_SHORT).show();
-                }
+               // }else{
+               //     Toast.makeText(getBaseContext(), "No hay stock suficiente", Toast.LENGTH_SHORT).show();
+              //  }
             }
 
         }else{

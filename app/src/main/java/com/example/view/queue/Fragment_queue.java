@@ -9,12 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.view.BackEnd;
 import com.example.view.databinding.FragmentFilaBinding;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import dao.OrderDAO;
+import model.Order;
 
 public class Fragment_queue extends Fragment {
 
@@ -35,19 +40,18 @@ public class Fragment_queue extends Fragment {
         binding.time.setText(BackEnd.getTimeToNextOrder());
         binding.orderNumber.setText(BackEnd.getNextOrder());
 
-        loadData();
-        showData();
+
+
+        OrderDAO.getOrders().observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
+            @Override
+            public void onChanged(@Nullable List<Order> last_orders) {
+                for(Order o : last_orders)
+                    orders.add("#" + o.getId());
+                showData();
+            }
+        });
 
         return view;
-    }
-
-
-    private void loadData(){
-
-        orders.addAll(BackEnd.getNextOrders());
-
-        orders.add("#10021");
-        orders.add("#10021");
     }
 
     private void showData(){
