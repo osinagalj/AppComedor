@@ -78,21 +78,6 @@ public class OrderDAO {
     }
 
     //@GET
-    public static List<Order> getCompletedOrders(CommonUser user) {
-        return Restaurant.getInstance().getOrdersCompleted(user);
-    }
-
-    //@GET
-    public static List<Order> getPendingOrders(CommonUser user) {
-        return Restaurant.getInstance().getPendingOrders(user);
-    }
-
-    //@GET
-    public static List<String> nextOrders() {
-        return Restaurant.getInstance().getNextOrders();
-    }
-
-    //@GET
     public static String timeNextOrder(CommonUser user){
         //TODO devuelve el tiempo que debe esperar el usuario para su la proxima orden
         return "05:02 min";

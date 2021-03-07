@@ -5,7 +5,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -19,8 +18,8 @@ import model.Category;
 import model.Combo;
 import model.CommonUser;
 import model.DailyMenu;
+import model.FixedDiscount;
 import model.Food;
-import model.Menu;
 import model.Order;
 import model.Product;
 
@@ -31,23 +30,12 @@ public class Restaurant {
     private String university;
     private String timeTable;
 
-    private int nextOrderNumber = 10000;
-    private final List<CommonUser> registeredUsers = new ArrayList<>();
-    private final List<Product> availableProducts = new ArrayList<>();
-    final List<Order> orders = new ArrayList<>();
-    final List<Order> ordersCompleted = new ArrayList<>();
-    private final List<Menu> menus = new ArrayList<>();
-
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+    private final int MAX_STOCK = 10000;
     public List<Integer> productsCategories = new ArrayList<>();
 
-    private final int MAX_STOCK = 10000;
-
     public static final Restaurant INSTANCE = new Restaurant();
-
     public static Restaurant getInstance() { return INSTANCE; }
-
 
     private Restaurant(){
 
@@ -57,183 +45,8 @@ public class Restaurant {
     }
 
     public void loadOrdersDB(){
-
-       // loadDataToDataBase();
+        loadDataToDataBase();
     }
-
-
-
-
-    public List<Order> getOrdersCompleted(CommonUser user){
-        List<Order> user_orders = new ArrayList<>();
-        for(Order order : ordersCompleted)
-            if(order.getPlacedBy().getIdentityCardNumber() == user.getIdentityCardNumber())
-                user_orders.add(order);
-        return user_orders;
-    }
-
-    public Product getProduct(int id){
-        return availableProducts.get(0);//TODO
-    }
-    public List<Order> getOrders(CommonUser user){
-        return orders;
-    }
-
-    //Get next orders
-    public List<String> getNextOrders(){
-
-        List<String> next_orders = new ArrayList<>();
-        int i = 0;
-        while(i<20 && i < orders.size()){
-            next_orders.add("#"+ String.valueOf(orders.get(i).getId()));
-            i++;
-        }
-        return next_orders;
-    }
-
-
-    public Product getSpecialMenu(CommonUser user){
-
-        System.out.println("TAMAÑO D EMENUS = " + menus.size());
-        //Add the menu
-        for(Menu menu: menus){
-           // if(menu.getDate().equals(LocalDate.now())){ todo
-                return menu.getMenu(user);
-           // }
-        }
-        return null;
-    }
-
-    public void removeDailyFood(){
-        for(Product p : availableProducts){
-            if(p.getCategory() == 0)
-                availableProducts.remove(p);
-        }
-    }
-    //TODO no devolver los elementos que no cuenten con stock
-    public List<Product> getAvailableProducts(CommonUser user){
-
-        List<Product> products = new ArrayList<>();
-
-        //Add the products
-        for(Product p : availableProducts){
-            if(p.getStock()> 0){
-                products.add(p);
-            }
-        }
-
-        return products;//todo
-    }
-
-
-
-
-    public boolean decreaseStock(int productId, int amount) {
-
-        for (Product p : availableProducts) {
-            if (p.getId() == productId) {
-                if (p.decreaseStock(amount))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    public void increaseStock(int productId, int amount) {
-        for (Product p : availableProducts) {
-            if (p.getId() == productId) {
-                p.addStock(amount);
-            }
-        }
-    }
-
-
-    //-------------------------------------------------------------------------------------------//
-    //-----------------------------     Orders   ------------------------------------------------//
-    //-------------------------------------------------------------------------------------------//
-
-    /***
-     * search the orders of a specific user
-     //* @param user user to search orders
-     * @return unmodifiable list with the orders of the user
-     */
-    public List<Order> getOrders2(CommonUser user){
-        List<Order> userOrders = new ArrayList<>();
-        for(Order order: orders)
-            if (order.getPlacedBy().equals(user))
-                userOrders.add(order);
-
-        return Collections.unmodifiableList(userOrders);
-    }
-
-    /***
-     * filter the products that a user cant consume
-     //* @param user user who wants to know what he can consume
-     * @return unmodifiable list with consumable products
-     */
-/*
-    public List<Product> getUserConsumableProducts(CommonUser user){
-        List<Product> consumableProducts = new ArrayList<>();
-        for (Product product : availableProducts)
-            if (user.canConsume(product))
-                consumableProducts.add(product);
-        return Collections.unmodifiableList(consumableProducts);
-    }
-*/
-
-
-    public void addStock(int barcode,int stock){
-        for(Product product : availableProducts){
-            if(product.getId() == barcode){
-                product.addStock(stock);
-            }
-        }
-    }
-
-    public List<Order> getPendingOrders(CommonUser u){
-        List<Order> userPendingOrders = new ArrayList<>();
-        if (registeredUsers.contains(u)) {
-            for (Order pendingOrder : orders){
-                if (pendingOrder.getPlacedBy().equals(u)){
-                    userPendingOrders.add(pendingOrder);
-                }
-            }
-        }
-        return userPendingOrders;
-    }
-
-    /*
-    public void addOrder(Order order){
-        for (Product product : order.getItems()){
-            availableProducts.get(availableProducts.indexOf(product)).decreaseStock(order.getAmount(product));
-        }
-        orders.add(order);
-    }
-    */
-
-    public void addOrder(Order order){
-        orders.add(order);
-    }
-
-    public int nextOrderNum() {
-        nextOrderNumber++;
-        return nextOrderNumber-1;
-    }
-
-    public void cancelPending(Order order) {
-        orders.remove(order);
-        order.getPlacedBy().addBalance(order.getPrice());
-    }
-
-    //-----------------------------------------------------------------------------------------------------------//
-    //-----------------------------------            LOAD DATA    -----------------------------------------------//
-    //-----------------------------------------------------------------------------------------------------------//
-
-    public void removeOrders(){//Al no ser una base de datos, si no vacio las ordenes
-        ordersCompleted.clear();
-        orders.clear();
-    }
-
 
 
     private void loadDataToDataBase(){
@@ -261,19 +74,19 @@ public class Restaurant {
         //La alternativa es poner las condiciones que no pueden comer ese menu, pero es un poco mas complicado
 
         //Para los que no tienen nada
-        DailyMenu m1 = new DailyMenu(100,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 88.0f, 2);
+        DailyMenu m1 = new DailyMenu(100,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 100.0f, 2);
         m1.addCondition(0);
 
         //Para vegetariano
-        DailyMenu m2 = new DailyMenu(101,"Milanesa con papas fritas","Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1, MAX_STOCK, 88.0f, 2);
+        DailyMenu m2 = new DailyMenu(101,"Milanesa con papas fritas","Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1, MAX_STOCK, 100.0f, 2);
         m2.addCondition(1);
 
         //Para vegano
-        DailyMenu m3 =new DailyMenu(102,"Ensalada con papas fritas","Ensalada y papas McCain", R.drawable.food_carne_papas, 1,  MAX_STOCK, 88.0f, 2);
+        DailyMenu m3 =new DailyMenu(102,"Ensalada con papas fritas","Ensalada y papas McCain", R.drawable.food_carne_papas, 1,  MAX_STOCK, 100.0f, 2);
         m3.addCondition(2);
 
         //Para celiaco
-        DailyMenu m4 =new DailyMenu(103,"Milanesa con papas fritas","Harina sin TACC, de Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 88.0f, 2);
+        DailyMenu m4 =new DailyMenu(103,"Milanesa con papas fritas","Harina sin TACC, de Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 100.0f, 2);
         m4.addCondition(3);
 
         ProductDAO.loadProduct(m1);
@@ -288,25 +101,25 @@ public class Restaurant {
         //Buffet
         Food f1 = new Food(1000,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo,2,6, 88.0f);
         Food f2 = new Food(1001,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, 2, 2, 85.0f);
-        Food f3 = new Food(1002,"Cafe con leche", "Con queso", R.drawable.food_cafe_con_leche, 2, 2, 85.0f);
-        Food f4 = new Food(1003,"Pebete de JyQ","Con chips de chocolate", R.drawable.food_pebete_jyq, 2,6, 20.2f);
-        Food f5 = new Food(1004,"Pizza","Porcion de 200 g", R.drawable.food_porcion_pizza, 2,6, 20.2f);
-        Food f6 = new Food(1005,"Tostado","de JyQ", R.drawable.food_tostado_jyq, 2,6, 20.2f);
-        Food f7 = new Food(1006,"Coca-Cola 500 ml","Botella de Coca-Cola", R.drawable.food_botella_coca, 2,6, 20.2f);
-        Food f8 = new Food(1007,"Empanada","De carne, cebolla y morron", R.drawable.food_empanada, 2,6, 20.2f);
-        Food f9 = new Food(1008,"Vaso de Coca-Cola","200 ml", R.drawable.food_vaso_coca, 2,6, 20.2f);
+        Food f3 = new Food(1002,"Cafe con leche", "Con queso", R.drawable.food_cafe_con_leche, 2, 2, 50.0f);
+        Food f4 = new Food(1003,"Pebete de JyQ","Con chips de chocolate", R.drawable.food_pebete_jyq, 2,6, 65.0f);
+        Food f5 = new Food(1004,"Pizza","Porcion de 200 g", R.drawable.food_porcion_pizza, 2,6, 20.0f);
+        Food f6 = new Food(1005,"Tostado","de JyQ", R.drawable.food_tostado_jyq, 2,6, 45.0f);
+        Food f7 = new Food(1006,"Coca-Cola 500 ml","Botella de Coca-Cola", R.drawable.food_botella_coca, 2,6, 70.0f);
+        Food f8 = new Food(1007,"Empanada","De carne, cebolla y morron", R.drawable.food_empanada, 2,6, 15.0f);
+        Food f9 = new Food(1008,"Vaso de Coca-Cola","200 ml", R.drawable.food_vaso_coca, 2,6, 30.0f);
         //Kiosko
-        Food f10 = new Food(1009,"Alfajor Pepitos","Con chips de chocolate", R.drawable.food_alfajor_pepitos, 3,6, 20.2f);
-        Food f11 = new Food(1010,"Galletitas 9 de oro","Agridulce", R.drawable.food_9_de_oro_agridulce, 3, 6, 88.0f);
-        Food f12 = new Food(1011,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, 3,6, 20.2f);
-        Food f13 = new Food(1012,"Frutigram de chocolate","Con chips de chocolate", R.drawable.food_frutigran_chocolate, 3,6, 20.2f);
-        Food f14 = new Food(1013,"Pepas 9 de Oro","Rellenas con membrillo", R.drawable.food_pepas_9_de_oro, 3,6, 20.2f);
-        Food f15 = new Food(1014,"Pepas chocotrio","Rellenas con membrillo recubiertas de chocolate", R.drawable.food_pepas_trio_chocotrio, 3,6, 20.2f);
+        Food f10 = new Food(1009,"Alfajor Pepitos","Con chips de chocolate", R.drawable.food_alfajor_pepitos, 3,6, 50.0f);
+        Food f11 = new Food(1010,"Galletitas 9 de oro","Agridulce", R.drawable.food_9_de_oro_agridulce, 3, 6, 105.0f);
+        Food f12 = new Food(1011,"Pepas trio","Rellenas de membrillo", R.drawable.food_pepas_trio, 3,6, 110.0f);
+        Food f13 = new Food(1012,"Frutigram de chocolate","Con chips de chocolate", R.drawable.food_frutigran_chocolate, 3,6, 90.0f);
+        Food f14 = new Food(1013,"Pepas 9 de Oro","Rellenas con membrillo", R.drawable.food_pepas_9_de_oro, 3,6, 105.0f);
+        Food f15 = new Food(1014,"Pepas chocotrio","Rellenas con membrillo recubiertas de chocolate", R.drawable.food_pepas_trio_chocotrio, 3,6, 110.0f);
 
         //Combos
         List<Product> promo1 = new ArrayList<>();
         promo1.add(f1);promo1.add(f9);promo1.add(f5);
-        Combo combo1 = new Combo(2000,"Combo1","Tarta de Pollo + Coca-Cola + Pizza",R.drawable.food_porcion_pizza,2,promo1,0.3f);
+        Combo combo1 = new Combo(2000,"Combo1","Tarta de Pollo + Coca-Cola + Pizza",R.drawable.food_porcion_pizza,2,promo1,new FixedDiscount(0.3f));
 
         ProductDAO.loadProduct(f1);
         ProductDAO.loadProduct(f2);

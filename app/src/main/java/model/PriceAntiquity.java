@@ -20,6 +20,6 @@ public class PriceAntiquity implements PriceCalculator {
         int daysBetween = (int) (((new Date()).getTime()-startDate.getTime()) / milisecondsByDay);
         float daysLog2 = (float)(Math.log(daysBetween)/Math.log(2));
         float discount = daysLog2/100;
-        return price - (price*discount);
+        return java.lang.Math.round(price - (price*discount));
     }
 }

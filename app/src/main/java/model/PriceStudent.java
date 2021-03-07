@@ -17,7 +17,7 @@ public class PriceStudent implements PriceCalculator {
 
     @Override
     public float getPrice(float price) {
-        return price - price * discountPercentage;
+        return java.lang.Math.round(price - price * discountPercentage);
     }
 
 

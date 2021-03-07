@@ -13,9 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.view.BackEnd;
 import com.example.view.databinding.ActivitySignUpBinding;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import model.Category;
 import model.CommonUser;
@@ -54,7 +52,7 @@ public class Sign_up extends AppCompatActivity {
             case "TEACHER" :
                 binding.labelCategory.setText("Docente");
                 binding.antiquity.setVisibility(View.VISIBLE);
-                binding.antiquity.setHint("Anos de antiguedad");
+                binding.antiquity.setHint("Cantidad de Materias");
                 break;
             case "NO TEACHER" :
                 binding.labelCategory.setText("No Docente");
@@ -89,20 +87,31 @@ public class Sign_up extends AppCompatActivity {
     }
 
     private void rigthSignUp(int parsedICN, String category){
-        //TODO falta agregar chequeos en varios campos, que no esten vacios por ejemplo, y que no este en uso el dni ya por ejemplo
-
         int conditionId = binding.condition.getCheckedRadioButtonId();
         int newUserCondition;
         if (conditionId != -1) {
             RadioButton radioButton = binding.condition.findViewById(conditionId);
             String conditionName = radioButton.getText().toString();
-            //newUserCondition = Restaurant.getInstance().getCondition(conditionName);
-            newUserCondition = 1;//TODO get the righ condition
+            //todo se podria mapear en restaurant los numeros con las condiciones
+            switch (conditionName){
+
+                case "Vegetariano":
+                    newUserCondition = 1;
+                    break;
+                case "Celiaco":
+                    newUserCondition = 2;
+                    break;
+                case "Vegano":
+                    newUserCondition = 3;
+                    break;
+                default:
+                    newUserCondition = 0;
+            }
         } else {
             newUserCondition = 0;
         }
 
-        Date date = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
+        Date date = new Date();
         CommonUser newUser = new CommonUser(
                 parsedICN,
                 binding.password.getText().toString(),
@@ -113,6 +122,8 @@ public class Sign_up extends AppCompatActivity {
                 newUserCondition,
                 getCategory(category)
         );
+        if(category.equals("TEACHER"))
+            newUser.setSubjects(Integer.parseInt(binding.antiquity.getText().toString()));
 
         BackEnd.addUser(newUser);
 

@@ -34,7 +34,7 @@ public class FragmentMyAccount extends Fragment {
         return view;
     }
 
-    private String getConditio(int number){
+    private String getCondition(int number){
         switch (number){
 
             case 1 :
@@ -54,7 +54,7 @@ public class FragmentMyAccount extends Fragment {
         binding.myAccountLabelLastName.setText(user.getLastName());
         binding.myAccountLabelDni.setText(String.valueOf(user.getIdentityCardNumber()));
         binding.myAccountLabelCategory.setText(user.getCategory().toString());
-        binding.myAccountLabelCondition.setText(getConditio(user.getCondition()));
+        binding.myAccountLabelCondition.setText(getCondition(user.getCondition()));
         binding.myAccountLabelPassword.setText(user.getPassword());
         //binding.myAccountImageViewProfile.setImageResource();
     }

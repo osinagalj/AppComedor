@@ -13,7 +13,10 @@ public class UserDAO {
 
     //@UPDATE
     public static boolean loadMoney(int icn, float amount){
-        //return Restaurant.getInstance().loadMoney(icn,amount); //Return false if the operation fails TODO
+        Restaurant.getInstance().db.collection("users2").document(String.valueOf(icn))
+                .update(
+                        "balance", amount
+                );
         return true;
     }
 
@@ -23,9 +26,10 @@ public class UserDAO {
                 .update(
                         "password", password
                 );
-
-        //Restaurant.getInstance().changePassword(dni,password); // TODO
     }
+
+
+
 
 
 }
