@@ -3,11 +3,9 @@ package dao;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.view.BackEnd;
-import com.example.view.food.nestedRecyclerFood.FoodViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -16,7 +14,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,61 +23,28 @@ import dataBase.Restaurant;
 import model.CommonUser;
 import model.Order;
 import model.Product;
+import utils.Utils;
 
 public class OrderDAO {
 
     private static final String TAG = "ok";
 
-    public static MutableLiveData<Integer> next_number = new MutableLiveData<>();
-
-
-
     //@POST
-    public static void loadPendingOrder2(Order order){
-
-
-
-            Map<String, Object> new_order = new HashMap<>();
-            new_order.put("id", order.getId());
-            new_order.put("date", LocalDate.now().toString());
-            new_order.put("user_id", order.getPlacedBy().getIdentityCardNumber());
-
-            Map<String, Integer> products = new HashMap<>(); //<id,amount>
-            for(Product p : order.getItems())
-                products.put(String.valueOf(p.getId()),order.getAmount(p));
-            new_order.put("products", products);
-
-            // Add a new document with a generated ID
-
-            Restaurant.getInstance().db.collection("pending_orders").document(String.valueOf(order.getId())).set(new_order);
-
-        //Restaurant.getInstance().addOrder(order);
-    }
-
-    //@POST
-    public static void loadConfirmedOrder(Order order){
+    public static void loadOrder(Order order, boolean pending){
 
         Map<String, Object> new_order = new HashMap<>();
         new_order.put("id", order.getId());
-        new_order.put("date", LocalDate.now().toString());
+        new_order.put("date", order.getPlaced());
         new_order.put("user_id", order.getPlacedBy().getIdentityCardNumber());
+        new_order.put("pending", pending);
 
         Map<String, Integer> products = new HashMap<>(); //<id,amount>
         for(Product p : order.getItems())
             products.put(String.valueOf(p.getId()),order.getAmount(p));
         new_order.put("products", products);
 
-        // Add a new document with a generated ID
-
-        Restaurant.getInstance().db.collection("confirmed_orders").document(String.valueOf(order.getId())).set(new_order);
-
-        //Restaurant.getInstance().addOrder(order);
-    }
-
-    //@GET
-    public static String timeNextOrder(CommonUser user){
-        //TODO devuelve el tiempo que debe esperar el usuario para su la proxima orden
-        return "05:02 min";
+        //Write in DB
+        Restaurant.getInstance().db.collection("orders").document(String.valueOf(order.getId())).set(new_order);
     }
 
     //@DELETE
@@ -103,45 +67,23 @@ public class OrderDAO {
 
     }
 
-    public static LiveData<List<Order>> getOrders(){
+
+    public static MutableLiveData<List<Order>> getOrders(boolean pending){
 
         MutableLiveData<List<Order>> list_orders = new MutableLiveData<List<Order>>();
-        ArrayList<Order> list = new ArrayList<Order>();
+        List<Order> list_of_orders = new ArrayList<>();
 
-        CollectionReference colRef = Restaurant.getInstance().db.collection("pending_orders");
-        colRef.whereEqualTo("user_id", BackEnd.getLoggedUser().getIdentityCardNumber())
+        CollectionReference colRef = Restaurant.getInstance().db.collection("orders");
+        colRef.whereEqualTo("user_id", BackEnd.getLoggedUser().getIdentityCardNumber()).whereEqualTo("pending", pending)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
-
-                                HashMap<String,Object> elements = (HashMap<String,Object>)document.getData().get("products");
-                                Map<Product,Integer> items = new HashMap<>();
-
-
-                                for (Map.Entry<String, Object> entry : elements.entrySet()) {
-                                    System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
-                                    for(Product p : FoodViewModel.list_of_foods){
-                                        if(p.getId() == Integer.parseInt(entry.getKey()))
-                                            items.put(p,Integer.parseInt(entry.getValue().toString()));
-                                    }
-                                }
-
-                                elements.forEach((k,v) ->
-                                        System.out.println("Key: " + k + ": Value: " + v));
-
-
-
-                                int nro = Integer.parseInt(document.getData().get("id").toString());
-                                Order o = new Order (nro,BackEnd.getLoggedUser(), items);
-
-                                list.add(o);
-
+                                list_of_orders.add(Utils.dbToOrder(document));
                             }
-                            list_orders.postValue(list);
+                            list_orders.postValue(list_of_orders);
 
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
@@ -152,11 +94,39 @@ public class OrderDAO {
         return list_orders;
     }
 
+    //Get all the orders
+    public static MutableLiveData<List<Order>> getOrders(){
+
+        MutableLiveData<List<Order>> list_orders = new MutableLiveData<List<Order>>();
+        List<Order> list_of_orders = new ArrayList<Order>();
+
+        CollectionReference colRef = Restaurant.getInstance().db.collection("orders");
+        colRef.whereEqualTo("user_id", BackEnd.getLoggedUser().getIdentityCardNumber())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                list_of_orders.add(Utils.dbToOrder(document));
+                            }
+                            list_orders.postValue(list_of_orders);
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+        return list_orders;
+    }
+
+
     //@GET
-    public static MutableLiveData<Integer> setNumberNextOrder2(){
-        //Todo  hay que buscar en las ordenes completas tambien
+    public static MutableLiveData<Integer> getNumberNextOrder(){
+
         MutableLiveData<Integer> el_number = new MutableLiveData<>();
-        CollectionReference docRef = Restaurant.getInstance().db.collection("pending_orders");
+        CollectionReference docRef = Restaurant.getInstance().db.collection("orders");
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -164,7 +134,6 @@ public class OrderDAO {
                 int num = -1;
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        System.out.println("Proximo numero de orden xd = " + Integer.parseInt(document.getData().get("id").toString()));
                         if(Integer.parseInt(document.getData().get("id").toString()) >  num){
                             num = Integer.parseInt(document.getData().get("id").toString());
                         }
@@ -177,6 +146,12 @@ public class OrderDAO {
             }
         });
         return el_number;
+    }
+
+    //@GET
+    public static String timeNextOrder(CommonUser user){
+        //TODO devuelve el tiempo que debe esperar el usuario para su la proxima orden
+        return "05:02 min";
     }
 
 }

@@ -1,24 +1,19 @@
 package model;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Menu {
 
     public ArrayList<DailyMenu> foods = new ArrayList<>(); //change to private
+    private Date date;
 
-    private LocalDate date;
-
-    public Menu(LocalDate date){
+    public Menu(Date date){
         this.date = date;
     }
 
-    public LocalDate getDate(){
-        return date;
-    }
-
+    /**Gets the menu corresponding to the user's condition*/
     public void add(DailyMenu menu){
-
         for(DailyMenu food: foods){
             if(food.getConditions() == menu.getConditions()) //todo
                 return;
@@ -27,6 +22,7 @@ public class Menu {
         foods.add(menu);
     }
 
+    /**Gets the menu corresponding to the user's condition*/
     public DailyMenu getMenu(CommonUser user){
         for(DailyMenu food: foods){
             for(int condition : food.getConditions()){
@@ -36,6 +32,21 @@ public class Menu {
 
         }
         return null;
+    }
+
+    public Date getDate(){
+        return date;
+    }
+    public ArrayList<DailyMenu> getFoods() {
+        return foods;
+    }
+
+    public void setFoods(ArrayList<DailyMenu> foods) {
+        this.foods = foods;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
 }

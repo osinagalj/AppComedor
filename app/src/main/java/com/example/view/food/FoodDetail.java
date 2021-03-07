@@ -59,7 +59,7 @@ public class FoodDetail extends AppCompatActivity  {
 
         //OrderDAO.setNumberNextOrder2();
         //final boolean[] cargo = {false}; //necesario sino inserta una orden vacia
-        OrderDAO.setNumberNextOrder2().observe(this, new Observer<Integer>() {
+        OrderDAO.getNumberNextOrder().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer id) {
                 //if(!cargo[0]){
@@ -77,7 +77,7 @@ public class FoodDetail extends AppCompatActivity  {
 
     private void observe(Product product){
 
-        OrderDAO.getOrders().observe(this, new Observer<List<Order>>() { //actualizo las ordenes
+        OrderDAO.getOrders(true).observe(this, new Observer<List<Order>>() { //actualizo las ordenes
             @Override
             public void onChanged(@Nullable List<Order> orders) {
                 if(addProduct(product,orders)){
@@ -91,7 +91,7 @@ public class FoodDetail extends AppCompatActivity  {
 
     private void observe2(Product product){
 
-        OrderDAO.getOrders().observe(this, new Observer<List<Order>>() { //actualizo las ordenes
+        OrderDAO.getOrders(true).observe(this, new Observer<List<Order>>() { //actualizo las ordenes
             @Override
             public void onChanged(@Nullable List<Order> orders) {
                 if(addProduct(product,orders)){

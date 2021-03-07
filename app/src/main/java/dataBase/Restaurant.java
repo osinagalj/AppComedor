@@ -18,6 +18,7 @@ import model.Category;
 import model.Combo;
 import model.CommonUser;
 import model.DailyMenu;
+import model.DiscountMax;
 import model.FixedDiscount;
 import model.Food;
 import model.Order;
@@ -45,7 +46,7 @@ public class Restaurant {
     }
 
     public void loadOrdersDB(){
-        loadDataToDataBase();
+        //loadDataToDataBase();
     }
 
 
@@ -96,8 +97,6 @@ public class Restaurant {
 
     //TODO foods
 
-
-
         //Buffet
         Food f1 = new Food(1000,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo,2,6, 88.0f);
         Food f2 = new Food(1001,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, 2, 2, 85.0f);
@@ -116,10 +115,16 @@ public class Restaurant {
         Food f14 = new Food(1013,"Pepas 9 de Oro","Rellenas con membrillo", R.drawable.food_pepas_9_de_oro, 3,6, 105.0f);
         Food f15 = new Food(1014,"Pepas chocotrio","Rellenas con membrillo recubiertas de chocolate", R.drawable.food_pepas_trio_chocotrio, 3,6, 110.0f);
 
-        //Combos
+        //Combo 1
         List<Product> promo1 = new ArrayList<>();
         promo1.add(f1);promo1.add(f9);promo1.add(f5);
-        Combo combo1 = new Combo(2000,"Combo1","Tarta de Pollo + Coca-Cola + Pizza",R.drawable.food_porcion_pizza,2,promo1,new FixedDiscount(0.3f));
+        Combo combo1 = new Combo(2000,"Combo 1","Tarta de Pollo + Coca-Cola + Pizza",R.drawable.food_porcion_pizza,2,promo1,new FixedDiscount(0.3f));
+
+        //Combo 2
+        List<Product> promo2 = new ArrayList<>();
+        promo2.add(f12);promo2.add(f14);promo2.add(f15);
+        Combo combo2 = new Combo(2001,"Combo 2","Promo de pepas: Pepas trio + Pepas 9 de oro + Pepas chocotrio ",R.drawable.food_pepas_9_de_oro,3,promo2,new DiscountMax(200.0f,45.0f));
+
 
         ProductDAO.loadProduct(f1);
         ProductDAO.loadProduct(f2);
@@ -138,9 +143,7 @@ public class Restaurant {
         ProductDAO.loadProduct(f15);
 
         ProductDAO.loadProduct(combo1);
-
-
-
+        ProductDAO.loadProduct(combo2);
 
 
 
@@ -161,11 +164,11 @@ public class Restaurant {
         Order order3 = new Order(4,user2,products);
         Order order4 = new Order(2,user2,products2);
 
-        OrderDAO.loadPendingOrder2(order1);
-        OrderDAO.loadPendingOrder2(order3);
+        OrderDAO.loadOrder(order1,true);
+        OrderDAO.loadOrder(order3,true);
 
-        OrderDAO.loadConfirmedOrder(order2);
-        OrderDAO.loadConfirmedOrder(order4);
+        OrderDAO.loadOrder(order2,false);
+        OrderDAO.loadOrder(order4,false);
 
     }
 

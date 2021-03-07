@@ -20,22 +20,19 @@ import model.Product;
 
 public class ProductDAO {
 
-
     public static void loadProduct(Food food){
-
-        // Add a new document with a generated ID
-        Restaurant.getInstance().db.collection("foods").document(String.valueOf(food.getId())).set(food);
+        Restaurant.getInstance().db.collection("foods")
+                .document(String.valueOf(food.getId()))
+                .set(food);
     }
 
     public static void loadProduct(DailyMenu food){
-
-        // Add a new document with a generated ID
-        Restaurant.getInstance().db.collection("dailyMenus").document(String.valueOf(food.getId())).set(food);
+        Restaurant.getInstance().db.collection("dailyMenus")
+                .document(String.valueOf(food.getId()))
+                .set(food);
     }
 
-
     public static void loadProduct(Combo food){
-
         Map<String, Object> new_food = new HashMap<>();
         new_food.put("id", food.getId());
         new_food.put("name", food.getName());
@@ -62,7 +59,28 @@ public class ProductDAO {
         Restaurant.getInstance().db.collection("combos").document(String.valueOf(food.getId())).set(new_food);
     }
 
-        /*
+
+
+    //@DELETE
+    public static void removeProduct(int id){
+
+        Restaurant.getInstance().db.collection("foods").document(String.valueOf(id))
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("TAG", "DocumentSnapshot successfully deleted!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("TAG", "Error deleting document", e);
+                    }
+                });
+    }
+
+            /*
     //@GET
     public static List<Product> getProducts(CommonUser user){
         return Restaurant.getInstance().getAvailableProducts(user);
@@ -92,24 +110,5 @@ public class ProductDAO {
         return Restaurant.getInstance().getProduct(id);
     }
 */
-
-    //DELETE
-    public static void removeProduct(int id){
-
-        Restaurant.getInstance().db.collection("foods").document(String.valueOf(id))
-                .delete()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("TAG", "DocumentSnapshot successfully deleted!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("TAG", "Error deleting document", e);
-                    }
-                });
-    }
 
 }

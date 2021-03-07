@@ -11,9 +11,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 
-import com.example.view.BackEnd;
 import com.example.view.R;
 import com.example.view.balance.FragmentBalance;
 import com.example.view.food.nestedRecyclerFood.FragmentFood;
@@ -22,7 +20,6 @@ import com.example.view.myOrders.HomeFragment;
 import com.example.view.queue.Fragment_queue;
 import com.google.android.material.navigation.NavigationView;
 
-import dao.OrderDAO;
 import dataBase.Restaurant;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -50,14 +47,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         Restaurant.getInstance().loadOrdersDB();
 
-        OrderDAO.setNumberNextOrder2();
-        OrderDAO.next_number.observe(this, new Observer<Integer>() {
+        /*
+        OrderDAO.setNumberNextOrder2().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer id) {
                 BackEnd.setOrderNumber(id+1);
                 System.out.println("Numero de orden hhhhh = " + id);
             }
         });
+*/
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
