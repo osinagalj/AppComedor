@@ -23,6 +23,13 @@ public class Order implements Serializable {
         this.placedBy = placedBy;
     }
 
+    public Order(int id,CommonUser placedBy, Map<Product,Integer> items, Date date){
+        this.id = id;
+        this.items= items;
+        this.placed = date;
+        this.placedBy = placedBy;
+    }
+
     public int getAmount(Product product){
         if (items.containsKey(product)){
             return items.get(product);
@@ -64,9 +71,6 @@ public class Order implements Serializable {
         return id;
     }
 
-    public Date getPlacedInstant() {
-        return placed;
-    }
 
     public CommonUser getPlacedBy() {
         return placedBy;

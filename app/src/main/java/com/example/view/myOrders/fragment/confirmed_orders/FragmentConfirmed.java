@@ -1,4 +1,4 @@
-package com.example.view.myOrders.fragment.confirmados;
+package com.example.view.myOrders.fragment.confirmed_orders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,9 +41,8 @@ public class FragmentConfirmed  extends Fragment {
 
         viewModel = ViewModelProviders.of(this).get(ConfirmedOrdersViewModel.class); //ViewModel para la DB
 
-        viewModel.setOrders();
 
-        viewModel.list_orders.observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
+        viewModel.getOrders().observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
             @Override
             public void onChanged(List<Order> orders) {
                 listaFoods = orders;

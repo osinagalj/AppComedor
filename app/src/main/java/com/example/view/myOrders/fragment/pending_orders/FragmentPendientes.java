@@ -1,4 +1,4 @@
-package com.example.view.myOrders.fragment.pendientes;
+package com.example.view.myOrders.fragment.pending_orders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,9 +42,8 @@ public class FragmentPendientes extends Fragment {
 
         viewModel = ViewModelProviders.of(this).get(PendingOrdersViewModel.class); //ViewModel para la DB
 
-        viewModel.setOrders();
 
-        viewModel.list_orders.observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
+        viewModel.getOrders().observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
             @Override
             public void onChanged(List<Order> orders) {
                 listaFoods = orders;

@@ -19,8 +19,8 @@ import com.example.view.BackEnd;
 import com.example.view.databinding.FragmentFoodBinding;
 import com.example.view.food.cart.ActivityCart;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dataBase.Restaurant;
@@ -54,10 +54,9 @@ public class FragmentFood extends Fragment {
         viewModel.getDailyMenu().observe(getViewLifecycleOwner(), new Observer<List<DailyMenu>>() {
             @Override
             public void onChanged(@Nullable List<DailyMenu> menus) {
-                Menu m = new Menu(LocalDate.now());
+                Menu m = new Menu(new Date());
                 for(DailyMenu p : menus){
                     m.add(p);
-
                 }
 
                 foods1.add(m.getMenu(BackEnd.getLoggedUser()));
@@ -69,8 +68,6 @@ public class FragmentFood extends Fragment {
         viewModel.getProductFoods().observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
             @Override
             public void onChanged(@Nullable List<Food> products) {
-                //Log.i(TAG, "viewModel: productsObjects is "+productsObjects.get(0).getCode());
-                //adapter.submitList(productsObjects);
                 foods1.addAll(products);
                 FoodViewModel.list_of_foods.addAll(products);
                 loadData();
@@ -80,11 +77,7 @@ public class FragmentFood extends Fragment {
         viewModel.setCombos().observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                //foods1.clear();
-                //foods1.addAll(viewModel.list_foods.getValue());
                 foods1.addAll(products);
-                System.out.println("Entro en los combos perreke");
-                //foods1.addAll(list_foods); se agregan repetidos si hago esto
                 loadData();
             }
         });

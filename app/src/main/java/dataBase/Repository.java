@@ -12,12 +12,15 @@ public class Repository {
     public Repository() { }
 
     public LiveData<List<Food>> productListening() {
-        return new FirestoreLiveData<List<Food>>(Restaurant.getInstance().db.collection("foods"), Food.class);
+      return new FirestoreLiveData<List<Food>>(
+              Restaurant.getInstance().db.collection("foods"),
+              Food.class);
     }
 
     public LiveData<List<DailyMenu>> menuListening() {
-        return new FirestoreLiveData<List<DailyMenu>>(Restaurant.getInstance().db.collection("dailyMenus"), DailyMenu.class);
-
+        return new FirestoreLiveData<List<DailyMenu>>(
+                Restaurant.getInstance().db.collection("dailyMenus"),
+                DailyMenu.class);
     }
 
 }

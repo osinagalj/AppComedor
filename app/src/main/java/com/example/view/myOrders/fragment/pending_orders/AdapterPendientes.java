@@ -1,6 +1,4 @@
-
-
-package com.example.view.myOrders.fragment.confirmados;
+package com.example.view.myOrders.fragment.pending_orders;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,32 +14,36 @@ import com.example.view.R;
 
 import java.util.List;
 
+import dao.OrderDAO;
 import model.Order;
 
-
-public class AdapterConfirmed extends RecyclerView.Adapter<com.example.view.myOrders.fragment.confirmados.AdapterConfirmed.ViewHolder> implements View.OnClickListener {
+public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.myOrders.fragment.pending_orders.AdapterPendientes.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
     List<Order> model;
-
+    Context context;
+    private int count = 0;
+    Button button_remove,btn_see_details;
     private View.OnClickListener listener;
+    FragmentPendientes fragmentPendientes;
 
-    public AdapterConfirmed(Context context, List<Order> model) {
+    public AdapterPendientes(Context context, List<Order> model,FragmentPendientes fragmentPendientes) {
         this.inflater = LayoutInflater.from(context);
         this.model = model;
+        this.fragmentPendientes = fragmentPendientes;
+        this.context = context;
     }
+
 
     @NonNull
     @Override
-    public com.example.view.myOrders.fragment.confirmados.AdapterConfirmed.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdapterPendientes.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.row_order_pendiente_new, parent, false);
         view.setOnClickListener(this);
+        button_remove = (Button) view.findViewById(R.id.row_pending_order_new_button_remove);
+        //btn_see_details = (Button) view.findViewById(R.id.row_pending_order_new_button_details);
 
-        Button btn =  view.findViewById(R.id.row_pending_order_new_button_remove);
-        btn.setText("Opinar");
-        btn.setVisibility(View.GONE);
-
-        return new com.example.view.myOrders.fragment.confirmados.AdapterConfirmed.ViewHolder(view);
+        return new com.example.view.myOrders.fragment.pending_orders.AdapterPendientes.ViewHolder(view);
     }
 
     public void setOnclickListener(View.OnClickListener listener) {
@@ -49,24 +51,36 @@ public class AdapterConfirmed extends RecyclerView.Adapter<com.example.view.myOr
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.example.view.myOrders.fragment.confirmados.AdapterConfirmed.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull com.example.view.myOrders.fragment.pending_orders.AdapterPendientes.ViewHolder holder, final int position) {
         String product_id = String.valueOf(model.get(position).getId());
         String product_description = model.get(position).getDescription();
-        String product_time = model.get(position).getPlacedInstant().toString();
+        String product_time = model.get(position).getPlaced().toString();
         String product_price = String.valueOf(model.get(position).getPrice());
 
         holder.product_id.setText("#"+product_id);
         holder.product_time.setText(product_time);
         holder.product_description.setText(product_description);
         holder.product_price.setText(product_price);
-    }
 
+        //To remove orders
+        button_remove.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+
+                OrderDAO.removeOrder("orders",String.valueOf(model.get(position).getId()));
+                //Restaurant.getInstance().cancelPending(model.get(position));
+                model.remove(position);
+                notifyDataSetChanged();
+                //notifyItemRemoved(position);    //TODO ESTO ELIMINA PERO A VECES TIRA ERROR POR LA POSICION
+            }
+        });
+    }
 
     @Override
     public int getItemCount() {
         return model.size();
     }
-
 
     @Override
     public void onClick(View view) {
@@ -76,7 +90,7 @@ public class AdapterConfirmed extends RecyclerView.Adapter<com.example.view.myOr
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView product_id, product_time,product_description,product_price;
+        TextView product_id, product_description, product_price,product_time;
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);

@@ -99,7 +99,7 @@ public class BackEnd {
     }
     public static void confirmOrder(int id){
         myOrder.setId(id);
-        OrderDAO.loadPendingOrder2(myOrder);
+        OrderDAO.loadOrder(myOrder,true);
         BackEnd.clearOrder();
     }
 

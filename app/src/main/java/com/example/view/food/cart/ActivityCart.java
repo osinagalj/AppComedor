@@ -77,7 +77,7 @@ public class ActivityCart extends AppCompatActivity {
     }
 
     private void completOrder(){
-        OrderDAO.setNumberNextOrder2().observe(this, new Observer<Integer>() {
+        OrderDAO.getNumberNextOrder().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer id) {
                 BackEnd.confirmOrder(id + 1);

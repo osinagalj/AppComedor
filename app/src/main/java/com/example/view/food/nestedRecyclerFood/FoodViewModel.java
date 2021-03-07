@@ -27,7 +27,7 @@ import model.Product;
 public class FoodViewModel extends ViewModel {
 
     private static final String TAG = "a";
-    //public MutableLiveData<List<Product>> list_foods = new MutableLiveData<List<Product>>();
+
     public static List<Product> list_of_foods = new ArrayList<Product>();
 
 
