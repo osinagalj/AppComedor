@@ -38,6 +38,7 @@ public class BackEnd {
         return UserDAO.loadMoney(loggedUser.getIdentityCardNumber(),loggedUser.getBalance() + amount);
     }
     public static boolean transferMoney(int dni, float amount){
+        loggedUser.addBalance(amount * -1);
         if(UserDAO.loadMoney(loggedUser.getIdentityCardNumber(),loggedUser.getBalance() - amount)) //Si se pudo descontar el dinero al usuario
             return UserDAO.loadMoney(dni,amount);                                //agregar dinero al destinatario
         else
@@ -46,6 +47,7 @@ public class BackEnd {
 
     public static void changePassword(String password){
         UserDAO.changePassword(loggedUser.getIdentityCardNumber(),password);
+        loggedUser.setPassword(password);
     }
 
     //-------------------------------------------------------------------------------------------------//
