@@ -1,12 +1,16 @@
 package model;
 
 
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Objects;
 
-public class CommonUser implements Serializable {
+@IgnoreExtraProperties
+public class CommonUser  implements Serializable {
     private String password;
     private String names;
     private String lastName;
@@ -18,7 +22,12 @@ public class CommonUser implements Serializable {
 
     private HashMap<String,Object> attributes = new HashMap<>();
 
-    //private PriceCalculator discountCalculator;
+    @Exclude
+    private PriceCalculator discountCalculator;
+
+    public float getPrice(float price){
+        return discountCalculator.getPrice(price);
+    }
 
     public CommonUser(){}
 
@@ -145,15 +154,15 @@ public class CommonUser implements Serializable {
         this.category = category;
     }
 
-
-       /* public PriceCalculator getDiscountCalculator() {
+    @Exclude
+    public PriceCalculator getDiscountCalculator() {
         return discountCalculator;
     }
-*/
-    /*
+
+    @Exclude
     public void setDiscountCalculator(PriceCalculator discountCalculator) {
         this.discountCalculator = discountCalculator;
     }
-*/
+
 }
 

@@ -9,25 +9,52 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import dataBase.Restaurant;
 import model.CommonUser;
+import model.PriceProfessor;
 
 public class UserDAO {
 
 
 
     public static void addUser(CommonUser user){
-        Restaurant.getInstance().db.collection("users").document(String.valueOf(user.getIdentityCardNumber())).set(user);
+        Restaurant.getInstance().db.collection("users")
+                .document(String.valueOf(user.getIdentityCardNumber()))
+                .set(user);
+        switch (user.getCategory()){
+            case DOCENTE:
+                Restaurant.getInstance().db.collection("users").document(String.valueOf(user.getIdentityCardNumber()))
+                        .update(
+                                "calculador", 0
+                        );
+                break;
+            case NO_DOCENTE:
+                Restaurant.getInstance().db.collection("users").document(String.valueOf(user.getIdentityCardNumber()))
+                        .update(
+                                "calculador", 1
+                        );
+                break;
+        }
+
     }
 
     public static MutableLiveData<CommonUser> getUser(int dni){
 
         MutableLiveData<CommonUser> m_user = new MutableLiveData<>();
-        DocumentReference docRef = Restaurant.getInstance().db.collection("users").document(String.valueOf(dni));
+        DocumentReference docRef = Restaurant.getInstance().db.collection("users")
+                .document(String.valueOf(dni));
 
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot document) {
                 if(document != null){
+
                     CommonUser user = document.toObject(CommonUser.class);
+                    int c =  Integer.parseInt(document.getData().get("calculador").toString());
+                    if(c == 0)
+                        user.setDiscountCalculator(new PriceProfessor((Integer.parseInt(user.getAttribute("subjects").toString()))));
+                    if(c == 1)
+                        user.setDiscountCalculator(new PriceProfessor((Integer.parseInt(user.getAttribute("startDate").toString()))));
+                    //TODO crear el PriceAntiquity
+
                     m_user.postValue(user);
                 }
             }
