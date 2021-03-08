@@ -29,6 +29,10 @@ public class OrderDAO {
 
     private static final String TAG = "ok";
 
+    /** Insert an order in the DB
+     * @param pending used to distinguish between pending and completed orders
+     * @param order is converted into a data type supported by the DB
+     * */
     //@POST
     public static void loadOrder(Order order, boolean pending){
 
@@ -47,10 +51,13 @@ public class OrderDAO {
         Restaurant.getInstance().db.collection("orders").document(String.valueOf(order.getId())).set(new_order);
     }
 
+    /** Remove an order in the DB
+     * @param id order key
+     * */
     //@DELETE
-    public static void removeOrder(String collection, String id){
+    public static void removeOrder(String id){
 
-        Restaurant.getInstance().db.collection(collection).document(id)
+        Restaurant.getInstance().db.collection("orders").document(id)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -67,7 +74,11 @@ public class OrderDAO {
 
     }
 
-
+    /** Brings the orders from the database whose id == id_logged_user
+     * and the orders whose status is equal to the
+     * @param pending
+     */
+    //@GET
     public static MutableLiveData<List<Order>> getOrders(boolean pending){
 
         MutableLiveData<List<Order>> list_orders = new MutableLiveData<List<Order>>();
@@ -94,15 +105,14 @@ public class OrderDAO {
         return list_orders;
     }
 
-    //Get all the orders
-    public static MutableLiveData<List<Order>> getOrders(){
+    /** @GET  the last orders from the database according to the limit*/
+    public static MutableLiveData<List<Order>> getOrders(int limit){
 
         MutableLiveData<List<Order>> list_orders = new MutableLiveData<List<Order>>();
         List<Order> list_of_orders = new ArrayList<Order>();
 
         CollectionReference colRef = Restaurant.getInstance().db.collection("orders");
-        colRef.whereEqualTo("user_id", BackEnd.getLoggedUser().getIdentityCardNumber())
-                .get()
+        colRef.limit(limit).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -121,8 +131,7 @@ public class OrderDAO {
         return list_orders;
     }
 
-
-    //@GET
+    /** @GET the id for the next command */
     public static MutableLiveData<Integer> getNumberNextOrder(){
 
         MutableLiveData<Integer> el_number = new MutableLiveData<>();
@@ -141,7 +150,7 @@ public class OrderDAO {
                     if(num == -1)
                         el_number.postValue(0); //primer numero de orden
                     else
-                        el_number.postValue(num);
+                        el_number.postValue(num + 1);
                 }
             }
         });

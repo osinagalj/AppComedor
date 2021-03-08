@@ -3,6 +3,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class CommonUser implements Serializable {
@@ -12,19 +13,16 @@ public class CommonUser implements Serializable {
     private Date birthDate;
     private int identityCardNumber;
     private float balance;
-    private int condition = 0; // por defecto pueden comer todo
+    private int condition;
     private Category category;
 
-    private int subjects = 0;
-    private Date startDate = new Date();
+    private HashMap<String,Object> attributes = new HashMap<>();
 
     //private PriceCalculator discountCalculator;
 
-    //TODO falta una imagen del perfil
-
     public CommonUser(){}
 
-    public CommonUser(int identityCardNumber,String password, float balance, String names, String lastName, Date birthDate,  int condition,Category category) {
+    public CommonUser(int identityCardNumber,String password, float balance, String names, String lastName, Date birthDate,  int condition, Category category) {
         this.password = password;
         this.names = names;
         this.lastName = lastName;
@@ -34,6 +32,14 @@ public class CommonUser implements Serializable {
         this.condition = condition;
        // this.discountCalculator = discountCalculator;
         this.balance = balance;
+    }
+
+
+    public void addAttribute(String key, Object value){
+        attributes.put(key,value);
+    }
+    public Object getAttribute(String key){
+        return attributes.get(key);
     }
 
 
@@ -63,6 +69,13 @@ public class CommonUser implements Serializable {
     //---------------------------------------------------------------------------------------------//
     //------------------------------ Getters && Setters -------------------------------------------//
     //---------------------------------------------------------------------------------------------//
+    public HashMap<String, Object> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(HashMap<String, Object> attributes) {
+        this.attributes = attributes;
+    }
 
     public String getPassword() {
         return password;
@@ -118,22 +131,6 @@ public class CommonUser implements Serializable {
 
     public void setCondition(int condition) {
         this.condition = condition;
-    }
-
-    public int getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(int subjects) {
-        this.subjects = subjects;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
     }
 
     public int getCondition() {

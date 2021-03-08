@@ -64,7 +64,7 @@ public class FoodDetail extends AppCompatActivity  {
             public void onChanged(Integer id) {
                 //if(!cargo[0]){
                  //   cargo[0] = true;
-                    BackEnd.confirmOrder(id + 1);
+                    BackEnd.confirmOrder(id);
                     openFinishOrder();
                     binding.cbToHome.setChecked(false);
               //  }

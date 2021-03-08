@@ -37,12 +37,9 @@ public class Fragment_queue extends Fragment {
 
         orders = new ArrayList<>();
 
-        binding.time.setText(BackEnd.getTimeToNextOrder());
-        binding.orderNumber.setText(BackEnd.getNextOrder());
+        setData();
 
-
-
-        OrderDAO.getOrders().observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
+        OrderDAO.getOrders(30).observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
             @Override
             public void onChanged(@Nullable List<Order> last_orders) {
                 for(Order o : last_orders)
@@ -52,6 +49,11 @@ public class Fragment_queue extends Fragment {
         });
 
         return view;
+    }
+
+    private void setData(){
+        binding.time.setText(BackEnd.getTimeToNextOrder());
+        binding.orderNumber.setText(BackEnd.getNextOrder());
     }
 
     private void showData(){

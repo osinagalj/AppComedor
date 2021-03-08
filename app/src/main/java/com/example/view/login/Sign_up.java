@@ -123,7 +123,11 @@ public class Sign_up extends AppCompatActivity {
                 getCategory(category)
         );
         if(category.equals("TEACHER"))
-            newUser.setSubjects(Integer.parseInt(binding.antiquity.getText().toString()));
+            newUser.addAttribute("subjects",Integer.parseInt(binding.antiquity.getText().toString()));
+
+        if(category.equals("NO TEACHER"))
+            newUser.addAttribute("startDate",Integer.parseInt(binding.antiquity.getText().toString()));
+
 
         BackEnd.addUser(newUser);
 

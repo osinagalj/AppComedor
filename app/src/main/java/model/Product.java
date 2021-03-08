@@ -30,7 +30,7 @@ public abstract class Product implements Serializable {
     }
 
 
-    public abstract boolean toHome();
+    public abstract boolean toHome(); //todo Capaz que hay que hacerlo como atributo
     public abstract int getStock();
     public abstract int getDailyLimit();
     public abstract void addStock(int stock);
