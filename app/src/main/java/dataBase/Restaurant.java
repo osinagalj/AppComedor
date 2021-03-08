@@ -49,7 +49,7 @@ public class Restaurant {
     }
 
     public void loadOrdersDB(){
-        loadDataToDataBase();
+        //loadDataToDataBase();
     }
 
 
