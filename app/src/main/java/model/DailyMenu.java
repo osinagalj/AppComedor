@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Date;
-
 public class DailyMenu extends Food  {
 
     private int limit;
@@ -12,6 +10,7 @@ public class DailyMenu extends Food  {
         super(id,name, description, imgId, productCategory,stock,price);
         this.limit = limit;
     }
+
 
     @Override
     public boolean toHome() {
@@ -30,18 +29,7 @@ public class DailyMenu extends Food  {
 
     @Override
     public float getPrice(CommonUser user ) {
-        //todo capaz hacer un try y catch para los user.getAtributte
-        switch(user.getCategory())
-        {
-            case ALUMNO:
-                return user.getPrice(new PriceStudent(0.6f),super.getPrice(user));
-            case DOCENTE:
-                return user.getPrice(new PriceProfessor(Math.toIntExact((Long)user.getAttribute("subjects"))),super.getPrice(user));
-            case NO_DOCENTE:
-                return user.getPrice(new PriceAntiquity((Date)user.getAttribute("startDate")),super.getPrice(user));
-            default:
-                return user.getPrice(new PriceExternal(),super.getPrice(user));
-        }
+        return user.getPrice(super.getPrice(user));
 
     }
 

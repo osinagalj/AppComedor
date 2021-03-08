@@ -22,6 +22,7 @@ import model.DiscountMax;
 import model.FixedDiscount;
 import model.Food;
 import model.Order;
+import model.PriceStudent;
 import model.Product;
 
 public class Restaurant {
@@ -56,6 +57,8 @@ public class Restaurant {
 
      //todo Users
         CommonUser user1 = new CommonUser(111,"111",1200f,"Lautaro1", "Osinaga", date,0, Category.ALUMNO);
+        user1.setDiscountCalculator(new PriceStudent());
+
         CommonUser user2 = new CommonUser(222,"222",1200f,"Lautaro2", "Osinaga", date,1, Category.DOCENTE);
         user2.addAttribute("subjects",2);
         CommonUser user3 = new CommonUser(333,"333",1200f,"Lautar3o", "Osinaga", date,2, Category.NO_DOCENTE);
