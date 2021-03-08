@@ -22,12 +22,13 @@ public class CommonUser  implements Serializable {
 
     private HashMap<String,Object> attributes = new HashMap<>();
 
-    @Exclude
-    private PriceCalculator discountCalculator;
+    @Exclude //Para no guardarlo en la base de datos porque se rompe
+    private PriceCalculator priceCalculator;
 
     public float getPrice(float price){
-        return discountCalculator.getPrice(price);
+        return priceCalculator.getPrice(price);
     }
+
 
     public CommonUser(){}
 
@@ -40,6 +41,18 @@ public class CommonUser  implements Serializable {
         this.category = category;
         this.condition = condition;
        // this.discountCalculator = discountCalculator;
+        this.balance = balance;
+    }
+
+    public CommonUser(int identityCardNumber,String password, float balance, String names, String lastName, Date birthDate,  int condition, Category category, PriceCalculator priceCalculator) {
+        this.password = password;
+        this.names = names;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.identityCardNumber = identityCardNumber;
+        this.category = category;
+        this.condition = condition;
+        this.priceCalculator = priceCalculator;
         this.balance = balance;
     }
 
@@ -156,12 +169,12 @@ public class CommonUser  implements Serializable {
 
     @Exclude
     public PriceCalculator getDiscountCalculator() {
-        return discountCalculator;
+        return priceCalculator;
     }
 
     @Exclude
     public void setDiscountCalculator(PriceCalculator discountCalculator) {
-        this.discountCalculator = discountCalculator;
+        this.priceCalculator = discountCalculator;
     }
 
 }

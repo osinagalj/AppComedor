@@ -1,12 +1,12 @@
 package model;
 
-public class PriceStudent implements PriceCalculator {
+public class PriceFixedDiscount implements PriceCalculator {
 
     private float discountPercentage;
 
-    public PriceStudent(){}
+    public PriceFixedDiscount(){}
 
-    public PriceStudent(float discountPercentage) {
+    public PriceFixedDiscount(float discountPercentage) {
         this.discountPercentage = discountPercentage;
     }
 

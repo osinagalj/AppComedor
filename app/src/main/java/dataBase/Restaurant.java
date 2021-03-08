@@ -22,7 +22,9 @@ import model.DiscountMax;
 import model.FixedDiscount;
 import model.Food;
 import model.Order;
-import model.PriceStudent;
+import model.PriceAntiquity;
+import model.PriceFixedDiscount;
+import model.PriceSubjects;
 import model.Product;
 
 public class Restaurant {
@@ -56,14 +58,14 @@ public class Restaurant {
         Date date = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
 
      //todo Users
-        CommonUser user1 = new CommonUser(111,"111",1200f,"Lautaro1", "Osinaga", date,0, Category.ALUMNO);
-        user1.setDiscountCalculator(new PriceStudent());
+        CommonUser user1 = new CommonUser(111,"111",1200f,"Lautaro1", "Osinaga", date,0, Category.ALUMNO, new PriceFixedDiscount(0.6f));
+        user1.setDiscountCalculator(new PriceFixedDiscount());
 
-        CommonUser user2 = new CommonUser(222,"222",1200f,"Lautaro2", "Osinaga", date,1, Category.DOCENTE);
+        CommonUser user2 = new CommonUser(222,"222",1200f,"Lautaro2", "Osinaga", date,1, Category.DOCENTE, new PriceSubjects(2));
         user2.addAttribute("subjects",2);
-        CommonUser user3 = new CommonUser(333,"333",1200f,"Lautar3o", "Osinaga", date,2, Category.NO_DOCENTE);
+        CommonUser user3 = new CommonUser(333,"333",1200f,"Lautar3o", "Osinaga", date,2, Category.NO_DOCENTE, new PriceAntiquity(new Date()));
         user3.addAttribute("startDate",new Date());
-        CommonUser user4 = new CommonUser(444,"444",1200f,"Lautaro3", "Osinaga", date,3, Category.ALUMNO);
+        CommonUser user4 = new CommonUser(444,"444",1200f,"Lautaro3", "Osinaga", date,3, Category.EXTERNO, new PriceFixedDiscount(0));
 
         UserDAO.addUser(user1);
         UserDAO.addUser(user2);
