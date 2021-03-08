@@ -68,8 +68,7 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.myO
             @Override
             public void onClick(View v) {
 
-                OrderDAO.removeOrder("orders",String.valueOf(model.get(position).getId()));
-                //Restaurant.getInstance().cancelPending(model.get(position));
+                OrderDAO.removeOrder(String.valueOf(model.get(position).getId()));
                 model.remove(position);
                 notifyDataSetChanged();
                 //notifyItemRemoved(position);    //TODO ESTO ELIMINA PERO A VECES TIRA ERROR POR LA POSICION

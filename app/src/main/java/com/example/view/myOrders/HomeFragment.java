@@ -24,7 +24,6 @@ public class HomeFragment extends Fragment {
     ViewPager viewPager;
     TabLayout tabLayout;
 
-
     public HomeFragment() {
         // Required empty public constructor
     }

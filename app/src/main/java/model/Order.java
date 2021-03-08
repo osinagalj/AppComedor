@@ -80,7 +80,7 @@ public class Order implements Serializable {
         return Collections.unmodifiableList(new ArrayList<>(items.keySet()));
     }
 
-    public void changeAmount(Product product, int amount, boolean Home){
+    public void changeAmount(Product product, int amount){
         int old = items.get(product);
         items.remove(product);
         items.put(product, old + amount);
