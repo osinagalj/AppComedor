@@ -31,24 +31,8 @@ public class UserDAO {
             @Override
             public void onSuccess(DocumentSnapshot document) {
                 if(document != null){
-
                     UserDB user = document.toObject(UserDB.class);
                     CommonUser model_user = user.convertToModel();
-                    /*
-                    switch (user.getCategory()){
-                        case ALUMNO:
-                            user.setDiscountCalculator(new PriceFixedDiscount(0.6f));
-                            break;
-                        case DOCENTE:
-                            user.setDiscountCalculator(new PriceSubjects((Integer.parseInt(user.getAttribute("subjects").toString()))));
-                            break;
-                        case NO_DOCENTE:
-                            user.setDiscountCalculator(new PriceAntiquity(new Date()));//TODO
-                            break;
-                        default:
-                            user.setDiscountCalculator(new PriceFixedDiscount(0f));
-                    }
-                    */
                     m_user.postValue(model_user);
                 }
             }
