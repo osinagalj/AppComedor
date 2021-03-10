@@ -7,16 +7,11 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import dataBase.Restaurant;
+import dataBase.model.ComboDB;
 import model.Combo;
 import model.DailyMenu;
 import model.Food;
-import model.Product;
 
 public class ProductDAO {
 
@@ -32,6 +27,12 @@ public class ProductDAO {
                 .set(food);
     }
 
+    public static void loadProduct(Combo food){
+        ComboDB new_food = new ComboDB(food);
+        Restaurant.getInstance().db.collection("combos").document(String.valueOf(food.getId())).set(new_food);
+    }
+
+    /*
     public static void loadProduct(Combo food){
         Map<String, Object> new_food = new HashMap<>();
         new_food.put("id", food.getId());
@@ -59,7 +60,7 @@ public class ProductDAO {
         Restaurant.getInstance().db.collection("combos").document(String.valueOf(food.getId())).set(new_food);
     }
 
-
+*/
 
     //@DELETE
     public static void removeProduct(int id){

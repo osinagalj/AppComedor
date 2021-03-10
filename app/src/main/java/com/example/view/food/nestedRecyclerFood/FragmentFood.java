@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.List;
 
 import dataBase.Restaurant;
+import dataBase.model.ComboDB;
+import model.Combo;
 import model.DailyMenu;
 import model.Food;
 import model.Menu;
@@ -74,18 +76,23 @@ public class FragmentFood extends Fragment {
                 for(Product p: products)
                     Restaurant.getInstance().addProduct(p);
                 loadData();
+
+                viewModel.getProductCombos().observe(getViewLifecycleOwner(), new Observer<List<ComboDB>>() {
+                    @Override
+                    public void onChanged(List<ComboDB> products2) {
+                        for(ComboDB comboDB: products2){
+                            Combo combo = comboDB.convertToModel();
+                            foods1.add(combo);
+                            Restaurant.getInstance().addProduct(combo);
+                        }
+
+                        loadData();
+                    }
+                });
             }
         });
 
-        viewModel.setCombos().observe(getViewLifecycleOwner(), new Observer<List<Product>>() {
-            @Override
-            public void onChanged(List<Product> products) {
-                foods1.addAll(products);
-                for(Product p: products)
-                    Restaurant.getInstance().addProduct(p);
-                loadData();
-            }
-        });
+
 
         setUpButtons();
 

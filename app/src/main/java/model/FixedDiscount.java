@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class FixedDiscount implements DiscountCalculator, Serializable {
+
+
     private float discountPercentage;
 
     public FixedDiscount(float discountPercentage) {
@@ -23,5 +25,13 @@ public class FixedDiscount implements DiscountCalculator, Serializable {
         for(Product p: products)
             new_price = new_price + p.getPrice(BackEnd.getLoggedUser());
         return new_price-(new_price*discountPercentage);
+    }
+
+    public float getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(float discountPercentage) {
+        this.discountPercentage = discountPercentage;
     }
 }
