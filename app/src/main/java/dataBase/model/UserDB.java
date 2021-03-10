@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import model.Category;
 import model.CommonUser;
+import model.PriceFixedDiscount;
 
 public class UserDB {
 
@@ -32,6 +33,21 @@ public class UserDB {
         this.balance = user.getBalance();
     }
 
+    public CommonUser convertToModel(){
+        CommonUser user = new CommonUser(
+                this.identityCardNumber,
+                this.password,
+                this.balance,
+                this.names,
+                this.lastName,
+                this.birthDate,
+                this.condition,
+                this.category
+        );
+        user.setDiscountCalculator(new PriceFixedDiscount(0.5f)); //todo
+        //user.addAttribute(); todo add all atributes
+        return user;
+    }
 
     public String getPassword() {
         return password;
