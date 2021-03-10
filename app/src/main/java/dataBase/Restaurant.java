@@ -69,6 +69,7 @@ public class Restaurant {
 
     public void loadOrdersDB(){
         loadDataToDataBase();
+        ProductDAO.increaseStock("1000",10);
     }
 
 

@@ -77,9 +77,8 @@ public class FragmentFood extends Fragment {
                     Food food = f.convertToModel();
                     if(BackEnd.getLoggedUser().canConsume(food.getConditions())){ //se agregan solamente los productos que puede comer el usuario
                         foods1.add(f.convertToModel());
-                        FoodViewModel.list_of_foods.add(f.convertToModel()); //todo eliminar
-
                     }
+                    FoodViewModel.list_of_foods.add(f.convertToModel()); //todo eliminar
                     Restaurant.getInstance().addProduct(f.convertToModel());
 
                 }
@@ -92,8 +91,8 @@ public class FragmentFood extends Fragment {
                             Combo combo = comboDB.convertToModel();
                             if(BackEnd.getLoggedUser().canConsume(combo.getConditions())){ //se agregan solamente los productos que puede comer el usuario
                                 foods1.add(combo);
-                                Restaurant.getInstance().addProduct(combo);
                             }
+                            Restaurant.getInstance().addProduct(combo);
                         }
 
                         loadData();
