@@ -1,10 +1,10 @@
 package model;
 
-public class PriceProfessor implements PriceCalculator {
+public class PriceSubjects implements PriceCalculator {
 
     private int subjects;
 
-    public PriceProfessor(int subjects) {
+    public PriceSubjects(int subjects) {
         this.subjects = subjects;
     }
 

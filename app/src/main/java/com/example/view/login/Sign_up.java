@@ -17,6 +17,9 @@ import java.util.Date;
 
 import model.Category;
 import model.CommonUser;
+import model.PriceAntiquity;
+import model.PriceFixedDiscount;
+import model.PriceSubjects;
 
 public class Sign_up extends AppCompatActivity {
 
@@ -126,8 +129,21 @@ public class Sign_up extends AppCompatActivity {
             newUser.addAttribute("subjects",Integer.parseInt(binding.antiquity.getText().toString()));
 
         if(category.equals("NO TEACHER"))
-            newUser.addAttribute("startDate",Integer.parseInt(binding.antiquity.getText().toString()));
+            newUser.addAttribute("startDate",new Date()); //todo obtener la fecha
 
+        switch (category) {
+            case "STUDENT":
+                newUser.setDiscountCalculator(new PriceFixedDiscount(0.6f));
+                break;
+            case "TEACHER":
+                newUser.setDiscountCalculator(new PriceSubjects(2));
+                break;
+            case "NO TEACHER":
+                newUser.setDiscountCalculator(new PriceAntiquity(new Date())); //todo obtener la fecha
+                break;
+            default:
+                newUser.setDiscountCalculator(new PriceFixedDiscount(0f));
+        }
 
         BackEnd.addUser(newUser);
 

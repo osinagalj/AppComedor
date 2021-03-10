@@ -19,6 +19,7 @@ import java.util.List;
 
 import dao.OrderDAO;
 import model.Order;
+import model.OrderState;
 import model.Product;
 
 public class FoodDetail extends AppCompatActivity  {
@@ -76,8 +77,8 @@ public class FoodDetail extends AppCompatActivity  {
 
 
     private void observe(Product product){
-
-        OrderDAO.getOrders(true).observe(this, new Observer<List<Order>>() { //actualizo las ordenes
+        //todo obtener todas las ordenes creo no solo las pending
+        OrderDAO.getOrders(OrderState.PENDING).observe(this, new Observer<List<Order>>() { //actualizo las ordenes
             @Override
             public void onChanged(@Nullable List<Order> orders) {
                 if(addProduct(product,orders)){
@@ -91,7 +92,7 @@ public class FoodDetail extends AppCompatActivity  {
 
     private void observe2(Product product){
 
-        OrderDAO.getOrders(true).observe(this, new Observer<List<Order>>() { //actualizo las ordenes
+        OrderDAO.getOrders(OrderState.PENDING).observe(this, new Observer<List<Order>>() { //actualizo las ordenes
             @Override
             public void onChanged(@Nullable List<Order> orders) {
                 if(addProduct(product,orders)){

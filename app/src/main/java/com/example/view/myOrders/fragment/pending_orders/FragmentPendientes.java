@@ -26,9 +26,9 @@ import model.Order;
 public class FragmentPendientes extends Fragment {
 
 
-    AdapterPendientes adapterPend;
-    RecyclerView recyclerViewPersonas;
-    List<Order> listaFoods;
+    AdapterPendientes adapter;
+    RecyclerView rv_orders;
+    List<Order> orders;
 
     PendingOrdersViewModel viewModel;
 
@@ -36,19 +36,18 @@ public class FragmentPendientes extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pending_orders,container,false);
-        recyclerViewPersonas = view.findViewById(R.id.recyclerView_live);
+        rv_orders = view.findViewById(R.id.recyclerView_live);
 
-        listaFoods = new ArrayList<>();
+        orders = new ArrayList<>();
 
         viewModel = ViewModelProviders.of(this).get(PendingOrdersViewModel.class); //ViewModel para la DB
 
 
         viewModel.getOrders().observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
             @Override
-            public void onChanged(List<Order> orders) {
-                listaFoods = orders;
-                //foods1.addAll(list_foods); se agregan repetidos si hago esto
-                mostrarData();
+            public void onChanged(List<Order> orders2) {
+                orders = orders2;
+                showData();
             }
         });
 
@@ -56,19 +55,19 @@ public class FragmentPendientes extends Fragment {
         return view;
     }
 
-    private void mostrarData() {
-        recyclerViewPersonas.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapterPend = new AdapterPendientes(getContext(), listaFoods,this);
-        recyclerViewPersonas.setAdapter(adapterPend);
+    private void showData() {
+        rv_orders.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new AdapterPendientes(getContext(), orders,this);
+        rv_orders.setAdapter(adapter);
 
-        adapterPend.setOnclickListener(new View.OnClickListener() {
+        adapter.setOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(getActivity(), ActivityPdf.class);
-                Order o = listaFoods.get(recyclerViewPersonas.getChildAdapterPosition(view));
+                Order o = orders.get(rv_orders.getChildAdapterPosition(view));
                 System.out.println("Numero de orden = " + o.getId());
-                intent.putExtra("ORDER_SELECTED",o);
+                intent.putExtra("ORDER_SELECTED",String.valueOf(o.getId()));
                 startActivity(intent);
             }
         });

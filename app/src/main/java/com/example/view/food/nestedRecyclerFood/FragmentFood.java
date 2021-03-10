@@ -58,6 +58,7 @@ public class FragmentFood extends Fragment {
                 for(DailyMenu p : menus){
                     m.add(p);
                 }
+                Restaurant.getInstance().addProduct(m.getMenu(BackEnd.getLoggedUser()));
 
                 foods1.add(m.getMenu(BackEnd.getLoggedUser()));
                 FoodViewModel.list_of_foods.add(m.getMenu(BackEnd.getLoggedUser()));
@@ -70,6 +71,8 @@ public class FragmentFood extends Fragment {
             public void onChanged(@Nullable List<Food> products) {
                 foods1.addAll(products);
                 FoodViewModel.list_of_foods.addAll(products);
+                for(Product p: products)
+                    Restaurant.getInstance().addProduct(p);
                 loadData();
             }
         });
@@ -78,6 +81,8 @@ public class FragmentFood extends Fragment {
             @Override
             public void onChanged(List<Product> products) {
                 foods1.addAll(products);
+                for(Product p: products)
+                    Restaurant.getInstance().addProduct(p);
                 loadData();
             }
         });
@@ -120,12 +125,12 @@ public class FragmentFood extends Fragment {
     public void onResume() { //Necesario para que se actualice la vista, y aparezca el boton de carrio si es neesario
         super.onResume();
         // Check should we need to refresh the fragment
-        showCarrito();
+        showCart();
         foods1 = new ArrayList<>(); //para que no aparezcan repetidos
     }
 
-    private void showCarrito() {
-        if (BackEnd.getProductsOrder().isEmpty()) {
+    private void showCart() {
+        if (BackEnd.orderIsEmpty()) {
             binding.layoutCart.setVisibility(View.GONE);
         } else {
             binding.layoutCart.setVisibility(View.VISIBLE);

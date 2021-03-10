@@ -12,18 +12,18 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.view.BackEnd;
-import com.example.view.food.FinishOrder;
 import com.example.view.databinding.ActivityCarritoBinding;
+import com.example.view.food.FinishOrder;
 
 import java.util.ArrayList;
 
 import dao.OrderDAO;
-import model.Product;
+import model.OrderLine;
 
 public class ActivityCart extends AppCompatActivity {
 
     AdapterCart adapter;
-    ArrayList<Product> products;
+    ArrayList<OrderLine> products;
     private ActivityCarritoBinding binding;
 
     @Override
@@ -94,7 +94,7 @@ public class ActivityCart extends AppCompatActivity {
 
     public void loadData(){
         products = new ArrayList<>();
-        products.addAll(BackEnd.getOrder().getItems());
+        products.addAll(BackEnd.getOrder().getLines());
     }
 
     private void showData() {

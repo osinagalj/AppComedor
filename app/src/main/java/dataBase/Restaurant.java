@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -22,7 +23,9 @@ import model.DiscountMax;
 import model.FixedDiscount;
 import model.Food;
 import model.Order;
-import model.PriceStudent;
+import model.PriceAntiquity;
+import model.PriceFixedDiscount;
+import model.PriceSubjects;
 import model.Product;
 
 public class Restaurant {
@@ -35,12 +38,30 @@ public class Restaurant {
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final int MAX_STOCK = 10000;
     public List<Integer> productsCategories = new ArrayList<>();
+    private List<Product> products = new ArrayList<>(); //Para no pedir siempre los productos en la DB
 
     public static final Restaurant INSTANCE = new Restaurant();
     public static Restaurant getInstance() { return INSTANCE; }
 
-    private Restaurant(){
+    public void addProduct(Product product){
+        if(!products.contains(product))
+            products.add(product);
+    }
 
+
+    public List<Product> getProducts(){
+        return Collections.unmodifiableList(products);
+    }
+
+    public Product getProduct(int id){
+        for(Product p: products)
+            if(p.getId() == id)
+                return p;
+
+        return null;
+    }
+
+    private Restaurant(){
         productsCategories.add(1); //Menu del Dia
         productsCategories.add(2); //Buffet
         productsCategories.add(3); //Kiosko
@@ -56,14 +77,14 @@ public class Restaurant {
         Date date = new GregorianCalendar(2014, Calendar.FEBRUARY, 11).getTime();
 
      //todo Users
-        CommonUser user1 = new CommonUser(111,"111",1200f,"Lautaro1", "Osinaga", date,0, Category.ALUMNO);
-        user1.setDiscountCalculator(new PriceStudent());
+        CommonUser user1 = new CommonUser(111,"111",1200f,"Lautaro1", "Osinaga", date,0, Category.ALUMNO, new PriceFixedDiscount(0.6f));
+        user1.setDiscountCalculator(new PriceFixedDiscount());
 
-        CommonUser user2 = new CommonUser(222,"222",1200f,"Lautaro2", "Osinaga", date,1, Category.DOCENTE);
+        CommonUser user2 = new CommonUser(222,"222",1200f,"Lautaro2", "Osinaga", date,1, Category.DOCENTE, new PriceSubjects(2));
         user2.addAttribute("subjects",2);
-        CommonUser user3 = new CommonUser(333,"333",1200f,"Lautar3o", "Osinaga", date,2, Category.NO_DOCENTE);
+        CommonUser user3 = new CommonUser(333,"333",1200f,"Lautar3o", "Osinaga", date,2, Category.NO_DOCENTE, new PriceAntiquity(new Date()));
         user3.addAttribute("startDate",new Date());
-        CommonUser user4 = new CommonUser(444,"444",1200f,"Lautaro3", "Osinaga", date,3, Category.ALUMNO);
+        CommonUser user4 = new CommonUser(444,"444",1200f,"Lautaro3", "Osinaga", date,3, Category.EXTERNO, new PriceFixedDiscount(0));
 
         UserDAO.addUser(user1);
         UserDAO.addUser(user2);
@@ -164,16 +185,12 @@ public class Restaurant {
         products2.put(f2,3);
         products2.put(f8,2);
 
-        Order order1 = new Order(3,user1,products);
-        Order order2 = new Order(1,user1,products2);
-        Order order3 = new Order(4,user2,products);
-        Order order4 = new Order(2,user2,products2);
+        Order order1 = new Order(1,user1);
+        order1.addProduct(f11,2,false);
+        order1.addProduct(f12,1,false);
+        order1.addProduct(f13,4,false);
 
-        OrderDAO.loadOrder(order1,true);
-        OrderDAO.loadOrder(order3,true);
-
-        OrderDAO.loadOrder(order2,false);
-        OrderDAO.loadOrder(order4,false);
+        OrderDAO.loadOrder(order1,false);
 
     }
 

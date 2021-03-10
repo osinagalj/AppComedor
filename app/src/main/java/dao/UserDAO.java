@@ -7,9 +7,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.Date;
+
 import dataBase.Restaurant;
 import model.CommonUser;
-import model.PriceProfessor;
+import model.PriceAntiquity;
+import model.PriceFixedDiscount;
+import model.PriceSubjects;
 
 public class UserDAO {
 
@@ -19,21 +23,6 @@ public class UserDAO {
         Restaurant.getInstance().db.collection("users")
                 .document(String.valueOf(user.getIdentityCardNumber()))
                 .set(user);
-        switch (user.getCategory()){
-            case DOCENTE:
-                Restaurant.getInstance().db.collection("users").document(String.valueOf(user.getIdentityCardNumber()))
-                        .update(
-                                "calculador", 0
-                        );
-                break;
-            case NO_DOCENTE:
-                Restaurant.getInstance().db.collection("users").document(String.valueOf(user.getIdentityCardNumber()))
-                        .update(
-                                "calculador", 1
-                        );
-                break;
-        }
-
     }
 
     public static MutableLiveData<CommonUser> getUser(int dni){
@@ -48,13 +37,19 @@ public class UserDAO {
                 if(document != null){
 
                     CommonUser user = document.toObject(CommonUser.class);
-                    int c =  Integer.parseInt(document.getData().get("calculador").toString());
-                    if(c == 0)
-                        user.setDiscountCalculator(new PriceProfessor((Integer.parseInt(user.getAttribute("subjects").toString()))));
-                    if(c == 1)
-                        user.setDiscountCalculator(new PriceProfessor((Integer.parseInt(user.getAttribute("startDate").toString()))));
-                    //TODO crear el PriceAntiquity
-
+                    switch (user.getCategory()){
+                        case ALUMNO:
+                            user.setDiscountCalculator(new PriceFixedDiscount(0.6f));
+                            break;
+                        case DOCENTE:
+                            user.setDiscountCalculator(new PriceSubjects((Integer.parseInt(user.getAttribute("subjects").toString()))));
+                            break;
+                        case NO_DOCENTE:
+                            user.setDiscountCalculator(new PriceAntiquity(new Date()));//TODO
+                            break;
+                        default:
+                            user.setDiscountCalculator(new PriceFixedDiscount(0f));
+                    }
                     m_user.postValue(user);
                 }
             }

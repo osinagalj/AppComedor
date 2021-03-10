@@ -4,22 +4,22 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.view.BackEnd;
 import com.example.view.databinding.ActivityOrderDetailsBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
+import dao.OrderDAO;
 import model.Order;
-import model.Product;
+import model.OrderLine;
 
 public class ActivityPdf extends AppCompatActivity {
 
     AdapterOrderDetail adapterPend;
-    ArrayList<OrderDetail> listaFoods;
+    ArrayList<OrderDetail> lines;
     private ActivityOrderDetailsBinding binding;
 
     @Override
@@ -28,25 +28,31 @@ public class ActivityPdf extends AppCompatActivity {
 
         binding = ActivityOrderDetailsBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-        setContentView(view);
+
 
         setUpButtons();
-        listaFoods = new ArrayList<>();
+        lines = new ArrayList<>();
+        setContentView(view);
 
+        String id =getIntent().getExtras().get("ORDER_SELECTED").toString();
 
-        Order order =(Order) getIntent().getExtras().get("ORDER_SELECTED");
+        System.out.println("Id del string = " + id);
+        OrderDAO.getOrderById(String.valueOf(id)).observe(this, new Observer<Order>() {
+            @Override
+            public void onChanged(Order order) {
+                System.out.println("Entro en by id");
+                setData(order);
+                showData();
 
-        if(order != null) {
-            setData(order);
-            showData();
-        }
+            }
+        });
 
     }
 
 
     private void showData() {
         binding.orderDetailsRv.setLayoutManager(new LinearLayoutManager(this));
-        adapterPend = new AdapterOrderDetail(this, listaFoods);
+        adapterPend = new AdapterOrderDetail(this, lines);
         binding.orderDetailsRv.setAdapter(adapterPend);
     }
 
@@ -64,10 +70,8 @@ public class ActivityPdf extends AppCompatActivity {
         String full_name = order.getPlacedBy().getNames() + " " + order.getPlacedBy().getLastName();
         binding.userName.setText(full_name);
 
-
-        List<Product> products = order.getItems();
-        for(Product product : products){
-            listaFoods.add(new OrderDetail(String.valueOf(order.getAmount(product)),product.getName(), String.valueOf(product.getPrice(BackEnd.getLoggedUser()))));
+        for(OrderLine line : order.getLines()){
+            lines.add(new OrderDetail(String.valueOf(line.getAmount()),line.getProduct().getName(), String.valueOf(line.getPrice())));
         }
     }
 
