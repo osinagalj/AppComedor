@@ -13,20 +13,21 @@ import model.Product;
 
 public class ComboDB {
 
-    int id_discount = 0;
-    int imgId;
-    int id;
-    String description;
-    int productCategory;
-    String name;
-    ArrayList<Integer> conditions;
-    ArrayList<Integer> products;
-    HashMap<String,Object> discount_attributes;
+    private int id_discount = 0;
+    private int imgId;
+    private int id;
+    private String description;
+    private int productCategory;
+    private String name;
+    private ArrayList<Integer> conditions;
+    private ArrayList<Integer> products;
+    private HashMap<String,Object> discount_attributes;
 
     public ComboDB(){}
+
     public ComboDB(Combo combo){
 
-        conditions = new ArrayList<>(combo.getConditions());
+        //conditions = new ArrayList<>(combo.getConditions());
         imgId = combo.getImgId();
         id = combo.getId();
         description = combo.getDescription();

@@ -25,9 +25,9 @@ import java.util.List;
 
 import dataBase.Restaurant;
 import dataBase.model.ComboDB;
+import dataBase.model.DailyMenuDB;
+import dataBase.model.FoodDB;
 import model.Combo;
-import model.DailyMenu;
-import model.Food;
 import model.Menu;
 import model.Product;
 
@@ -53,12 +53,12 @@ public class FragmentFood extends Fragment {
 
         foods1 = new ArrayList<>();
 
-        viewModel.getDailyMenu().observe(getViewLifecycleOwner(), new Observer<List<DailyMenu>>() {
+        viewModel.getDailyMenu().observe(getViewLifecycleOwner(), new Observer<List<DailyMenuDB>>() {
             @Override
-            public void onChanged(@Nullable List<DailyMenu> menus) {
+            public void onChanged(@Nullable List<DailyMenuDB> menus) {
                 Menu m = new Menu(new Date());
-                for(DailyMenu p : menus){
-                    m.add(p);
+                for(DailyMenuDB p : menus){
+                    m.add(p.convertToModel());
                 }
                 Restaurant.getInstance().addProduct(m.getMenu(BackEnd.getLoggedUser()));
 
@@ -68,13 +68,14 @@ public class FragmentFood extends Fragment {
             }
         });
 
-        viewModel.getProductFoods().observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
+        viewModel.getProductFoods().observe(getViewLifecycleOwner(), new Observer<List<FoodDB>>() {
             @Override
-            public void onChanged(@Nullable List<Food> products) {
-                foods1.addAll(products);
-                FoodViewModel.list_of_foods.addAll(products);
-                for(Product p: products)
-                    Restaurant.getInstance().addProduct(p);
+            public void onChanged(@Nullable List<FoodDB> products) {
+                for(FoodDB f : products){
+                    foods1.add(f.convertToModel());
+                    FoodViewModel.list_of_foods.add(f.convertToModel()); //todo eliminar
+                    Restaurant.getInstance().addProduct(f.convertToModel());
+                }
                 loadData();
 
                 viewModel.getProductCombos().observe(getViewLifecycleOwner(), new Observer<List<ComboDB>>() {

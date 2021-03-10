@@ -22,7 +22,6 @@ public class UserDB {
     private float balance;
     private int condition;
     private Category category;
-
     private HashMap<String,Object> attributes = new HashMap<>();
 
     public UserDB(){}

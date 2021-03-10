@@ -7,6 +7,7 @@ import com.google.firebase.firestore.IgnoreExtraProperties;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Objects;
 
 @IgnoreExtraProperties
@@ -56,6 +57,10 @@ public class CommonUser  implements Serializable {
         this.balance = balance;
     }
 
+    /**Si la condicion del usuario esta en la lista de condiciones, entonces no puede consumir el producto*/
+    public boolean canConsume(List<Integer> conditions){
+        return !conditions.contains(this.condition);
+    }
 
     public void addAttribute(String key, Object value){
         attributes.put(key,value);

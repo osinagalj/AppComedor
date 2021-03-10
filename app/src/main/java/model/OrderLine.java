@@ -17,6 +17,10 @@ public class OrderLine implements Serializable {
         this.price = price;
     }
 
+    public void increaseAmount(int amount){
+        this.amount = this.amount + amount;
+    }
+    //todo change amount of a line method
     //--------------------------------------------------------------------------------------------//
     //------------------------------------ Getters && Setters ------------------------------------//
     //--------------------------------------------------------------------------------------------//

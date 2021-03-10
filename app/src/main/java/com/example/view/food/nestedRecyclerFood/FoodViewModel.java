@@ -8,8 +8,8 @@ import java.util.List;
 
 import dataBase.Repository;
 import dataBase.model.ComboDB;
-import model.DailyMenu;
-import model.Food;
+import dataBase.model.DailyMenuDB;
+import dataBase.model.FoodDB;
 import model.Product;
 
 public class FoodViewModel extends ViewModel {
@@ -21,13 +21,12 @@ public class FoodViewModel extends ViewModel {
 
     Repository repository = new Repository();
 
-    public LiveData<List<DailyMenu>> getDailyMenu() {
+    public LiveData<List<DailyMenuDB>> getDailyMenu() {
         return repository.menuListening();
     }
 
-    public LiveData<List<Food>> getProductFoods() {
-        LiveData<List<Food>> list = repository.productListening();
-        return list;
+    public LiveData<List<FoodDB>> getProductFoods() {
+        return repository.productListening();
     }
 
     public LiveData<List<ComboDB>> getProductCombos() {

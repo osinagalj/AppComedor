@@ -102,19 +102,19 @@ public class Restaurant {
 
         //Para los que no tienen nada
         DailyMenu m1 = new DailyMenu(100,"Milanesa con papas fritas","Carne vacuna y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 100.0f, 2);
-        m1.addCondition(0);
+        m1.addCondition(1);m1.addCondition(2);m1.addCondition(3);
 
         //Para vegetariano
         DailyMenu m2 = new DailyMenu(101,"Milanesa con papas fritas","Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1, MAX_STOCK, 100.0f, 2);
-        m2.addCondition(1);
+        m2.addCondition(0);m2.addCondition(2);m2.addCondition(3);
 
         //Para vegano
         DailyMenu m3 =new DailyMenu(102,"Ensalada con papas fritas","Ensalada y papas McCain", R.drawable.food_carne_papas, 1,  MAX_STOCK, 100.0f, 2);
-        m3.addCondition(2);
+        m3.addCondition(0);m3.addCondition(1);m3.addCondition(3);
 
         //Para celiaco
         DailyMenu m4 =new DailyMenu(103,"Milanesa con papas fritas","Harina sin TACC, de Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 100.0f, 2);
-        m4.addCondition(3);
+        m3.addCondition(0);m3.addCondition(1);m3.addCondition(2);
 
         ProductDAO.loadProduct(m1);
         ProductDAO.loadProduct(m2);
