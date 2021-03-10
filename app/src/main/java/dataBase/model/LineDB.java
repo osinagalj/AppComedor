@@ -7,6 +7,7 @@ public class LineDB {
     private float price;
 
     public LineDB(){}
+
     public LineDB(int amount, int product_id, boolean toHome, float price) {
         this.amount = amount;
         this.product_id = product_id;
