@@ -5,24 +5,24 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import dataBase.model.ComboDB;
+import dataBase.model.DailyMenuDB;
+import dataBase.model.FoodDB;
 import dataBase.model.UserDB;
-import model.DailyMenu;
-import model.Food;
 
 public class Repository {
 
     public Repository() { }
 
-    public LiveData<List<Food>> productListening() {
-      return new FirestoreLiveData<List<Food>>(
+    public LiveData<List<FoodDB>> productListening() {
+      return new FirestoreLiveData<List<FoodDB>>(
               Restaurant.getInstance().db.collection("foods"),
-              Food.class);
+              FoodDB.class);
     }
 
-    public LiveData<List<DailyMenu>> menuListening() {
-        return new FirestoreLiveData<List<DailyMenu>>(
+    public LiveData<List<DailyMenuDB>> menuListening() {
+        return new FirestoreLiveData<List<DailyMenuDB>>(
                 Restaurant.getInstance().db.collection("dailyMenus"),
-                DailyMenu.class);
+                DailyMenuDB.class);
     }
 
     public LiveData<List<ComboDB>> comboListening() {
