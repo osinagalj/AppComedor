@@ -18,10 +18,6 @@ public class UserDAO {
     public static void addUser(CommonUser user){
         Restaurant.getInstance().db.collection("users")
                 .document(String.valueOf(user.getIdentityCardNumber()))
-                .set(user);
-
-        Restaurant.getInstance().db.collection("users5")
-                .document(String.valueOf(user.getIdentityCardNumber()))
                 .set(new UserDB(user));
     }
 
