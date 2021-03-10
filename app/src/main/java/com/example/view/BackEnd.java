@@ -66,9 +66,15 @@ public class BackEnd {
             if(o.getPlacedBy().getIdentityCardNumber() == loggedUser.getIdentityCardNumber()){
                 String dat = new SimpleDateFormat("dd/MM/yyyy").format(o.getPlaced());
                 if(today.equals(dat))
-                    for (OrderLine line : o.getLines())
-                        if (line.getProduct().getCategory() == 1)
-                            total++;
+                    for (OrderLine line : o.getLines()){
+                        if(line.getProduct() != null){
+                            if (line.getProduct().getCategory() == 1)
+                                total++;
+                        }else{
+                            System.out.println("Orden nulla" + o.getId());
+                        }
+                    }
+
             }
 
         if(total < 2)

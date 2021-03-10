@@ -27,13 +27,12 @@ public class OrderDB {
         this.date = date;
         this.user_id = user_id;
         this.state = state;
-        lineas2.add(new LineDB(1,2,true,70.f));
-        lineas2.add(new LineDB(2,3,true,70.f));
     }
+
     private ArrayList<LineDB> getLines(Order o){
         ArrayList<LineDB> list = new ArrayList<>();
         for(OrderLine line: o.getLines()){
-            LineDB l = new LineDB(line.getProduct().getId(),line.getAmount(),line.isToHome(),line.getPrice());
+            LineDB l = new LineDB(line.getAmount(),line.getProduct().getId(),line.isToHome(),line.getPrice());
             list.add(l);
         }
         return list;
