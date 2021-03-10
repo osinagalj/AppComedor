@@ -203,4 +203,7 @@ public class OrderDAO {
         return "05:02 min";
     }
 
+    public static boolean tryDecreaseStock(Order cart) {
+        return true;
+    }
 }

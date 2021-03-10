@@ -47,7 +47,6 @@ public class ActivityCart extends AppCompatActivity {
         binding.btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO eliminar los productos de la orden actual
                 if(!BackEnd.orderIsEmpty()){
                     showSimpleDialog(v);
                 }else{
@@ -66,7 +65,6 @@ public class ActivityCart extends AppCompatActivity {
         binding.btnFinishOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO eliminar los productos de la orden actual
                 if(BackEnd.orderIsEmpty()){
                     Toast.makeText(getBaseContext(), "No se puede realizar un pedido sin productos", Toast.LENGTH_SHORT).show();
                 }else{
@@ -77,13 +75,17 @@ public class ActivityCart extends AppCompatActivity {
     }
 
     private void completOrder(){
-        OrderDAO.getNumberNextOrder().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer id) {
-                BackEnd.confirmOrder(id + 1);
-                openFinishOrder();
-            }
-        });
+        if (OrderDAO.tryDecreaseStock(BackEnd.getOrder())) {
+            OrderDAO.getNumberNextOrder().observe(this, new Observer<Integer>() {
+                @Override
+                public void onChanged(Integer id) {
+                    BackEnd.confirmOrder(id + 1);
+                    openFinishOrder();
+                }
+            });
+        } else {
+            Toast.makeText(getBaseContext(), "No hay stock suficiente de alguno de los productos.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void openFinishOrder(){
