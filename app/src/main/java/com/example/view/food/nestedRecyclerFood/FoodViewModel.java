@@ -1,26 +1,14 @@
 package com.example.view.food.nestedRecyclerFood;
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import dataBase.Repository;
-import dataBase.Restaurant;
-import model.Combo;
+import dataBase.model.ComboDB;
 import model.DailyMenu;
-import model.FixedDiscount;
 import model.Food;
 import model.Product;
 
@@ -35,21 +23,21 @@ public class FoodViewModel extends ViewModel {
 
     public LiveData<List<DailyMenu>> getDailyMenu() {
         return repository.menuListening();
-
     }
 
     public LiveData<List<Food>> getProductFoods() {
         LiveData<List<Food>> list = repository.productListening();
-        setCombos();
         return list;
     }
 
+    public LiveData<List<ComboDB>> getProductCombos() {
+        return repository.comboListening();
 
+    }
+    /*
     public LiveData<List<Product>> setCombos(){
-
         MutableLiveData<List<Product>> combos = new MutableLiveData<List<Product>>();
         List<Product> list_ = new ArrayList<Product>();
-
         CollectionReference colRef = Restaurant.getInstance().db.collection("combos");
         colRef.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -58,30 +46,9 @@ public class FoodViewModel extends ViewModel {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                List<Product> comboItems = new ArrayList<>();
-
-                                ArrayList<Long> arrList = new ArrayList<Long>();
-                                arrList = (ArrayList) document.getData().get("items");
-
-                                for(int i=0;i<arrList.size();i++){
-                                    for(Product f : list_of_foods){
-                                        System.out.println("Numero de food = " + Math.toIntExact((arrList.get(i))));
-                                        if(f.getId() == Math.toIntExact((arrList.get(i)))){
-                                            comboItems.add(f);
-                                        }
-                                    }
-                                }
-
-                                Combo c = new Combo (Integer.parseInt(document.getData().get("id").toString()),
-                                        document.getData().get("name").toString(),
-                                        document.getData().get("description").toString(),
-                                        Integer.parseInt(document.getData().get("imgId").toString()),
-                                        Integer.parseInt(document.getData().get("productCategory").toString()),
-                                        comboItems,new FixedDiscount(0.3f)
-                                );
-
-                                list_.add(c);
-                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                ComboDB comboDB = document.toObject(ComboDB.class);
+                                Combo model_combo = comboDB.convertToModel();
+                                list_.add(model_combo);
                             }
                             combos.postValue(list_);
 
@@ -90,12 +57,10 @@ public class FoodViewModel extends ViewModel {
                         }
                     }
                 });
-
         return combos;
     }
 
-
-
+*/
 
 
 }

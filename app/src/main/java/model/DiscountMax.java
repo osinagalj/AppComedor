@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class DiscountMax implements DiscountCalculator, Serializable {
+
     private float limit;      //El limite minimo que debe tener el combo para aplicar el amount
     private float discount;   //Descuento
 
@@ -32,4 +33,21 @@ public class DiscountMax implements DiscountCalculator, Serializable {
             return new_price - discount;
         return new_price;
     }
+
+    public float getLimit() {
+        return limit;
+    }
+
+    public void setLimit(float limit) {
+        this.limit = limit;
+    }
+
+    public float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(float discount) {
+        this.discount = discount;
+    }
+
 }

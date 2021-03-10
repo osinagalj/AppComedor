@@ -74,7 +74,6 @@ public class BackEnd {
                             System.out.println("Orden nulla" + o.getId());
                         }
                     }
-
             }
 
         if(total < 2)
