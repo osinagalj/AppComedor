@@ -10,6 +10,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import java.util.Date;
 
 import dataBase.Restaurant;
+import dataBase.model.UserDB;
 import model.CommonUser;
 import model.PriceAntiquity;
 import model.PriceFixedDiscount;
@@ -23,6 +24,10 @@ public class UserDAO {
         Restaurant.getInstance().db.collection("users")
                 .document(String.valueOf(user.getIdentityCardNumber()))
                 .set(user);
+
+        Restaurant.getInstance().db.collection("users5")
+                .document(String.valueOf(user.getIdentityCardNumber()))
+                .set(new UserDB(user));
     }
 
     public static MutableLiveData<CommonUser> getUser(int dni){
