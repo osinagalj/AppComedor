@@ -15,14 +15,14 @@ public class LineDB  {
         this.toHome = toHome;
         this.price = price;
     }
-
+/*
     public LineDB(OrderLine line){
         this.product_id = line.getProduct().getId();
         this.amount = line.getAmount();
         this.price = line.getPrice();
         this.toHome = line.isToHome();
     }
-
+*/
     public OrderLine getOrderLine(){
         return new OrderLine(
                 Restaurant.getInstance().getProduct(this.product_id),
