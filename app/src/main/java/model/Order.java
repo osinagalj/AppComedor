@@ -1,53 +1,57 @@
 package model;
 
-import com.example.view.BackEnd;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class Order implements Serializable {
 
     private int id;
     private Date placed;
     private CommonUser placedBy;
-    private Map<Product,Integer> items;
+    private OrderState state = OrderState.PENDING;
+    private List<OrderLine> lines = new ArrayList<OrderLine>();
 
-    public Order(int id,CommonUser placedBy, Map<Product,Integer> items){
+    public Order(){}
+
+    public Order(int id,CommonUser placedBy){
         this.id = id;
-        this.items= items;
         this.placed = new Date();
         this.placedBy = placedBy;
     }
 
-    public Order(int id,CommonUser placedBy, Map<Product,Integer> items, Date date){
+    public Order(int id,CommonUser placedBy, Date date){
         this.id = id;
-        this.items= items;
         this.placed = date;
         this.placedBy = placedBy;
     }
 
-    public int getAmount(Product product){
-        if (items.containsKey(product)){
-            return items.get(product);
+    public void addLines(List<OrderLine> new_lines){
+        lines.addAll(new_lines);
+    }
+
+    public int getAmount(int id){
+        int amount = 0;
+        for (OrderLine line : lines){
+            if(line.getProduct().getId() == id){
+                amount++;
+            }
         }
-        return -1;
+        return amount;
+    }
+
+    public void clearOrder(){
+        lines.removeAll(lines);
     }
 
 
-    public boolean addProduct(Product p, int amount){
-        if (p != null) {
-            items.put(p, amount);
-            return true;
-        }
-        else {
-            return false;
-        }
+    public void addProduct(Product p, int amount, boolean toHome){
+        lines.add(new OrderLine(p,amount,toHome,p.getPrice(placedBy)));
     }
 
+/*
     public String getDescription(){
         StringBuilder description = new StringBuilder();
         for (Product product : items.keySet()){
@@ -58,11 +62,12 @@ public class Order implements Serializable {
         }
         return description.toString();
     }
+*/
 
     public float getPrice() {
         float totalPrice = 0;
-        for (Product product : items.keySet()){
-            totalPrice+=product.getPrice(BackEnd.getLoggedUser())*items.get(product);
+        for (OrderLine line : lines){
+            totalPrice+= line.getPrice();
         }
         return totalPrice;
     }
@@ -75,22 +80,35 @@ public class Order implements Serializable {
     public CommonUser getPlacedBy() {
         return placedBy;
     }
-
+/*
     public List<Product> getItems() {
-        return Collections.unmodifiableList(new ArrayList<>(items.keySet()));
+        List<Product> list = new ArrayList<>();
+        for (OrderLine line : lines){
+            list.add(line.getProduct());
+        }
+        return Collections.unmodifiableList(list);
+    }
+   */
+    public List<OrderLine> getLines() {
+        return Collections.unmodifiableList(lines);
     }
 
+    /*
     public void changeAmount(Product product, int amount){
         int old = items.get(product);
         items.remove(product);
         items.put(product, old + amount);
 
     }
+*/
 
-    public void removeProduct(Product product){
-        if (items.containsKey(product))
-            items.remove(product);
-
+    public void removeProduct(int product_id){
+        for (OrderLine line : lines){
+            if(line.getProduct().getId() == product_id){
+                lines.remove(line);
+                return;
+            }
+        }
     }
 
 
@@ -110,8 +128,27 @@ public class Order implements Serializable {
         this.placedBy = placedBy;
     }
 
-    public void setItems(Map<Product, Integer> items) {
-        this.items = items;
+/*
+    public int getNumber_line() {
+        return number_line;
+    }
+
+    public void setNumber_line(int number_line) {
+        this.number_line = number_line;
+    }
+*/
+
+
+    public OrderState getState() {
+        return state;
+    }
+
+    public void setState(OrderState state) {
+        this.state = state;
+    }
+
+    public void setLines(List<OrderLine> lines) {
+        this.lines = lines;
     }
 
 }

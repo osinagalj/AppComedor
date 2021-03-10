@@ -134,10 +134,13 @@ public class Sign_up extends AppCompatActivity {
         switch (category) {
             case "STUDENT":
                 newUser.setDiscountCalculator(new PriceFixedDiscount(0.6f));
+                break;
             case "TEACHER":
-                newUser.setDiscountCalculator(new PriceSubjects(Integer.parseInt(binding.antiquity.getText().toString())));
+                newUser.setDiscountCalculator(new PriceSubjects(2));
+                break;
             case "NO TEACHER":
                 newUser.setDiscountCalculator(new PriceAntiquity(new Date())); //todo obtener la fecha
+                break;
             default:
                 newUser.setDiscountCalculator(new PriceFixedDiscount(0f));
         }

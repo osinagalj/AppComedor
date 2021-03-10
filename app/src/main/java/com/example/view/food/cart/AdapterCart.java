@@ -17,18 +17,18 @@ import com.example.view.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Product;
+import model.OrderLine;
 
 public class AdapterCart extends RecyclerView.Adapter<AdapterCart.ViewHolder> implements View.OnClickListener {
 
     LayoutInflater inflater;
-    List<Product> model =  new ArrayList<>();
+    List<OrderLine> model =  new ArrayList<>();
     Context context;
     ImageButton button;
     private View.OnClickListener listener;
 
 
-    public AdapterCart(Context context, ArrayList<Product> model) {//TODO borrar el segundo parametro
+    public AdapterCart(Context context, ArrayList<OrderLine> model) {//TODO borrar el segundo parametro
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.model = model;
@@ -52,18 +52,18 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull AdapterCart.ViewHolder holder, final int position) {
-        String product_name = model.get(position).getName();
-        int product_nro = model.get(position).getId();
-        String product_price = String.valueOf(model.get(position).getPrice(BackEnd.getLoggedUser()));
+        String product_name = model.get(position).getProduct().getName();
+        int product_nro = model.get(position).getProduct().getId();
+        String product_price = String.valueOf(model.get(position).getPrice());
 
-        int produc_amount = BackEnd.getAmount(model.get(position));
+        int produc_amount = model.get(position).getAmount();
 
-        int product_img = model.get(position).getImgId();
+        int product_img = model.get(position).getProduct().getImgId();
 
         holder.product_name.setText("#"+product_nro);
         holder.product_description.setText(product_name);
         holder.product_price.setText("Precio x Unidad: " + product_price);
-        float tot = model.get(position).getPrice(BackEnd.getLoggedUser()) * produc_amount; //TODO
+        float tot = model.get(position).getPrice() * produc_amount; //TODO
         holder.product_total_price.setText("Total: " + tot );
 
 
@@ -78,7 +78,7 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.ViewHolder> im
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BackEnd.removeProduct(model.get(position));
+                BackEnd.removeProduct(model.get(position).getProduct());
                 model.remove(model.get(position));
                 //model = BackEnd.getProducts();
                 notifyDataSetChanged();

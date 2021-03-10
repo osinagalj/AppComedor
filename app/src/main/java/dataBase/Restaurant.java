@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -37,19 +38,37 @@ public class Restaurant {
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final int MAX_STOCK = 10000;
     public List<Integer> productsCategories = new ArrayList<>();
+    private List<Product> products = new ArrayList<>(); //Para no pedir siempre los productos en la DB
 
     public static final Restaurant INSTANCE = new Restaurant();
     public static Restaurant getInstance() { return INSTANCE; }
 
-    private Restaurant(){
+    public void addProduct(Product product){
+        if(!products.contains(product))
+            products.add(product);
+    }
 
+
+    public List<Product> getProducts(){
+        return Collections.unmodifiableList(products);
+    }
+
+    public Product getProduct(int id){
+        for(Product p: products)
+            if(p.getId() == id)
+                return p;
+
+        return null;
+    }
+
+    private Restaurant(){
         productsCategories.add(1); //Menu del Dia
         productsCategories.add(2); //Buffet
         productsCategories.add(3); //Kiosko
     }
 
     public void loadOrdersDB(){
-        //loadDataToDataBase();
+        loadDataToDataBase();
     }
 
 
@@ -166,16 +185,12 @@ public class Restaurant {
         products2.put(f2,3);
         products2.put(f8,2);
 
-        Order order1 = new Order(3,user1,products);
-        Order order2 = new Order(1,user1,products2);
-        Order order3 = new Order(4,user2,products);
-        Order order4 = new Order(2,user2,products2);
+        Order order1 = new Order(1,user1);
+        order1.addProduct(f11,2,false);
+        order1.addProduct(f12,1,false);
+        order1.addProduct(f13,4,false);
 
-        OrderDAO.loadOrder(order1,true);
-        OrderDAO.loadOrder(order3,true);
-
-        OrderDAO.loadOrder(order2,false);
-        OrderDAO.loadOrder(order4,false);
+        OrderDAO.loadOrder(order1,false);
 
     }
 

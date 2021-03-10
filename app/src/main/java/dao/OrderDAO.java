@@ -11,19 +11,20 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import dataBase.Restaurant;
+import dataBase.model.OrderDB;
 import model.CommonUser;
 import model.Order;
-import model.Product;
-import utils.Utils;
+import model.OrderLine;
+import model.OrderState;
 
 public class OrderDAO {
 
@@ -35,20 +36,115 @@ public class OrderDAO {
      * */
     //@POST
     public static void loadOrder(Order order, boolean pending){
-
-        Map<String, Object> new_order = new HashMap<>();
-        new_order.put("id", order.getId());
-        new_order.put("date", order.getPlaced());
-        new_order.put("user_id", order.getPlacedBy().getIdentityCardNumber());
-        new_order.put("pending", pending);
-
-        Map<String, Integer> products = new HashMap<>(); //<id,amount>
-        for(Product p : order.getItems())
-            products.put(String.valueOf(p.getId()),order.getAmount(p));
-        new_order.put("products", products);
+        OrderDB new_order = new OrderDB(order);
 
         //Write in DB
-        Restaurant.getInstance().db.collection("orders").document(String.valueOf(order.getId())).set(new_order);
+        Restaurant.getInstance().db.collection("orders")
+                .document(String.valueOf(order.getId()))
+                .set(new_order);
+    }
+
+
+
+    /** Brings the orders from the database whose id == id_logged_user
+     * and the orders whose status is equal to the
+     * @param state
+     */
+    //@GET
+    public static MutableLiveData<List<Order>> getOrders(OrderState state){
+
+        MutableLiveData<List<Order>> list_orders = new MutableLiveData<List<Order>>();
+        List<Order> list_of_orders = new ArrayList<>();
+
+        CollectionReference colRef = Restaurant.getInstance().db.collection("orders");
+
+        colRef.whereEqualTo("user_id", BackEnd.getLoggedUser().getIdentityCardNumber())
+                .whereEqualTo("state", state.toString())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                OrderDB order = document.toObject(OrderDB.class);
+                                list_of_orders.add(order.convertToModel());
+                            }
+                            list_orders.postValue(list_of_orders);
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+        return list_orders;
+    }
+
+
+    public static MutableLiveData<Order> getOrderById(String id){
+
+        MutableLiveData<Order> m_order = new MutableLiveData<>();
+        DocumentReference docRef = Restaurant.getInstance().db
+                .collection("orders")
+                .document(id);
+
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot document) {
+                if(document != null){
+
+                    OrderDB or= document.toObject(OrderDB.class);
+                    if(or!= null){
+                        Order o = or.convertToModel();
+                        System.out.println("id =" + o.getId());
+                        System.out.println("id =" + o.getPlacedBy().getIdentityCardNumber());
+                        System.out.println("id =" + o.getPlaced());
+                        System.out.println("lines =" + o.getLines());
+                        for(OrderLine line: o.getLines()) {
+                            System.out.println("nombre linea = " + line.getProduct().getName());
+                            System.out.println("id linea = " + line.getProduct().getId());
+                            System.out.println(" stock linea = " + line.getProduct().getStock());
+                        }
+                        m_order.postValue(o);
+                    }
+
+                }
+            }
+        });
+
+        return m_order;
+    }
+
+    /** @GET  the last orders from the database according to the limit*/
+    public static MutableLiveData<List<Order>> getOrders(int limit){
+
+        MutableLiveData<List<Order>> list_orders = new MutableLiveData<List<Order>>();
+        List<Order> list_of_orders = new ArrayList<Order>();
+
+        CollectionReference colRef = Restaurant.getInstance().db.collection("orders");
+        colRef.limit(limit).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                OrderDB order = document.toObject(OrderDB.class);
+                                Order o = order.convertToModel();
+                                System.out.println("id =" + o.getId());
+                                System.out.println("id =" + o.getPlacedBy());
+                                System.out.println("id =" + o.getPlaced());
+                                System.out.println("lines =" + o.getLines());
+                                list_of_orders.add(o);
+                            }
+                            list_orders.postValue(list_of_orders);
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+        return list_orders;
     }
 
     /** Remove an order in the DB
@@ -72,63 +168,6 @@ public class OrderDAO {
                     }
                 });
 
-    }
-
-    /** Brings the orders from the database whose id == id_logged_user
-     * and the orders whose status is equal to the
-     * @param pending
-     */
-    //@GET
-    public static MutableLiveData<List<Order>> getOrders(boolean pending){
-
-        MutableLiveData<List<Order>> list_orders = new MutableLiveData<List<Order>>();
-        List<Order> list_of_orders = new ArrayList<>();
-
-        CollectionReference colRef = Restaurant.getInstance().db.collection("orders");
-        colRef.whereEqualTo("user_id", BackEnd.getLoggedUser().getIdentityCardNumber()).whereEqualTo("pending", pending)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                list_of_orders.add(Utils.dbToOrder(document));
-                            }
-                            list_orders.postValue(list_of_orders);
-
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-
-        return list_orders;
-    }
-
-    /** @GET  the last orders from the database according to the limit*/
-    public static MutableLiveData<List<Order>> getOrders(int limit){
-
-        MutableLiveData<List<Order>> list_orders = new MutableLiveData<List<Order>>();
-        List<Order> list_of_orders = new ArrayList<Order>();
-
-        CollectionReference colRef = Restaurant.getInstance().db.collection("orders");
-        colRef.limit(limit).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                list_of_orders.add(Utils.dbToOrder(document));
-                            }
-                            list_orders.postValue(list_of_orders);
-
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
-
-        return list_orders;
     }
 
     /** @GET the id for the next command */

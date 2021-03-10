@@ -1,15 +1,14 @@
 package com.example.view;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import dao.OrderDAO;
 import dao.UserDAO;
 import model.CommonUser;
 import model.Order;
+import model.OrderLine;
 import model.Product;
 
 public class BackEnd {
@@ -27,7 +26,7 @@ public class BackEnd {
 
     public static void setLoggedUser(CommonUser user) {
         BackEnd.loggedUser = user;
-        myOrder = new Order(1,loggedUser,new HashMap<>()); //todo
+        myOrder = new Order(1,loggedUser); //todo
     }
 
     public static void addUser(CommonUser user){
@@ -55,12 +54,7 @@ public class BackEnd {
     //-------------------------------------------------------------------------------------------------//
 
     public static void addProduct(Product product, int amount, boolean toHome) {
-        myOrder.addProduct(product, amount);
-            if (!myOrder.getItems().contains(product)){         //Si no existe en la orden lo agrego
-                 myOrder.addProduct(product, amount);
-            }else{
-                 myOrder.changeAmount(product, amount); //Si existe en la orden aumento la cantidad
-            }
+        myOrder.addProduct(product, amount,toHome);
     }
 
     /** Obtiene la cantidad de menus del dia que ha pedido un usuario en el dia actual*/
@@ -72,8 +66,8 @@ public class BackEnd {
             if(o.getPlacedBy().getIdentityCardNumber() == loggedUser.getIdentityCardNumber()){
                 String dat = new SimpleDateFormat("dd/MM/yyyy").format(o.getPlaced());
                 if(today.equals(dat))
-                    for (Product p : o.getItems())
-                        if (p.getCategory() == 1)
+                    for (OrderLine line : o.getLines())
+                        if (line.getProduct().getCategory() == 1)
                             total++;
             }
 
@@ -93,29 +87,30 @@ public class BackEnd {
         BackEnd.clearOrder();
     }
 
-    public static void clearOrder(){
-        myOrder = new Order(1,loggedUser,new HashMap<>()); //todo
+    public static void clearOrder() {
+        myOrder.clearOrder();
     }
 
     public static float getOrderPrice(){
         return myOrder.getPrice();
     }
 
+    /*
     public static List<Product> getProductsOrder(){
         List<Product> list = new ArrayList<>();
-        list.addAll(myOrder.getItems());
+        list.addAll(myOrder.get);
         return list;
     }
-
+*/
 
     public static void removeProduct(Product product){
-        int amount = myOrder.getAmount(product);
-        myOrder.removeProduct(product);
+        int amount = myOrder.getAmount(product.getId());
+        myOrder.removeProduct(product.getId());
         //ProductDAO.increaseStock(product.getId(),amount); todo
     }
 
     public static int getAmount(Product product){
-        return myOrder.getAmount(product);
+        return myOrder.getAmount(product.getId());
     }
 
     public static String getTimeToNextOrder(){
@@ -126,7 +121,7 @@ public class BackEnd {
     }
 
     public static boolean orderIsEmpty(){
-        if(myOrder.getItems().isEmpty())
+        if(myOrder.getLines().isEmpty())
             return true;
         return false;
     }

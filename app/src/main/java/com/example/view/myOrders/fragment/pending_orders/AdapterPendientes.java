@@ -53,13 +53,13 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.myO
     @Override
     public void onBindViewHolder(@NonNull com.example.view.myOrders.fragment.pending_orders.AdapterPendientes.ViewHolder holder, final int position) {
         String product_id = String.valueOf(model.get(position).getId());
-        String product_description = model.get(position).getDescription();
+        //String product_description = model.get(position).getDescription();
         String product_time = model.get(position).getPlaced().toString();
         String product_price = String.valueOf(model.get(position).getPrice());
 
         holder.product_id.setText("#"+product_id);
         holder.product_time.setText(product_time);
-        holder.product_description.setText(product_description);
+       // holder.product_description.setText(product_description);
         holder.product_price.setText(product_price);
 
         //To remove orders
