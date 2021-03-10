@@ -37,7 +37,7 @@ public abstract class Product implements Serializable {
     public abstract boolean decreaseStock(int amount);
 
     public abstract float getPrice(CommonUser user);
-    //public abstract ArrayList<Product> getProducts();
+    public abstract ArrayList<Product> getProducts();
 
     @Override
     public String toString() {

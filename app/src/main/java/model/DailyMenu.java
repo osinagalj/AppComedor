@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class DailyMenu extends Food  {
 
     private int limit;
@@ -61,14 +63,14 @@ public class DailyMenu extends Food  {
         this.limit = limit;
     }
 
-    /*
+
     @Override
     public ArrayList<Product> getProducts() {
         ArrayList<Product> products = new ArrayList<>();
         products.add(this);
         return products; //Collections.unmodifiableList(
     }
-    */
+
 
 
 }

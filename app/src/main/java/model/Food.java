@@ -75,13 +75,13 @@ public class Food extends Product implements Serializable {
         return false;
     }
 
-    /*
+
     @Override
     public ArrayList<Product> getProducts() {
         ArrayList<Product> products = new ArrayList<>();
         products.add(this);
         return products; //Collections.unmodifiableList(
     }
-    */
+
 
 }
