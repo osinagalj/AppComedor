@@ -84,14 +84,13 @@ public class Combo extends Product implements Serializable {
     }
 
 
-    /*
     @Override
     public ArrayList<Product> getProducts() {
         ArrayList<Product> products = new ArrayList<>();
         for (Product item : comboItems)
             products.addAll(item.getProducts());
         return products;//Collections.unmodifiableList(
-    }*/
+    }
 
     public DiscountCalculator getDiscount() {
         return discount;
