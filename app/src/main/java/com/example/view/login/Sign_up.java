@@ -15,7 +15,6 @@ import com.example.view.databinding.ActivitySignUpBinding;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -29,6 +28,7 @@ public class Sign_up extends AppCompatActivity {
 
 
     private ActivitySignUpBinding binding;
+    private Category newUserCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,35 +41,38 @@ public class Sign_up extends AppCompatActivity {
         //get the category selected in Sign_up view
         final String category =(String) getIntent().getExtras().get("USER_CATEGORY");
 
-        setButtons(category);
+        setButtons();
         setCategoryLabel(category);
     }
 
     private void setCategoryLabel(String category){
-
         switch(category) {
             case "STUDENT" :
                 binding.labelCategory.setText("Alumno");
                 binding.antiquity.setVisibility(View.GONE);
+                newUserCategory = Category.ALUMNO;
                 break;
             case "EXTERNAL" :
                 binding.labelCategory.setText("Externo");
                 binding.antiquity.setVisibility(View.GONE);
+                newUserCategory = Category.EXTERNO;
                 break;
             case "TEACHER" :
                 binding.labelCategory.setText("Docente");
                 binding.antiquity.setVisibility(View.VISIBLE);
                 binding.antiquity.setHint("Cantidad de Materias");
+                newUserCategory = Category.DOCENTE;
                 break;
             case "NO TEACHER" :
                 binding.labelCategory.setText("No Docente");
                 binding.antiquity.setVisibility(View.VISIBLE);
                 binding.antiquity.setHint("Anos de antiguedad");
+                newUserCategory = Category.NO_DOCENTE;
                 break;
         }
     }
 
-    private void setButtons(String category){
+    private void setButtons(){
         binding.btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,26 +83,17 @@ public class Sign_up extends AppCompatActivity {
         binding.btnCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createAccount(category);
+                createAccount(Integer.parseInt(binding.dni.getText().toString()));
             }
         });
     }
 
-    private void createAccount(String category){
-
-        int parsedICN = 0;
-        parsedICN = Integer.parseInt(binding.dni.getText().toString());
-        rigthSignUp(parsedICN,category);
-
-    }
-
-    private void rigthSignUp(int parsedICN, String category){
+    private void createAccount(int parsedICN){
         int conditionId = binding.condition.getCheckedRadioButtonId();
         int newUserCondition;
         if (conditionId != -1) {
             RadioButton radioButton = binding.condition.findViewById(conditionId);
             String conditionName = radioButton.getText().toString();
-            //todo se podria mapear en restaurant los numeros con las condiciones
             switch (conditionName){
                 case "Vegetariano":
                     newUserCondition = 1;
@@ -117,17 +111,9 @@ public class Sign_up extends AppCompatActivity {
             newUserCondition = 0;
         }
 
-        Date date = new Date();
-        CommonUser newUser = new CommonUser(
-                parsedICN,
-                binding.password.getText().toString(),
-                0f,
-                binding.name.getText().toString(),
-                binding.lastName.getText().toString(),
-                date,
-                newUserCondition,
-                getCategory(category)
-        );
+        CommonUser newUser = new CommonUser(parsedICN, binding.password.getText().toString(),0f,
+                binding.name.getText().toString(), binding.lastName.getText().toString(), new Date(),
+                newUserCondition, newUserCategory);
 
         switch (newUser.getCategory()) {
             case ALUMNO:
@@ -154,21 +140,6 @@ public class Sign_up extends AppCompatActivity {
         success();
     }
 
-    private Category getCategory(String category){
-        switch (category) {
-            case "STUDENT":
-                return Category.ALUMNO;
-            case "EXTERNAL":
-                return Category.EXTERNO;
-            case "TEACHER":
-                return Category.DOCENTE;
-            case "NO TEACHER":
-                return Category.NO_DOCENTE;
-        }
-        return null;
-    }
-
-
     public void success() {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -178,15 +149,12 @@ public class Sign_up extends AppCompatActivity {
         builder.setPositiveButton("OK!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
-
                 //Go back to login
                 Intent intent = new Intent(getBaseContext(), Login.class);
                 startActivity(intent);
-
                 finish();
             }
         });
-
         // Create the AlertDialog object and return it
         builder.create().show();
     }
