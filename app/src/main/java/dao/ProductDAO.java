@@ -3,9 +3,14 @@ package dao;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Transaction;
 
 import dataBase.Restaurant;
 import dataBase.model.ComboDB;
@@ -84,17 +89,74 @@ public class ProductDAO {
     }
 
 
-    /*
+
     //@UPDATE
-    public static boolean decreaseStock(int productId,int amount){
-        return Restaurant.getInstance().decreaseStock(productId,amount);
+    public static MutableLiveData<Boolean> increaseStock(String productId, int amount){
+        MutableLiveData<Boolean> state = new MutableLiveData<>();
+
+        DocumentReference gg = Restaurant.getInstance().db.collection("foods").document(productId);
+
+        Restaurant.getInstance().db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(gg);
+
+                int stock = Integer.parseInt(snapshot.get("stock").toString()) + amount;
+                transaction.update(gg, "stock", stock);
+
+                // Success
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                state.postValue(true);
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        state.postValue(false);
+                    }
+                });
+
+        return state;
     }
 
     //@UPDATE
-    public static void increaseStock(int productId,int amount){
-         Restaurant.getInstance().increaseStock(productId,amount);
+    public static MutableLiveData<Boolean> decreaseStock(String productId, int amount){
+        MutableLiveData<Boolean> state = new MutableLiveData<>();
+
+        DocumentReference gg = Restaurant.getInstance().db.collection("foods").document(productId);
+
+        Restaurant.getInstance().db.runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                DocumentSnapshot snapshot = transaction.get(gg);
+
+                int stock = Integer.parseInt(snapshot.get("stock").toString());
+                if(stock <= amount){
+                    stock = stock - amount;
+                    transaction.update(gg, "stock", stock);
+                }else{
+                    state.postValue(false);
+                }
+
+                // Success
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                state.postValue(true);
+            }
+        });
+
+
+        return state;
     }
-    */
+
+
 
 
 }
