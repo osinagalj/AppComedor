@@ -28,6 +28,7 @@ import dataBase.model.ComboDB;
 import dataBase.model.DailyMenuDB;
 import dataBase.model.FoodDB;
 import model.Combo;
+import model.Food;
 import model.Menu;
 import model.Product;
 
@@ -72,9 +73,15 @@ public class FragmentFood extends Fragment {
             @Override
             public void onChanged(@Nullable List<FoodDB> products) {
                 for(FoodDB f : products){
-                    foods1.add(f.convertToModel());
-                    FoodViewModel.list_of_foods.add(f.convertToModel()); //todo eliminar
+
+                    Food food = f.convertToModel();
+                    if(BackEnd.getLoggedUser().canConsume(food.getConditions())){ //se agregan solamente los productos que puede comer el usuario
+                        foods1.add(f.convertToModel());
+                        FoodViewModel.list_of_foods.add(f.convertToModel()); //todo eliminar
+
+                    }
                     Restaurant.getInstance().addProduct(f.convertToModel());
+
                 }
                 loadData();
 
@@ -83,8 +90,10 @@ public class FragmentFood extends Fragment {
                     public void onChanged(List<ComboDB> products2) {
                         for(ComboDB comboDB: products2){
                             Combo combo = comboDB.convertToModel();
-                            foods1.add(combo);
-                            Restaurant.getInstance().addProduct(combo);
+                            if(BackEnd.getLoggedUser().canConsume(combo.getConditions())){ //se agregan solamente los productos que puede comer el usuario
+                                foods1.add(combo);
+                                Restaurant.getInstance().addProduct(combo);
+                            }
                         }
 
                         loadData();

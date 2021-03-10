@@ -18,13 +18,13 @@ public class FoodDB {
     private float price;
 
     public FoodDB(){}
-    public FoodDB(int id,String name, String description, int imgId, int productCategory, List<Integer> coditions, int stock, float price){
+    public FoodDB(int id,String name, String description, int imgId, int productCategory, List<Integer> conditions, int stock, float price){
         this.id = id;
         this.name = name;
         this.description = description;
         this.imgId = imgId;
         this.productCategory = productCategory;
-        this.conditions = coditions;
+        this.conditions = conditions;
         this.stock = stock;
         this.price = price;
     }
@@ -41,9 +41,15 @@ public class FoodDB {
     }
 
     public Food convertToModel(){
-        return new Food(id,name,description,imgId,productCategory,stock,price);
+        Food f =  new Food(id,name,description,imgId,productCategory,stock,price);
+        f.addCondition(this.conditions);
+        return f;
     }
 
+
+    public List<Integer> getConditions() {
+        return conditions;
+    }
 
     public int getImgId() {
         return imgId;
@@ -86,10 +92,6 @@ public class FoodDB {
     }
 
     public void setConditions(ArrayList<Integer> conditions) {
-        this.conditions = conditions;
-    }
-
-    public void setConditions(List<Integer> conditions) {
         this.conditions = conditions;
     }
 

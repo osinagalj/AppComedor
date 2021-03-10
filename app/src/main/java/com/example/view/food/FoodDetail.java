@@ -174,6 +174,7 @@ public class FoodDetail extends AppCompatActivity  {
             if(product.getCategory() == 1){ //todo capaz es mejor obtener el numero del restaurant
                 if(BackEnd.getMenusRestantes(new Date(),orders) >= addedAmount){
                     //todo chkear stock
+
                     BackEnd.addProduct(product,addedAmount,toHome);
                         return true;
 
@@ -187,7 +188,10 @@ public class FoodDetail extends AppCompatActivity  {
 
             }else{
                 //todo chekear stock
-                BackEnd.addProduct(product,addedAmount,toHome);
+
+                    BackEnd.addProduct(product,addedAmount,toHome);
+
+
                     return true;
                // }else{
                //     Toast.makeText(getBaseContext(), "No hay stock suficiente", Toast.LENGTH_SHORT).show();
