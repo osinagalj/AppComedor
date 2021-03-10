@@ -42,6 +42,7 @@ public class OrderDAO {
         Restaurant.getInstance().db.collection("orders")
                 .document(String.valueOf(order.getId()))
                 .set(new_order);
+
     }
 
 
