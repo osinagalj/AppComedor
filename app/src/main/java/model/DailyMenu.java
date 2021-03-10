@@ -61,13 +61,14 @@ public class DailyMenu extends Food  {
         this.limit = limit;
     }
 
-    /* Se rompe con la DB
+    /*
     @Override
     public ArrayList<Product> getProducts() {
         ArrayList<Product> products = new ArrayList<>();
         products.add(this);
         return products; //Collections.unmodifiableList(
     }
-*/
+    */
+
 
 }

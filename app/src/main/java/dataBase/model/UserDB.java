@@ -1,11 +1,16 @@
 package dataBase.model;
 
+import com.google.firebase.Timestamp;
+
 import java.util.Date;
 import java.util.HashMap;
 
 import model.Category;
 import model.CommonUser;
+import model.PriceAntiquity;
+import model.PriceCalculator;
 import model.PriceFixedDiscount;
+import model.PriceSubjects;
 
 public class UserDB {
 
@@ -30,6 +35,9 @@ public class UserDB {
         this.category = user.getCategory();
         this.condition = user.getCondition();
         this.balance = user.getBalance();
+        for (String attributeKey : user.getAttributes().keySet()){
+            attributes.put(attributeKey,user.getAttributes().get(attributeKey));
+        }
     }
 
     public CommonUser convertToModel(){
@@ -43,9 +51,24 @@ public class UserDB {
                 this.condition,
                 this.category
         );
-        user.setDiscountCalculator(new PriceFixedDiscount(0.5f)); //todo
-        //user.addAttribute(); todo add all atributes
+        for (String attributeName :attributes.keySet()){
+            user.addAttribute(attributeName,attributes.get(attributeName));
+        }
+        user.setDiscountCalculator(getPriceCalculator(user));
         return user;
+    }
+
+    public PriceCalculator getPriceCalculator(CommonUser user){
+        switch (user.getCategory()){
+            case ALUMNO:
+                return new PriceFixedDiscount(0.6f);
+            case DOCENTE:
+                return new PriceSubjects((Integer.parseInt(user.getAttribute("subjects").toString())));
+            case NO_DOCENTE:
+                return new PriceAntiquity(((Timestamp) user.getAttribute("startDate")).toDate());
+            default:
+                return new PriceFixedDiscount(0f);
+        }
     }
 
     public String getPassword() {

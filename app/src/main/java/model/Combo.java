@@ -96,7 +96,8 @@ public class Combo extends Product implements Serializable {
         for (Product item : comboItems)
             products.addAll(item.getProducts());
         return products;//Collections.unmodifiableList(
-    }*/
+    }
+    */
 
     public DiscountCalculator getDiscount() {
         return discount;

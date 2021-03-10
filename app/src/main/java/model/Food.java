@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Food extends Product implements Serializable {
 
@@ -73,7 +74,6 @@ public class Food extends Product implements Serializable {
         }
         return false;
     }
-
 
     /*
     @Override

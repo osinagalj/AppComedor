@@ -13,6 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.view.BackEnd;
 import com.example.view.databinding.ActivitySignUpBinding;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Date;
 
 import model.Category;
@@ -97,7 +101,6 @@ public class Sign_up extends AppCompatActivity {
             String conditionName = radioButton.getText().toString();
             //todo se podria mapear en restaurant los numeros con las condiciones
             switch (conditionName){
-
                 case "Vegetariano":
                     newUserCondition = 1;
                     break;
@@ -125,28 +128,29 @@ public class Sign_up extends AppCompatActivity {
                 newUserCondition,
                 getCategory(category)
         );
-        if(category.equals("TEACHER"))
-            newUser.addAttribute("subjects",Integer.parseInt(binding.antiquity.getText().toString()));
 
-        if(category.equals("NO TEACHER"))
-            newUser.addAttribute("startDate",new Date()); //todo obtener la fecha
-
-        switch (category) {
-            case "STUDENT":
+        switch (newUser.getCategory()) {
+            case ALUMNO:
                 newUser.setDiscountCalculator(new PriceFixedDiscount(0.6f));
                 break;
-            case "TEACHER":
+            case DOCENTE:
+                newUser.addAttribute("subjects",Integer.parseInt(binding.antiquity.getText().toString()));
                 newUser.setDiscountCalculator(new PriceSubjects(2));
                 break;
-            case "NO TEACHER":
-                newUser.setDiscountCalculator(new PriceAntiquity(new Date())); //todo obtener la fecha
+            case NO_DOCENTE:
+                System.out.println("Fecha 01/01/"+(LocalDate.now().getYear()-Integer.parseInt(binding.antiquity.getText().toString())));
+                try {
+                    newUser.addAttribute("startDate",new SimpleDateFormat("dd/MM/yyyy").parse("01/01/"+(LocalDate.now().getYear()-Integer.parseInt(binding.antiquity.getText().toString()))));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(newUser.getAttribute("startDate"));
+                newUser.setDiscountCalculator(new PriceAntiquity((Date) newUser.getAttribute("startDate")));
                 break;
             default:
                 newUser.setDiscountCalculator(new PriceFixedDiscount(0f));
         }
-
         BackEnd.addUser(newUser);
-
         success();
     }
 
