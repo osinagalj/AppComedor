@@ -14,7 +14,7 @@ public class DailyMenuDB extends FoodDB{
     }
 
     public DailyMenu convertToModel(){
-        return new DailyMenu(super.getId(),
+        DailyMenu m =  new DailyMenu(super.getId(),
                 super.getName(),
                 super.getDescription(),
                 super.getImgId(),
@@ -23,6 +23,9 @@ public class DailyMenuDB extends FoodDB{
                 super.getPrice(),
                 limit
         );
+        for(Integer i : super.getConditions())
+            m.addCondition(i);
+        return m;
     }
 
     public int getLimit() {

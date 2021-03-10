@@ -54,7 +54,8 @@ public class BackEnd {
     //-------------------------------------------------------------------------------------------------//
 
     public static void addProduct(Product product, int amount, boolean toHome) {
-        myOrder.addProduct(product, amount,toHome);
+
+            myOrder.addProduct(product, amount, toHome);
     }
 
     /** Obtiene la cantidad de menus del dia que ha pedido un usuario en el dia actual*/

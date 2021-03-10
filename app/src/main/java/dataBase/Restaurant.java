@@ -125,6 +125,7 @@ public class Restaurant {
 
         //Buffet
         Food f1 = new Food(1000,"Tarta de Pollo","Con cebolla, morron y queso", R.drawable.food_tarta_pollo,2,6, 88.0f);
+        f1.addCondition(3);
         Food f2 = new Food(1001,"Tarta de Calabaza", "Con queso", R.drawable.food_tarta_calabaza, 2, 2, 85.0f);
         Food f3 = new Food(1002,"Cafe con leche", "Con queso", R.drawable.food_cafe_con_leche, 2, 2, 50.0f);
         Food f4 = new Food(1003,"Pebete de JyQ","Con chips de chocolate", R.drawable.food_pebete_jyq, 2,6, 65.0f);
