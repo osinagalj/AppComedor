@@ -48,6 +48,14 @@ public class Order implements Serializable {
 
 
     public void addProduct(Product p, int amount, boolean toHome){
+
+        for(OrderLine line : lines)
+            if(line.getProduct().equals(p) && line.isToHome() == toHome){
+                line.increaseAmount(amount);
+                return;
+            }
+
+        //If the product, toHome did not exist, then I add it
         lines.add(new OrderLine(p,amount,toHome,p.getPrice(placedBy)));
     }
 
@@ -92,15 +100,6 @@ public class Order implements Serializable {
     public List<OrderLine> getLines() {
         return Collections.unmodifiableList(lines);
     }
-
-    /*
-    public void changeAmount(Product product, int amount){
-        int old = items.get(product);
-        items.remove(product);
-        items.put(product, old + amount);
-
-    }
-*/
 
     public void removeProduct(int product_id){
         for (OrderLine line : lines){

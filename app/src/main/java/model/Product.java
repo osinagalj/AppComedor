@@ -13,9 +13,7 @@ public abstract class Product implements Serializable {
     private int productCategory;
     private ArrayList<Integer> conditions = new ArrayList<>(); //Condiciones que no pueden consumir este alimento
 
-    protected Product(){
-
-    }
+    protected Product(){}
 
     protected Product(int id, String name, String description, int imgId, int productCategory) {
         this.id = id;
@@ -28,7 +26,9 @@ public abstract class Product implements Serializable {
     public void addCondition(int condition){
         conditions.add(condition);
     }
-
+    public void addCondition(List<Integer> condition){
+        conditions.addAll(condition);
+    }
 
     public abstract boolean toHome(); //todo Capaz que hay que hacerlo como atributo
     public abstract int getStock();

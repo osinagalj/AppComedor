@@ -9,6 +9,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import dataBase.Restaurant;
 import dataBase.model.ComboDB;
+import dataBase.model.DailyMenuDB;
+import dataBase.model.FoodDB;
 import model.Combo;
 import model.DailyMenu;
 import model.Food;
@@ -18,13 +20,13 @@ public class ProductDAO {
     public static void loadProduct(Food food){
         Restaurant.getInstance().db.collection("foods")
                 .document(String.valueOf(food.getId()))
-                .set(food);
+                .set(new FoodDB(food));
     }
 
     public static void loadProduct(DailyMenu food){
         Restaurant.getInstance().db.collection("dailyMenus")
                 .document(String.valueOf(food.getId()))
-                .set(food);
+                .set(new DailyMenuDB(food));
     }
 
     public static void loadProduct(Combo food){

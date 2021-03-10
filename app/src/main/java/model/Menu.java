@@ -15,7 +15,7 @@ public class Menu {
     /**Gets the menu corresponding to the user's condition*/
     public void add(DailyMenu menu){
         for(DailyMenu food: foods){
-            if(food.getConditions() == menu.getConditions()) //todo
+             if(food.getConditions() == menu.getConditions()) //todo
                 return;
         }
         //Si no existe una comida con la misma condicion
@@ -25,11 +25,8 @@ public class Menu {
     /**Gets the menu corresponding to the user's condition*/
     public DailyMenu getMenu(CommonUser user){
         for(DailyMenu food: foods){
-            for(int condition : food.getConditions()){
-                if(condition == user.getCondition())
-                    return food;
-            }
-
+            if(user.canConsume(food.getConditions())) //si la condicion del usuario no esta en la lista de condiciones no posibles
+                return food;
         }
         return null;
     }
