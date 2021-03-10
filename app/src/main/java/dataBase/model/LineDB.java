@@ -1,54 +1,26 @@
 package dataBase.model;
 
-import dataBase.Restaurant;
-import model.OrderLine;
-
-public class LineDB  {
-    private int product_id;
+public class LineDB {
     private int amount;
+    private int product_id;
     private boolean toHome;
-    private float price; //Historical price
+    private float price;
 
-    public LineDB(int product, int amount, boolean toHome, float price){
-        this.product_id = product;
+    public LineDB(){}
+
+    public LineDB(int amount, int product_id, boolean toHome, float price) {
         this.amount = amount;
+        this.product_id = product_id;
         this.toHome = toHome;
         this.price = price;
     }
-/*
-    public LineDB(OrderLine line){
-        this.product_id = line.getProduct().getId();
-        this.amount = line.getAmount();
-        this.price = line.getPrice();
-        this.toHome = line.isToHome();
-    }
-*/
-    public OrderLine getOrderLine(){
-        return new OrderLine(
-                Restaurant.getInstance().getProduct(this.product_id),
-                this.amount,
-                this.toHome,
-                this.price
-        );
-    }
 
-    //--------------------------------------------------------------------------------------------//
-    //------------------------------------ Getters && Setters ------------------------------------//
-    //--------------------------------------------------------------------------------------------//
-    public int getProductId() {
+    public int getProduct_id() {
         return product_id;
     }
 
-    public void setProduct(int product_id) {
+    public void setProduct_id(int product_id) {
         this.product_id = product_id;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     public boolean isToHome() {
@@ -59,6 +31,14 @@ public class LineDB  {
         this.toHome = toHome;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     public float getPrice() {
         return price;
     }
@@ -66,5 +46,6 @@ public class LineDB  {
     public void setPrice(float price) {
         this.price = price;
     }
+
 
 }
