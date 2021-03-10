@@ -7,14 +7,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 
-import java.util.Date;
-
 import dataBase.Restaurant;
 import dataBase.model.UserDB;
 import model.CommonUser;
-import model.PriceAntiquity;
-import model.PriceFixedDiscount;
-import model.PriceSubjects;
 
 public class UserDAO {
 
@@ -22,10 +17,6 @@ public class UserDAO {
 
     public static void addUser(CommonUser user){
         Restaurant.getInstance().db.collection("users")
-                .document(String.valueOf(user.getIdentityCardNumber()))
-                .set(user);
-
-        Restaurant.getInstance().db.collection("users5")
                 .document(String.valueOf(user.getIdentityCardNumber()))
                 .set(new UserDB(user));
     }
@@ -41,7 +32,9 @@ public class UserDAO {
             public void onSuccess(DocumentSnapshot document) {
                 if(document != null){
 
-                    CommonUser user = document.toObject(CommonUser.class);
+                    UserDB user = document.toObject(UserDB.class);
+                    CommonUser model_user = user.convertToModel();
+                    /*
                     switch (user.getCategory()){
                         case ALUMNO:
                             user.setDiscountCalculator(new PriceFixedDiscount(0.6f));
@@ -55,7 +48,8 @@ public class UserDAO {
                         default:
                             user.setDiscountCalculator(new PriceFixedDiscount(0f));
                     }
-                    m_user.postValue(user);
+                    */
+                    m_user.postValue(model_user);
                 }
             }
         });
