@@ -11,15 +11,9 @@ import model.DiscountMax;
 import model.FixedDiscount;
 import model.Product;
 
-public class ComboDB {
+public class ComboDB extends ProductDB {
 
     private int id_discount = 0;
-    private int imgId;
-    private int id;
-    private String description;
-    private int productCategory;
-    private String name;
-    private ArrayList<Integer> conditions;
     private ArrayList<Integer> products;
     private HashMap<String,Object> discount_attributes;
 
@@ -27,13 +21,7 @@ public class ComboDB {
 
     public ComboDB(Combo combo){
 
-        //conditions = new ArrayList<>(combo.getConditions());
-        imgId = combo.getImgId();
-        id = combo.getId();
-        description = combo.getDescription();
-        productCategory = combo.getProductCategory();
-        name = combo.getName();
-
+        super(combo.getId(),combo.getName(),combo.getDescription(),combo.getImgId(),combo.getProductCategory(),combo.getConditions());
 
         discount_attributes = new HashMap<>();
         products = new ArrayList<>();
@@ -81,7 +69,7 @@ public class ComboDB {
                 );
         }
 
-        return new Combo(id,name,description,imgId,productCategory,items,discountCalculator);
+        return new Combo(super.getId(),super.getName(),super.getDescription(),super.getImgId(),super.getProductCategory(),items,discountCalculator);
 
     }
 
@@ -91,54 +79,6 @@ public class ComboDB {
 
     public void setId_discount(int id_discount) {
         this.id_discount = id_discount;
-    }
-
-    public int getImgId() {
-        return imgId;
-    }
-
-    public void setImgId(int imgId) {
-        this.imgId = imgId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getProductCategory() {
-        return productCategory;
-    }
-
-    public void setProductCategory(int productCategory) {
-        this.productCategory = productCategory;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ArrayList<Integer> getConditions() {
-        return conditions;
-    }
-
-    public void setConditions(ArrayList<Integer> conditions) {
-        this.conditions = conditions;
     }
 
     public ArrayList<Integer> getProducts() {
