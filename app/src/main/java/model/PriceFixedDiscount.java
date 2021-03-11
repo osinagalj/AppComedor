@@ -1,5 +1,7 @@
 package model;
 
+import androidx.annotation.NonNull;
+
 public class PriceFixedDiscount implements PriceCalculator {
 
     private float discountPercentage;
@@ -7,6 +9,14 @@ public class PriceFixedDiscount implements PriceCalculator {
     public PriceFixedDiscount(){}
 
     public PriceFixedDiscount(float discountPercentage) {
+        this.discountPercentage = discountPercentage;
+    }
+
+    public float getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(float discountPercentage) {
         this.discountPercentage = discountPercentage;
     }
 
@@ -20,13 +30,9 @@ public class PriceFixedDiscount implements PriceCalculator {
         return java.lang.Math.round(price - price * discountPercentage);
     }
 
-
-    public float getDiscountPercentage() {
-        return discountPercentage;
+    @NonNull
+    @Override
+    public Object clone() {
+        return new PriceFixedDiscount(discountPercentage);
     }
-
-    public void setDiscountPercentage(float discountPercentage) {
-        this.discountPercentage = discountPercentage;
-    }
-
 }

@@ -34,6 +34,11 @@ public class DiscountMax implements DiscountCalculator, Serializable {
         return new_price;
     }
 
+    @Override
+    public Object clone() {
+        return new DiscountMax(getLimit(),getDiscount());
+    }
+
     public float getLimit() {
         return limit;
     }

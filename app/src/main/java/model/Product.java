@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Product implements Serializable {
+public abstract class Product implements Serializable,Cloneable {
     private int id;
     private String name;
     private String description;
@@ -23,6 +23,12 @@ public abstract class Product implements Serializable {
         this.imgId = imgId;
         this.productCategory = productCategory;
     }
+
+    /**
+     * Forces to rewrite the clone method that is protected in Object
+     * @return the cloned object
+     */
+    public abstract Object clone();
 
     /**
      * @return true if the product has the possibility to take home, otherwise false
