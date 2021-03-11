@@ -12,6 +12,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Transaction;
 
+import java.util.HashMap;
+
 import dataBase.Restaurant;
 import dataBase.model.ComboDB;
 import dataBase.model.DailyMenuDB;
@@ -93,6 +95,7 @@ public class ProductDAO {
         return state;
     }
 
+    public static HashMap<Integer,Integer> productos_decrementados = new HashMap<>();
 
     //@UPDATE
     public static MutableLiveData<Boolean> decreaseStock(String productId, int amount, String collection){
@@ -111,6 +114,7 @@ public class ProductDAO {
                         stock = stock - amount;
                         transaction.update(gg, "stock", stock);
                         System.out.println("Decremento el producto");
+                        productos_decrementados.put(Integer.valueOf(productId),amount);
                         state.postValue(true);
                     }else{
                         System.out.println("No Decremento el producto");

@@ -16,6 +16,7 @@ import com.example.view.databinding.ActivityFoodDetailsBinding;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import dao.OrderDAO;
@@ -84,8 +85,13 @@ public class FoodDetail extends AppCompatActivity  {
                                         if(stocks[0] == end[0]){ //si fueron exitosas
                                             decrease_ok.setValue(true); //retorno true
                                         }else{
-                                            decrease_ok.setValue(false); //retorno false
-                                            //todo agregar los stocks que saque
+                                            decrease_ok.setValue(false); //retorno false, no se pudo realizar la orden
+                                            for (HashMap.Entry<Integer, Integer> entry : ProductDAO.productos_decrementados.entrySet()) {
+                                                ProductDAO.increaseStock(String.valueOf(entry.getKey()), entry.getValue(),"foods");
+                                                ProductDAO.increaseStock(String.valueOf(entry.getKey()), entry.getValue(),"combos");
+                                                ProductDAO.increaseStock(String.valueOf(entry.getKey()), entry.getValue(),"dailyMenus");
+                                            }
+                                            ProductDAO.productos_decrementados.clear();
                                         }
 
                                     }

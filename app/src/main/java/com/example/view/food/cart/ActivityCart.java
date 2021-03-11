@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -16,8 +17,11 @@ import com.example.view.databinding.ActivityCarritoBinding;
 import com.example.view.food.FinishOrder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import dao.OrderDAO;
+import dao.ProductDAO;
 import model.OrderLine;
 
 public class ActivityCart extends AppCompatActivity {
@@ -74,19 +78,84 @@ public class ActivityCart extends AppCompatActivity {
         });
     }
 
-    private void completOrder(){
-        if (OrderDAO.tryDecreaseStock(BackEnd.getOrder())) {
-            OrderDAO.getNumberNextOrder().observe(this, new Observer<Integer>() {
-                @Override
-                public void onChanged(Integer id) {
-                    BackEnd.confirmOrder(id + 1);
-                    openFinishOrder();
-                }
-            });
-        } else {
-            Toast.makeText(getBaseContext(), "No hay stock suficiente de alguno de los productos.", Toast.LENGTH_SHORT).show();
+
+
+
+    public MutableLiveData<Boolean> stockAvailable(List<OrderLine> o){
+        final int[] stocks = {0};
+        final int[] end = {0};
+        MutableLiveData<Boolean> decrease_ok = new MutableLiveData<Boolean>();
+
+        ArrayList<String> tables= new ArrayList<>();
+        tables.add("foods");
+        tables.add("combos");
+        tables.add("dailyMenus");
+
+        for(OrderLine line: o){
+            for(String s: tables){
+                ProductDAO.decreaseStock(String.valueOf(line.getProduct().getId()),line.getAmount(),s )
+                        .observe(this, new Observer<Boolean>() {
+                            @Override
+                            public void onChanged(Boolean decreaseOk) {
+                                if(decreaseOk){
+                                    stocks[0] = stocks[0] + 1;
+                                }
+                                end[0] = end[0] + 1;
+                                if(end[0] == o.size()){ //si ya se hicieron todas las ordenes, exitosas o no
+                                    if(stocks[0] == end[0]){ //si fueron exitosas
+                                        decrease_ok.setValue(true); //retorno true
+                                    }else{
+                                        decrease_ok.setValue(false); //retorno false
+                                        for (HashMap.Entry<Integer, Integer> entry : ProductDAO.productos_decrementados.entrySet()) {
+                                            ProductDAO.increaseStock(String.valueOf(entry.getKey()), entry.getValue(),"foods");
+                                            ProductDAO.increaseStock(String.valueOf(entry.getKey()), entry.getValue(),"combos");
+                                            ProductDAO.increaseStock(String.valueOf(entry.getKey()), entry.getValue(),"dailyMenus");
+                                        }
+                                        ProductDAO.productos_decrementados.clear();
+                                    }
+                                }
+                            }
+                        });
+            }
+
         }
+        return decrease_ok;
     }
+
+
+    private void getOrderId (){
+
+        OrderDAO.getNumberNextOrder().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer id) {
+                //if(!cargo[0]){
+                //   cargo[0] = true;
+                BackEnd.confirmOrder(id);
+                openFinishOrder();
+
+                //  }
+
+            }
+        });
+    }
+    private void completOrder(){
+
+        stockAvailable(BackEnd.getOrder().getLines()).observe(this, new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean decreaseOk) {
+                        if(decreaseOk){
+                            getOrderId();
+                            Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getBaseContext(), "No se ha podido agregar", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                }
+        );
+
+    }
+
 
     public void openFinishOrder(){
         Intent intent = new Intent(this, FinishOrder.class);
