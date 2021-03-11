@@ -61,11 +61,12 @@ public class FragmentFood extends Fragment {
                 for(DailyMenuDB p : menus){
                     m.add(p.convertToModel());
                 }
-                Restaurant.getInstance().addProduct(m.getMenu(BackEnd.getLoggedUser()));
-
-                foods1.add(m.getMenu(BackEnd.getLoggedUser()));
-                FoodViewModel.list_of_foods.add(m.getMenu(BackEnd.getLoggedUser()));
-                loadData();
+                if(!foods1.contains(m.getMenu(BackEnd.getLoggedUser()))) {
+                    foods1.add(m.getMenu(BackEnd.getLoggedUser()));
+                    Restaurant.getInstance().addProduct(m.getMenu(BackEnd.getLoggedUser()));
+                    FoodViewModel.list_of_foods.add(m.getMenu(BackEnd.getLoggedUser()));
+                    loadData();
+                }
             }
         });
 
@@ -75,11 +76,14 @@ public class FragmentFood extends Fragment {
                 for(FoodDB f : products){
 
                     Food food = f.convertToModel();
-                    if(BackEnd.getLoggedUser().canConsume(food.getConditions())){ //se agregan solamente los productos que puede comer el usuario
-                        foods1.add(f.convertToModel());
+                    if(!foods1.contains(food)) {
+                        if (BackEnd.getLoggedUser().canConsume(food.getConditions())) { //se agregan solamente los productos que puede comer el usuario
+                            foods1.add(food);
+                        }
+                        FoodViewModel.list_of_foods.add(f.convertToModel()); //todo eliminar
+                        Restaurant.getInstance().addProduct(f.convertToModel());
                     }
-                    FoodViewModel.list_of_foods.add(f.convertToModel()); //todo eliminar
-                    Restaurant.getInstance().addProduct(f.convertToModel());
+
 
                 }
                 loadData();
@@ -89,10 +93,14 @@ public class FragmentFood extends Fragment {
                     public void onChanged(List<ComboDB> products2) {
                         for(ComboDB comboDB: products2){
                             Combo combo = comboDB.convertToModel();
-                            if(BackEnd.getLoggedUser().canConsume(combo.getConditions())){ //se agregan solamente los productos que puede comer el usuario
-                                foods1.add(combo);
+                            if(!foods1.contains(combo)) {
+                                if(BackEnd.getLoggedUser().canConsume(combo.getConditions())){ //se agregan solamente los productos que puede comer el usuario
+                                    foods1.add(combo);
+                                }
+                                Restaurant.getInstance().addProduct(combo);
                             }
-                            Restaurant.getInstance().addProduct(combo);
+
+
                         }
 
                         loadData();
