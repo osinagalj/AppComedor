@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Combo extends Product implements Serializable {
@@ -16,7 +17,6 @@ public class Combo extends Product implements Serializable {
             for(Product p: comboItems)
                 super.addCondition(p.getConditions());
         }
-
         else
             this.comboItems = new ArrayList<>();
         this.discount = calculator;
@@ -53,10 +53,12 @@ public class Combo extends Product implements Serializable {
 
     @Override
     public float getPrice(CommonUser user) {
-
         return discount.getPrice(comboItems);
     }
 
+    /**
+     * The stock of a combo is the minimum stock of the products that compose it.
+     */
     @Override
     public int getStock() {
         int stock = Integer.MAX_VALUE;
@@ -65,6 +67,9 @@ public class Combo extends Product implements Serializable {
         return stock;
     }
 
+    /**
+     * To add stock to a combo, stock is added to all the products that compose it.
+     */
     @Override
     public void addStock(int stock) {
         for (Product item : comboItems){
@@ -72,6 +77,9 @@ public class Combo extends Product implements Serializable {
         }
     }
 
+    /**
+     * The daily limit of a combo is the minimum daily limit of the products that compose it.
+     */
     @Override
     public int getDailyLimit() {
         int limit = Integer.MAX_VALUE;
@@ -80,22 +88,29 @@ public class Combo extends Product implements Serializable {
         return limit;
     }
 
+    /**
+     * To decrease stock to a combo, stock is decreased to all the products that compose it.
+     * @param amount stock to be decreased
+     * @return true if all the products that compose it have been able to decrease the stock, otherwise false
+     */
     @Override
-    public boolean decreaseStock(int amount) { //TODO
+    public boolean decreaseStock(int amount) {
         for (Product product : comboItems){
-            product.decreaseStock(amount);
+            if (!product.decreaseStock(amount))
+                return false;
         }
-        return true; //Hacer la logica para retornar true o false si hay o no stock
+        return true;
     }
 
-
-
+    /**
+     * A combo return all the products that compose it.
+     */
     @Override
-    public ArrayList<Product> getProducts() {
-        ArrayList<Product> products = new ArrayList<>();
+    public List<Product> getProducts() {
+        List<Product> products = new ArrayList<>();
         for (Product item : comboItems)
             products.addAll(item.getProducts());
-        return products;//Collections.unmodifiableList(
+        return Collections.unmodifiableList(products);
     }
 
 
