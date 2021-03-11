@@ -1,45 +1,55 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class Menu {
 
-    public ArrayList<DailyMenu> foods = new ArrayList<>(); //change to private
+    private List<DailyMenu> dailyMenusOptions = new ArrayList<>();
     private Date date;
 
     public Menu(Date date){
         this.date = date;
     }
 
-    /**Gets the menu corresponding to the user's condition*/
+    /**
+     * Add a new daily menu that does not have the same conditions (who can consume) as the previous one.
+     * @param menu the new menu
+     */
     public void add(DailyMenu menu){
-        for(DailyMenu food: foods){
-             if(food.getConditions() == menu.getConditions()) //todo
+        for(DailyMenu food: dailyMenusOptions){
+             if(food.getConditions() == menu.getConditions())
                 return;
         }
         //Si no existe una comida con la misma condicion
-        foods.add(menu);
+        dailyMenusOptions.add(menu);
     }
 
-    /**Gets the menu corresponding to the user's condition*/
+    /**
+     * Gets the menu corresponding to the user's condition
+     * @param user for whom you wish to obtain the menu
+     * @return the menu corresponding to the user if there is one that suits his conditions, otherwise null
+     */
     public DailyMenu getMenu(CommonUser user){
-        for(DailyMenu food: foods){
+        for(DailyMenu food: dailyMenusOptions){
             if(user.canConsume(food.getConditions())) //si la condicion del usuario no esta en la lista de condiciones no posibles
-                return food;
+                return (DailyMenu)food.clone();
         }
         return null;
     }
 
     public Date getDate(){
-        return date;
-    }
-    public ArrayList<DailyMenu> getFoods() {
-        return foods;
+        return (Date) date.clone();
     }
 
-    public void setFoods(ArrayList<DailyMenu> foods) {
-        this.foods = foods;
+    public List<DailyMenu> getFoods() {
+        return Collections.unmodifiableList(dailyMenusOptions);
+    }
+
+    public void setFoods(List<DailyMenu> foods) {
+        this.dailyMenusOptions = foods;
     }
 
     public void setDate(Date date) {

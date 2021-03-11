@@ -96,6 +96,12 @@ public class CommonUser implements Serializable,Cloneable {
         return Objects.hash(identityCardNumber);
     }
 
+    @Override
+    public Object clone(){
+        return new CommonUser(getIdentityCardNumber(),getPassword(),getBalance(),getNames(),getLastName(),
+                (Date) getBirthDate().clone(),getCondition(),getCategory(),(PriceCalculator) getDiscountCalculator().clone());
+    }
+
     //---------------------------------------------------------------------------------------------//
     //------------------------------ Getters && Setters -------------------------------------------//
     //---------------------------------------------------------------------------------------------//

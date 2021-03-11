@@ -28,10 +28,17 @@ public class Order implements Serializable {
         this.placedBy = placedBy;
     }
 
+    /**
+     * @param new_lines new lines to add to the order
+     */
     public void addLines(List<OrderLine> new_lines){
         lines.addAll(new_lines);
     }
 
+    /**
+     * @param id of the product from which the amount is to be obtained
+     * @return the amount in the order
+     */
     public int getAmount(int id){
         int amount = 0;
         for (OrderLine line : lines){
@@ -42,13 +49,19 @@ public class Order implements Serializable {
         return amount;
     }
 
+    /**
+     * delete all the lines in the order, consequently the products
+     */
     public void clearOrder(){
         lines.removeAll(lines);
     }
 
-
+    /**
+     * @param p product to add to the order
+     * @param amount of p to add
+     * @param toHome true if the product is to be brought to the home, otherwise false
+     */
     public void addProduct(Product p, int amount, boolean toHome){
-
         for(OrderLine line : lines)
             if(line.getProduct().equals(p) && line.isToHome() == toHome){
                 line.increaseAmount(amount);
@@ -60,9 +73,12 @@ public class Order implements Serializable {
     }
 
     public String getDescription(){
-        return "descripcion olaaa";
+        return "descripcion olaaa"; //TODO
     }
 
+    /**
+     * @return the sum of the prices of the products multiplied by the quantity on order
+     */
     public float getPrice() {
         float totalPrice = 0;
         for (OrderLine line : lines){
@@ -75,9 +91,8 @@ public class Order implements Serializable {
         return id;
     }
 
-
     public CommonUser getPlacedBy() {
-        return placedBy;
+        return (CommonUser) placedBy.clone();
     }
 
     public List<OrderLine> getLines() {
@@ -93,13 +108,12 @@ public class Order implements Serializable {
         }
     }
 
-
     public void setId(int id) {
         this.id = id;
     }
 
     public Date getPlaced() {
-        return placed;
+        return (Date) placed.clone();
     }
 
     public void setPlaced(Date placed) {

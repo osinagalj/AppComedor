@@ -33,7 +33,7 @@ public class Combo extends Product implements Serializable {
     }
 
     public List<Product> getComboItems() {
-        return comboItems;
+        return Collections.unmodifiableList(comboItems);
     }
 
     public void setComboItems(List<Product> comboItems) {
@@ -126,7 +126,7 @@ public class Combo extends Product implements Serializable {
     }
 
     public DiscountCalculator getDiscount() {
-        return discount;
+        return (DiscountCalculator) discount.clone();
     }
 
     public void setDiscount(FixedDiscount discount) {
