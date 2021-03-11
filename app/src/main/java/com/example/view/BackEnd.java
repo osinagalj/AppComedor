@@ -39,7 +39,7 @@ public class BackEnd {
     }
 
     public static boolean transferMoney(int dni, float amount){
-        if(UserDAO.loadMoney(loggedUser.getIdentityCardNumber(),loggedUser.getBalance() - amount)) //Si se pudo descontar el dinero al usuario
+        if(UserDAO.loadMoney(loggedUser.getIdentityCardNumber(), loggedUser.getBalance()- amount)) //Si se pudo descontar el dinero al usuario
             return UserDAO.loadMoney(dni,amount);                                                          //agregar dinero al destinatario
         else
             return false;                                                                                  //Sino devolver false indicando que no se pudo
@@ -59,7 +59,7 @@ public class BackEnd {
             myOrder.addProduct(product, amount, toHome);
     }
 
-    /** Obtiene la cantidad de menus del dia que ha pedido un usuario en el dia actual*/
+    /** Obtains the number of menus of the day that a user has requested on the current day*/
     public static int getDailyMenusRemaining(Product p, Date date, List<Order> orders) {
 
         String today = new SimpleDateFormat("dd/MM/yyyy").format(date);

@@ -111,9 +111,14 @@ public class Sign_up extends AppCompatActivity {
             newUserCondition = 0;
         }
 
-        CommonUser newUser = new CommonUser(parsedICN, binding.password.getText().toString(),0f,
-                binding.name.getText().toString(), binding.lastName.getText().toString(), new Date(),
-                newUserCondition, newUserCategory);
+        CommonUser newUser = new CommonUser(parsedICN,
+                binding.password.getText().toString(),
+                5000f,
+                binding.name.getText().toString(),
+                binding.lastName.getText().toString(),
+                new Date(),
+                newUserCondition,
+                newUserCategory);
 
         switch (newUser.getCategory()) {
             case ALUMNO:

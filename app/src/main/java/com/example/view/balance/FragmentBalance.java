@@ -86,9 +86,9 @@ public class FragmentBalance extends Fragment {
         binding.loadAmount.getText().clear();
     }
 
-    private void transferMoney(int icnUTargetUser,float amount){
+    private void transferMoney(int icnTargetUser,float amount){
 
-        if(BackEnd.transferMoney(icnUTargetUser,amount)){
+        if(BackEnd.transferMoney(icnTargetUser,amount)){
             Toast.makeText(getContext(), "La transferencia ha sido exitosa", Toast.LENGTH_LONG).show();
             binding.userAmount.setText(String.valueOf(BackEnd.getLoggedUser().getBalance()));
         }
