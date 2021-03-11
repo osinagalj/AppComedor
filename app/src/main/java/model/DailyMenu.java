@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 public class DailyMenu extends Food  {
 
     private int limit;
@@ -13,7 +11,6 @@ public class DailyMenu extends Food  {
         this.limit = limit;
     }
 
-
     @Override
     public boolean toHome() {
         return true;
@@ -21,28 +18,18 @@ public class DailyMenu extends Food  {
 
     @Override
     public String toString() {
-
         return "Menu del Dia {" +
                 "stock=" + super.getStock() +
                 ", price=" + super.getPrice(null) +
                 "} " + super.toString();
     }
 
-
+    /**
+     * The menus of the day have a different price depending on the user who orders it.
+     */
     @Override
-    public float getPrice(CommonUser user ) {
+    public float getPrice(CommonUser user) {
         return user.getPrice(super.getPrice(user));
-
-    }
-
-    @Override
-    public int getStock() {
-        return super.getStock();
-    }
-
-    @Override
-    public void addStock(int stock) {
-        super.addStock(stock);;
     }
 
     @Override
@@ -50,27 +37,7 @@ public class DailyMenu extends Food  {
         return limit;
     }
 
-    @Override
-    public boolean decreaseStock(int amount) {
-        return super.decreaseStock(amount);
-    }
-
-    public int getLimit() {
-        return limit;
-    }
-
     public void setLimit(int limit) {
         this.limit = limit;
     }
-
-
-    @Override
-    public ArrayList<Product> getProducts() {
-        ArrayList<Product> products = new ArrayList<>();
-        products.add(this);
-        return products; //Collections.unmodifiableList(
-    }
-
-
-
 }

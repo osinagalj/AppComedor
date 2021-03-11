@@ -12,7 +12,7 @@ public abstract class Product implements Serializable {
     private String description;
     private int imgId;
     private int productCategory;
-    private ArrayList<Integer> conditions = new ArrayList<>(); //Condiciones que no pueden consumir este alimento
+    private List<Integer> conditions = new ArrayList<>(); //Condiciones que no pueden consumir este alimento
 
     protected Product(){}
 
@@ -24,20 +24,50 @@ public abstract class Product implements Serializable {
         this.productCategory = productCategory;
     }
 
+    /**
+     * @return true if the product has the possibility to take home, otherwise false
+     */
+    public abstract boolean toHome();
+
+    /**
+     * @return the stock of a product
+     */
+    public abstract int getStock();
+
+    /**
+     * @return the maximum amount that can be purchased per day
+     */
+    public abstract int getDailyLimit();
+
+    /**
+     * increases the stock of a product
+     * @param stock amount to be increased
+     */
+    public abstract void addStock(int stock);
+
+    /**
+     * decreases the stock of a product
+     * @param amount stock to be decreased
+     */
+    public abstract boolean decreaseStock(int amount);
+
+    /**
+     * @param user for whom the price is to be calculated
+     * @return the price for the user
+     */
+    public abstract float getPrice(CommonUser user);
+
+    /**
+     * @return A list of the products it contains
+     */
+    public abstract List<Product> getProducts();
+
     public void addCondition(int condition){
         conditions.add(condition);
     }
     public void addCondition(List<Integer> condition){
         conditions.addAll(condition);
     }
-
-    public abstract boolean toHome(); //todo Capaz que hay que hacerlo como atributo
-    public abstract int getStock();
-    public abstract int getDailyLimit();
-    public abstract void addStock(int stock);
-    public abstract boolean decreaseStock(int amount);
-    public abstract float getPrice(CommonUser user);
-    public abstract ArrayList<Product> getProducts();
 
     @Override
     public String toString() {
@@ -64,7 +94,7 @@ public abstract class Product implements Serializable {
         return Collections.unmodifiableList(conditions);
     }
 
-    public void setConditions(ArrayList<Integer> conditions) {
+    public void setConditions(List<Integer> conditions) {
         this.conditions = conditions;
     }
 
@@ -120,6 +150,4 @@ public abstract class Product implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
-
-
 }

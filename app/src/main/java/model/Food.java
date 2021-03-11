@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Food extends Product implements Serializable {
 
@@ -66,22 +68,24 @@ public class Food extends Product implements Serializable {
         return Integer.MAX_VALUE;
     }
 
+    /**
+     * to decrease the stock of a product there must be at least the same quantity of the product to be decreased
+     * @param amount stock to be decreased
+     * @return true if can be decreased, otherwise false
+     */
     @Override
     public boolean decreaseStock(int amount) {
-        if(stock2 >= amount ){
+        if(stock2 >= amount){
             stock2-=amount;
             return true;
         }
         return false;
     }
 
-
     @Override
-    public ArrayList<Product> getProducts() {
+    public List<Product> getProducts() {
         ArrayList<Product> products = new ArrayList<>();
         products.add(this);
-        return products; //Collections.unmodifiableList(
+        return Collections.unmodifiableList(products);
     }
-
-
 }

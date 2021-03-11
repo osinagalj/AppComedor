@@ -10,7 +10,7 @@ public class DailyMenuDB extends FoodDB{
 
     public DailyMenuDB(DailyMenu dailyMenu) {
         super(dailyMenu.getId(),dailyMenu.getName(),dailyMenu.getDescription(),dailyMenu.getImgId(),dailyMenu.getProductCategory(),dailyMenu.getConditions(),dailyMenu.getStock2(),dailyMenu.getPrice2());
-        this.limit = dailyMenu.getLimit();
+        this.limit = dailyMenu.getDailyLimit();
     }
 
     public DailyMenu convertToModel(){
