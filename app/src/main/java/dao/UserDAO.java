@@ -2,7 +2,6 @@ package dao;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.view.BackEnd;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -47,7 +46,6 @@ public class UserDAO {
                 .update(
                         "balance", amount
                 );
-        BackEnd.getLoggedUser().setBalance(BackEnd.getLoggedUser().getBalance() + amount);
         return true;
     }
 
