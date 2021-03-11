@@ -34,7 +34,7 @@ public class BackEnd {
     }
 
     public static boolean loadMoney(float amount){
-        return UserDAO.loadMoney(loggedUser.getIdentityCardNumber(), amount);
+        return UserDAO.loadMoney(loggedUser.getIdentityCardNumber(), loggedUser.getBalance()+amount);
     }
 
     public static boolean transferMoney(int dni, float amount){
