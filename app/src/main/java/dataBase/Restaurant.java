@@ -68,7 +68,7 @@ public class Restaurant {
     }
 
     public void loadOrdersDB(){
-        //loadDataToDataBase();
+        loadDataToDataBase();
         ProductDAO.increaseStock("1000",1,"foods");
 
         /*
@@ -142,8 +142,8 @@ public class Restaurant {
         m3.addCondition(0);m3.addCondition(1);m3.addCondition(3);
 
         //Para celiaco
-        DailyMenu m4 =new DailyMenu(103,"Milanesa con papas fritas","Harina sin TACC, de Berenjena y papas McCain", R.drawable.food_milanesas_con_fritas, 1,  MAX_STOCK, 100.0f, 2);
-        m3.addCondition(0);m3.addCondition(1);m3.addCondition(2);
+        DailyMenu m4 =new DailyMenu(103,"Carne con papas fritas","sin TACC, de Berenjena y papas McCain", R.drawable.food_carne_papas, 1,  MAX_STOCK, 100.0f, 2);
+        m4.addCondition(0);m4.addCondition(1);m4.addCondition(2);
 
         ProductDAO.loadProduct(m1);
         ProductDAO.loadProduct(m2);
