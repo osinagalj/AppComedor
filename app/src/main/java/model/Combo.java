@@ -1,5 +1,7 @@
 package model;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -113,6 +115,15 @@ public class Combo extends Product implements Serializable {
         return Collections.unmodifiableList(products);
     }
 
+    @NonNull
+    @Override
+    public Object clone() {
+        List<Product> clonedItems = new ArrayList<>();
+        for (Product comboItem : comboItems){
+            clonedItems.add((Product) comboItem.clone());
+        }
+        return new Combo(getId(),getName(),getDescription(),getImgId(),getProductCategory(),clonedItems,getDiscount());
+    }
 
     public DiscountCalculator getDiscount() {
         return discount;

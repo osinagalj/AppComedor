@@ -27,6 +27,11 @@ public class FixedDiscount implements DiscountCalculator, Serializable {
         return new_price-(new_price*discountPercentage);
     }
 
+    @Override
+    public Object clone() {
+        return new FixedDiscount(getDiscountPercentage());
+    }
+
     public float getDiscountPercentage() {
         return discountPercentage;
     }

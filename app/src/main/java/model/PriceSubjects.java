@@ -1,5 +1,7 @@
 package model;
 
+import androidx.annotation.NonNull;
+
 public class PriceSubjects implements PriceCalculator {
 
     private int subjects;
@@ -8,9 +10,17 @@ public class PriceSubjects implements PriceCalculator {
         this.subjects = subjects;
     }
 
+    public int getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(int subjects) {
+        this.subjects = subjects;
+    }
+
     @Override
     public String toString() {
-        return "Descuento de profesor ";
+        return "Descuento de profesor. Materias: "+subjects;
     }
 
     @Override
@@ -18,5 +28,11 @@ public class PriceSubjects implements PriceCalculator {
         if(subjects > 3)
             return price - price * 0.3f;
         return java.lang.Math.round(price - price * subjects * 0.1f);
+    }
+
+    @NonNull
+    @Override
+    public Object clone() {
+        return new PriceSubjects(subjects);
     }
 }

@@ -34,6 +34,10 @@ public class Food extends Product implements Serializable {
         this.price2 = price2;
     }
 
+    @Override
+    public Object clone() {
+        return new Food(getId(),getName(),getDescription(),getImgId(),getProductCategory(),getStock2(),getPrice2());
+    }
 
     @Override
     public boolean toHome() {

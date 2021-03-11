@@ -1,17 +1,14 @@
 package model;
 
-
-import com.google.firebase.firestore.Exclude;
-import com.google.firebase.firestore.IgnoreExtraProperties;
-
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
-@IgnoreExtraProperties
-public class CommonUser  implements Serializable,Cloneable {
+public class CommonUser implements Serializable,Cloneable {
     private String password;
     private String names;
     private String lastName;
@@ -20,16 +17,8 @@ public class CommonUser  implements Serializable,Cloneable {
     private float balance;
     private int condition;
     private Category category;
-
-    private HashMap<String,Object> attributes = new HashMap<>();
-
-    @Exclude //Para no guardarlo en la base de datos porque se rompe
+    private Map<String,Object> attributes = new HashMap<>();
     private PriceCalculator priceCalculator;
-
-    public float getPrice(float price){
-        return priceCalculator.getPrice(price);
-    }
-
 
     public CommonUser(){}
 
@@ -41,7 +30,6 @@ public class CommonUser  implements Serializable,Cloneable {
         this.identityCardNumber = identityCardNumber;
         this.category = category;
         this.condition = condition;
-       // this.discountCalculator = discountCalculator;
         this.balance = balance;
     }
 
@@ -57,27 +45,43 @@ public class CommonUser  implements Serializable,Cloneable {
         this.balance = balance;
     }
 
+    /**
+     * @param price base price to which the price is adjusted
+     * @return the adjusted price
+     */
+    public float getPrice(float price){
+        return priceCalculator.getPrice(price);
+    }
+
     /**Si la condicion del usuario esta en la lista de condiciones, entonces no puede consumir el producto*/
     public boolean canConsume(List<Integer> conditions){
         return !conditions.contains(this.condition);
     }
 
+    /**
+     * add a dynamic attribute
+     * @param key of attribute
+     * @param value of the attribute
+     */
     public void addAttribute(String key, Object value){
         attributes.put(key,value);
     }
+
+    /**
+     * @param key of the attribute is searched
+     * @return the value of the attribute if the key exists, null if the map not contains the key
+     */
     public Object getAttribute(String key){
         return attributes.get(key);
     }
 
-
-    public float getPrice(PriceCalculator calculator, float price){
-        return calculator.getPrice(price);
-    }
-
+    /**
+     * increase the user's balance, negative values decrease the balance
+     * @param price amount to be increased, negative number to decrease
+     */
     public void addBalance(float price) {
         balance+=price;
-    }//price puede ser negativo, usado cuando se hace una transferencia y se quiere restar plata al usuario
-
+    } //price puede ser negativo, usado cuando se hace una transferencia y se quiere restar plata al usuario
 
     @Override
     public boolean equals(Object o) {
@@ -92,16 +96,14 @@ public class CommonUser  implements Serializable,Cloneable {
         return Objects.hash(identityCardNumber);
     }
 
-
-
     //---------------------------------------------------------------------------------------------//
     //------------------------------ Getters && Setters -------------------------------------------//
     //---------------------------------------------------------------------------------------------//
-    public HashMap<String, Object> getAttributes() {
-        return attributes;
+    public Map<String, Object> getAttributes() {
+        return Collections.unmodifiableMap(attributes);
     }
 
-    public void setAttributes(HashMap<String, Object> attributes) {
+    public void setAttributes(Map<String, Object> attributes) {
         this.attributes = attributes;
     }
 
@@ -173,12 +175,10 @@ public class CommonUser  implements Serializable,Cloneable {
         this.category = category;
     }
 
-    @Exclude
     public PriceCalculator getDiscountCalculator() {
-        return priceCalculator;
+        return (PriceCalculator) priceCalculator.clone();
     }
 
-    @Exclude
     public void setDiscountCalculator(PriceCalculator discountCalculator) {
         this.priceCalculator = discountCalculator;
     }

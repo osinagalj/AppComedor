@@ -12,6 +12,11 @@ public class DailyMenu extends Food  {
     }
 
     @Override
+    public Object clone() {
+        return new DailyMenu(getId(),getName(),getDescription(),getImgId(),getProductCategory(),getStock(),getPrice2(),getDailyLimit());
+    }
+
+    @Override
     public boolean toHome() {
         return true;
     }
