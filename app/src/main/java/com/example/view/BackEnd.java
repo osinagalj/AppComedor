@@ -60,7 +60,7 @@ public class BackEnd {
     }
 
     /** Obtiene la cantidad de menus del dia que ha pedido un usuario en el dia actual*/
-    public static int getMenusRestantes(Date date, List<Order> orders) {
+    public static int getDailyMenusRemaining(Product p, Date date, List<Order> orders) {
 
         String today = new SimpleDateFormat("dd/MM/yyyy").format(date);
         int total = 0;
@@ -72,14 +72,12 @@ public class BackEnd {
                         if(line.getProduct() != null){
                             if (line.getProduct().getCategory() == 1)
                                 total++;
-                        }else{
-                            System.out.println("Orden nulla" + o.getId());
                         }
                     }
             }
 
-        if(total < 2)
-            return 2 - total;
+        if(total < p.getDailyLimit())
+            return p.getDailyLimit() - total;
         else
             return 0;
     }

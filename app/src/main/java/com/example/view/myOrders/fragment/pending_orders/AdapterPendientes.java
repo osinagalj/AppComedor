@@ -43,7 +43,7 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.myO
         button_remove = (Button) view.findViewById(R.id.row_pending_order_new_button_remove);
         //btn_see_details = (Button) view.findViewById(R.id.row_pending_order_new_button_details);
 
-        return new com.example.view.myOrders.fragment.pending_orders.AdapterPendientes.ViewHolder(view);
+        return new AdapterPendientes.ViewHolder(view);
     }
 
     public void setOnclickListener(View.OnClickListener listener) {
@@ -51,15 +51,15 @@ public class AdapterPendientes extends RecyclerView.Adapter<com.example.view.myO
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.example.view.myOrders.fragment.pending_orders.AdapterPendientes.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull AdapterPendientes.ViewHolder holder, final int position) {
         String product_id = String.valueOf(model.get(position).getId());
-        //String product_description = model.get(position).getDescription();
+        String product_description = model.get(position).getDescription();
         String product_time = model.get(position).getPlaced().toString();
         String product_price = String.valueOf(model.get(position).getPrice());
 
         holder.product_id.setText("#"+product_id);
         holder.product_time.setText(product_time);
-       // holder.product_description.setText(product_description);
+        holder.product_description.setText(product_description);
         holder.product_price.setText(product_price);
 
         //To remove orders
