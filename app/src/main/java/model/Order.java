@@ -59,18 +59,6 @@ public class Order implements Serializable {
         lines.add(new OrderLine(p,amount,toHome,p.getPrice(placedBy)));
     }
 
-/*
-    public String getDescription(){
-        StringBuilder description = new StringBuilder();
-        for (Product product : items.keySet()){
-            description.append(product.getName());
-            description.append(" ");
-            description.append(product.getDescription());
-            description.append("\n");
-        }
-        return description.toString();
-    }
-*/
 
     public float getPrice() {
         float totalPrice = 0;
@@ -88,15 +76,7 @@ public class Order implements Serializable {
     public CommonUser getPlacedBy() {
         return placedBy;
     }
-/*
-    public List<Product> getItems() {
-        List<Product> list = new ArrayList<>();
-        for (OrderLine line : lines){
-            list.add(line.getProduct());
-        }
-        return Collections.unmodifiableList(list);
-    }
-   */
+
     public List<OrderLine> getLines() {
         return Collections.unmodifiableList(lines);
     }

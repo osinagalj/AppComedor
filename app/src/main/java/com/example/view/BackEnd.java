@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import dao.OrderDAO;
+import dao.ProductDAO;
 import dao.UserDAO;
 import model.CommonUser;
 import model.Order;
@@ -101,18 +102,14 @@ public class BackEnd {
         return myOrder.getPrice();
     }
 
-    /*
-    public static List<Product> getProductsOrder(){
-        List<Product> list = new ArrayList<>();
-        list.addAll(myOrder.get);
-        return list;
-    }
-*/
+
 
     public static void removeProduct(Product product){
         int amount = myOrder.getAmount(product.getId());
         myOrder.removeProduct(product.getId());
-        //ProductDAO.increaseStock(product.getId(),amount); todo
+        ProductDAO.increaseStock(String.valueOf(product.getId()),amount,"foods");
+        ProductDAO.increaseStock(String.valueOf(product.getId()),amount,"combos");
+        ProductDAO.increaseStock(String.valueOf(product.getId()),amount,"dailyMenus");
     }
 
     public static int getAmount(Product product){
