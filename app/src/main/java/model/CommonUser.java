@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 @IgnoreExtraProperties
-public class CommonUser  implements Serializable {
+public class CommonUser  implements Serializable,Cloneable {
     private String password;
     private String names;
     private String lastName;
@@ -91,6 +91,7 @@ public class CommonUser  implements Serializable {
     public int hashCode() {
         return Objects.hash(identityCardNumber);
     }
+
 
 
     //---------------------------------------------------------------------------------------------//

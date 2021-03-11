@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,7 +36,6 @@ public abstract class Product implements Serializable {
     public abstract int getDailyLimit();
     public abstract void addStock(int stock);
     public abstract boolean decreaseStock(int amount);
-
     public abstract float getPrice(CommonUser user);
     public abstract ArrayList<Product> getProducts();
 
@@ -61,7 +61,7 @@ public abstract class Product implements Serializable {
     }
 
     public List<Integer> getConditions() {
-        return conditions;
+        return Collections.unmodifiableList(conditions);
     }
 
     public void setConditions(ArrayList<Integer> conditions) {

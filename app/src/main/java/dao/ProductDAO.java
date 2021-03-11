@@ -39,36 +39,6 @@ public class ProductDAO {
         Restaurant.getInstance().db.collection("combos").document(String.valueOf(food.getId())).set(new_food);
     }
 
-    /*
-    public static void loadProduct(Combo food){
-        Map<String, Object> new_food = new HashMap<>();
-        new_food.put("id", food.getId());
-        new_food.put("name", food.getName());
-        new_food.put("description", food.getDescription());
-        new_food.put("imgId", food.getImgId());
-        new_food.put("productCategory", food.getCategory());
-
-        new_food.put("discount", "0.3");//todo
-
-        ArrayList<Integer> conditions = new ArrayList<>(food.getConditions());
-
-        new_food.put("conditions", conditions);
-
-
-        List<Integer> foods = new ArrayList<>();
-        for(Product p : food.getComboItems()){
-            System.out.println("ID del food en combo = " + p.getId());
-            foods.add(p.getId());
-        }
-
-        new_food.put("items", foods);
-
-        // Add a new document with a generated ID
-        Restaurant.getInstance().db.collection("combos").document(String.valueOf(food.getId())).set(new_food);
-    }
-
-*/
-
     //@DELETE
     public static void removeProduct(int id){
 
@@ -91,10 +61,10 @@ public class ProductDAO {
 
 
     //@UPDATE
-    public static MutableLiveData<Boolean> increaseStock(String productId, int amount){
+    public static MutableLiveData<Boolean> increaseStock(String productId, int amount, String collection){
         MutableLiveData<Boolean> state = new MutableLiveData<>();
 
-        DocumentReference gg = Restaurant.getInstance().db.collection("foods").document(productId);
+        DocumentReference gg = Restaurant.getInstance().db.collection(collection).document(productId);
 
         Restaurant.getInstance().db.runTransaction(new Transaction.Function<Void>() {
             @Override
@@ -123,40 +93,37 @@ public class ProductDAO {
         return state;
     }
 
+
     //@UPDATE
-    public static MutableLiveData<Boolean> decreaseStock(String productId, int amount){
+    public static MutableLiveData<Boolean> decreaseStock(String productId, int amount, String collection){
         MutableLiveData<Boolean> state = new MutableLiveData<>();
 
-        DocumentReference gg = Restaurant.getInstance().db.collection("foods").document(productId);
+        DocumentReference gg = Restaurant.getInstance().db.collection(collection).document(productId);
 
         Restaurant.getInstance().db.runTransaction(new Transaction.Function<Void>() {
             @Override
             public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                DocumentSnapshot snapshot = transaction.get(gg);
+                if(transaction != null){
+                    DocumentSnapshot snapshot = transaction.get(gg);
 
-                int stock = Integer.parseInt(snapshot.get("stock").toString());
-                if(stock <= amount){
-                    stock = stock - amount;
-                    transaction.update(gg, "stock", stock);
-                }else{
-                    state.postValue(false);
+                    int stock = Integer.parseInt(snapshot.get("stock").toString());
+                    if(stock >= amount){
+                        stock = stock - amount;
+                        transaction.update(gg, "stock", stock);
+                        System.out.println("Decremento el producto");
+                        state.postValue(true);
+                    }else{
+                        System.out.println("No Decremento el producto");
+                        state.postValue(false);
+                    }
                 }
 
                 // Success
                 return null;
             }
-        }).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                state.postValue(true);
-            }
         });
-
 
         return state;
     }
-
-
-
 
 }

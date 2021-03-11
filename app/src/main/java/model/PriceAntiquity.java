@@ -16,8 +16,7 @@ public class PriceAntiquity implements PriceCalculator {
 
     @Override
     public float getPrice(float price) {
-        int milisecondsByDay = 86400000;
-        int daysBetween = (int) (((new Date()).getTime()-startDate.getTime()) / milisecondsByDay);
+        int daysBetween = (int) (((new Date()).getTime()-startDate.getTime()) / 86400000);
         float daysLog2 = (float)(Math.log(daysBetween)/Math.log(2));
         float discount = daysLog2/100;
         return java.lang.Math.round(price - (price*discount));

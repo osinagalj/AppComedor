@@ -68,8 +68,36 @@ public class Restaurant {
     }
 
     public void loadOrdersDB(){
-        loadDataToDataBase();
-        ProductDAO.increaseStock("1000",10);
+        //loadDataToDataBase();
+        ProductDAO.increaseStock("1000",1,"foods");
+
+        /*
+        // Get a new write batch
+        WriteBatch batch = db.batch();
+
+// Set the value of 'NYC'
+        DocumentReference nycRef = db.collection("cities").document("NYC");
+        batch.set(nycRef, new City());
+
+
+        List<Product> products = new ArrayList<>();
+        for(Product p : products){
+            DocumentReference sfRef = db.collection("foods").document(String.valueOf(p.getId()));
+            batch.update(sfRef, "stock", 1000000L);
+        }
+// Update the population of 'SF'
+
+
+
+// Commit the batch
+        batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                // ...
+            }
+        });
+        */
+
     }
 
 

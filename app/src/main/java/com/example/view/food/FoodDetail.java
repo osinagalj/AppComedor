@@ -14,11 +14,14 @@ import androidx.lifecycle.Observer;
 import com.example.view.BackEnd;
 import com.example.view.databinding.ActivityFoodDetailsBinding;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import dao.OrderDAO;
+import dao.ProductDAO;
 import model.Order;
+import model.OrderLine;
 import model.OrderState;
 import model.Product;
 
@@ -56,22 +59,76 @@ public class FoodDetail extends AppCompatActivity  {
             binding.cbToHome.setVisibility(View.GONE);
         }
     }
-    private void completOrder(){
 
-        //OrderDAO.setNumberNextOrder2();
-        //final boolean[] cargo = {false}; //necesario sino inserta una orden vacia
+    public MutableLiveData<Boolean> stockAvailable(List<OrderLine> o){
+        final int[] stocks = {0};
+        final int[] end = {0};
+        MutableLiveData<Boolean> decrease_ok = new MutableLiveData<Boolean>();
+
+        ArrayList<String> tables= new ArrayList<>();
+        tables.add("foods");
+        tables.add("combos");
+        tables.add("dailyMenus");
+
+        for(OrderLine line: o){
+            for(String s: tables){
+                ProductDAO.decreaseStock(String.valueOf(line.getProduct().getId()),line.getAmount(),s )
+                        .observe(this, new Observer<Boolean>() {
+                            @Override
+                            public void onChanged(Boolean decreaseOk) {
+                                    if(decreaseOk){
+                                        stocks[0] = stocks[0] + 1;
+                                    }
+                                    end[0] = end[0] + 1;
+                                    if(end[0] == o.size()){ //si ya se hicieron todas las ordenes, exitosas o no
+                                        if(stocks[0] == end[0]){ //si fueron exitosas
+                                            decrease_ok.setValue(true); //retorno true
+                                        }else{
+                                            decrease_ok.setValue(false); //retorno false
+                                            //todo agregar los stocks que saque
+                                        }
+
+                                    }
+                            }
+                        });
+            }
+
+        }
+    return decrease_ok;
+    }
+
+
+    private void getOrderId (){
+
         OrderDAO.getNumberNextOrder().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer id) {
                 //if(!cargo[0]){
-                 //   cargo[0] = true;
-                    BackEnd.confirmOrder(id);
-                    openFinishOrder();
-                    binding.cbToHome.setChecked(false);
-              //  }
+                //   cargo[0] = true;
+                BackEnd.confirmOrder(id);
+                openFinishOrder();
+                binding.cbToHome.setChecked(false);
+                //  }
 
             }
         });
+    }
+    private void completOrder(){
+
+        stockAvailable(BackEnd.getOrder().getLines()).observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean decreaseOk) {
+                if(decreaseOk){
+                    getOrderId();
+                    Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getBaseContext(), "No se ha podido agregar", Toast.LENGTH_SHORT).show();
+                }
+
+                }
+            }
+        );
+
     }
 
 
@@ -83,7 +140,7 @@ public class FoodDetail extends AppCompatActivity  {
             public void onChanged(@Nullable List<Order> orders) {
                 if(addProduct(product,orders)){
                     //Send the order to the DataBase
-                    Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
+
                     completOrder();
                 }
             }
@@ -158,6 +215,7 @@ public class FoodDetail extends AppCompatActivity  {
         });
 
     }
+
 
     private boolean addProduct(Product product, List<Order> orders){
         //TODO mejorar estafuncion y modularizar, posiblemente algunas cosas haya que hacerlas en el backend y no aca
