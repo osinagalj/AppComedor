@@ -16,13 +16,6 @@ public class DailyMenu extends Food  {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "Menu del Dia {" +
-                "stock=" + super.getStock() +
-                ", price=" + super.getPrice(null) +
-                "} " + super.toString();
-    }
 
     /**
      * The menus of the day have a different price depending on the user who orders it.
@@ -40,4 +33,13 @@ public class DailyMenu extends Food  {
     public void setLimit(int limit) {
         this.limit = limit;
     }
+
+    @Override
+    public String toString() {
+        return "Menu del Dia {" +
+                "stock=" + super.getStock() +
+                ", price=" + super.getPrice(null) +
+                "} " + super.toString();
+    }
+
 }

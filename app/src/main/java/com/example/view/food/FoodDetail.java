@@ -224,47 +224,25 @@ public class FoodDetail extends AppCompatActivity  {
 
 
     private boolean addProduct(Product product, List<Order> orders){
-        //TODO mejorar estafuncion y modularizar, posiblemente algunas cosas haya que hacerlas en el backend y no aca
+
         //Get the amount
         int addedAmount = Integer.parseInt(binding.productAmount.getText().toString());
         boolean toHome = binding.cbToHome.isChecked();
+
         //Add the food
-
-        //Controlar el saldo > pedido
-        //Controlar la cantidad de menus del dia que puede pedir
-        //Controlar Stock
-
         if(product.getPrice(BackEnd.getLoggedUser()) * addedAmount <= BackEnd.getLoggedUser().getBalance()){ //Si hay suficiente saldo
             if(product.getCategory() == 1){ //todo capaz es mejor obtener el numero del restaurant
-                if(BackEnd.getMenusRestantes(new Date(),orders) >= addedAmount){
-                    //todo chkear stock
-
+                if(BackEnd.getDailyMenusRemaining(product,new Date(),orders) >= addedAmount){
                     BackEnd.addProduct(product,addedAmount,toHome);
                         return true;
-
-                     //   else{
-                     //   Toast.makeText(getBaseContext(), "No hay stock suficiente", Toast.LENGTH_SHORT).show();
-                  //  }
-                }else{
-                            Toast.makeText(getBaseContext(), "Cantidad maxima superada de este producto", Toast.LENGTH_SHORT).show();
-                }
-
-
+                }else
+                    Toast.makeText(getBaseContext(), "Cantidad maxima superada de este producto", Toast.LENGTH_SHORT).show();
             }else{
-                //todo chekear stock
-
                     BackEnd.addProduct(product,addedAmount,toHome);
-
-
                     return true;
-               // }else{
-               //     Toast.makeText(getBaseContext(), "No hay stock suficiente", Toast.LENGTH_SHORT).show();
-              //  }
             }
-
-        }else{
+        }else
             Toast.makeText(getBaseContext(), "No suficiente saldo en la cuenta", Toast.LENGTH_SHORT).show();
-        }
 
         return false;
     }

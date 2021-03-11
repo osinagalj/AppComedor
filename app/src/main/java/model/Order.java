@@ -59,6 +59,9 @@ public class Order implements Serializable {
         lines.add(new OrderLine(p,amount,toHome,p.getPrice(placedBy)));
     }
 
+    public String getDescription(){
+        return "descripcion olaaa";
+    }
 
     public float getPrice() {
         float totalPrice = 0;
@@ -106,16 +109,6 @@ public class Order implements Serializable {
     public void setPlacedBy(CommonUser placedBy) {
         this.placedBy = placedBy;
     }
-
-/*
-    public int getNumber_line() {
-        return number_line;
-    }
-
-    public void setNumber_line(int number_line) {
-        this.number_line = number_line;
-    }
-*/
 
 
     public OrderState getState() {

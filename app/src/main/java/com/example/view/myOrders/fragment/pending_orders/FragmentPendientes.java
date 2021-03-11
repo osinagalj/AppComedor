@@ -42,7 +42,6 @@ public class FragmentPendientes extends Fragment {
 
         viewModel = ViewModelProviders.of(this).get(PendingOrdersViewModel.class); //ViewModel para la DB
 
-
         viewModel.getOrders().observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
             @Override
             public void onChanged(List<Order> orders2) {
@@ -66,7 +65,6 @@ public class FragmentPendientes extends Fragment {
 
                 Intent intent = new Intent(getActivity(), ActivityPdf.class);
                 Order o = orders.get(rv_orders.getChildAdapterPosition(view));
-                System.out.println("Numero de orden = " + o.getId());
                 intent.putExtra("ORDER_SELECTED",String.valueOf(o.getId()));
                 startActivity(intent);
             }
