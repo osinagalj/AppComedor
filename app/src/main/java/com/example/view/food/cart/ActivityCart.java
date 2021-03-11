@@ -147,7 +147,7 @@ public class ActivityCart extends AppCompatActivity {
                             getOrderId();
                             Toast.makeText(getBaseContext(), "Se ha realizado el pedido", Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(getBaseContext(), "No se ha podido agregar", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "No hay stock suficiente", Toast.LENGTH_SHORT).show();
                         }
 
                     }
