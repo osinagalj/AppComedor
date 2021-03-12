@@ -73,7 +73,11 @@ public class Order implements Serializable {
     }
 
     public String getDescription(){
-        return "descripcion olaaa"; //TODO
+        String description = "";
+        for(OrderLine line : lines)
+            description = description + line.getProduct().getName() + "\n";
+
+        return description;
     }
 
     /**
